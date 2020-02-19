@@ -1,12 +1,15 @@
 import React from 'react';
 
+import Menu from '../components/Menu/Menu';
+
 function Task() {
   return (
-    <div>
+    <>
+      <Menu />
       <main>
         <h1>Task</h1>
       </main>
-    </div>
+    </>
   );
 }
 
