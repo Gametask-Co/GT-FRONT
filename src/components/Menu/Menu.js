@@ -1,9 +1,22 @@
 import React from 'react';
+import './Menu.sass'
 
 function Menu() {
   return (
     <>
-      <h1>Menu</h1>
+      <nav>
+          <ul>
+              <li>
+                  <a href="http://"></a>
+              </li>
+              <li>
+                  <a href="http://"></a>
+              </li>
+              <li>
+                  <a href="http://"></a>
+              </li>
+          </ul>
+      </nav>
     </>
   );
 }

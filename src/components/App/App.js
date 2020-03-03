@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from '../../pages/Home/Home';
-import Task from '../../pages/Task';
+import Task from '../../pages/Task/Task';
 import './App.sass';
 
 function App() {
