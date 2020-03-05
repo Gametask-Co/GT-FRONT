@@ -12,10 +12,10 @@ function Home() {
     console.log("show", show);
 
     async function authUser() {
-      // const response = await api
-      //   .post('/user/auth', {
-      const response = await axios
-        .post('https://gametask.com.br/user/auth', {
+      const response = await api
+        .post('/user/auth', {
+      // const response = await axios
+      //   .post('https://gametask.com.br/user/auth', {
           email: 'euller@gametask.com',
           password: 'test123'
         })
@@ -49,7 +49,7 @@ function Home() {
         alt="Logo Game"
       />
 
-      <button
+      <a
         className="toggle-button"
         id="centered-toggle-button"
         onClick={e => {
@@ -58,18 +58,55 @@ function Home() {
       >
         {" "}
         show Modal{" "}
-      </button>
+      </a>
 
       <Modal onClose={showModal} show={show}>
 
-        <div className="models">logo</div>
-        <div className="content">nav</div>
-        <div className="todo">content</div>
+        <div className="models">
+          <section className="container">
+            <h2>Modelos</h2>
+            <button
+              className="item"
+              onClick={e => {
+                // showModal(e);
+              }}
+            >
+              <span>Avulsa</span>
+            </button>
+            <button
+              className="item"
+              onClick={e => {
+                // showModal(e);
+              }}
+            >
+              <span>Disciplina</span>
+            </button>
+            <button
+              className="item"
+              onClick={e => {
+                // showModal(e);
+              }}
+            >
+              <span>Projeto</span>
+            </button>
+          </section>
+        </div>
+        <div className="content">
+          <h2>Cadastrar Atividade</h2>
+          <button
+            className="toggle-button"
+            id="centered-toggle-button"
+            onClick={e => {
+              showModal(e);
+            }}
+          >
+            <span>Cancelar</span>
+          </button>
+        </div>
+        <div className="todo">
+          <h2>Lista de Afarezes</h2>
+        </div>
 
-        {/* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-        deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
-        fuga omnis a sed impedit explicabo accusantium nihil doloremque
-        consequuntur. */}
       </Modal>
 
     </div>
