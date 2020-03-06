@@ -71,14 +71,6 @@ function Home() {
                 // showModal(e);
               }}
             >
-              <span>Avulsa</span>
-            </button>
-            <button
-              className="item"
-              onClick={e => {
-                // showModal(e);
-              }}
-            >
               <span>Disciplina</span>
             </button>
             <button
@@ -89,22 +81,58 @@ function Home() {
             >
               <span>Projeto</span>
             </button>
+            <button
+              className="item"
+              onClick={e => {
+                // showModal(e);
+              }}
+            >
+              <span>Avulsa</span>
+            </button>
           </section>
         </div>
+
         <div className="content">
-          <h2>Cadastrar Atividade</h2>
-          <button
-            className="toggle-button"
-            id="centered-toggle-button"
-            onClick={e => {
-              showModal(e);
-            }}
-          >
-            <span>Cancelar</span>
-          </button>
+          <section className="container">
+            <h2>Cadastrar Atividade</h2>
+
+            <label for="name" className="label_margin">
+              Nome
+              <div className="">
+                {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
+                <input type="text" name="name" id="name" placeholder="Nome" className="" required autocomplete="off" />
+              </div>
+            </label>
+
+
+
+            <div className="between">
+              <button
+                className="toggle-button"
+                id="centered-toggle-button"
+                onClick={e => {
+                  showModal(e);
+                }}
+              >
+                <span><i class="fa fa-times" aria-hidden="true"></i>Cancelar</span>
+              </button>
+              <button
+                className="toggle-button"
+                id="centered-toggle-button"
+                onClick={e => {
+                  showModal(e);
+                }}
+              >
+                <span><i class="fa fa-times" aria-hidden="true"></i>Confirmar</span>
+              </button>
+            </div>
+          </section>
         </div>
+
         <div className="todo">
-          <h2>Lista de Afarezes</h2>
+          <section className="container">
+            <h2>Lista de Afarezes</h2>
+          </section>
         </div>
 
       </Modal>

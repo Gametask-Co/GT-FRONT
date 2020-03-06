@@ -15,16 +15,7 @@ function Modal(props) {
 
   return (
     <section className="modal structure">
-
       {props.children}
-
-      {/* <h3>Modal Window</h3> */}
-      {/* <div className="content">{props.children}</div> */}
-      {/* <div className="actions">
-        <button className="toggle-button" onClick={onClose}>
-          close
-        </button>
-      </div> */}
     </section>
   );
 }
