@@ -6,7 +6,7 @@ import Modal from '../../components/Modal/Modal';
 import './Home.sass';
 
 function Home() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   useEffect(()=>{
     console.log("show", show);
@@ -101,6 +101,37 @@ function Home() {
               <div className="">
                 {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
                 <input type="text" name="name" id="name" placeholder="Nome" className="" required autocomplete="off" />
+              </div>
+            </label>
+
+            <div className="form_between">
+              <label for="subject" id="subject" className="">
+                Disciplina
+                <div className="input_long input_long_style">
+                  {/* <img src="/static/icons/form_icon/icon_subject.png" className="input_icon" /> */}
+                  <select className="select" name="select_subject" id="select_subject" required>
+                    <option value="0" selected disabled> Escolha uma disciplina</option>
+                    <option value="1"> Disciplina 1</option>
+                    <option value="2"> Disciplina 2</option>
+                  </select>
+                </div>
+              </label>
+              <label for="due_date" id="due_date" className="font_tips">
+                Prazo
+                <div className="input_long input_long_style">
+                  {/* <img src="/static/icons/form_icon/icon_date.png" className="input_icon" /> */}
+                  <input type="date" name="due_date" id="due_date_field" placeholder="dd/mm/aaaa" className="" required autocomplete="off" />
+                </div>
+              </label>
+            </div>
+
+            <label for="description" className="">
+              Descrição
+              <div className="input_long input_long_style">
+                {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
+                {/* <input type="text" name="description" id="description_field" placeholder="Descrição" className="input_text input_style font_description" required autocomplete="off" /> */}
+
+                <textarea id="text" name="description" rows="5" placeholder="Descrição" />
               </div>
             </label>
 
