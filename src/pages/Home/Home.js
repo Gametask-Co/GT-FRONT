@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import api from '../../services/api';
 import Modal from '../../components/Modal/Modal';
@@ -9,8 +8,6 @@ function Home() {
   const [show, setShow] = useState(true);
 
   useEffect(()=>{
-    console.log("show", show);
-
     async function authUser() {
       const response = await api
         .post('/user/auth', {
@@ -135,8 +132,6 @@ function Home() {
               </div>
             </label>
 
-
-
             <div className="between">
               <button
                 className="toggle-button"
@@ -163,6 +158,31 @@ function Home() {
         <div className="todo">
           <section className="container">
             <h2>Lista de Afarezes</h2>
+
+            <label for="to_do_list">
+              <div id='to_do_list'>
+                <div className="flex">
+                  <span id="btn_todo">
+                    <span className="btn_closed"><i class="fa fa-times" aria-hidden="true"></i></span>
+                  </span>
+                  <div className="">
+                    <div>
+                      {/* <img src="/static/icons/form_icon/icon_todo.png" className="input_icon" /> */}
+                      {/* <span><i class="fa fa-times" aria-hidden="true"></i></span> */}
+                      <input type="text" name="to_do_name_0" id="to_do_name_field" placeholder="Questão 1" className="input_text input_style font_description" required autocomplete="off" />
+                    </div>
+                    <div>
+                      {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
+                      {/* <span><i class="fa fa-times" aria-hidden="true"></i></span> */}
+                      <textarea id="to_do_description_field" name="to_do_description_0" rows="2" placeholder="Descrição" required autocomplete="off" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            {/* <span><i className="fa fa-times" aria-hidden="true"></i></span> */}
+
           </section>
         </div>
 
