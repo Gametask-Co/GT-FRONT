@@ -24,32 +24,6 @@
   column-gap: 1.25vw
   grid-template-areas: "models models models models models content content content content content content content content content todo todo todo todo todo todo todo todo"
 
-button
-  cursor: pointer
-  border: none
-  width: 160px
-  height: 48px
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16)
-  background-color: rgba(255, 255, 255, 0.07)
-
-button:hover
-  opacity: 0.9
-  border: solid 1px #ffffff
-  background-color: rgba(255, 255, 255, 0.09)
-  color: rgba(255, 255, 255, 0.87)
-
-button span
-  top: 654px
-  left: 661px
-  width: 87px
-  height: 24px
-  text-align: right
-  font: Condensed Semibold 16px/24px Bernina Sans
-  letter-spacing: 0.02px
-  color: #FFFFFFDE
-  text-transform: uppercase
-  opacity: 1
-
 .container
   display: flex
   margin: 26px 11px 0 44px
@@ -87,4 +61,30 @@ button span
 .btn_closed
   margin: 18px
   float: left
-  
+
+.box
+  margin: 3vh 18.75vw
+  padding: 4vh auto
+  height: 92vh
+  width: 62.5vw
+  background-color: rgba(255, 255, 255, 0.02)
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  align-items: center
+
+#logotext
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  align-items: center
+
+.item.activate
+  border: solid 1px #ffffff
+  background-color: rgba(255, 255, 255, 0.09)
+
+.container_between
+  height: 25vw
+  display: flex
+  justify-content: space-between
+  flex-direction: column
