@@ -7,12 +7,19 @@ import './Home.sass';
 function Home() {
   const [show, setShow] = useState(true);
 
+  const [name, setName] = useState('');
+  // const [subject, setSubject] = useState('');
+  const [due_date, setDueDate] = useState('');
+  const [description, setDescription] = useState('');
+  // const [to_do_list, setToDoList] = useState('');
+  const [user_id, setUserId] = useState('');
+
   useEffect(()=>{
     async function authUser() {
-      const response = await api
-        .post('/user/auth', {
       // const response = await axios
       //   .post('https://gametask.com.br/user/auth', {
+      const response = await api
+        .post('/user/auth', {
           email: 'euller@gametask.com',
           password: 'test123'
         })
@@ -27,6 +34,32 @@ function Home() {
 
   function showModal(e) {
     setShow(!show);
+  };
+
+  async function handleCreateTask(e) {
+    e.preventDefault();
+
+    console.log(name);
+    
+    const response = await api
+      .post('/task', {
+        name,
+        // subject,
+        due_date,
+        description,
+        // to_do_list,
+        user_id
+      })
+      .then(function(res) {
+        console.log(res, 'deu ruim!!!');
+      });
+    console.log(response);
+
+    setShow(!show);
+    setName('');
+    setDueDate('');
+    setDescription('');
+    setToDoList('');
   };
 
   return (
@@ -54,7 +87,7 @@ function Home() {
         }}
       >
         {" "}
-        show Modal{" "}
+        Nova Atividade{" "}
       </a>
 
       <Modal onClose={showModal} show={show}>
@@ -89,69 +122,69 @@ function Home() {
           </section>
         </div>
 
+
         <div className="content">
           <section className="container">
-            <h2>Cadastrar Atividade</h2>
-
-            <label for="name" className="label_margin">
-              Nome
-              <div className="">
-                {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
-                <input type="text" name="name" id="name" placeholder="Nome" className="" required autocomplete="off" />
-              </div>
-            </label>
-
-            <div className="form_between">
-              <label for="subject" id="subject" className="">
-                Disciplina
-                <div className="input_long input_long_style">
-                  {/* <img src="/static/icons/form_icon/icon_subject.png" className="input_icon" /> */}
-                  <select className="select" name="select_subject" id="select_subject" required>
-                    <option value="0" selected disabled> Escolha uma disciplina</option>
-                    <option value="1"> Disciplina 1</option>
-                    <option value="2"> Disciplina 2</option>
-                  </select>
+            <form onSubmit={handleCreateTask}>
+            
+              <h2>Cadastrar Atividade</h2>
+              <label htmlFor="name">
+                Nome
+                <div className="">
+                  {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
+                  <input type="text" name="name" id="name" placeholder="Nome" value={name} required />
                 </div>
               </label>
-              <label for="due_date" id="due_date" className="font_tips">
-                Prazo
-                <div className="input_long input_long_style">
-                  {/* <img src="/static/icons/form_icon/icon_date.png" className="input_icon" /> */}
-                  <input type="date" name="due_date" id="due_date_field" placeholder="dd/mm/aaaa" className="" required autocomplete="off" />
+
+              <div className="form_between">
+                <label htmlFor="subject">
+                  Disciplina
+                  <div>
+                    {/* <img src="/static/icons/form_icon/icon_subject.png" className="input_icon" /> */}
+                    <select className="select" name="subject" id="subject" value={subject} required>
+                      <option value="0" selected disabled> Escolha uma disciplina</option>
+                      <option value="1"> Disciplina 1</option>
+                      <option value="2"> Disciplina 2</option>
+                    </select>
+                  </div>
+                </label>
+                <label htmlFor="due_date">
+                  Prazo
+                  <div>
+                    {/* <img src="/static/icons/form_icon/icon_date.png" className="input_icon" /> */}
+                    <input type="date" name="due_date" id="due_date" placeholder="dd/mm/aaaa" value={due_date} required />
+                  </div>
+                </label>
+              </div>
+
+              <label htmlFor="description">
+                Descrição
+                <div>
+                  {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
+                  {/* <input type="text" name="description" id="description_field" placeholder="Descrição" className="input_text input_style font_description" required /> */}
+
+                  <textarea id="text" name="description" id="description" value={description} rows="5" placeholder="Descrição" />
                 </div>
               </label>
-            </div>
 
-            <label for="description" className="">
-              Descrição
-              <div className="input_long input_long_style">
-                {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
-                {/* <input type="text" name="description" id="description_field" placeholder="Descrição" className="input_text input_style font_description" required autocomplete="off" /> */}
-
-                <textarea id="text" name="description" rows="5" placeholder="Descrição" />
+              <div className="between">
+                <button
+                  className="toggle-button"
+                  id="centered-toggle-button"
+                  onClick={e => {
+                    showModal(e);
+                  }}
+                >
+                  <span><i className="fa fa-times" aria-hidden="true"></i>Cancelar</span>
+                </button>
+                <button
+                  type="submit"
+                >
+                  <span><i className="fa fa-times" aria-hidden="true"></i>Confirmar</span>
+                </button>
               </div>
-            </label>
 
-            <div className="between">
-              <button
-                className="toggle-button"
-                id="centered-toggle-button"
-                onClick={e => {
-                  showModal(e);
-                }}
-              >
-                <span><i class="fa fa-times" aria-hidden="true"></i>Cancelar</span>
-              </button>
-              <button
-                className="toggle-button"
-                id="centered-toggle-button"
-                onClick={e => {
-                  showModal(e);
-                }}
-              >
-                <span><i class="fa fa-times" aria-hidden="true"></i>Confirmar</span>
-              </button>
-            </div>
+            </form>
           </section>
         </div>
 
@@ -159,22 +192,22 @@ function Home() {
           <section className="container">
             <h2>Lista de Afarezes</h2>
 
-            <label for="to_do_list">
+            <label htmlFor="to_do_list">
               <div id='to_do_list'>
                 <div className="flex">
                   <span id="btn_todo">
-                    <span className="btn_closed"><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <span className="btn_closed"><i className="fa fa-times" aria-hidden="true"></i></span>
                   </span>
                   <div className="">
                     <div>
                       {/* <img src="/static/icons/form_icon/icon_todo.png" className="input_icon" /> */}
                       {/* <span><i class="fa fa-times" aria-hidden="true"></i></span> */}
-                      <input type="text" name="to_do_name_0" id="to_do_name_field" placeholder="Questão 1" className="input_text input_style font_description" required autocomplete="off" />
+                      <input type="text" name="to_do_name_0" id="to_do_name_field" placeholder="Questão 1" className="input_text input_style font_description" required />
                     </div>
                     <div>
                       {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
                       {/* <span><i class="fa fa-times" aria-hidden="true"></i></span> */}
-                      <textarea id="to_do_description_field" name="to_do_description_0" rows="2" placeholder="Descrição" required autocomplete="off" />
+                      <textarea id="to_do_description_field" name="to_do_description_0" rows="2" placeholder="Descrição" required />
                     </div>
                   </div>
                 </div>
