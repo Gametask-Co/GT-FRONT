@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import api from "../../services/api";
 import Modal from "../../components/Modal/Modal";
-import "./Home.sass";
 
 function Home() {
   const [show, setShow] = useState(true);
@@ -13,10 +12,12 @@ function Home() {
   // const [to_do_list, setToDoList] = useState('');
   const [user_id, setUserId] = useState("");
 
-  const models = {
-
-  }
-
+  const models = [
+    { 'name': 'Disciplina', 'activate': true },
+    { 'name': 'Projeto', 'activate': false },
+    { 'name': 'Avulsa', 'activate': false },
+  ];
+  
   useEffect(() => {
     async function authUser() {
       const response = await api
@@ -91,47 +92,22 @@ function Home() {
         Nova Atividade{" "}
       </a>
 
+
       <Modal onClose={showModal} show={show}>
         <div className="models">
           <section className="container">
             <h2>Modelos</h2>
-            
-            {/* // <DevItem key={dev._id} dev={dev} /> */}
-            {devs.map(dev => (
+            {models.map(model => (
               <button
-                className="item activate"
+                key={model.name}
+                className={model.activate ? "item activate" : "item"}
                 onClick={e => {
                   // showModal(e);
                 }}
               >
-                <span>Disciplina</span>
+                <span>{model.name}</span>
               </button>
             ))}
-            
-            <button
-              className="item activate"
-              onClick={e => {
-                // showModal(e);
-              }}
-            >
-              <span>Disciplina</span>
-            </button>
-            <button
-              className="item"
-              onClick={e => {
-                // showModal(e);
-              }}
-            >
-              <span>Projeto</span>
-            </button>
-            <button
-              className="item"
-              onClick={e => {
-                // showModal(e);
-              }}
-            >
-              <span>Avulsa</span>
-            </button>
           </section>
         </div>
 
@@ -139,80 +115,79 @@ function Home() {
           <section className="container">
             <form onSubmit={handleCreateTask} className="container_between">
               <h2>Cadastrar Atividade</h2>
-              
-              <div>
-              <label htmlFor="name">
-                Nome
-                <div className="">
-                  {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Nome"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                    required
-                  />
-                </div>
-              </label>
 
-              <div className="form_between">
-                <label htmlFor="subject">
-                  Disciplina
-                  <div>
-                    {/* <img src="/static/icons/form_icon/icon_subject.png" className="input_icon" /> */}
-                    <select
-                      className="select"
-                      name="subject"
-                      id="subject"
-                      required
-                    >
-                      <option value="0" selected disabled>
-                        {" "}
-                        Escolha uma disciplina
-                      </option>
-                      <option value="1"> Disciplina 1</option>
-                      <option value="2"> Disciplina 2</option>
-                    </select>
-                  </div>
-                </label>
-                <label htmlFor="due_date">
-                  Prazo
-                  <div>
-                    {/* <img src="/static/icons/form_icon/icon_date.png" className="input_icon" /> */}
+              <div>
+                <label htmlFor="name">
+                  Nome
+                  <div className="">
+                    {/* <img src="/static/icons/form_icon/icon_task.png" className="input_icon" /> */}
                     <input
-                      type="date"
-                      name="due_date"
-                      id="due_date"
-                      placeholder="dd/mm/aaaa"
-                      value={due_date}
-                      onChange={e => setDueDate(e.target.value)}
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Nome"
+                      value={name}
+                      onChange={e => setName(e.target.value)}
                       required
                     />
                   </div>
                 </label>
-              </div>
 
-              <label htmlFor="description">
-                Descrição
-                <div>
-                  {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
-                  {/* <input type="text" name="description" id="description_field" placeholder="Descrição" className="input_text input_style font_description" required /> */}
-
-                  <textarea
-                    id="text"
-                    name="description"
-                    id="description"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                    rows="5"
-                    placeholder="Descrição"
-                  />
+                <div className="form_between">
+                  <label htmlFor="subject">
+                    Disciplina
+                    <div>
+                      {/* <img src="/static/icons/form_icon/icon_subject.png" className="input_icon" /> */}
+                      <select
+                        className="select"
+                        name="subject"
+                        id="subject"
+                        required
+                      >
+                        <option value="0" selected disabled>
+                          {" "}
+                          Escolha uma disciplina
+                        </option>
+                        <option value="1"> Disciplina 1</option>
+                        <option value="2"> Disciplina 2</option>
+                      </select>
+                    </div>
+                  </label>
+                  <label htmlFor="due_date">
+                    Prazo
+                    <div>
+                      {/* <img src="/static/icons/form_icon/icon_date.png" className="input_icon" /> */}
+                      <input
+                        type="date"
+                        name="due_date"
+                        id="due_date"
+                        placeholder="dd/mm/aaaa"
+                        value={due_date}
+                        onChange={e => setDueDate(e.target.value)}
+                        required
+                      />
+                    </div>
+                  </label>
                 </div>
-              </label>
-              </div>
 
+                <label htmlFor="description">
+                  Descrição
+                  <div>
+                    {/* <img src="/static/icons/form_icon/icon_description.png" className="input_icon" /> */}
+                    {/* <input type="text" name="description" id="description_field" placeholder="Descrição" className="input_text input_style font_description" required /> */}
+
+                    <textarea
+                      id="text"
+                      name="description"
+                      id="description"
+                      value={description}
+                      onChange={e => setDescription(e.target.value)}
+                      rows="5"
+                      placeholder="Descrição"
+                    />
+                  </div>
+                </label>
+              </div>
 
               <div className="between">
                 <button
@@ -276,7 +251,7 @@ function Home() {
                 </div>
               </div>
             </label>
-
+            
             {/* <span><i className="fa fa-times" aria-hidden="true"></i></span> */}
           </section>
         </div>

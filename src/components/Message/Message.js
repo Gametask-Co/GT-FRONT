@@ -1,10 +1,9 @@
 import React from "react";
-import "../../../src/styles/css/modal.css";
 import PropTypes from "prop-types";
 
-function Modal(props) {
-  console.log(props);
+import "../../../src/styles/css/message.css";
 
+function Message(props) {
   function onClose(e) {
     props.onClose && props.onClose(e);
   }
@@ -13,12 +12,12 @@ function Modal(props) {
     return null;
   }
 
-  return <section className="modal structure">{props.children}</section>;
+  return <section className="modal">{props.children}</section>;
 }
 
-Modal.propTypes = {
+Message.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired
 };
 
-export default Modal;
+export default Message;
