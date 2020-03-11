@@ -10,25 +10,34 @@ function Home() {
   const [due_date, setDueDate] = useState("");
   const [description, setDescription] = useState("");
   // const [to_do_list, setToDoList] = useState('');
-  const [user_id, setUserId] = useState("");
+  const [auth_user, setAuthUser] = useState("");
 
   const models = [
-    { 'name': 'Disciplina', 'activate': true },
-    { 'name': 'Projeto', 'activate': false },
-    { 'name': 'Avulsa', 'activate': false },
+    { name: "Disciplina", activate: true },
+    { name: "Projeto", activate: false },
+    { name: "Avulsa", activate: false }
   ];
-  
+
   useEffect(() => {
     async function authUser() {
       const response = await api
+        // .post("/user", {
+        //   name: 'eullerTest',
+        //   email: "euller@game1task.com",
+        //   birthday: '12/29/2000',
+        //   password_hash: "testGametask"
+        // })
         .post("/user/auth", {
-          email: "euller@gametask.com",
-          password: "test123"
+          email: "euller@game1task.com",
+          password: "testGametask"
         })
         .then(function(res) {
-          console.log(res, "deu ruim!");
+          console.log("Auth user ok!");
+          setAuthUser(res.data.token);
+        })
+        .catch(function(error) {
+          console.log(error, "Auth user error!");
         });
-      console.log(response);
     }
 
     authUser();
@@ -40,22 +49,22 @@ function Home() {
 
   async function handleCreateTask(e) {
     e.preventDefault();
-
-    console.log(name);
-
+    var config = {
+      headers: { Authorization: `Bearer ${auth_user}` }
+    };
     const response = await api
-      .post("/task", {
-        name,
-        // subject,
-        due_date,
-        description,
-        to_do_list: [],
-        user_id
-      })
+      .post(
+        "/task",
+        {
+          name,
+          description,
+          due_date
+        },
+        config
+      )
       .then(function(res) {
-        console.log(res, "deu ruim!!!");
+        console.log(res, "Create task error!");
       });
-    console.log(response);
 
     setShow(!show);
     setName("");
@@ -91,7 +100,6 @@ function Home() {
         {" "}
         Nova Atividade{" "}
       </a>
-
 
       <Modal onClose={showModal} show={show}>
         <div className="models">
@@ -251,7 +259,7 @@ function Home() {
                 </div>
               </div>
             </label>
-            
+
             {/* <span><i className="fa fa-times" aria-hidden="true"></i></span> */}
           </section>
         </div>
