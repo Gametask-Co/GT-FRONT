@@ -13,7 +13,13 @@ function Modal(props) {
     return null;
   }
 
-  return <section className="modal structure">{props.children}</section>;
+  return props.text === "complete" ? (
+    <section className="modal">{props.children}</section>
+  ) : "message" ? (
+    <section className="modal_message">{props.children}</section>
+  ) : (
+    <section className="modal structure">{props.children}</section>
+  );
 }
 
 Modal.propTypes = {

@@ -89,4 +89,17 @@
   justify-content: space-between;
   flex-direction: column; }
 
+.modal_message {
+  width: 336px;
+  height: 129px;
+  background-color: #121212;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
+  color: white; }
+
+.modal_message .margin_center {
+  margin: 2vw; }
+
 /*# sourceMappingURL=modal.css.map */

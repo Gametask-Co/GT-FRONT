@@ -20,7 +20,7 @@ function Home() {
 
   useEffect(() => {
     async function authUser() {
-      const response = await api
+      await api
         // .post("/user", {
         //   name: 'eullerTest',
         //   email: "euller@game1task.com",
@@ -52,7 +52,7 @@ function Home() {
     var config = {
       headers: { Authorization: `Bearer ${auth_user}` }
     };
-    const response = await api
+    await api
       .post(
         "/task",
         {
@@ -101,7 +101,14 @@ function Home() {
         Nova Atividade{" "}
       </a>
 
-      <Modal onClose={showModal} show={show}>
+      <Modal onClose={showModal} show={show} text="message">
+        <section className="margin_center">
+          <h3>Atividade Concluida</h3>
+          <span>Você ganhou 15 pontos pela atividade 'Lista de Exercícios' de Banco de Dados.</span>
+        </section>
+      </Modal>
+
+      <Modal onClose={showModal} show={false}>
         <div className="models">
           <section className="container">
             <h2>Modelos</h2>
