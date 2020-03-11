@@ -18,7 +18,7 @@ function CardDetalhes() {
                     </div>
                 </div>
 
-                <div id="main-card-detalhes" className=" col-lg-12 d-flex">
+                <div id="main-card-detalhes" className="d-flex">
                     <div id="ficha-tecnica" className="col-lg-6">
                         <div className="box-titulo-card">
                             <h2 className="titulo-filtro col-lg-12">
