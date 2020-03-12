@@ -70,7 +70,7 @@ function Home() {
     setName("");
     setDueDate("");
     setDescription("");
-    // setToDoList('');
+    // setToDoList("");
   }
 
   return (
@@ -101,14 +101,22 @@ function Home() {
         Nova Atividade{" "}
       </a>
 
-      <Modal onClose={showModal} show={show} text="message">
-        <section className="margin_center">
-          <h3>Atividade Concluida</h3>
-          <span>Você ganhou 15 pontos pela atividade 'Lista de Exercícios' de Banco de Dados.</span>
-        </section>
+      <Modal onClose={showModal} show={true} type="message">
+        <div className="margin_center">
+          <div className="between">
+            <h3>Atividade Concluida</h3>
+            <span>
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </span>
+          </div>
+          <p>
+            Você ganhou 15 pontos pela atividade 'Lista de Exercícios' de Banco
+            de Dados.
+          </p>
+        </div>
       </Modal>
 
-      <Modal onClose={showModal} show={false}>
+      <Modal onClose={showModal} show={false} type="modal">
         <div className="models">
           <section className="container">
             <h2>Modelos</h2>

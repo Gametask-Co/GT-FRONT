@@ -13,12 +13,25 @@ function Modal(props) {
     return null;
   }
 
-  return props.text === "complete" ? (
-    <section className="modal">{props.children}</section>
-  ) : "message" ? (
-    <section className="modal_message">{props.children}</section>
-  ) : (
-    <section className="modal structure">{props.children}</section>
+  return (
+    <>
+      {(() => {
+        switch (props.type) {
+          case "modal":
+            return <section className="modal">{props.children}</section>;
+          case "message":
+            return (
+              <section className="modal_message">{props.children}</section>
+            );
+          case "alert":
+            return <section className="modal_alert">{props.children}</section>;
+          case "prompt":
+            return <section className="modal_prompt">{props.children}</section>;
+          default:
+            return null;
+        }
+      })()}
+    </>
   );
 }
 
