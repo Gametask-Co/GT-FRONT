@@ -100,8 +100,16 @@ function Home() {
         {" "}
         Nova Atividade{" "}
       </a>
+      
+      <Modal onClose={showModal} show={true} type="alert">
+        <h1>Concluir atividade?</h1>
+        <p>
+          Tem certeza que quer concluir esta atividade, após a conclusão não
+          será mais possível altera-la.
+        </p>
+      </Modal>
 
-      <Modal onClose={showModal} show={true} type="message">
+      <Modal onClose={showModal} show={false} type="message">
         <div className="margin_center">
           <div className="between">
             <h3>Atividade Concluida</h3>

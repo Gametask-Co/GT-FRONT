@@ -24,7 +24,7 @@ function Modal(props) {
               <section className="modal_message">{props.children}</section>
             );
           case "alert":
-            return <section className="modal_alert">{props.children}</section>;
+            return <section className="alert_block">{props.children}</section>;
           case "prompt":
             return <section className="modal_prompt">{props.children}</section>;
           default:
