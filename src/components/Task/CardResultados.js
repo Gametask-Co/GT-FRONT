@@ -22,7 +22,21 @@ function CardResultados() {
                                     30/01/2021
                                 </h4>
                             </div>
+                            <div className="retangulo-titulo-atividade">
+                                <h2>Titulo da Atividade</h2>
+                            </div>
                         </li>
+
+                        {/* <li className="retangulo col-lg-10">
+                            <div className="row cabecalho-resultado">
+                                <h4 className="title titulo-resultado">
+                                    Titulo do resultado
+                                </h4>
+                                <h4>
+                                    30/01/2021
+                                </h4>
+                            </div>
+                        </li> */}
                     </ul>
                 </div>
             </div>

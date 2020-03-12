@@ -25,6 +25,39 @@ function CardDetalhes() {
                                 Ficha Técnica
                             </h2>
                         </div>
+                        <div className="cabecalho-ficha-tecnica col-lg-12">
+                            <div>
+                                <h2>
+                                    Titulo de titulo
+                                </h2>
+                            </div>
+                            <div>
+                                <p>21/03/2000</p>
+                            </div>
+                        </div>
+
+                        <div className="">
+                            <h2>
+                                Titulo da  atividades
+                            </h2>
+
+                            <p>
+                                Descrição da atividade. batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata batata batata batata 
+                                batata batata batata batata batata batata batata
+                            </p>
+
+                        </div>
+                        <div>
+                            
+                        </div>
+
+
                     </div>
 
 
