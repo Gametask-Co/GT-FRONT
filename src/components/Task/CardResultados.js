@@ -5,7 +5,7 @@ import '../Cards/Cards.sass'
 function CardResultados() {
     return (
         <>
-            <div id="card-resultados">
+            <div id="card-resultados" className="col-lg-3">
                 <div className="box-titulo-card">
                     <h1 className="titulo-filtro col-lg-12">
                         Resultados

@@ -4,7 +4,7 @@ import '../Cards/Cards.sass'
 
 function Filtro() {
     return <>
-        <div className="filtro">
+        <div className="filtro col-lg-3">
             <div className="box-titulo-card">
                 <h1 className="titulo-filtro col-lg-12">
                     Filtros

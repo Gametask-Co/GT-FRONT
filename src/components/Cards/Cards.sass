@@ -4,19 +4,15 @@ h1
     width: 95%
     height: 95%
     background-color: #1b1b1b
-    display: flex
+    display: inherit
 
 .filtro
     height: 100%
     width: 20%
     background-color: #1b1b1b;
 
-.box-titulo-card
-    height: 10%
-    width: 100%
-    display: flex
-    justify-content: center
-    align-items: center
+
+
 
 .titulo-filtro
     color: white
@@ -112,18 +108,22 @@ input::placeholder
     width: 55%
     height: 100%
     background-color: #2d2d2d
+    display: flex
+    flex-direction: column
     
 .cabecalho-card
     display: flex
     justify-content: space-between
     height: 10%
 
-#card-detalhes .box-titulo-card
-    justify-content: space-between
+#card-detalhes 
+    .box-titulo-card
+        display: inline-flex
 
-.bd-example
-    height: 40%
-    display: flex
+
+//.bd-example
+//    height: 40%
+//    display: flex
 
 .bd-example button
     border: none !important
@@ -314,4 +314,9 @@ checkbox-container
     height: 10%
     width: 100%
 .cabecalho-ficha-tecnica p
+    color: white
+.box-btn-inferiores
+    background-color: #ccc
+
+p.texto-descricao-atividade
     color: white

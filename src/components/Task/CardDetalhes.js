@@ -6,8 +6,8 @@ import ListaAfazeres from './ListaAfazeres';
 function CardDetalhes() {
     return (
         <>
-            <div id="card-detalhes">
-                <div className="box-titulo-card col-lg-12">
+            <div id="card-detalhes" className="col-lg-6">
+                <div className="box-titulo-card">
                     <h1 className="titulo-filtro col-lg-10">
                         Detalhes
                     </h1>
@@ -36,12 +36,12 @@ function CardDetalhes() {
                             </div>
                         </div>
 
-                        <div className="">
+                        <div className="col-lg-12">
                             <h2>
                                 Titulo da  atividades
                             </h2>
 
-                            <p>
+                            <p className="texto-descricao-atividade">
                                 Descrição da atividade. batata batata batata batata batata batata batata batata 
                                 batata batata batata batata batata batata batata batata batata batata batata 
                                 batata batata batata batata batata batata batata batata batata batata batata batata 
@@ -53,7 +53,10 @@ function CardDetalhes() {
                             </p>
 
                         </div>
-                        <div>
+                        <div className="box-btn-inferiores">
+                            
+                            <button></button>
+                            <button></button>
                             
                         </div>
 
