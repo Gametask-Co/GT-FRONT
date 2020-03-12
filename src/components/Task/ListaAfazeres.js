@@ -6,9 +6,9 @@ function ListaAfazeres() {
     return <>
         <div id="lista-afazeres">
             <div className="box-titulo-card">
-                <h2 className="titulo-filtro col-lg-12">
-                    Lista de afazeres
-                </h2>
+                <h3 className="titulo-card col-lg-12">
+                    Lista de afazeres:
+                </h3>
             </div>
 
             <div className="box-checkbox-afazeres">

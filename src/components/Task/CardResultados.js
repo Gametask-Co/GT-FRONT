@@ -13,8 +13,8 @@ function CardResultados() {
                 </div>
                 <div id="box-lista-resultados">
                     <ul id="lista-resultados">
-                        <li className="retangulo active col-lg-10">
-                            <div className="row cabecalho-resultado">
+                        <li className="retangulo active ">
+                            <div className="d-flex cabecalho-resultado">
                                 <h4 className="title titulo-resultado">
                                     Titulo do resultado
                                 </h4>
@@ -23,12 +23,12 @@ function CardResultados() {
                                 </h4>
                             </div>
                             <div className="retangulo-titulo-atividade">
-                                <h2>Titulo da Atividade</h2>
+                                <h3>Titulo da Atividade</h3>
                             </div>
                         </li>
 
-                        {/* <li className="retangulo col-lg-10">
-                            <div className="row cabecalho-resultado">
+                        <li className="retangulo">
+                            <div className="d-flex cabecalho-resultado">
                                 <h4 className="title titulo-resultado">
                                     Titulo do resultado
                                 </h4>
@@ -36,7 +36,10 @@ function CardResultados() {
                                     30/01/2021
                                 </h4>
                             </div>
-                        </li> */}
+                            <div className="retangulo-titulo-atividade">
+                                <h3>Titulo da Atividade</h3>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

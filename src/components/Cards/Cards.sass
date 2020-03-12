@@ -1,45 +1,21 @@
 h1
     text-transform: none
+    font-size: 48px 
+h2
+    font-size: 32px
+    margin: 0px 0px 0px 0px
+h3 
+    font-size: 21px
+    color: white
+h3.titulo-card
+    font-weight: 300
+    margin-bottom: 0px
+
 #super-card
     width: 95%
     height: 95%
     background-color: #1b1b1b
     display: inherit
-
-.filtro
-    height: 100%
-    width: 20%
-    background-color: #1b1b1b;
-
-
-
-
-.titulo-filtro
-    color: white
-
-#botao-pesquisar
-    width: 50px
-    height: 50px
-    background-color: #353535
-    border: none
-
-#campo-busca
-    height: 50px
-    background-color: #353535
-    border: none
-    width: 100%
-
-#busca
-    display: flex
-    justify-content: center
-
-.box-botao-colapso
-    display: flex
-    width: 95%
-    height: 40px
-    border: solid 1px white
-    margin-top: 15px
-
 
 input::placeholder
   font-size: 2rem
@@ -47,18 +23,8 @@ input::placeholder
   align-itens: center
   padding-left: 2%
 
-.box-botao-colapso a
-    height: 100%
-    width: 100%
-    text-align: center
-    display: flex
-    align-items: center
-    font-size: 2em
-    padding: 5% 10%
-    color: white !important
 
-#filtros
-    height: 65%
+
 .box-botao-criar-atividade
     height: 10%
     display: flex
@@ -67,16 +33,9 @@ input::placeholder
     height: 70%
     font-size: 1.5rem
     border: none
-.box-botao-colapso a:hover
-    text-decoration: none
-    color: #b9b9b9 !important
-.lista-filtros
-    display: flex
-    flex-flow: column
-    height: 100%
-    width: 100%
-.lista-filtros li label
-    color: #b9b9b9
+    color: white
+
+
 
 #card-resultados
     width: 25%
@@ -88,22 +47,26 @@ input::placeholder
 #box-lista-resultados
     height: 100%
     width: 100%
+
 #lista-resultados
     display: flex
-    justify-content: center
+    align-items: center
     height: 100%
     padding-top: 3%
+    flex-flow: column
+
 .retangulo.active
-    width: 100%;
-    height: 84px;
     border: solid 1px rgba(255, 255, 255, 0.87)
     background-color: rgba(255, 255, 255, 0.04)
+    
 .retangulo
-    width: 276px
-    height: 84px
+    width: 90%;
     background-color: rgba(255, 255, 255, 0.04)
     display: flex;
-    flex-flow: column;
+    flex-flow: column
+    padding: 15px 15px 15px 15px
+    margin-bottom: 5%
+
 #card-detalhes
     width: 55%
     height: 100%
@@ -120,19 +83,31 @@ input::placeholder
     .box-titulo-card
         display: inline-flex
 
-
-//.bd-example
-//    height: 40%
-//    display: flex
+.bd-example
+    display: flex;
+    align-items: center;
 
 .bd-example button
     border: none !important
-    font-size: 2rem
+    font-size: 1.8rem
+    height: 80%
 
 .box-form-search
     height: 10%
 
-#lista-afazeres, #ficha-tecnica
+#ficha-tecnica
+    height: 100%
+    display: flex
+    flex-flow: column
+    padding: 15px 15px
+
+#lista-afazeres
+    height: 100%
+    width: 100%
+    background-color: #ffffff0a
+    padding: 15px 15px
+
+.box-textos-descritivos
     height: 100%
 
 .form-check
@@ -145,9 +120,12 @@ input::placeholder
 
 #box-form-checkbox
     color: white
+    margin-bottom: 15px
 
 .form-check-label
     margin-left: 3%
+    font-style: italic
+
 
 input
     width: 18px
@@ -156,27 +134,21 @@ input
     color: black
     cursor: pointer
     
-
 .descricao-atividade
     font-weight: 100
     padding-left: 1.25rem
-
-checkbox-container 
-    float: left
-    width: 50%
-    box-sizing: border-box
-    text-align:center
-    padding: 40px 0px
-
+    font-style: italic
 
 .circular-container 
-  background-color: #0067FF
+    background-color: #0067FF
+
 .input-title
     clear: both
     padding: 22px 0px 0px 0px
     font-size: 16px
     color: rgba(255,255,255,.6)
     font-weight: 300
+
 .checkbox-label 
     display: block
     position: relative
@@ -187,11 +159,11 @@ checkbox-container
     width: 24px
     clear: both
     margin-bottom: 0px
+    
 .checkbox-label input
     position: absolute
     opacity: 0
     cursor: pointer
-
 
 .checkbox-label 
     .checkbox-custom
@@ -241,7 +213,6 @@ checkbox-container
         -ms-transition: all 0.3s ease-out
         -o-transition: all 0.3s ease-out
 
-
 .checkbox-label 
     input:checked ~ .checkbox-custom::after
         -webkit-transform: rotate(45deg) scale(1)
@@ -256,7 +227,6 @@ checkbox-container
         border-width: 0 2px 2px 0
         background-color: transparent
         border-radius: 0
-
 
 .checkbox-label 
     .checkbox-custom::before 
@@ -290,10 +260,9 @@ checkbox-container
         -ms-transition: all 0.3s ease-out
         -o-transition: all 0.3s ease-out
 
-
 .cabecalho-resultado
     color: white
-    justify-content: space-around
+    justify-content: space-between
 
 .cabecalho-resultado
     h4
@@ -302,7 +271,6 @@ checkbox-container
 .retangulo-titulo-atividade
     height: 100%
     width: 100%
-    justify-content: center
     align-items: center
     display: flex
 
@@ -311,12 +279,60 @@ checkbox-container
         font-weight: bold
 
 .cabecalho-ficha-tecnica
-    height: 10%
+    height: 15%
     width: 100%
-.cabecalho-ficha-tecnica p
-    color: white
+    display: flex
+    flex-flow: column
+    justify-content: center
+
+.cabecalho-ficha-tecnica 
+    p
+
+        font-size: 14px
+        font-weight: 300
+        font-stretch: normal
+        font-style: italic
+        line-height: 1.14
+        letter-spacing: 0px
+        text-align: left
+        color: #ffffff99
+
 .box-btn-inferiores
-    background-color: #ccc
+    display: flex
+    justify-content: space-between
+    height: 10%
 
 p.texto-descricao-atividade
     color: white
+    font-size: 1rem
+    font-style: italic
+
+#btn-desistir
+    background-color: #ffffff0a !important
+    border: none
+
+#btn-concluir
+    border: solid 1px #ffffff1f
+    margin-top: 0px
+    background-color: #2d2d2d
+
+.titulo-box-textos-descritivos
+    font-size: 28px
+    font-weight: normal
+    font-stretch: normal
+    font-style: normal
+    line-height: 1.14
+    letter-spacing: -0.67px
+    text-align: left
+    color: #ffffffde
+    margin-bottom: 5%
+
+.box-btn-inferiores
+    button
+        height: 75%
+        font-size: 1.80rem
+
+.checkbox-afazeres
+    margin-top: 5%
+
+
