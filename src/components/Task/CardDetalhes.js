@@ -57,14 +57,14 @@ function CardDetalhes() {
 
                             <div className="col-lg-6">
                                 <button type="button" id="btn-desistir" className="btn btn-secondary btn-lg btn-block">
-                                    <img srcSet="img/icons-8-cancel.png" srcset="img/icons-8-cancel@2x.png 2x,img/icons-8-cancel@3x.png 3x" className="icons8_cancel"></img>
+                                    {/* <img srcSet="img/icons-8-cancel.png" srcset="img/icons-8-cancel@2x.png 2x,img/icons-8-cancel@3x.png 3x" className="icons8_cancel"></img> */}
                                     DESISTIR
                                 </button>
                             </div>
 
                             <div className="col-lg-6">
                                 <button type="button" id="btn-concluir" className="btn btn-primary btn-lg btn-block">
-                                    <img srcSet="img/icons-8-trophy.svg" className="icons8_trophy"></img>
+                                    {/* <img srcSet="img/icons-8-trophy.svg" className="icons8_trophy"></img> */}
                                     CONCLUIR
                                 </button>
                             </div>
