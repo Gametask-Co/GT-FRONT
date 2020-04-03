@@ -37,7 +37,7 @@ function Modal(props) {
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool.isRequired,
 };
 
 export default Modal;

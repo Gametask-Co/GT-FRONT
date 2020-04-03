@@ -10,12 +10,11 @@ function Home() {
   const [due_date, setDueDate] = useState("");
   const [description, setDescription] = useState("");
   // const [to_do_list, setToDoList] = useState('');
-  const [auth_user, setAuthUser] = useState("");
 
   const models = [
     { name: "Disciplina", activate: true },
     { name: "Projeto", activate: false },
-    { name: "Avulsa", activate: false }
+    { name: "Avulsa", activate: false },
   ];
 
   useEffect(() => {
@@ -29,11 +28,13 @@ function Home() {
         // })
         .post("/user/auth", {
           email: "euller@game1task.com",
-          password: "testGametask"
+          password: "testGametask",
         })
         .then(function(res) {
           console.log("Auth user ok!");
-          setAuthUser(res.data.token);
+          // setAuthUser(res.data.token);
+          // add others infos on localStorage
+          localStorage.setItem("userToken", res.data.token);
         })
         .catch(function(error) {
           console.log(error, "Auth user error!");
@@ -49,8 +50,11 @@ function Home() {
 
   async function handleCreateTask(e) {
     e.preventDefault();
+
+    const user_token = localStorage.getItem("userToken");
     var config = {
-      headers: { Authorization: `Bearer ${auth_user}` }
+      // headers: { Authorization: `Bearer ${auth_user}` },
+      headers: { Authorization: `Bearer ${user_token}` },
     };
     await api
       .post(
@@ -58,7 +62,7 @@ function Home() {
         {
           name,
           description,
-          due_date
+          due_date,
         },
         config
       )
@@ -93,20 +97,42 @@ function Home() {
       <a
         className="toggle-button"
         id="centered-toggle-button"
-        onClick={e => {
+        onClick={(e) => {
           showModal(e);
         }}
       >
         {" "}
         Nova Atividade{" "}
       </a>
-      
-      <Modal onClose={showModal} show={true} type="alert">
+
+      <Modal onClose={showModal} show={false} type="alert">
         <h1>Concluir atividade?</h1>
         <p>
           Tem certeza que quer concluir esta atividade, após a conclusão não
           será mais possível altera-la.
         </p>
+        <div class="check">
+          <input type="checkbox" id="horns" name="horns" />
+          <span for="horns">Horns</span>
+        </div>
+        <div className="between">
+          <button
+            className="toggle-button"
+            id="centered-toggle-button"
+            onClick={(e) => {
+              showModal(e);
+            }}
+          >
+            <span>
+              <i className="fa fa-times" aria-hidden="true"></i>Cancelar
+            </span>
+          </button>
+          <button type="submit">
+            <span>
+              <i className="fa fa-times" aria-hidden="true"></i>Confirmar
+            </span>
+          </button>
+        </div>
       </Modal>
 
       <Modal onClose={showModal} show={false} type="message">
@@ -124,15 +150,15 @@ function Home() {
         </div>
       </Modal>
 
-      <Modal onClose={showModal} show={false} type="modal">
+      <Modal onClose={showModal} show={true} type="modal">
         <div className="models">
           <section className="container">
             <h2>Modelos</h2>
-            {models.map(model => (
+            {models.map((model) => (
               <button
                 key={model.name}
                 className={model.activate ? "item activate" : "item"}
-                onClick={e => {
+                onClick={(e) => {
                   // showModal(e);
                 }}
               >
@@ -158,7 +184,7 @@ function Home() {
                       id="name"
                       placeholder="Nome"
                       value={name}
-                      onChange={e => setName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
@@ -194,7 +220,7 @@ function Home() {
                         id="due_date"
                         placeholder="dd/mm/aaaa"
                         value={due_date}
-                        onChange={e => setDueDate(e.target.value)}
+                        onChange={(e) => setDueDate(e.target.value)}
                         required
                       />
                     </div>
@@ -212,7 +238,7 @@ function Home() {
                       name="description"
                       id="description"
                       value={description}
-                      onChange={e => setDescription(e.target.value)}
+                      onChange={(e) => setDescription(e.target.value)}
                       rows="5"
                       placeholder="Descrição"
                     />
@@ -224,7 +250,7 @@ function Home() {
                 <button
                   className="toggle-button"
                   id="centered-toggle-button"
-                  onClick={e => {
+                  onClick={(e) => {
                     showModal(e);
                   }}
                 >

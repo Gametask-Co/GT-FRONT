@@ -3,11 +3,13 @@
   margin: 0;
   padding: 0;
   outline: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 html, body, #root {
   height: 100%;
-  font-size: 8pt; }
+  font-size: 8pt;
+}
 
 body {
   --webkit-font-smoothing: antialiased;
@@ -15,10 +17,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center;
+}
 
 body, input, button {
-  font-family: Roboto, sans-serif; }
+  font-family: Roboto, sans-serif;
+}
 
 h1 {
   color: rgba(255, 255, 255, 0.6);
@@ -27,7 +31,8 @@ h1 {
   font-weight: 400;
   font-style: normal;
   font-size: 6rem;
-  line-height: 7rem; }
+  line-height: 7rem;
+}
 
 h2 {
   font-family: Condensed Semibold 16px/24px Bernina Sans;
@@ -38,7 +43,8 @@ h2 {
   line-height: 1.17;
   letter-spacing: -0.02px;
   text-align: left;
-  color: rgba(255, 255, 255, 0.6); }
+  color: rgba(255, 255, 255, 0.6);
+}
 
 label {
   margin-top: 20px;
@@ -50,17 +56,20 @@ label {
   line-height: 1.38;
   letter-spacing: -0.5px;
   text-align: left;
-  color: rgba(255, 255, 255, 0.87); }
+  color: rgba(255, 255, 255, 0.87);
+}
 
 input, select, textarea {
   background-color: transparent;
   border: none;
   width: 100%;
   color: rgba(255, 255, 255, 0.6);
-  border-bottom: 0.2rem solid rgba(255, 255, 255, 0.6); }
+  border-bottom: 0.2rem solid rgba(255, 255, 255, 0.6);
+}
 
 option {
-  background-color: #1f1f1f; }
+  background-color: #1f1f1f;
+}
 
 a {
   text-transform: uppercase;
@@ -72,11 +81,13 @@ a {
   line-height: 1.5;
   letter-spacing: 0.02px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.87); }
+  color: rgba(255, 255, 255, 0.87);
+}
 
 a:hover {
   cursor: pointer;
-  opacity: 0.8; }
+  opacity: 0.8;
+}
 
 button {
   cursor: pointer;
@@ -84,13 +95,15 @@ button {
   width: 160px;
   height: 48px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  background-color: rgba(255, 255, 255, 0.07); }
+  background-color: rgba(255, 255, 255, 0.07);
+}
 
 button:hover {
   opacity: 0.9;
   border: solid 1px #ffffff;
   background-color: rgba(255, 255, 255, 0.09);
-  color: rgba(255, 255, 255, 0.87); }
+  color: rgba(255, 255, 255, 0.87);
+}
 
 button span {
   top: 654px;
@@ -102,6 +115,7 @@ button span {
   letter-spacing: 0.02px;
   color: #FFFFFFDE;
   text-transform: uppercase;
-  opacity: 1; }
+  opacity: 1;
+}
 
 /*# sourceMappingURL=global.css.map */
