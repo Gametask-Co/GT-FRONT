@@ -18,7 +18,7 @@ function Modal(props) {
       {(() => {
         switch (props.type) {
           case "modal":
-            return <section className="modal">{props.children}</section>;
+            return <section className="modal structure">{props.children}</section>;
           case "message":
             return (
               <section className="modal_message">{props.children}</section>
