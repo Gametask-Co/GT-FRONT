@@ -16,13 +16,16 @@
     "react-dom": "^16.12.0",
     "react-fontawesome": "^1.7.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "sass": "^1.26.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "PORT=2000 react-scripts start",
+    "build": "yarn sass:build && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass": "sass --watch src/styles/sass:src/styles/css",
+    "sass:build": "sass — update src/styles/scss:src/styles/css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }
