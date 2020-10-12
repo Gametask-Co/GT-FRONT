@@ -4,7 +4,7 @@ import media from "styled-media-query";
 import { KeyboardArrowLeft, KeyboardArrowDown } from "styled-icons/material";
 
 export const Header = styled.div`
-  padding: 2.3rem;
+  padding: 2rem;
   color: white;
   background-color: #343a40;
 
@@ -21,10 +21,14 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  /* > div:first {
+  > div {
     display: flex;
     align-items: center;
-  } */
+
+    > svg:first-child {
+      margin-right: 2rem;
+    }
+  }
 
   /* & ::before {
     
