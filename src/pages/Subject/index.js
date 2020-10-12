@@ -6,12 +6,16 @@ import * as Styled from "./styled";
 import Layout from "../../components/Layout";
 import Container from "../../components/Container";
 
+import { useAuth } from "../../contents/auth";
+
 function Subject() {
+  const { signed } = useAuth();
   const history = useHistory();
 
   useEffect(() => {
-    // if value signed is false return to /
-    // history.push("/");
+    if (signed === false) {
+      history.push("/");
+    }
   }, []);
 
   return (
