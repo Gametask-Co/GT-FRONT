@@ -5,7 +5,7 @@ import media from "styled-media-query";
 import { KeyboardArrowLeft, KeyboardArrowDown } from "styled-icons/material";
 
 import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
-// import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
+import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 
 export const Header = styled.div`
   padding: 2rem;

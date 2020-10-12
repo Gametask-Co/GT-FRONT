@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import * as Styled from "./styled";
 
 import { ReactComponent as Logo } from "../../assets/icons/logotype.svg";
+import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
+import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 
 const Header = ({ siteTitle }) => {
   return (
@@ -17,8 +19,9 @@ const Header = ({ siteTitle }) => {
           <h1>{siteTitle}</h1>
         </div>
         <div>
-          <Styled.MessageIcon />
-          {/* <Bell /> */}
+          {/* <Styled.MessageIcon /> */}
+          <Message />
+          <Bell />
           <img src="" alt="" />
           <Styled.KeyboardArrowDownIcon />
         </div>
