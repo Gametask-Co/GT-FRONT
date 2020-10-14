@@ -35,7 +35,10 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     line-height: 1;
-
+    
+    color: white;
+    background-color: #1C1E23;
+    
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   }
   ol, ul {

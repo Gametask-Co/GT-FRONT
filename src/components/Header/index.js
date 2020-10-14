@@ -13,16 +13,22 @@ const Header = ({ siteTitle }) => {
       <Styled.Container>
         <div>
           <Logo />
-          <a href="/subject">
-            <Styled.KeyboardArrowLeftIcon />
-          </a>
-          <h1>{siteTitle}</h1>
+          {siteTitle ? (
+            <>
+              <a href="/subject">
+                <Styled.KeyboardArrowLeftIcon />
+              </a>
+              <h1>{siteTitle}</h1>
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div>
           {/* <Styled.MessageIcon /> */}
           <Message />
           <Bell />
-          <img src="" alt="" />
+          <Styled.CircleProfile />
           <Styled.KeyboardArrowDownIcon />
         </div>
       </Styled.Container>

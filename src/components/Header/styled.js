@@ -8,9 +8,12 @@ import { ReactComponent as Message } from "../../assets/icons/message-circle.svg
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 
 export const Header = styled.div`
-  padding: 2rem;
+  padding: 1rem;
+
   color: white;
-  background-color: #343a40;
+
+  background: #1c1e23;
+  border-bottom: 2px solid #3f424d;
 
   a {
     text-transform: uppercase;
@@ -56,32 +59,51 @@ export const KeyboardArrowDownIcon = styled(KeyboardArrowDown)`
 `;
 
 export const MessageIcon = styled(Message)`
-  width: 28px;
-  height: 28px;
-
-  color: white;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 
   position: relative;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
 
-  & ::after {
+  &::before {
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    left: -17px;
+    top: calc(50% - 4.5px);
+    background-color: white;
+    border-radius: 50%;
+    content: "";
+  }
+
+  &::after {
     background-color: red;
     width: auto;
     height: 16px;
-
     padding: 0 4px;
-
     position: absolute;
     bottom: -4px;
     right: -4px;
-
-    border-radius: 12px border 4px solid gray;
-
+    border-radius: 12px;
+    border: 4px solid gray;
     text-align: right;
     font-size: 13px;
     font-weight: bold;
     color: white;
-
-    content: "313";
+    content: "123";
   }
+`;
+
+export const CircleProfile = styled.span`
+  height: 30px;
+  width: 30px;
+  
+  margin: 1rem;
+
+  background-color: #3f424d;
+  border-radius: 50%;
 `;

@@ -19,7 +19,7 @@ function Subject() {
   }, []);
 
   return (
-    <Layout pageTitle="Disciplinas">
+    <Layout>
       <Container>
         <h1>Page Subject</h1>
       </Container>
