@@ -9,7 +9,7 @@ import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 
 export const Header = styled.div`
   padding: 1rem;
-
+  margin-bottom: 3rem;
   color: white;
 
   background: #1c1e23;
@@ -101,7 +101,7 @@ export const MessageIcon = styled(Message)`
 export const CircleProfile = styled.span`
   height: 30px;
   width: 30px;
-  
+
   margin: 1rem;
 
   background-color: #3f424d;

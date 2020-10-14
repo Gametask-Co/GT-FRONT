@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
-import Container from "../../components/Container";
+import CardSubjectList from "../../components/CardSubjectList";
 
 import { useAuth } from "../../contents/auth";
 
@@ -20,9 +20,19 @@ function Subject() {
 
   return (
     <Layout>
-      <Container>
-        <h1>Page Subject</h1>
-      </Container>
+      {/* <div>
+        <h1>Menu lateral</h1>
+      </div> */}
+      <Styled.SubjectWrapper>
+        <div>
+          <h1>Disciplinas</h1>
+          <div>
+            <span>0909</span>
+            <span>kkkkk</span>
+          </div>
+        </div>
+        <CardSubjectList name="Sistemas Operacionais" teacher="Fulano de Tal" percentage="55" />
+      </Styled.SubjectWrapper>
     </Layout>
   );
 }

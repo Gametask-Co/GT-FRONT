@@ -14,3 +14,18 @@ export const Container = styled.div`
     padding-left: 0px;  
   `}
 `;
+
+export const SubjectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    
+    span {
+      padding-left: 1rem;
+    }
+  }
+`;
