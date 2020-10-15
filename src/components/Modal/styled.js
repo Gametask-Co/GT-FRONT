@@ -6,22 +6,25 @@ export const ContainerModal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
 
-  /* get props  */
-  .display-block {
-    display: block;
-  }
-
-  .display-none {
-    display: none;
-  }
+  /* -webkit-filter: blur(8px);
+  filter: blur(8px); */
 `;
 
-export const ModalMain = styled.div`
+export const ModalMain = styled.section`
   position: fixed;
-  background: white;
-  width: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+
+  background: #282a31;
+
+  box-shadow: 0px 16px 48px rgba(63, 66, 77, 0.25);
+  border-radius: 16px;
+
+  width: 30%;
   height: auto;
   top: 50%;
   left: 50%;

@@ -5,6 +5,7 @@ import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
 import CardSubjectList from "../../components/CardSubjectList";
+import Modal from "../../components/Modal";
 
 import { useAuth } from "../../contents/auth";
 
@@ -24,7 +25,7 @@ function Subject() {
     }
   }, [signed]);
 
-  function openSubjectModal(e) {
+  function handleSubjectModal(e) {
     setShow(!show);
   }
 
@@ -37,7 +38,7 @@ function Subject() {
         <div>
           <h1>Disciplinas</h1>
           <div>
-            <button onClick={openSubjectModal}>
+            <button onClick={handleSubjectModal}>
               <Plus />
             </button>
             <button>
@@ -52,10 +53,10 @@ function Subject() {
         />
       </Styled.SubjectWrapper>
 
-      <div>
+      <Modal onClose={handleSubjectModal} show={show}>
         <h1>Modal</h1>
-      </div>
-      
+        <button onClick={handleSubjectModal}>Close</button>
+      </Modal>
     </Layout>
   );
 }
