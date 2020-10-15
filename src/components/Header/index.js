@@ -25,7 +25,6 @@ const Header = ({ siteTitle }) => {
           )}
         </div>
         <div>
-          {/* <Styled.MessageIcon /> */}
           <Message />
           <Bell />
           <Styled.CircleProfile />

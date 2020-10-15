@@ -11,10 +11,16 @@ export const Wrapper = styled.div`
     margin-right: 1rem;
   }
 
-  > div {    
+  > div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
+
     > span {
       font-size: 0.8rem;
       color: #65cba0;
+      padding-top: 0.5rem;
     }
 
     > div {
@@ -22,6 +28,16 @@ export const Wrapper = styled.div`
       align-items: center;
     }
   }
+`;
+
+export const Thumbnail = styled.div`
+  width: 200px;
+  height: 150px;
+
+  margin-right: 1rem;
+
+  background-color: #282A31;
+  border-radius: 0.9rem;
 `;
 
 export const CircleProfile = styled.div`
@@ -41,7 +57,7 @@ export const Percentage = styled.div.attrs((props) => ({
   height: 20px;
   display: flex;
 
-  margin-top: 1rem;
+  margin-top: 4rem;
 
   background-color: #282a31;
   border-radius: 50px;

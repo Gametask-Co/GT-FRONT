@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Modal(props) {
-  console.log(props);
-
   function onClose(e) {
     props.onClose && props.onClose(e);
   }

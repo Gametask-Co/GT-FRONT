@@ -1,7 +1,6 @@
 import React from "react";
 
 import Layout from "../../components/Layout";
-import Container from "../../components/Container";
 
 import { useAuth } from "../../contents/auth";
 
@@ -16,10 +15,10 @@ function SignIn() {
   }
 
   return (
-    <div>
+    <Layout>
       <h1>SignIn</h1>
       <button onClick={handleSignIn}>Sign In</button>
-    </div>
+    </Layout>
   );
 }
 

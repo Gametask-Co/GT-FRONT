@@ -15,17 +15,36 @@ export const Container = styled.div`
   `}
 `;
 
+export const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #282a31;
+  border-radius: 0.9rem;
+`;
+
 export const SubjectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
 
   > div:first-child {
     display: flex;
     justify-content: space-between;
-    
-    span {
-      padding-left: 1rem;
+    align-items: center;
+
+    button {
+      margin-left: 1rem;
+      background-color: #282a31;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 0.6rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: gray;
+      }
     }
   }
 `;

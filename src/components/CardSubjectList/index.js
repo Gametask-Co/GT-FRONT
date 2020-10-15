@@ -5,7 +5,8 @@ import * as Styled from "./styled";
 const CardSubjectList = ({ name, teacher, percentage }) => {
   return (
     <Styled.Wrapper>
-      <img src="#" alt={name} />
+      {/* <img src="#" alt={name} /> */}
+      <Styled.Thumbnail />
       <div>
         <h3>{name}</h3>
         <div>
