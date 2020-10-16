@@ -17,6 +17,7 @@ function App() {
           <Route path="/signin" component={SignIn} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/subject" component={Subject} />
+          {/* <Route path="/subject/:id" component={ SubjectDetail } /> */}
         </Switch>
       </Router>
     </AuthProvider>

@@ -54,8 +54,29 @@ function Subject() {
       </Styled.SubjectWrapper>
 
       <Modal onClose={handleSubjectModal} show={show}>
-        <h1>Modal</h1>
-        <button onClick={handleSubjectModal}>Close</button>
+        <form action="#" method="post">
+          <h2>Criar Disciplina</h2>
+
+          <label htmlFor="name">Nome</label>
+          <input type="text" id="name" placeholder="Nome da Disciplina" />
+
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            type="text"
+            id="description"
+            placeholder="Escreva aqui..."
+            rows="5"
+            cols="33"
+          />
+
+          <label htmlFor="image">Imagem</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+
+          <div>
+            <button onClick={handleSubjectModal}>Cancelar</button>
+            <button>Salvar</button>
+          </div>
+        </form>
       </Modal>
     </Layout>
   );
