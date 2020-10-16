@@ -9,6 +9,8 @@ import Modal from "../../components/Modal";
 
 import { useAuth } from "../../contents/auth";
 
+import api from "../../services/api";
+
 import { ReactComponent as Plus } from "../../assets/icons/start.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
@@ -16,6 +18,7 @@ function Subject() {
   const { signed, user } = useAuth();
 
   const [show, setShow] = useState(false);
+  const [showStudent, setShowStudent] = useState(false);
   // subject
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -31,6 +34,9 @@ function Subject() {
 
   function handleSubjectModal(e) {
     setShow(!show);
+  }
+  function handleStudentModal(e) {
+    setShowStudent(!showStudent);
   }
 
   async function handleCreateSubject(e) {
@@ -50,10 +56,16 @@ function Subject() {
         setName("");
         setDescription("");
         setImage("");
+
+        setShowStudent(!showStudent);
       })
       .catch(function (error) {
         console.log(error, "Error Subject error!");
       });
+  }
+
+  async function handleStudentSubject(e) {
+    e.preventDefault();
   }
 
   return (
@@ -125,34 +137,31 @@ function Subject() {
       </Modal>
 
       {/* unfinish modal sucess  */}
-      <Modal onClose={handleSubjectModal} show={show}>
-        <form onSubmit={handleCreateSubject}>
+      <Modal onClose={handleStudentModal} show={showStudent}>
+        <form onSubmit={handleStudentSubject}>
           <h2>Adicionar Alunos</h2>
 
-          <label htmlFor="name">Compartilhar link</label>
+          <label htmlFor="link">Compartilhar link</label>
           <input
             type="text"
-            id="name"
+            id="link"
             placeholder="Nome da Disciplina"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            // value={link}
+            // onChange={(e) => setLink(e.target.value)}
             required
           />
 
-          <label htmlFor="description">Descrição</label>
-          <textarea
+          <label htmlFor="student">Inserir alunos por email</label>
+          <input
             type="text"
-            id="description"
-            placeholder="Escreva aqui..."
-            rows="5"
-            cols="33"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            id="student"
+            placeholder="Nome da Disciplina"
+            // value={student}
           />
 
           <div>
-            <button onClick={handleSubjectModal}>Cancelar</button>
-            <button type="submit">Salvar</button>
+            <button onClick={handleStudentModal}>Cancelar</button>
+            <button type="submit">Continuar</button>
           </div>
         </form>
       </Modal>
