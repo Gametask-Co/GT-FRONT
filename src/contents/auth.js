@@ -32,22 +32,28 @@ const AuthProvider = ({ children }) => {
         setUser(JSON.parse(storagedUser));
       }
     }
+
+    loadStoragedData();
   }, []);
 
+  // email, password
   async function signIn() {
-    const response = await api
-      .post("/user", {
+    await api
+      .get("/user", {
         email: "",
         password: "",
       })
       .then(function (res) {
         console.log("Auth user ok!", res);
 
-        // set header to all request
-        api.defaults.headers["Authorization"] = `Bearer ${response.token}`;
+        // set header to all requests
+        api.defaults.headers["Authorization"] = `Bearer ${res.token}`;
 
-        localStorage.setItem("@RNAuth:user", JSON.stringify(response.user));
-        localStorage.setItem("@RNAuth:token", response.token);
+        localStorage.setItem("@RNAuth:user", JSON.stringify(res.user));
+        localStorage.setItem("@RNAuth:token", res.token);
+
+        console.log("request user", res);
+        // setUser(request.user);
       })
       .catch(function (error) {
         console.log(error, "Auth user error!");

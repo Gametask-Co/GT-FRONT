@@ -13,9 +13,13 @@ import { ReactComponent as Plus } from "../../assets/icons/start.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
 function Subject() {
-  const { signed } = useAuth();
+  const { signed, user } = useAuth();
 
   const [show, setShow] = useState(false);
+  // subject
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   const history = useHistory();
 
@@ -27,6 +31,29 @@ function Subject() {
 
   function handleSubjectModal(e) {
     setShow(!show);
+  }
+
+  async function handleCreateSubject(e) {
+    e.preventDefault();
+
+    await api
+      .post("/subject", {
+        name,
+        description,
+        image,
+        teacher_id: user.id,
+      })
+      .then(function (res) {
+        console.log(res, "Create Subject ok!");
+
+        setShow(!show);
+        setName("");
+        setDescription("");
+        setImage("");
+      })
+      .catch(function (error) {
+        console.log(error, "Error Subject error!");
+      });
   }
 
   return (
@@ -54,11 +81,18 @@ function Subject() {
       </Styled.SubjectWrapper>
 
       <Modal onClose={handleSubjectModal} show={show}>
-        <form action="#" method="post">
+        <form onSubmit={handleCreateSubject}>
           <h2>Criar Disciplina</h2>
 
           <label htmlFor="name">Nome</label>
-          <input type="text" id="name" placeholder="Nome da Disciplina" />
+          <input
+            type="text"
+            id="name"
+            placeholder="Nome da Disciplina"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
           <label htmlFor="description">Descrição</label>
           <textarea
@@ -67,14 +101,58 @@ function Subject() {
             placeholder="Escreva aqui..."
             rows="5"
             cols="33"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
           />
 
           <label htmlFor="image">Imagem</label>
-          <input type="file" id="image" name="image" accept="image/*" />
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
 
           <div>
             <button onClick={handleSubjectModal}>Cancelar</button>
-            <button>Salvar</button>
+            <button type="submit">Salvar</button>
+          </div>
+        </form>
+      </Modal>
+
+      {/* unfinish modal sucess  */}
+      <Modal onClose={handleSubjectModal} show={show}>
+        <form onSubmit={handleCreateSubject}>
+          <h2>Adicionar Alunos</h2>
+
+          <label htmlFor="name">Compartilhar link</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Nome da Disciplina"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            type="text"
+            id="description"
+            placeholder="Escreva aqui..."
+            rows="5"
+            cols="33"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <div>
+            <button onClick={handleSubjectModal}>Cancelar</button>
+            <button type="submit">Salvar</button>
           </div>
         </form>
       </Modal>
