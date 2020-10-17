@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import media from "styled-media-query";
-
 import { KeyboardArrowLeft, KeyboardArrowDown } from "styled-icons/material";
 
 import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";

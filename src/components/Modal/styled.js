@@ -70,6 +70,10 @@ export const ModalMain = styled.section`
       &:focus {
         border-color: #7289da;
       }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
 
     > textarea {

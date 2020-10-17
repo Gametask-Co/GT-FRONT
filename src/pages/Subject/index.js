@@ -19,16 +19,29 @@ function Subject() {
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
+
   // subject
+  const [subjects, setSubjects] = useState("");
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+
+  //student
+  const [link, setLink] = useState("");
+  const [students, setStudents] = useState([]);
 
   const history = useHistory();
 
   useEffect(() => {
     if (signed === false) {
       history.push("/");
+    } else {
+      api.get("/subject").then(function (res) {
+        console.log(res, "List Subject ok!");
+
+        // setSubjects(res);
+      });
     }
   }, [signed]);
 
@@ -58,6 +71,7 @@ function Subject() {
         setImage("");
 
         setShowStudent(!showStudent);
+        // setLink(res.shared_link)
       })
       .catch(function (error) {
         console.log(error, "Error Subject error!");
@@ -66,6 +80,27 @@ function Subject() {
 
   async function handleStudentSubject(e) {
     e.preventDefault();
+
+    await api
+      .post("/subject", {
+        name,
+        description,
+        image,
+        teacher_id: user.id,
+      })
+      .then(function (res) {
+        console.log(res, "Create Subject ok!");
+
+        setShow(!show);
+        setName("");
+        setDescription("");
+        setImage("");
+
+        setShowStudent(!showStudent);
+      })
+      .catch(function (error) {
+        console.log(error, "Error Subject error!");
+      });
   }
 
   return (
@@ -85,11 +120,16 @@ function Subject() {
             </button>
           </div>
         </div>
-        <CardSubjectList
-          name="Sistemas Operacionais"
-          teacher="Fulano de Tal"
-          percentage="55"
-        />
+
+        {/* subjects.map */}
+        {[1, 2, 3, 4, 5].map((item) => (
+          <CardSubjectList
+            key={item}
+            name="Sistemas Operacionais"
+            teacher="Fulano de Tal"
+            percentage="55"
+          />
+        ))}
       </Styled.SubjectWrapper>
 
       <Modal onClose={handleSubjectModal} show={show}>
@@ -136,8 +176,8 @@ function Subject() {
         </form>
       </Modal>
 
-      {/* unfinish modal sucess  */}
-      <Modal onClose={handleStudentModal} show={showStudent}>
+      {/* <Modal onClose={handleStudentModal} show={showStudent}> */}
+      <Modal onClose={handleStudentModal} show={true}>
         <form onSubmit={handleStudentSubject}>
           <h2>Adicionar Alunos</h2>
 
@@ -146,18 +186,21 @@ function Subject() {
             type="text"
             id="link"
             placeholder="Nome da Disciplina"
-            // value={link}
-            // onChange={(e) => setLink(e.target.value)}
+            value={link}
             required
+            disabled
           />
 
-          <label htmlFor="student">Inserir alunos por email</label>
+          <label htmlFor="students">Inserir alunos por email</label>
           <input
             type="text"
-            id="student"
+            id="students"
             placeholder="Nome da Disciplina"
-            // value={student}
+            value={students}
+            onChange={(e) => setStudents(e.target.value)}
+            disabled
           />
+          {/* <p>{students}</p> */}
 
           <div>
             <button onClick={handleStudentModal}>Cancelar</button>
