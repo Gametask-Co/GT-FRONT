@@ -21,7 +21,7 @@ function Subject() {
   const [showStudent, setShowStudent] = useState(false);
 
   // subject
-  const [subjects, setSubjects] = useState("");
+  const [subjects, setSubjects] = useState([]);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -33,14 +33,18 @@ function Subject() {
 
   const history = useHistory();
 
+  console.log("user", user);
+  console.log("signed", signed);
+
+  // const userName = user.name;
+  // const userEmail = user.email;
+
   useEffect(() => {
     if (signed === false) {
       history.push("/");
     } else {
       api.get("/subject").then(function (res) {
-        console.log(res, "List Subject ok!");
-
-        // setSubjects(res);
+        setSubjects(res.data);
       });
     }
   }, [signed]);
@@ -106,7 +110,8 @@ function Subject() {
   return (
     <Layout>
       <Styled.MenuWrapper>
-        <h1>Menu lateral</h1>
+        {/* <h1>{userName}</h1>
+        <p>{userEmail}</p> */}
       </Styled.MenuWrapper>
       <Styled.SubjectWrapper>
         <div>
@@ -121,11 +126,10 @@ function Subject() {
           </div>
         </div>
 
-        {/* subjects.map */}
-        {[1, 2, 3, 4, 5].map((item) => (
+        {subjects.map((item) => (
           <CardSubjectList
             key={item}
-            name="Sistemas Operacionais"
+            name={item.name}
             teacher="Fulano de Tal"
             percentage="55"
           />
@@ -176,8 +180,7 @@ function Subject() {
         </form>
       </Modal>
 
-      {/* <Modal onClose={handleStudentModal} show={showStudent}> */}
-      <Modal onClose={handleStudentModal} show={true}>
+      <Modal onClose={handleStudentModal} show={showStudent}>
         <form onSubmit={handleStudentSubject}>
           <h2>Adicionar Alunos</h2>
 

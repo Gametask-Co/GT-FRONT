@@ -21,6 +21,7 @@ export const MenuWrapper = styled.div`
   flex-wrap: wrap;
   background-color: #282a31;
   border-radius: 0.9rem;
+  align-items: center;
 `;
 
 export const SubjectWrapper = styled.div`
