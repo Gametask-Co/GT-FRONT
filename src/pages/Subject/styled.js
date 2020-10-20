@@ -22,6 +22,7 @@ export const MenuWrapper = styled.div`
   background-color: #282a31;
   border-radius: 0.9rem;
   align-items: center;
+  height: 100%;
 `;
 
 export const SubjectWrapper = styled.div`

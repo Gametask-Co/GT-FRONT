@@ -11,7 +11,7 @@ import { useAuth } from "../../contents/auth";
 
 import api from "../../services/api";
 
-import { ReactComponent as Plus } from "../../assets/icons/start.svg";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
 function Subject() {
@@ -36,8 +36,8 @@ function Subject() {
   console.log("user", user);
   console.log("signed", signed);
 
-  // const userName = user.name;
-  // const userEmail = user.email;
+  const userName = user.name;
+  const userEmail = user.email;
 
   useEffect(() => {
     if (signed === false) {
@@ -48,7 +48,7 @@ function Subject() {
         setSubjects(res.data);
       });
     }
-  }, []);
+  }, [signed, subjects]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -72,8 +72,8 @@ function Subject() {
         setName("");
         setDescription("");
 
-        // setIdSubject(res.id_subject)
-        // setLink(res.link)
+        setIdSubject(res.id);
+        setLink("https://gametask.netlify.app/subject/" + res.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
@@ -104,8 +104,13 @@ function Subject() {
   return (
     <Layout>
       <Styled.MenuWrapper>
-        {/* <h1>{userName}</h1>
-        <p>{userEmail}</p> */}
+        <h1>{userName}</h1>
+        <p>{userEmail}</p>
+
+        {/* <h1>MEDALHAS</h1>
+        <br/>
+        <br/>
+        <h1>TROFÉUS</h1> */}
       </Styled.MenuWrapper>
       <Styled.SubjectWrapper>
         <div>
@@ -169,7 +174,7 @@ function Subject() {
 
           <div>
             <button onClick={handleSubjectModal}>Cancelar</button>
-            <button type="submit">Salvar</button>
+            <button type="submit">Continuar</button>
           </div>
         </form>
       </Modal>
@@ -184,7 +189,6 @@ function Subject() {
             id="link"
             placeholder="Nome da Disciplina"
             value={link}
-            required
             disabled
           />
 
@@ -195,9 +199,9 @@ function Subject() {
             placeholder="Nome da Disciplina"
             value={students}
             onChange={(e) => setStudents(e.target.value)}
-            disabled
+            required
           />
-          {/* <p>{students}</p> */}
+          {/* <span>{students}</span> */}
 
           <div>
             <button onClick={handleStudentModal}>Cancelar</button>

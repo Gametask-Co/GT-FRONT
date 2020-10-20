@@ -7,8 +7,8 @@ export const ContainerModal = styled.div`
   width: 100%;
   height: 100%;
 
-  /* -webkit-filter: blur(8px);
-  filter: blur(8px); */
+  background: rgba(0, 0, 0, 0.5);
+  transition: all ease 4s;
 `;
 
 export const ModalMain = styled.section`
@@ -95,18 +95,25 @@ export const ModalMain = styled.section`
       }
     }
 
-    > button {
-      margin: 20px 0 0;
+    > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      border-radius: 3px;
-      transition: background-color 0.15s ease;
-      background: #7289da;
-      border: 0;
-      color: #fff;
-      font-size: 12px;
-      padding: 0 10px;
-      text-transform: uppercase;
-      font-weight: 700;
+      > button {
+        border-radius: 4px;
+        transition: background-color 0.15s ease;
+        background: #3F424D;
+        color: #fff;
+        border: 0;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &:first-child {
+          background: transparent;
+        }
+      }
     }
   }
 `;
