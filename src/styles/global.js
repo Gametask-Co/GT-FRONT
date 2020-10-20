@@ -35,17 +35,11 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     line-height: 1;
-
+    
+    color: white;
+    background-color: #1C1E23;
+    
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-
-    /* --bg: ${V.Color.white};
-    --bgSolid: ${V.Color.whiteSolid};
-    --bgSecondary: ${V.Color.grayWhite};
-    --borderColor: ${V.Color.grayWhite};
-    --highlightColor: ${V.Color.blue};
-    --primaryColor: ${V.Color.black};
-    --secondaryColor: ${V.Color.gray}; */
-    --boxShadow: rgba(18, 18, 18, .12);
   }
   ol, ul {
     list-style: none;
@@ -61,6 +55,27 @@ const GlobalStyles = createGlobalStyle`
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+
+  /* more customs */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body, #root {
+    height: 100%;
+  }
+
+  :root {
+    /* --bg: ${V.Color.white};
+    --bgSolid: ${V.Color.whiteSolid};
+    --bgSecondary: ${V.Color.grayWhite};
+    --borderColor: ${V.Color.grayWhite};
+    --highlightColor: ${V.Color.blue};
+    --primaryColor: ${V.Color.black};
+    --secondaryColor: ${V.Color.gray}; */
+    --boxShadow: rgba(18, 18, 18, .12);
   }
 `;
 

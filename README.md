@@ -12,6 +12,7 @@ This project was developed with the following technologies:
 - [Styled Components](https://styled-components.com/)
 - [Styled Media Query](https://github.com/morajabi/styled-media-query)
 - [React Redux](https://react-redux.js.org/)
+- [Context API](https://pt-br.reactjs.org/docs/context.html)
 
 ## 💻 Project
 
