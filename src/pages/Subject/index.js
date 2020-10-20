@@ -22,14 +22,14 @@ function Subject() {
 
   // subject
   const [subjects, setSubjects] = useState([]);
-
+  const [idSubject, setIdSubject] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
   //student
   const [link, setLink] = useState("");
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState(""); // []
 
   const history = useHistory();
 
@@ -43,11 +43,12 @@ function Subject() {
     if (signed === false) {
       history.push("/");
     } else {
+      // await 2 sec
       api.get("/subject").then(function (res) {
         setSubjects(res.data);
       });
     }
-  }, [signed]);
+  }, []);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -63,8 +64,6 @@ function Subject() {
       .post("/subject", {
         name,
         description,
-        image,
-        teacher_id: user.id,
       })
       .then(function (res) {
         console.log(res, "Create Subject ok!");
@@ -72,10 +71,10 @@ function Subject() {
         setShow(!show);
         setName("");
         setDescription("");
-        setImage("");
 
+        // setIdSubject(res.id_subject)
+        // setLink(res.link)
         setShowStudent(!showStudent);
-        // setLink(res.shared_link)
       })
       .catch(function (error) {
         console.log(error, "Error Subject error!");
@@ -86,24 +85,19 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subject", {
-        name,
-        description,
-        image,
-        teacher_id: user.id,
+      .post("/subject/student/email", {
+        subject_id: idSubject,
+        student_email: students,
       })
       .then(function (res) {
-        console.log(res, "Create Subject ok!");
-
-        setShow(!show);
-        setName("");
-        setDescription("");
-        setImage("");
+        console.log(res, "add Student on Subject ok!");
+        setLink("");
+        setStudents("");
 
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, "Error Subject error!");
+        console.log(error, "Error Student on Subject error!");
       });
   }
 
@@ -128,7 +122,7 @@ function Subject() {
 
         {subjects.map((item) => (
           <CardSubjectList
-            key={item}
+            key={item.id}
             name={item.name}
             teacher="Fulano de Tal"
             percentage="55"
@@ -162,7 +156,7 @@ function Subject() {
             required
           />
 
-          <label htmlFor="image">Imagem</label>
+          {/* <label htmlFor="image">Imagem</label>
           <input
             type="file"
             id="image"
@@ -170,8 +164,8 @@ function Subject() {
             accept="image/*"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            required
-          />
+            // required
+          /> */}
 
           <div>
             <button onClick={handleSubjectModal}>Cancelar</button>

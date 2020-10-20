@@ -12,8 +12,8 @@ const AuthContext = createContext({
 });
 
 const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useState({}); // for test
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({}); // for test
+  // const [user, setUser] = useState(null);
 
   useEffect(() => {
     function loadStoragedData() {
@@ -36,6 +36,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   async function signIn() {
+    // joaozinho - teacher
+    // joaozinho01 - student
     await api
       .post("/session", {
         email: "joaozinho@gametask.com",
