@@ -13,7 +13,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/*" component={Home} />
           <Route path="/signin" component={SignIn} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/subject" component={Subject} />
