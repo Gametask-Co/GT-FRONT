@@ -48,7 +48,7 @@ function Subject() {
         setSubjects(res.data);
       });
     }
-  }, [signed, subjects]);
+  }, [signed, subjects, history]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -161,16 +161,17 @@ function Subject() {
             required
           />
 
-          {/* <label htmlFor="image">Imagem</label>
+          <label htmlFor="image">Imagem</label>
           <input
             type="file"
             id="image"
             name="image"
             accept="image/*"
             value={image}
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage("null")}
+            // onChange={(e) => setImage(e.target.value)}
             // required
-          /> */}
+          />
 
           <div>
             <button onClick={handleSubjectModal}>Cancelar</button>
