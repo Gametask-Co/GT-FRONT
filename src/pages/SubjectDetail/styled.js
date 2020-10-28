@@ -23,6 +23,41 @@ export const MenuWrapper = styled.div`
   border-radius: 0.9rem;
   align-items: center;
   height: 100%;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: 13rem;
+
+    > div {
+      display: flex;
+      align-items: center;
+    }
+
+    button {
+      margin-left: 1rem;
+      background-color: #3f424d;
+      border: none;
+      padding: 0.4rem;
+      border-radius: 0.6rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: gray;
+      }
+    }
+  }
+`;
+
+export const CircleProfile = styled.div`
+  height: 30px;
+  width: 30px;
+
+  margin-right: 1rem;
+
+  background-color: #3f424d;
+  border-radius: 50%;
 `;
 
 export const SubjectWrapper = styled.div`
