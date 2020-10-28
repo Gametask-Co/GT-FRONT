@@ -17,8 +17,8 @@ const Header = ({ siteTitle }) => {
             <>
               <a href="/subject">
                 <Styled.KeyboardArrowLeftIcon />
+                <span>{siteTitle}</span>
               </a>
-              <h1>{siteTitle}</h1>
             </>
           ) : (
             ""

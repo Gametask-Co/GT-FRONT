@@ -6,7 +6,8 @@ export const Wrapper = styled.div`
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
-
+  cursor: pointer;
+  
   > img {
     margin-right: 1rem;
   }

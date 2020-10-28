@@ -13,9 +13,9 @@ export const Header = styled.div`
   border-bottom: 2px solid #3f424d;
 
   a {
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: 700;
+    /* text-transform: uppercase; */
+    /* font-size: 18px;
+    font-weight: 700; */
     letter-spacing: 0px;
   }
 `;

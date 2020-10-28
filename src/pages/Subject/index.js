@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import * as Styled from "./styled";
 
@@ -129,12 +129,14 @@ function Subject() {
         </div>
 
         {subjects.map((item) => (
-          <CardSubjectList
-            key={item.id}
-            name={item.name}
-            teacher="Fulano de Tal"
-            percentage="55"
-          />
+          <Link key={item.id} to={`/subject/${(item.id)}`}>
+            <CardSubjectList
+              key={item.id}
+              name={item.name}
+              teacher="Fulano de Tal"
+              percentage="55"
+            />
+          </Link>
         ))}
       </Styled.SubjectWrapper>
 

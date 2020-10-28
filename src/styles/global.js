@@ -66,6 +66,11 @@ const GlobalStyles = createGlobalStyle`
   html, body, #root {
     height: 100%;
   }
+  
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 
   :root {
     /* --bg: ${V.Color.white};
