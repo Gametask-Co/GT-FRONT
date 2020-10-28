@@ -19,7 +19,7 @@ function SubjectDetail() {
   const { signed, user, loading } = useAuth();
 
   const [show, setShow] = useState(false);
-  const [subjects, setSubjects] = useState([]);
+  const [showStudent, setShowStudent] = useState(false);
 
   //student
   const [students, setStudents] = useState([]);
@@ -35,7 +35,6 @@ function SubjectDetail() {
         api.get("/subject").then(function (res) {
           res.data.map((item) => {
             if (item.id === id) {
-              console.log("students", item.students);
               // setStudents(...students, [item.students]);
               setStudents((students) => [...students, item.students]);
               console.log("setStudents", students);
@@ -44,17 +43,37 @@ function SubjectDetail() {
         });
       }
     }
-  }, [signed, subjects, history, loading]);
+  }, [signed, history, loading]);
 
   function handleSubjectModal(e) {
     setShow(!show);
+  }
+  function handleStudentModal(e) {
+    setShowStudent(!showStudent);
+  }
+
+  async function handleRemoveStudent(e) {
+    e.preventDefault();
+
+    await api
+      .delete("/subject/student/email", {
+        subject_id: idSubject,
+        student_email: students,
+      })
+      .then(function (res) {
+        console.log(res, "add Student on Subject ok!");
+        setShowStudent(!showStudent);
+      })
+      .catch(function (error) {
+        console.log(error, "Error Student on Subject error!");
+      });
   }
 
   return (
     <Layout pageTitle="Disciplinas">
       <Styled.MenuWrapper>
         <h1>ALUNOS</h1>
-        {[1, 2, 3].map((item) => (
+        {students.map((item) => (
           <div key={item}>
             <div>
               <Styled.CircleProfile />
@@ -94,6 +113,16 @@ function SubjectDetail() {
           </div>
         </div>
       </Styled.SubjectWrapper>
+
+      {/* <Modal onClose={handleStudentModal} show={showStudent}>
+        <form onSubmit={handleRemoveStudent}>
+          <h2>Remover Aluno</h2>
+          <div>
+            <button onClick={handleStudentModal}>Cancelar</button>
+            <button type="submit">Confirmar</button>
+          </div>
+        </form>
+      </Modal> */}
     </Layout>
   );
 }
