@@ -129,7 +129,7 @@ function Subject() {
         </div>
 
         {subjects.map((item) => (
-          <Link key={item.id} to={`/subject/${(item.id)}`}>
+          <Link key={item.id} to={`/subject/${item.id}`}>
             <CardSubjectList
               key={item.id}
               name={item.name}
