@@ -55,14 +55,6 @@ function SubjectDetail() {
   async function handleRemoveStudent(e) {
     e.preventDefault();
 
-    // await api
-    // .delete("/subject/student/", {
-    //   data: {
-    //     subject_id: id,
-    //     student_id: studentActive,
-    //   }
-    // })
-
     await api({
       method: "delete",
       url: "/subject/student/",
