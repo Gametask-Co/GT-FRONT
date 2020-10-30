@@ -57,8 +57,10 @@ function SubjectDetail() {
 
     await api
       .delete("/subject/student/", {
-        subject_id: id,
-        student_id: studentActive,
+        data: {
+          subject_id: id,
+          student_id: studentActive,
+        }
       })
       .then(function (res) {
         console.log(res, "add Student on Subject ok!");
@@ -66,6 +68,8 @@ function SubjectDetail() {
         setStudentActive("");
       })
       .catch(function (error) {
+        console.log("id", id);
+        console.log("studentActive", studentActive);
         console.log(error, "Error Student on Subject error!");
       });
   }
