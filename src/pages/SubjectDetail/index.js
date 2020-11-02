@@ -115,9 +115,9 @@ function SubjectDetail() {
             <h2>Sistema Operacionais</h2>
           </div>
 
-          <div>
-            <span>marcos</span>
-          </div>
+          {/* <div>
+            <span>Marcos</span>
+          </div> */}
         </div>
       </Styled.SubjectWrapper>
 

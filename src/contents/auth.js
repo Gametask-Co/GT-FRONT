@@ -61,12 +61,16 @@ const AuthProvider = ({ children }) => {
       });
   }
 
-  async function signOut() {
-    await localStorage.clear().then(() => {
-      setUser(null);
+  function signOut() {
+    console.log("signOut");
+    // await localStorage.clear().then(() => {
+    //   setUser(null);
+    //   history.push("/");
+    // });
 
-      history.push("/");
-    });
+    localStorage.clear();
+    setUser(null);
+    // history.push("/");
   }
 
   return (

@@ -24,6 +24,12 @@ export const MenuWrapper = styled.div`
   align-items: center;
   height: 100%;
 
+  h1 {
+    text-align: left;
+    font-size: 1rem;
+    color: #434343;
+  }
+
   > div {
     display: flex;
     justify-content: space-between;
@@ -65,6 +71,11 @@ export const SubjectWrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   width: 100%;
+
+  h2 {
+    font-size: 1.5rem;
+    color: #A2A2A2;
+  }
 
   > div:first-child {
     display: flex;

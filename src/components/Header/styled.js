@@ -104,3 +104,38 @@ export const CircleProfile = styled.span`
   background-color: #3f424d;
   border-radius: 50%;
 `;
+
+export const Dropdown = styled.div`
+  position: relative;
+  display: inline-block;
+
+  /* .dropdown:hover .dropdown-content {display: block;}
+
+  .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+
+  &:hover {
+    div {
+      display: block;
+      left: -3rem;
+    }
+  }
+`;
+
+export const DropDownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  a:hover {
+    background-color: #ddd;
+  }
+`;
