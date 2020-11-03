@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import * as Styled from "./styled";
 
@@ -15,7 +15,7 @@ import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
 function Subject() {
-  const { signed, user } = useAuth();
+  const { signed, user, loading } = useAuth();
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
@@ -31,24 +31,25 @@ function Subject() {
   const [link, setLink] = useState("");
   const [students, setStudents] = useState(""); // []
 
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
   const history = useHistory();
 
-  // console.log("user", user);
-  // console.log("signed", signed);
-
-  const userName = user.name;
-  const userEmail = user.email;
-
   useEffect(() => {
-    if (signed === false) {
-      history.push("/");
-    } else {
-      // await 2 sec
-      api.get("/subject").then(function (res) {
-        setSubjects(res.data);
-      });
+    if (loading === false) {
+      if (signed === false) {
+        history.push("/");
+      } else {
+        setUserName(user.name);
+        setUserEmail(user.email);
+
+        api.get("/subject").then(function (res) {
+          setSubjects(res.data);
+        });
+      }
     }
-  }, [signed, subjects, history]);
+  }, [signed, subjects, history, loading]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -73,7 +74,6 @@ function Subject() {
         setName("");
         setDescription("");
 
-        // console.log("res.data.id =======", res.data.id);
         setIdSubject(res.data.id);
         setLink("https://gametask.com.br/subject/" + res.data.id);
         setShowStudent(!showStudent);
@@ -128,12 +128,14 @@ function Subject() {
         </div>
 
         {subjects.map((item) => (
-          <CardSubjectList
-            key={item.id}
-            name={item.name}
-            teacher="Fulano de Tal"
-            percentage="55"
-          />
+          <Link key={item.id} to={`/subject/${item.id}`}>
+            <CardSubjectList
+              key={item.id}
+              name={item.name}
+              teacher="Fulano de Tal"
+              percentage="55"
+            />
+          </Link>
         ))}
       </Styled.SubjectWrapper>
 

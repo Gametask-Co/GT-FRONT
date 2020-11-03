@@ -1,23 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 
 import { useAuth } from "../../contents/auth";
 
 function SignIn() {
-  const { signed, signIn } = useAuth();
+  const { signed, signIn, loading } = useAuth();
 
-  console.log("signed", signed);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // auth is runing on context
-  async function handleSignIn() {
-    await signIn();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loading === false) {
+      if (signed === true) {
+        history.push("/dashboard");
+      }
+    }
+  }, [signed]);
+
+  async function handleSignIn(email, password) {
+    await signIn(email, password);
   }
 
   return (
     <Layout>
-      <h1>SignIn</h1>
-      <button onClick={handleSignIn}>Sign In</button>
+      <h1>Login</h1>
+      <br />
+      <br />
+      <form onSubmit={handleSignIn(email, password)}>
+        <input
+          type="email"
+          name="email"
+          id="userEmail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="userPassword"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <br />
+        <br />
+        <button type="submit">Entrar</button>
+      </form>
     </Layout>
   );
 }

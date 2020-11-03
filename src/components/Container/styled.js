@@ -17,7 +17,7 @@ export const Container = styled.div`
 
   > div:first-child {
     margin-right: 5rem;
-    padding: 3rem;
+    padding: 1rem;
   }
 
   ${media.lessThan("medium")`
