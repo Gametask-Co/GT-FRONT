@@ -24,8 +24,7 @@ export const MenuWrapper = styled.div`
   align-items: center;
   height: 100%;
 
-  h1 {
-    text-align: left;
+  h1, span {
     font-size: 1rem;
     color: #434343;
   }

@@ -78,7 +78,10 @@ function SubjectDetail() {
   return (
     <Layout pageTitle="Disciplinas">
       <Styled.MenuWrapper>
-        <h1>ALUNOS</h1>
+        <div>
+          <h1>ALUNOS</h1>
+          <span>{students.length}</span>
+        </div>
 
         {students.map((item) => (
           <div key={item.id}>

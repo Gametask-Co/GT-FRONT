@@ -5,11 +5,11 @@ function Home() {
   return (
     <div>
       <h1>Página Inicial Static</h1>
-      <Link to="/signin">Pagina SignIn</Link>
+      <Link to="/signin">Página Login</Link>
       <br />
-      <Link to="/dashboard">Pagina Dashboard</Link>
+      <Link to="/dashboard">Página Dashboard</Link>
       <br />
-      <Link to="/subject">Pagina Subjects</Link>
+      <Link to="/subject">Pagina Disciplinas</Link>
     </div>
   );
 }
