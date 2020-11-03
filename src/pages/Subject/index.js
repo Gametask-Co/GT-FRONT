@@ -74,7 +74,6 @@ function Subject() {
         setName("");
         setDescription("");
 
-        // console.log("res.data.id =======", res.data.id);
         setIdSubject(res.data.id);
         setLink("https://gametask.com.br/subject/" + res.data.id);
         setShowStudent(!showStudent);
