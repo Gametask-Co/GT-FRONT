@@ -33,8 +33,8 @@ function Subject() {
 
   const history = useHistory();
 
-  console.log("user", user);
-  console.log("signed", signed);
+  // console.log("user", user);
+  // console.log("signed", signed);
 
   const userName = user.name;
   const userEmail = user.email;
@@ -48,7 +48,7 @@ function Subject() {
         setSubjects(res.data);
       });
     }
-  }, [signed, subjects]);
+  }, [signed, subjects, history]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -64,16 +64,18 @@ function Subject() {
       .post("/subject", {
         name,
         description,
+        image,
       })
       .then(function (res) {
-        console.log(res, "Create Subject ok!");
+        console.log(res.data, "Create Subject ok!");
 
         setShow(!show);
         setName("");
         setDescription("");
 
-        setIdSubject(res.id);
-        setLink("https://gametask.netlify.app/subject/" + res.id);
+        // console.log("res.data.id =======", res.data.id);
+        setIdSubject(res.data.id);
+        setLink("https://gametask.com.br/subject/" + res.data.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
@@ -161,16 +163,17 @@ function Subject() {
             required
           />
 
-          {/* <label htmlFor="image">Imagem</label>
+          <label htmlFor="image">Imagem</label>
           <input
             type="file"
             id="image"
             name="image"
             accept="image/*"
             value={image}
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage("null")}
+            // onChange={(e) => setImage(e.target.value)}
             // required
-          /> */}
+          />
 
           <div>
             <button onClick={handleSubjectModal}>Cancelar</button>
