@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { KeyboardArrowLeft, KeyboardArrowDown } from "styled-icons/material";
-
 import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
 
 export const Header = styled.div`
@@ -39,21 +37,21 @@ export const Container = styled.div`
   } */
 `;
 
-export const KeyboardArrowLeftIcon = styled(KeyboardArrowLeft)`
-  width: 28px;
-  height: 28px;
+// export const KeyboardArrowLeftIcon = styled(KeyboardArrowLeft)`
+//   width: 28px;
+//   height: 28px;
 
-  color: white;
-  cursor: pointer;
-`;
+//   color: white;
+//   cursor: pointer;
+// `;
 
-export const KeyboardArrowDownIcon = styled(KeyboardArrowDown)`
-  width: 28px;
-  height: 28px;
+// export const KeyboardArrowDownIcon = styled(KeyboardArrowDown)`
+//   width: 28px;
+//   height: 28px;
 
-  color: white;
-  cursor: pointer;
-`;
+//   color: white;
+//   cursor: pointer;
+// `;
 
 export const MessageIcon = styled(Message)`
   display: flex;

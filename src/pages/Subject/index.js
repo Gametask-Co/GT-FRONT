@@ -109,6 +109,13 @@ function Subject() {
         <h1>{userName}</h1>
         <p>{userEmail}</p>
 
+        <div>
+          <span>Medalhas</span>
+          <div>
+            <p>988 - Ouro</p>
+            <p>988 - Prata</p>
+          </div>
+        </div>
         {/* <h1>MEDALHAS</h1>
         <br/>
         <br/>

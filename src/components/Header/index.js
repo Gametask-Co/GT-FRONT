@@ -10,7 +10,7 @@ import { ReactComponent as Message } from "../../assets/icons/message-circle.svg
 import { ReactComponent as Bell } from "../../assets/icons/bell.svg";
 
 const Header = ({ siteTitle }) => {
-  const { signOut } = useAuth();
+  const { signed, signOut } = useAuth();
 
   return (
     <Styled.Header>
@@ -20,7 +20,7 @@ const Header = ({ siteTitle }) => {
           {siteTitle ? (
             <>
               <a href="/subject">
-                <Styled.KeyboardArrowLeftIcon />
+                {/* <Styled.KeyboardArrowLeftIcon /> */}
                 <span>{siteTitle}</span>
               </a>
             </>
@@ -33,13 +33,19 @@ const Header = ({ siteTitle }) => {
           <Bell />
 
           <Styled.CircleProfile />
-          <Styled.Dropdown>
-            <Styled.KeyboardArrowDownIcon />
-            <Styled.DropDownContent>
-              <a href="#">Perfil</a>
-              <a href="#" onClick={signOut}>Sair</a>
-            </Styled.DropDownContent>
-          </Styled.Dropdown>
+          {signed ? (
+            <Styled.Dropdown>
+              {/* <Styled.KeyboardArrowDownIcon /> */}
+              <Styled.DropDownContent>
+                <a href="#">Perfil</a>
+                <a href="#" onClick={signOut}>
+                  Sair
+                </a>
+              </Styled.DropDownContent>
+            </Styled.Dropdown>
+          ) : (
+            ""
+          )}
         </div>
       </Styled.Container>
     </Styled.Header>
