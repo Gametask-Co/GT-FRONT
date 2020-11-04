@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon/Fill/email">
+<path id="Mask" fill-rule="evenodd" clip-rule="evenodd" d="M19.0064 6L12.5014 10.468C12.1944 10.643 11.8184 10.643 11.5114 10.468L5.0064 6H19.0064ZM19.0064 4H5.0064C3.3524 4 2.0064 5.346 2.0064 7V17C2.0064 18.654 3.3524 20 5.0064 20H19.0064C20.6604 20 22.0064 18.654 22.0064 17V7C22.0064 5.346 20.6604 4 19.0064 4Z" fill="#F0F0F0"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="2" y="4" width="21" height="16">
+<path id="Mask_2" fill-rule="evenodd" clip-rule="evenodd" d="M19.0064 6L12.5014 10.468C12.1944 10.643 11.8184 10.643 11.5114 10.468L5.0064 6H19.0064ZM19.0064 4H5.0064C3.3524 4 2.0064 5.346 2.0064 7V17C2.0064 18.654 3.3524 20 5.0064 20H19.0064C20.6604 20 22.0064 18.654 22.0064 17V7C22.0064 5.346 20.6604 4 19.0064 4Z" fill="white"/>
+</mask>
+<g mask="url(#mask0)">
+<g id="&#240;&#159;&#142;&#168; Color">
+<rect id="Base" width="24" height="24" fill="#F0F0F0"/>
+</g>
+</g>
+</g>
+</svg>
