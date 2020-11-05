@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 
 import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
+import CardMilestoneList from "../../components/CardMilestoneList";
 import Modal from "../../components/Modal";
 
 import { useAuth } from "../../contents/auth";
@@ -67,13 +68,10 @@ function SubjectDetail() {
       },
     })
       .then(function (res) {
-        console.log(res, "add Student on Subject ok!");
         setShowStudent(!showStudent);
         setStudentActive("");
       })
       .catch(function (error) {
-        console.log("id", id);
-        console.log("studentActive", studentActive);
         console.log(error, "Error Student on Subject error!");
       });
   }
@@ -117,20 +115,28 @@ function SubjectDetail() {
         </div>
 
         <div>
-          <div>
-            <h2>{subjectName}</h2>
-          </div>
-
-          {/* <div>
-            <span>Marcos</span>
-          </div> */}
+          <h2>{subjectName}</h2>
         </div>
+
+        <Styled.MilestoneWrapper>
+          {[0, 1, 2, 3].map((item) => (
+            <Link key={item.id} to={`/milestone/${item.id}`}>
+              <CardMilestoneList
+                number={item}
+                name="Introdução"
+                deadline="Termina em 11/06/20"
+                percentage="55"
+              />
+            </Link>
+          ))}
+        </Styled.MilestoneWrapper>
       </Styled.SubjectWrapper>
 
       <Modal onClose={handleStudentModal} show={showStudent}>
         <form onSubmit={handleRemoveStudent}>
           <h2>Remover Aluno</h2>
-          <p>Deseja realmente resolver o aluno da disciplina?</p> <br/><br/>
+          <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
+          <br />
           <div>
             <button onClick={handleStudentModal}>Cancelar</button>
             <button type="submit">Confirmar</button>

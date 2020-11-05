@@ -100,5 +100,4 @@ export const SubjectWrapper = styled.div`
 export const MilestoneWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
 `;
