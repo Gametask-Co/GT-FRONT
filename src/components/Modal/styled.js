@@ -99,11 +99,12 @@ export const ModalMain = styled.section`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem;
 
       > button {
         border-radius: 4px;
         transition: background-color 0.15s ease;
-        background: #3F424D;
+        background: #3f424d;
         color: #fff;
         border: 0;
         padding: 0.5rem 1rem 0.5rem 1rem;

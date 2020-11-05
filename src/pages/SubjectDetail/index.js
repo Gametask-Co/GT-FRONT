@@ -24,6 +24,8 @@ function SubjectDetail() {
   //student
   const [students, setStudents] = useState([]);
   const [studentActive, setStudentActive] = useState("");
+  //subject
+  const [subjectName, setSubjectName] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -36,6 +38,7 @@ function SubjectDetail() {
         api.get("/subject").then(function (res) {
           res.data.map((item) => {
             if (item.id === id) {
+              setSubjectName(item.name);
               setStudents(item.students);
             }
           });
@@ -115,7 +118,7 @@ function SubjectDetail() {
 
         <div>
           <div>
-            <h2>Sistema Operacionais</h2>
+            <h2>{subjectName}</h2>
           </div>
 
           {/* <div>
@@ -127,6 +130,7 @@ function SubjectDetail() {
       <Modal onClose={handleStudentModal} show={showStudent}>
         <form onSubmit={handleRemoveStudent}>
           <h2>Remover Aluno</h2>
+          <p>Deseja realmente resolver o aluno da disciplina?</p> <br/><br/>
           <div>
             <button onClick={handleStudentModal}>Cancelar</button>
             <button type="submit">Confirmar</button>

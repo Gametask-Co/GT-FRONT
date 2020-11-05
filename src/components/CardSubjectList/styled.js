@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
-  
+
   > img {
     margin-right: 1rem;
   }
@@ -32,13 +32,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Thumbnail = styled.div`
-  width: 200px;
-  height: 150px;
+  width: 250px;
+  height: 160px;
 
   margin-right: 1rem;
-
-  background-color: #282A31;
   border-radius: 0.9rem;
+
+  background-image: url("https://upload.wikimedia.org/wikibooks/pt/8/81/Introducao_programacao_cover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const CircleProfile = styled.div`
