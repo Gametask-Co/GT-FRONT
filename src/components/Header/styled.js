@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
+import { ReactComponent as KeyboardArrowLeftIconSvg } from "../../assets/icons/arrow-ios-left.svg";
+import { ReactComponent as KeyboardArrowDownIconSvg } from "../../assets/icons/arrow-ios-down.svg";
 
 export const Header = styled.div`
   padding: 1rem;
@@ -15,6 +17,8 @@ export const Header = styled.div`
     /* font-size: 18px;
     font-weight: 700; */
     letter-spacing: 0px;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -37,21 +41,21 @@ export const Container = styled.div`
   } */
 `;
 
-// export const KeyboardArrowLeftIcon = styled(KeyboardArrowLeft)`
-//   width: 28px;
-//   height: 28px;
+export const KeyboardArrowLeftIcon = styled(KeyboardArrowLeftIconSvg)`
+  width: 28px;
+  height: 28px;
 
-//   color: white;
-//   cursor: pointer;
-// `;
+  color: white;
+  cursor: pointer;
+`;
 
-// export const KeyboardArrowDownIcon = styled(KeyboardArrowDown)`
-//   width: 28px;
-//   height: 28px;
+export const KeyboardArrowDownIcon = styled(KeyboardArrowDownIconSvg)`
+  width: 28px;
+  height: 28px;
 
-//   color: white;
-//   cursor: pointer;
-// `;
+  color: white;
+  cursor: pointer;
+`;
 
 export const MessageIcon = styled(Message)`
   display: flex;
@@ -93,14 +97,17 @@ export const MessageIcon = styled(Message)`
   }
 `;
 
-export const CircleProfile = styled.span`
-  height: 30px;
-  width: 30px;
+export const CircleProfile = styled.div`
+  height: 40px;
+  width: 40px;
 
   margin: 1rem;
-
-  background-color: #3f424d;
   border-radius: 50%;
+
+  background-image: url("https://w7.pngwing.com/pngs/349/288/png-transparent-teacher-education-student-course-school-avatar-child-face-heroes.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 export const Dropdown = styled.div`

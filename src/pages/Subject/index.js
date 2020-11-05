@@ -13,6 +13,8 @@ import api from "../../services/api";
 
 import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { ReactComponent as Award } from "../../assets/icons/award.svg";
+import { ReactComponent as Star } from "../../assets/icons/star.svg";
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -106,20 +108,45 @@ function Subject() {
   return (
     <Layout>
       <Styled.MenuWrapper>
+        <Styled.CircleProfile />
+        <h3>Professor:</h3>
         <h1>{userName}</h1>
-        <p>{userEmail}</p>
+        <h3>{userEmail}</h3>
 
         <div>
-          <span>Medalhas</span>
+          <h4>Medalhas</h4>
           <div>
-            <p>988 - Ouro</p>
-            <p>988 - Prata</p>
+            <Styled.Insignia color="#CCAF4E">
+              <Award />
+              999 <span> - Ouro</span>
+            </Styled.Insignia>
+            <Styled.Insignia color="#F0F0F0">
+              <Award />
+              888 <span> - Prata</span>
+            </Styled.Insignia>
+            <Styled.Insignia color="#E2673E">
+              <Award />
+              777 <span> - Bronze</span>
+            </Styled.Insignia>
           </div>
         </div>
-        {/* <h1>MEDALHAS</h1>
-        <br/>
-        <br/>
-        <h1>TROFÉUS</h1> */}
+        <div>
+          <h4>Troféus</h4>
+          <div>
+            <Styled.Insignia color="#CCAF4E">
+              <Star />
+              999 <span> - Ouro</span>
+            </Styled.Insignia>
+            <Styled.Insignia color="#F0F0F0">
+              <Star />
+              888 <span> - Prata</span>
+            </Styled.Insignia>
+            <Styled.Insignia color="#E2673E">
+              <Star />
+              777 <span> - Bronze</span>
+            </Styled.Insignia>
+          </div>
+        </div>
       </Styled.MenuWrapper>
       <Styled.SubjectWrapper>
         <div>

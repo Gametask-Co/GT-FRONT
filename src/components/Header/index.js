@@ -20,7 +20,7 @@ const Header = ({ siteTitle }) => {
           {siteTitle ? (
             <>
               <a href="/subject">
-                {/* <Styled.KeyboardArrowLeftIcon /> */}
+                <Styled.KeyboardArrowLeftIcon />
                 <span>{siteTitle}</span>
               </a>
             </>
@@ -28,14 +28,14 @@ const Header = ({ siteTitle }) => {
             ""
           )}
         </div>
-        <div>
-          <Message />
-          <Bell />
+        {signed ? (
+          <div>
+            <Message />
+            <Bell />
 
-          <Styled.CircleProfile />
-          {signed ? (
+            <Styled.CircleProfile />
             <Styled.Dropdown>
-              {/* <Styled.KeyboardArrowDownIcon /> */}
+              <Styled.KeyboardArrowDownIcon />
               <Styled.DropDownContent>
                 <a href="#">Perfil</a>
                 <a href="#" onClick={signOut}>
@@ -43,10 +43,10 @@ const Header = ({ siteTitle }) => {
                 </a>
               </Styled.DropDownContent>
             </Styled.Dropdown>
-          ) : (
-            ""
-          )}
-        </div>
+          </div>
+        ) : (
+          ""
+        )}
       </Styled.Container>
     </Styled.Header>
   );
