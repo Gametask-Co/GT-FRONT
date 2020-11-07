@@ -30,7 +30,9 @@ function SubjectDetail() {
   const [subjectName, setSubjectName] = useState("");
 
   //milestone
-  // const [milestones, setMilestones] = useState([]);
+  const [milestones, setMilestones] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -49,14 +51,14 @@ function SubjectDetail() {
           });
         });
 
-        // api.get("/milestone").then(function (res) {
-        //   setMilestones(res.data);
-        // });
+        api.get("/milestone").then(function (res) {
+          setMilestones(res.data);
+        });
       }
     }
-  }, [signed, history, students, loading]);
+  }, [signed, history, milestones, students, loading]);
 
-  function handleSubjectModal(e) {
+  function handleMilestoneModal(e) {
     setShow(!show);
   }
   function handleStudentModal(student_id) {
@@ -84,6 +86,26 @@ function SubjectDetail() {
       });
   }
 
+  async function handleCreateMilestone(e) {
+    e.preventDefault();
+
+    await api
+      .post("/milestone", {
+        name,
+        description,
+      })
+      .then(function (res) {
+        console.log(res.data, "Create Milestone ok!");
+
+        setShow(!show);
+        setName("");
+        setDescription("");
+      })
+      .catch(function (error) {
+        console.log(error, "Error Milestone error!");
+      });
+  }
+
   return (
     <Layout pageTitle="Disciplinas">
       <Styled.MenuWrapper>
@@ -102,7 +124,7 @@ function SubjectDetail() {
               <button onClick={() => handleStudentModal(item.id)}>
                 <Remove />
               </button>
-              <button onClick={() => handleSubjectModal}>
+              <button>
                 <Message />
               </button>
             </div>
@@ -113,7 +135,7 @@ function SubjectDetail() {
         <div>
           <h1>Detalhes</h1>
           <div>
-            <button onClick={handleSubjectModal}>
+            <button onClick={handleMilestoneModal}>
               <Plus />
             </button>
             <button>
@@ -149,6 +171,39 @@ function SubjectDetail() {
           <div>
             <button onClick={handleStudentModal}>Cancelar</button>
             <button type="submit">Confirmar</button>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal onClose={handleMilestoneModal} show={show}>
+        <form onSubmit={handleCreateMilestone}>
+          <h2>Adicionar Marco</h2>
+
+          <label htmlFor="name">Nome</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Nome do marco"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            type="text"
+            id="description"
+            placeholder="Escreva aqui..."
+            rows="5"
+            cols="33"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+
+          <div>
+            <button onClick={handleMilestoneModal}>Cancelar</button>
+            <button type="submit">Continuar</button>
           </div>
         </form>
       </Modal>
