@@ -25,8 +25,12 @@ function SubjectDetail() {
   //student
   const [students, setStudents] = useState([]);
   const [studentActive, setStudentActive] = useState("");
+
   //subject
   const [subjectName, setSubjectName] = useState("");
+
+  //milestone
+  // const [milestones, setMilestones] = useState([]);
 
   const history = useHistory();
   const { id } = useParams();
@@ -34,7 +38,7 @@ function SubjectDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/");
+        history.push("/signin");
       } else {
         api.get("/subject").then(function (res) {
           res.data.map((item) => {
@@ -44,6 +48,10 @@ function SubjectDetail() {
             }
           });
         });
+
+        // api.get("/milestone").then(function (res) {
+        //   setMilestones(res.data);
+        // });
       }
     }
   }, [signed, history, students, loading]);
@@ -119,6 +127,7 @@ function SubjectDetail() {
         </div>
 
         <Styled.MilestoneWrapper>
+          {/* milestones.map */}
           {[0, 1, 2, 3].map((item) => (
             <Link key={item.id} to={`/milestone/${item.id}`}>
               <CardMilestoneList

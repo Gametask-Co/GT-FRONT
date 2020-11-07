@@ -41,7 +41,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/");
+        history.push("/signin");
       } else {
         setUserName(user.name);
         setUserEmail(user.email);

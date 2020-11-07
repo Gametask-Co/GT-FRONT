@@ -16,7 +16,7 @@ function SignIn() {
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/dashboard");
+        history.push("/");
       }
     }
   }, [signed]);
