@@ -37,6 +37,26 @@ export const ModalMain = styled.section`
     margin-bottom: 2rem;
   }
 
+  > span {
+    padding: 1rem;
+  }
+
+  > button {
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+
+    width: 100%;
+    text-align: left;
+    background: #3f424d;
+
+    color: #fff;
+    border: 0;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1rem;
+    margin: 0.1rem;
+    cursor: pointer;
+  }
+
   form {
     display: flex;
     flex-direction: column;
