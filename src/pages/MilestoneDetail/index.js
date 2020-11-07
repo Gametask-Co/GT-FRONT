@@ -16,7 +16,7 @@ function MilestoneDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/signin");
+        // history.push("/signin");
       } else {
         // api.get("/milestone").then(function (res) {
         //   setMilestones(res.data);
@@ -26,8 +26,43 @@ function MilestoneDetail() {
   }, [signed, history, loading]);
 
   return (
-    <Layout pageTitle="Disciplinas">
-      <h1>Milestone Detail</h1>
+    // pageTitle is dynamic, resquest on api
+    <Layout pageTitle="Sistemas Operacionais">
+      <Styled.Wrapper>
+        <Styled.Content>
+          <div>
+            <div>
+              <h4>Sistemas Operacionais</h4>
+              <h3>
+                <span>Marco 3 - </span>
+                Gerencia de Memória
+              </h3>
+            </div>
+            <button>Continuar</button>
+          </div>
+
+          <Styled.EmbedContainer>
+            <iframe
+              src="https://www.youtube.com/embed/QILiHiTD3uc"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </Styled.EmbedContainer>
+        </Styled.Content>
+        <Styled.Block>
+          <div>
+            <span>opção 01</span>
+            <span>opção 02</span>
+            <span>opção 03</span>
+          </div>
+          {/* <div>
+            <span>
+              <input type="checkbox" name="" id="" />
+              Aula - Método de Acesso
+            </span>
+          </div> */}
+        </Styled.Block>
+      </Styled.Wrapper>
     </Layout>
   );
 }
