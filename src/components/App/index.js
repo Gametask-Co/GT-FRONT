@@ -6,6 +6,7 @@ import SignIn from "../../pages/SignIn";
 import Dashboard from "../../pages/Dashboard";
 import Subject from "../../pages/Subject";
 import SubjectDetail from "../../pages/SubjectDetail";
+import MilestoneDetail from "../../pages/MilestoneDetail";
 
 import AuthProvider from "../../contents/auth";
 
@@ -14,11 +15,12 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Home} /> */}
+          {/* <Route path="/dashboard" component={Dashboard} /> */}
           <Route path="/signin" component={SignIn} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route exact path="/subject" component={Subject} />
+          <Route exact path="/" component={Subject} />
           <Route path="/subject/:id" component={SubjectDetail} />
+          <Route path="/milestone/:id" component={MilestoneDetail} />
         </Switch>
       </Router>
     </AuthProvider>

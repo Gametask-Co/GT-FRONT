@@ -24,7 +24,8 @@ export const MenuWrapper = styled.div`
   align-items: center;
   height: 100%;
 
-  h1, span {
+  h1,
+  span {
     font-size: 1rem;
     color: #434343;
   }
@@ -73,7 +74,7 @@ export const SubjectWrapper = styled.div`
 
   h2 {
     font-size: 1.5rem;
-    color: #A2A2A2;
+    color: #a2a2a2;
   }
 
   > div:first-child {
@@ -94,4 +95,10 @@ export const SubjectWrapper = styled.div`
       }
     }
   }
+`;
+
+export const MilestoneWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
 `;

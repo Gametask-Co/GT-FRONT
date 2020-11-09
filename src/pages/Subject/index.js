@@ -21,6 +21,7 @@ function Subject() {
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
+  const [showEditSubject, setShowEditSubject] = useState(false);
 
   // subject
   const [subjects, setSubjects] = useState([]);
@@ -41,7 +42,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/");
+        history.push("/signin");
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
@@ -58,6 +59,10 @@ function Subject() {
   }
   function handleStudentModal(e) {
     setShowStudent(!showStudent);
+  }
+
+  function handleEditSubjectModal(e) {
+    setShowEditSubject(!showEditSubject);
   }
 
   async function handleCreateSubject(e) {
@@ -155,7 +160,7 @@ function Subject() {
             <button onClick={handleSubjectModal}>
               <Plus />
             </button>
-            <button>
+            <button onClick={handleEditSubjectModal}>
               <Edit />
             </button>
           </div>
@@ -247,6 +252,15 @@ function Subject() {
             <button type="submit">Continuar</button>
           </div>
         </form>
+      </Modal>
+
+      <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
+        <h2>Editar Disciplinas</h2>
+
+        {subjects.map((item) => (
+          <button key={item.id}>{item.name}</button>
+        ))}
+        <span onClick={handleEditSubjectModal}>Cancelar</span>
       </Modal>
     </Layout>
   );

@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import Layout from "../../components/Layout";
 
+import * as Styled from "./styled";
+
 import { useAuth } from "../../contents/auth";
 
 function SignIn() {
@@ -16,7 +18,7 @@ function SignIn() {
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/dashboard");
+        history.push("/");
       }
     }
   }, [signed]);
@@ -27,31 +29,32 @@ function SignIn() {
 
   return (
     <Layout>
-      <h1>Login</h1>
-      <br />
-      <br />
-      <form onSubmit={handleSignIn(email, password)}>
-        <input
-          type="email"
-          name="email"
-          id="userEmail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="userPassword"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <button type="submit">Entrar</button>
-      </form>
+      <Styled.LoginWrapper>
+        <h1>Login</h1>
+        <form onSubmit={handleSignIn(email, password)}>
+          <label htmlFor="name">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="userEmail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label htmlFor="name">Senha</label>
+          <input
+            type="password"
+            name="password"
+            id="userPassword"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">Entrar</button>
+        </form>
+      </Styled.LoginWrapper>
     </Layout>
   );
 }
