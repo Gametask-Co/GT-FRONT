@@ -317,17 +317,19 @@ function SubjectDetail() {
           />
 
           <label htmlFor="milestone">Milestone</label>
-          <select name="select" id="milestone" required>
+          <select
+            name="select"
+            id="milestone"
+            value={selectMilestone}
+            onChange={(e) => setSelectMilestoneTask(e.target.value)}
+            required
+          >
             <option value="" selected>
               Selecione um milestone
             </option>
             {/* map on milestones */}
             {[0, 1, 2, 3].map((item) => (
-              <option
-                key={item}
-                value={selectMilestone ? "" : "item.id"}
-                onChange={(e) => setSelectMilestoneTask(e.target.value)}
-              >
+              <option key={item} value="item.id">
                 item.name
               </option>
             ))}
