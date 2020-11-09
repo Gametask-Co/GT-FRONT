@@ -18,7 +18,7 @@ function MilestoneDetail() {
       if (signed === false) {
         // history.push("/signin");
       } else {
-        // api.get("/milestone").then(function (res) {
+        // api.get("/milestones").then(function (res) {
         //   setMilestones(res.data);
         // });
       }

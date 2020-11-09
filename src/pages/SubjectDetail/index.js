@@ -5,6 +5,7 @@ import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
 import CardMilestoneList from "../../components/CardMilestoneList";
+import CardSubjectList from "../../components/CardSubjectList";
 import Modal from "../../components/Modal";
 
 import { useAuth } from "../../contents/auth";
@@ -16,11 +17,16 @@ import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
 
+import { ReactComponent as Award } from "../../assets/icons/award.svg";
+import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
+
 function SubjectDetail() {
   const { signed, loading } = useAuth();
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
+  const [showTab, setShowTab] = useState(false);
+  const [showTask, setShowTask] = useState(false);
 
   //student
   const [students, setStudents] = useState([]);
@@ -33,6 +39,12 @@ function SubjectDetail() {
   const [milestones, setMilestones] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  // task
+  const [nameTask, setNameTask] = useState("");
+  const [descriptionTask, setDescriptionTask] = useState("");
+  const [dueTask, setDueTask] = useState("");
+  const [selectMilestone, setSelectMilestoneTask] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -51,7 +63,7 @@ function SubjectDetail() {
           });
         });
 
-        api.get("/milestone").then(function (res) {
+        api.get("/milestones").then(function (res) {
           setMilestones(res.data);
         });
       }
@@ -61,6 +73,13 @@ function SubjectDetail() {
   function handleMilestoneModal(e) {
     setShow(!show);
   }
+  function handleTaskModal(e) {
+    setShowTask(!showTask);
+  }
+  function handleShowTab(e) {
+    setShowTab(!showTab);
+  }
+
   function handleStudentModal(student_id) {
     setShowStudent(!showStudent);
     setStudentActive(student_id);
@@ -90,7 +109,7 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post("/milestone", {
+      .post("/milestones", {
         name,
         description,
       })
@@ -98,11 +117,35 @@ function SubjectDetail() {
         console.log(res.data, "Create Milestone ok!");
 
         setShow(!show);
+        setNameTask("");
+        setDescriptionTask("");
+        setDueTask("");
+        setSelectMilestoneTask("");
+      })
+      .catch(function (error) {
+        console.log(error, "Error Milestone error!");
+      });
+  }
+
+  async function handleCreateTask(e) {
+    e.preventDefault();
+
+    await api
+      .post("/tasks", {
+        nameTask,
+        descriptionTask,
+        dueTask,
+        selectMilestone,
+      })
+      .then(function (res) {
+        console.log(res.data, "Create Task ok!");
+
+        setShowTask(!showTask);
         setName("");
         setDescription("");
       })
       .catch(function (error) {
-        console.log(error, "Error Milestone error!");
+        console.log(error, "Error Task error!");
       });
   }
 
@@ -133,22 +176,41 @@ function SubjectDetail() {
       </Styled.MenuWrapper>
       <Styled.SubjectWrapper>
         <div>
-          <h1>Detalhes</h1>
+          <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
+            Detalhes
+          </Styled.ButtonTab>
+          <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
+            Atividades
+          </Styled.ButtonTab>
+        </div>
+        <div>
           <div>
-            <button onClick={handleMilestoneModal}>
-              <Plus />
-            </button>
-            <button>
-              <Edit />
-            </button>
+            {showTab ? (
+              <>
+                <button onClick={handleTaskModal}>
+                  <Plus />
+                </button>
+                <button>
+                  <Award />
+                </button>
+                <button>
+                  <Calendar />
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={handleMilestoneModal}>
+                  <Plus />
+                </button>
+                <button>
+                  <Edit />
+                </button>
+              </>
+            )}
           </div>
         </div>
 
-        <div>
-          <h2>{subjectName}</h2>
-        </div>
-
-        <Styled.MilestoneWrapper>
+        <Styled.MilestoneWrapper tab={showTab}>
           {/* milestones.map */}
           {[0, 1, 2, 3].map((item) => (
             <Link key={item.id} to={`/milestone/${item.id}`}>
@@ -161,6 +223,19 @@ function SubjectDetail() {
             </Link>
           ))}
         </Styled.MilestoneWrapper>
+
+        {/* state show to view tasks.map */}
+        {[0, 1, 2, 3].map((item) => (
+          <Link key={item} to={`/task/${item}`}>
+            <CardSubjectList
+              name="Atividade APOO"
+              description="Descrição da tarefa..."
+              milestone="Gerência de memória"
+              percentage="55"
+              tab={showTab}
+            />
+          </Link>
+        ))}
       </Styled.SubjectWrapper>
 
       <Modal onClose={handleStudentModal} show={showStudent}>
@@ -203,6 +278,73 @@ function SubjectDetail() {
 
           <div>
             <button onClick={handleMilestoneModal}>Cancelar</button>
+            <button type="submit">Continuar</button>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal onClose={handleTaskModal} show={showTask}>
+        <form onSubmit={handleCreateTask}>
+          <h2>Adicionar Atividade</h2>
+          {/* task 
+            - milestone_id
+            - name
+            - description
+            - due
+            - attachment_url
+            - total_score */}
+
+          <label htmlFor="name">Nome</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Nome do marco"
+            value={nameTask}
+            onChange={(e) => setNameTask(e.target.value)}
+            required
+          />
+
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            type="text"
+            id="description"
+            placeholder="Escreva aqui..."
+            rows="5"
+            cols="33"
+            value={descriptionTask}
+            onChange={(e) => setDescriptionTask(e.target.value)}
+            required
+          />
+
+          <label htmlFor="milestone">Milestone</label>
+          <select name="select" id="milestone" required>
+            <option value="" selected>
+              Selecione um milestone
+            </option>
+            {/* map on milestones */}
+            {[0, 1, 2, 3].map((item) => (
+              <option
+                key={item}
+                value={selectMilestone ? "" : "item.id"}
+                onChange={(e) => setSelectMilestoneTask(e.target.value)}
+              >
+                item.name
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="due">Prazo</label>
+          <input
+            type="date"
+            name="due"
+            id="due"
+            value={dueTask}
+            onChange={(e) => setDueTask(e.target.value)}
+            required
+          />
+
+          <div>
+            <button onClick={handleTaskModal}>Cancelar</button>
             <button type="submit">Continuar</button>
           </div>
         </form>

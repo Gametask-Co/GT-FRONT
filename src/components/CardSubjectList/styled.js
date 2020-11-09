@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  display: ${(props) => (props.tab ? "flex" : "none")};
 
   > img {
     margin-right: 1rem;

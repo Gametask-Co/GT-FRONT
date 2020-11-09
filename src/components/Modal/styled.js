@@ -70,7 +70,7 @@ export const ModalMain = styled.section`
       margin-top: 15px;
     }
 
-    > input {
+    > input, select {
       height: 40px;
       padding: 10px;
 
