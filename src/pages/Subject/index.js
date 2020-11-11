@@ -21,6 +21,7 @@ function Subject() {
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
+  const [showEditSubject, setShowEditSubject] = useState(false);
 
   // subject
   const [subjects, setSubjects] = useState([]);
@@ -41,12 +42,12 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/");
+        history.push("/signin");
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
 
-        api.get("/subject").then(function (res) {
+        api.get("/subjects").then(function (res) {
           setSubjects(res.data);
         });
       }
@@ -60,11 +61,15 @@ function Subject() {
     setShowStudent(!showStudent);
   }
 
+  function handleEditSubjectModal(e) {
+    setShowEditSubject(!showEditSubject);
+  }
+
   async function handleCreateSubject(e) {
     e.preventDefault();
 
     await api
-      .post("/subject", {
+      .post("/subjects", {
         name,
         description,
         image,
@@ -89,7 +94,7 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subject/student/email", {
+      .post("/subjects/students/email", {
         subject_id: idSubject,
         student_email: students,
       })
@@ -155,7 +160,7 @@ function Subject() {
             <button onClick={handleSubjectModal}>
               <Plus />
             </button>
-            <button>
+            <button onClick={handleEditSubjectModal}>
               <Edit />
             </button>
           </div>
@@ -168,6 +173,7 @@ function Subject() {
               name={item.name}
               teacher="Fulano de Tal"
               percentage="55"
+              tab={true}
             />
           </Link>
         ))}
@@ -247,6 +253,15 @@ function Subject() {
             <button type="submit">Continuar</button>
           </div>
         </form>
+      </Modal>
+
+      <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
+        <h2>Editar Disciplinas</h2>
+
+        {subjects.map((item) => (
+          <button key={item.id}>{item.name}</button>
+        ))}
+        <span onClick={handleEditSubjectModal}>Cancelar</span>
       </Modal>
     </Layout>
   );

@@ -19,7 +19,7 @@ const Header = ({ siteTitle }) => {
           <Logo />
           {siteTitle ? (
             <>
-              <a href="/subject">
+              <a href="/">
                 <Styled.KeyboardArrowLeftIcon />
                 <span>{siteTitle}</span>
               </a>

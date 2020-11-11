@@ -24,7 +24,8 @@ export const MenuWrapper = styled.div`
   align-items: center;
   height: 100%;
 
-  h1, span {
+  h1,
+  span {
     font-size: 1rem;
     color: #434343;
   }
@@ -73,13 +74,14 @@ export const SubjectWrapper = styled.div`
 
   h2 {
     font-size: 1.5rem;
-    color: #A2A2A2;
+    color: #a2a2a2;
   }
 
-  > div:first-child {
+  > div:nth-child(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    justify-content: end;
 
     button {
       margin-left: 1rem;
@@ -87,11 +89,37 @@ export const SubjectWrapper = styled.div`
       border: none;
       padding: 0.8rem;
       border-radius: 0.6rem;
-
+      align-items: center;
       &:hover {
         cursor: pointer;
         background-color: gray;
       }
     }
+  }
+`;
+
+export const MilestoneWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  display: ${(props) => (props.tab ? "none" : "grid")};
+`;
+
+export const ButtonTab = styled.button`
+  border: none;
+  background: transparent;
+  color: white;
+  margin-left: 1rem;
+
+  border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")};
+
+  &:first-child {
+    border-bottom: 2px solid ${(props) => (props.tab ? "transparent" : "white")};
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: gray;
+    border-bottom: 2px solid gray;
   }
 `;

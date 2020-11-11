@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
     // joaozinho - teacher
     // joaozinho01 - student
     await api
-      .post("/session", {
+      .post("/sessions", {
         // email: "joaozinho@gametask.com",
         // password: "test123",
         email,

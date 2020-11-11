@@ -7,7 +7,9 @@ export const Wrapper = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
-  display: ${(props) => (props.tab ? "flex" : "none")};
+  background-color: #282a31;
+  border-radius: 20px;
+  padding: 1.5rem;
 
   > img {
     margin-right: 1rem;
@@ -19,9 +21,25 @@ export const Wrapper = styled.div`
     flex-wrap: wrap;
     align-content: space-between;
 
+    > h2 {
+      color: #a2a2a2;
+      font-size: 1.3rem;
+    }
+    > p {
+      color: #434343;
+      font-size: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    > h3 {
+      font-size: 1.5rem;
+      padding-top: 1rem;
+    }
+
     > span {
       font-size: 0.8rem;
-      color: #65cba0;
+      /* color: #65cba0; */
+      color: #434343;
       padding-top: 0.5rem;
     }
 
@@ -64,7 +82,8 @@ export const Percentage = styled.div.attrs((props) => ({
 
   margin-top: 4rem;
 
-  background-color: #282a31;
+  /* background-color: #282a31; */
+  background-color: #1c1e23;
   border-radius: 50px;
 
   &::before {
@@ -73,7 +92,9 @@ export const Percentage = styled.div.attrs((props) => ({
 
     width: calc(var(--progress) * 1%);
     /* background-color: hsl(calc(var(--progress) * 1.2), 80%, 50%); */
-    background-color: #65cba0;
+    /* background-color: #65cba0; */
+
+    background-color: #3f424d;
     transition: all 0.2s ease;
     border-radius: 50px;
   }
