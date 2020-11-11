@@ -54,7 +54,7 @@ function SubjectDetail() {
       if (signed === false) {
         history.push("/signin");
       } else {
-        api.get("/subject").then(function (res) {
+        api.get("/subjects").then(function (res) {
           res.data.map((item) => {
             if (item.id === id) {
               setSubjectName(item.name);
@@ -90,7 +90,7 @@ function SubjectDetail() {
 
     await api({
       method: "delete",
-      url: "/subject/student/",
+      url: "/subjects/students/",
       data: {
         subject_id: id,
         student_id: studentActive,

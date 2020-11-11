@@ -118,7 +118,7 @@ function SignIn() {
           <div>
             <button type="submit">
               <LogIn />
-              <span>Entrar</span>
+              <span>Cadastrar</span>
             </button>
             <Link to="/signin">
               <span>

@@ -47,7 +47,7 @@ function Subject() {
         setUserName(user.name);
         setUserEmail(user.email);
 
-        api.get("/subject").then(function (res) {
+        api.get("/subjects").then(function (res) {
           setSubjects(res.data);
         });
       }
@@ -69,7 +69,7 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subject", {
+      .post("/subjects", {
         name,
         description,
         image,
@@ -94,7 +94,7 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subject/student/email", {
+      .post("/subjects/students/email", {
         subject_id: idSubject,
         student_email: students,
       })
@@ -173,6 +173,7 @@ function Subject() {
               name={item.name}
               teacher="Fulano de Tal"
               percentage="55"
+              tab={true}
             />
           </Link>
         ))}

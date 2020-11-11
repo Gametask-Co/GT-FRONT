@@ -16,7 +16,7 @@ function MilestoneDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        // history.push("/signin");
+        history.push("/signin");
       } else {
         // api.get("/milestones").then(function (res) {
         //   setMilestones(res.data);
