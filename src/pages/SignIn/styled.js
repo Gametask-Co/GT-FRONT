@@ -8,6 +8,7 @@ export const LoginWrapper = styled.div`
   flex-direction: column;
 
   background-color: #282a31;
+  margin-top: 5rem;
   padding-bottom: 3rem;
 
   width: 100%;

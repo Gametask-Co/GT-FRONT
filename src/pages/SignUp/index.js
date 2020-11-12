@@ -12,7 +12,7 @@ import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
 import { ReactComponent as Google } from "../../assets/icons/google.svg";
 
 function SignIn() {
-  const { signed, signIn, loading } = useAuth();
+  const { signed, signUp, loading } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,42 +22,51 @@ function SignIn() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   console.log("gender", gender);
-  
+
   const history = useHistory();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/");
+        history.push("/signin");
       }
     }
-  }, [signed]);
+  }, [loading, signed]);
 
-  async function handleSignUp(email, password) {
-    await signIn(email, password);
+  async function handleSignUp(e) {
+    e.preventDefault();
+
+    try {
+      if (password === confirmPassword) {
+        await signUp(name, email, date, gender, password);
+        history.push("/signin");
+      }
+    } catch (err) {
+      alert("Erro no cadastro, tente novamente.");
+    }
   }
 
   return (
-    <Layout>
+    <Layout header={false}>
       <Styled.LoginWrapper>
         <Styled.LogoIcon />
         <span>Insira seus dados para criar uma conta.</span>
-        <form onSubmit={handleSignUp(email, password)}>
+        <form onSubmit={handleSignUp}>
           <label htmlFor="name">Nome</label>
           <input
-            type="email"
-            name="email"
+            type="text"
+            name="name"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
 
-          <label htmlFor="name">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
-            id="userEmail"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -95,21 +104,21 @@ function SignIn() {
             </option>
           </select>
 
-          <label htmlFor="name">Senha</label>
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
             name="password"
-            id="userPassword"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
 
-          <label htmlFor="name">Confirmar senha</label>
+          <label htmlFor="passwordConfirm">Confirmar senha</label>
           <input
             type="password"
             name="password"
-            id="userPassword"
+            id="passwordConfirm"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required

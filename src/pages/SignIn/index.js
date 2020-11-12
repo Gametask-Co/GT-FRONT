@@ -25,18 +25,25 @@ function SignIn() {
         history.push("/");
       }
     }
-  }, [signed]);
+  }, [loading, signed]);
 
-  async function handleSignIn(email, password) {
-    await signIn(email, password);
+  async function handleSignIn(e) {
+    e.preventDefault();
+
+    try {
+      await signIn(email, password);
+      history.push("/");
+    } catch (err) {
+      alert("Erro no login, tente novamente.");
+    }
   }
 
   return (
-    <Layout>
+    <Layout header={false}>
       <Styled.LoginWrapper>
         <Styled.LogoIcon />
         <span>Insira seus dados para fazer login.</span>
-        <form onSubmit={handleSignIn(email, password)}>
+        <form onSubmit={handleSignIn}>
           <label htmlFor="name">Email</label>
           <input
             type="email"
