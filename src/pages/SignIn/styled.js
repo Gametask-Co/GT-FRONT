@@ -120,3 +120,29 @@ export const LogoIcon = styled(LogoSvg)`
   height: 70px;
   color: white;
 `;
+
+
+export const FilterRadio = styled.section`
+  display: flex;
+  justify-content: center;
+  border: 2px solid #3f424d;
+
+  input {
+    display: none;
+  }
+
+  label {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #featured-radio:checked ~ .featured,
+  #personal-radio:checked ~ .personal,
+  #tech-radio:checked ~ .tech {
+    background-color: #3f424d;
+  }
+`;

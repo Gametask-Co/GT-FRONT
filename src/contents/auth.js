@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
       });
   }
 
-  async function signUp(name, email, date, gender, password) {
+  async function signUp(name, email, date, gender, teacher, password) {
     await api
       .post("/users", {
         name,
@@ -73,7 +73,39 @@ const AuthProvider = ({ children }) => {
         password,
       })
       .then(() => {
-        history.push("/signin");
+        if (teacher === true) {
+          api
+            .post("/sessions", {
+              email,
+              password,
+            })
+            .then((res) => {
+              let tokenUser = res.data.token;
+              api
+                .post("/teachers", {
+                  headers: { Authorization: `Bearer ${tokenUser}` },
+                })
+                .then(() => {
+                  history.push("/signin");
+                });
+            });
+        } else {
+          api
+            .post("/sessions", {
+              email,
+              password,
+            })
+            .then((res) => {
+              let tokenUser = res.data.token;
+              api
+                .post("/students", {
+                  headers: { Authorization: `Bearer ${tokenUser}` },
+                })
+                .then(() => {
+                  history.push("/signin");
+                });
+            });
+        }
       })
       .catch(function (error) {
         console.log(error, "Auth register user error!");

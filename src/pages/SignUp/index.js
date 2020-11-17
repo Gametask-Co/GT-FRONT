@@ -18,10 +18,9 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [gender, setGender] = useState("");
+  const [teacher, setTeacher] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  console.log("gender", gender);
 
   const history = useHistory();
 
@@ -38,7 +37,7 @@ function SignIn() {
 
     try {
       if (password === confirmPassword) {
-        await signUp(name, email, date, gender, password);
+        await signUp(name, email, date, gender, teacher, password);
         history.push("/signin");
       }
     } catch (err) {
@@ -103,6 +102,42 @@ function SignIn() {
               Outro
             </option>
           </select>
+
+          <label htmlFor="iAm">Eu sou</label>
+          <Styled.FilterRadio>
+            <input
+              type="radio"
+              id="featured-radio"
+              className="radio-button"
+              name="content-filter"
+              defaultChecked="checked"
+              value={teacher}
+              onChange={() => setTeacher(false)}
+            />
+            <input
+              type="radio"
+              id="personal-radio"
+              className="radio-button"
+              name="content-filter"
+              value={teacher}
+              onChange={() => setTeacher(true)}
+            />
+
+            <label
+              htmlFor="featured-radio"
+              className="filter-label featured"
+              id="feature-label"
+            >
+              Estudante
+            </label>
+            <label
+              htmlFor="personal-radio"
+              className="filter-label personal"
+              id="personal-label"
+            >
+              Professor
+            </label>
+          </Styled.FilterRadio>
 
           <label htmlFor="password">Senha</label>
           <input
