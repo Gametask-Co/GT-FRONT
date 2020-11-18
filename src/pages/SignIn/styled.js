@@ -8,6 +8,7 @@ export const LoginWrapper = styled.div`
   flex-direction: column;
 
   background-color: #282a31;
+  margin-top: 5rem;
   padding-bottom: 3rem;
 
   width: 100%;
@@ -118,4 +119,30 @@ export const LogoIcon = styled(LogoSvg)`
   width: 70px;
   height: 70px;
   color: white;
+`;
+
+
+export const FilterRadio = styled.section`
+  display: flex;
+  justify-content: center;
+  border: 2px solid #3f424d;
+
+  input {
+    display: none;
+  }
+
+  label {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #featured-radio:checked ~ .featured,
+  #personal-radio:checked ~ .personal,
+  #tech-radio:checked ~ .tech {
+    background-color: #3f424d;
+  }
 `;

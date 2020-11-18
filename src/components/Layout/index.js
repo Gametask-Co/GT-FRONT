@@ -5,11 +5,11 @@ import GlobalStyles from "../../styles/global";
 import Header from "../../components/Header";
 import Container from "../../components/Container";
 
-const Layout = ({ children, pageTitle }) => {
+const Layout = ({ children, pageTitle, header }) => {
   return (
     <>
       <GlobalStyles />
-      <Header siteTitle={pageTitle} />
+      {header === false ? "" : <Header siteTitle={pageTitle} />}
       <Container>{children}</Container>
     </>
   );

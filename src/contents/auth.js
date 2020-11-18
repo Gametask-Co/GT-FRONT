@@ -9,6 +9,7 @@ const AuthContext = createContext({
   token: "",
   user: {},
   signIn() {},
+  signUp() {},
   signOut() {},
 });
 
@@ -54,28 +55,71 @@ const AuthProvider = ({ children }) => {
         setUser(res.data);
         setLoading(false);
 
-        history.push("/dashboard");
+        history.push("/");
       })
       .catch(function (error) {
         console.log(error, "Auth user error!");
       });
   }
 
-  function signOut() {
-    console.log("signOut");
-    // await localStorage.clear().then(() => {
-    //   setUser(null);
-    //   history.push("/");
-    // });
+  async function signUp(name, email, date, gender, teacher, password) {
+    await api
+      .post("/users", {
+        name,
+        email,
+        date,
+        gender,
+        avatar_url: "null",
+        password,
+      })
+      .then(() => {
+        if (teacher === true) {
+          api
+            .post("/sessions", {
+              email,
+              password,
+            })
+            .then((res) => {
+              let tokenUser = res.data.token;
+              api
+                .post("/teachers", {
+                  headers: { Authorization: `Bearer ${tokenUser}` },
+                })
+                .then(() => {
+                  history.push("/signin");
+                });
+            });
+        } else {
+          api
+            .post("/sessions", {
+              email,
+              password,
+            })
+            .then((res) => {
+              let tokenUser = res.data.token;
+              api
+                .post("/students", {
+                  headers: { Authorization: `Bearer ${tokenUser}` },
+                })
+                .then(() => {
+                  history.push("/signin");
+                });
+            });
+        }
+      })
+      .catch(function (error) {
+        console.log(error, "Auth register user error!");
+      });
+  }
 
+  function signOut() {
     localStorage.clear();
     setUser(null);
-    // history.push("/");
   }
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, loading, signIn, signOut }}
+      value={{ signed: !!user, user, loading, signIn, signUp, signOut }}
     >
       {children}
     </AuthContext.Provider>

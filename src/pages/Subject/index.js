@@ -249,8 +249,8 @@ function Subject() {
           {/* <span>{students}</span> */}
 
           <div>
-            <button onClick={handleStudentModal}>Cancelar</button>
-            <button type="submit">Continuar</button>
+            <button onClick={handleStudentModal}>Pular</button>
+            <button type="submit">Concluir</button>
           </div>
         </form>
       </Modal>
