@@ -424,7 +424,7 @@ function SubjectDetail() {
             required
           />
 
-          <label htmlFor="milestone">Milestone</label>
+          <label htmlFor="milestone">Marco</label>
           <select
             name="select"
             id="milestone"
@@ -433,7 +433,7 @@ function SubjectDetail() {
             required
           >
             <option value="" selected>
-              Selecione um milestone
+              Selecione um marco
             </option>
             {/* map on milestones */}
             {[0, 1, 2, 3].map((item) => (
