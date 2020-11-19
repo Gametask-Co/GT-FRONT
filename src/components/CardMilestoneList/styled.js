@@ -6,10 +6,12 @@ export const Wrapper = styled.div`
   align-items: center;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  cursor: pointer;
   background-color: #282a31;
   border-radius: 20px;
   padding: 1.5rem;
+
+  opacity: ${(props) => (props.visibility ? props.visibility : "0.6")};
+  cursor: ${(props) => (props.visibility ? "pointer" : "not-allowed")};
 
   > img {
     margin-right: 1rem;

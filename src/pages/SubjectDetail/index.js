@@ -58,7 +58,7 @@ function SubjectDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/signin");
+        // history.push("/signin");
       } else {
         api.get("/subjects").then(function (res) {
           res.data.map((item) => {
@@ -269,6 +269,7 @@ function SubjectDetail() {
                 name="Introdução"
                 deadline="Termina em 11/06/20"
                 percentage="55"
+                visibility={false}
               />
             </Link>
           ))}
