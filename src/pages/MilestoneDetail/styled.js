@@ -159,3 +159,33 @@ export const WrapCollabsible = styled.div`
     font-size: 0.9rem;
   }
 `;
+
+// styles on content
+export const ButtonTab = styled.button`
+  border: none !important;
+  background: transparent !important;
+  color: white !important;
+  margin-left: 1rem !important;
+
+  border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")} !important;
+
+  &:first-child {
+    border-bottom: 2px solid ${(props) => (props.tab ? "transparent" : "white")} !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: gray;
+    border-bottom: 2px solid gray;
+  }
+`;
+
+export const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > div:first-child {
+    display: flex;
+    justify-content: space-between;
+  }
+`;

@@ -52,6 +52,27 @@ function MilestoneDetail() {
               allowfullscreen
             ></iframe>
           </Styled.EmbedContainer>
+
+          <Styled.MainContent>
+            <div>
+              {/* <Styled.ButtonTab onClick={handleShowTab} tab={showTab}> */}
+              <Styled.ButtonTab tab={false}>Detalhes</Styled.ButtonTab>
+              <Styled.ButtonTab tab={false}>Atividades</Styled.ButtonTab>
+              <div>
+                <button>
+                  <Edit />
+                </button>
+              </div>
+            </div>
+
+            {/* view content use this <Styled.MilestoneWrapper tab={showTab}> */}
+            <div>
+              <span>Content Details</span>
+            </div>
+            <div>
+              <span>Content Tasks</span>
+            </div>
+          </Styled.MainContent>
         </Styled.Content>
         <Styled.Block>
           <div>
@@ -81,7 +102,6 @@ function MilestoneDetail() {
               </div>
             </div>
           </Styled.WrapCollabsible>
-
         </Styled.Block>
       </Styled.Wrapper>
     </Layout>
