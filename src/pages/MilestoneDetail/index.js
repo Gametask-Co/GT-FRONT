@@ -8,6 +8,10 @@ import Layout from "../../components/Layout";
 import { useAuth } from "../../contents/auth";
 import api from "../../services/api";
 
+import { ReactComponent as Inbox } from "../../assets/icons/inbox.svg";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+
 function MilestoneDetail() {
   const { signed, loading } = useAuth();
 
@@ -16,7 +20,7 @@ function MilestoneDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/signin");
+        // history.push("/signin");
       } else {
         // api.get("/milestones").then(function (res) {
         //   setMilestones(res.data);
@@ -51,16 +55,33 @@ function MilestoneDetail() {
         </Styled.Content>
         <Styled.Block>
           <div>
-            <span>opção 01</span>
-            <span>opção 02</span>
-            <span>opção 03</span>
+            <button>
+              <Inbox />
+            </button>
+            <button>
+              <Plus />
+            </button>
+            <button>
+              <Edit />
+            </button>
           </div>
-          {/* <div>
-            <span>
-              <input type="checkbox" name="" id="" />
-              Aula - Método de Acesso
-            </span>
-          </div> */}
+          {/* .map to get blocks and class and tasks */}
+          <Styled.WrapCollabsible>
+            {/* styled with circle as number block */}
+            <input id="collapsible" className="toggle" type="checkbox" />
+            <label htmlFor="collapsible" className="lbl-toggle">
+              Uso direto
+            </label>
+            <div className="collapsible-content">
+              <div className="content-inner">
+                <span>
+                  <input type="checkbox" name="class" id="class-id" />
+                  <label htmlFor="class-id">Aula - Método de Acesso</label>
+                </span>
+              </div>
+            </div>
+          </Styled.WrapCollabsible>
+
         </Styled.Block>
       </Styled.Wrapper>
     </Layout>
