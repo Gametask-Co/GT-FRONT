@@ -31,11 +31,10 @@ export const Content = styled.div`
     }
 
     > button {
-      padding: 1rem;
+      padding: 0.1rem;
       background-color: #282a31;
       color: white;
       border: none;
-      border-radius: 0.6rem;
       font-size: 1rem;
 
       &:hover {
@@ -69,6 +68,7 @@ export const EmbedContainer = styled.div`
 export const Block = styled.div`
   /* display: flex; */
   width: 40%;
+  padding-left: 1rem;
 
   > div:first-child {
     display: flex;
@@ -155,6 +155,9 @@ export const WrapCollabsible = styled.div`
   span {
     margin-bottom: 0;
   }
+  input {
+    margin-right: 0.5rem;
+  }
   label {
     font-size: 0.9rem;
   }
@@ -164,18 +167,21 @@ export const WrapCollabsible = styled.div`
 export const ButtonTab = styled.button`
   border: none !important;
   background: transparent !important;
-  color: white !important;
   margin-left: 1rem !important;
 
   border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")} !important;
+  color: ${(props) => (props.tab ? "white" : "gray")} !important;
 
   &:first-child {
-    border-bottom: 2px solid ${(props) => (props.tab ? "transparent" : "white")} !important;
+    /* border-bottom: 2px solid ${(props) =>
+      props.tab ? "transparent" : "white"} !important; */
+    /* color: ${(props) => (props.tab ? "gray" : "white")} !important; */
+    margin-left: 0rem !important;
   }
 
   &:hover {
     cursor: pointer;
-    color: gray;
+    color: white !important;
     border-bottom: 2px solid gray;
   }
 `;
@@ -185,7 +191,23 @@ export const MainContent = styled.div`
   flex-direction: column;
 
   > div:first-child {
+    padding-top: 1rem;
     display: flex;
     justify-content: space-between;
+
+    > div {
+      button {
+        border-radius: 0.3rem;
+      }
+    }
   }
+
+  > div {
+    padding-top: 1rem;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  display: ${(props) => (props.show === true ? "block" : "none")} !important;
+  color: #A2A2A2;
 `;
