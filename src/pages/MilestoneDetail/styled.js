@@ -9,6 +9,7 @@ export const Content = styled.div`
   width: 100%;
   font-size: 1rem;
   padding-right: 3rem;
+  overflow-y: auto;
 
   div {
     display: flex;
@@ -30,11 +31,10 @@ export const Content = styled.div`
     }
 
     > button {
-      padding: 1rem;
+      padding: 0.1rem;
       background-color: #282a31;
       color: white;
       border: none;
-      border-radius: 0.6rem;
       font-size: 1rem;
 
       &:hover {
@@ -66,14 +66,148 @@ export const EmbedContainer = styled.div`
 `;
 
 export const Block = styled.div`
-  display: flex;
+  /* display: flex; */
+  width: 40%;
+  padding-left: 1rem;
 
   > div:first-child {
     display: flex;
     align-items: right;
+    align-content: right;
 
-    span {
-      padding: 1rem;
+    button {
+      margin-left: 1rem;
+      background-color: #282a31;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 0.6rem;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: gray;
+      }
     }
   }
+`;
+
+export const WrapCollabsible = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  #collapsible {
+    display: none;
+  }
+  .lbl-toggle {
+    display: block;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 1rem;
+    color: #ddd;
+    background: #282a31;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: all 0.25s ease-out;
+  }
+  .lbl-toggle:hover {
+    color: #fff;
+  }
+
+  /* adds number of block */
+  .lbl-toggle::before {
+    content: " ";
+    display: inline-block;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+    vertical-align: middle;
+    margin-right: 0.7rem;
+    transform: translateY(-2px);
+    transition: transform 0.2s ease-out;
+  }
+  .toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+  }
+
+  .collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.25s ease-in-out;
+  }
+  .toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: 350px;
+  }
+  .toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .collapsible-content .content-inner {
+    background: #1c1e23;
+    border: 0.5rem solid #282a31;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    padding: 0.5rem 1rem;
+  }
+  .collapsible-content p,
+  span {
+    margin-bottom: 0;
+  }
+  input {
+    margin-right: 0.5rem;
+  }
+  label {
+    font-size: 0.9rem;
+  }
+`;
+
+// styles on content
+export const ButtonTab = styled.button`
+  border: none !important;
+  background: transparent !important;
+  margin-left: 1rem !important;
+
+  border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")} !important;
+  color: ${(props) => (props.tab ? "white" : "gray")} !important;
+
+  &:first-child {
+    /* border-bottom: 2px solid ${(props) =>
+      props.tab ? "transparent" : "white"} !important; */
+    /* color: ${(props) => (props.tab ? "gray" : "white")} !important; */
+    margin-left: 0rem !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: white !important;
+    border-bottom: 2px solid gray;
+  }
+`;
+
+export const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > div:first-child {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      button {
+        border-radius: 0.3rem;
+      }
+    }
+  }
+
+  > div {
+    padding-top: 1rem;
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  display: ${(props) => (props.show === true ? "block" : "none")} !important;
+  color: #A2A2A2;
 `;

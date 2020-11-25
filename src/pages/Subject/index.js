@@ -47,9 +47,22 @@ function Subject() {
         setUserName(user.name);
         setUserEmail(user.email);
 
-        api.get("/subjects").then(function (res) {
-          setSubjects(res.data);
-        });
+        // VERIFY user is teacher or students
+        // // user.teacher
+        // api.get("/teacher/subjects").then(function (res) {
+        api
+          .get("subjects")
+          .then(function (res) {
+            console.log("res ------", res);
+            if (res.status != "error") {
+              setSubjects(res.data);
+            }
+          })
+          .catch((error) => {
+            // user student
+            console.log("error ------", error);
+            setSubjects([]);
+          });
       }
     }
   }, [signed, subjects, history, loading]);

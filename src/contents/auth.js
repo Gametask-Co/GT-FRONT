@@ -41,8 +41,6 @@ const AuthProvider = ({ children }) => {
     // joaozinho01 - student
     await api
       .post("/sessions", {
-        // email: "joaozinho@gametask.com",
-        // password: "test123",
         email,
         password,
       })
@@ -69,7 +67,6 @@ const AuthProvider = ({ children }) => {
         email,
         date,
         gender,
-        avatar_url: "null",
         password,
       })
       .then(() => {
@@ -81,13 +78,12 @@ const AuthProvider = ({ children }) => {
             })
             .then((res) => {
               let tokenUser = res.data.token;
-              api
-                .post("/teachers", {
-                  headers: { Authorization: `Bearer ${tokenUser}` },
-                })
-                .then(() => {
-                  history.push("/signin");
-                });
+              api.defaults.headers["Authorization"] = `Bearer ${tokenUser}`;
+
+              api.post("/teachers").then(() => {
+                // history.push("/signin");
+                console.log("Adds associated!");
+              });
             });
         } else {
           api
@@ -97,13 +93,12 @@ const AuthProvider = ({ children }) => {
             })
             .then((res) => {
               let tokenUser = res.data.token;
-              api
-                .post("/students", {
-                  headers: { Authorization: `Bearer ${tokenUser}` },
-                })
-                .then(() => {
-                  history.push("/signin");
-                });
+              api.defaults.headers["Authorization"] = `Bearer ${tokenUser}`;
+
+              api.post("/students").then(() => {
+                // history.push("/signin");
+                console.log("Adds associated!");
+              });
             });
         }
       })
