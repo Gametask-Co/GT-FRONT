@@ -50,7 +50,8 @@ function SubjectDetail() {
   const [nameTask, setNameTask] = useState("");
   const [descriptionTask, setDescriptionTask] = useState("");
   const [dueTask, setDueTask] = useState("");
-  const [selectMilestone, setSelectMilestoneTask] = useState("");
+  const [selectMilestoneTask, setSelectMilestoneTask] = useState("");
+  const [selectBlockTask, setSelectBlockTask] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -69,8 +70,12 @@ function SubjectDetail() {
           });
         });
 
-        api.get("/milestones").then(function (res) {
+        // breno's do it
+        api.get("/subjects/milestones").then(function (res) {
           setMilestones(res.data);
+        });
+        api.get("/subjects/blocks").then(function (res) {
+          setBlocks(res.data);
         });
       }
     }
@@ -135,7 +140,7 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post("/milestones", {
+      .post("/subjects/milestones", {
         name,
         description,
         visibility,
@@ -161,9 +166,10 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post("/blocks", {
+      .post("/subjects/blocks", {
+        // name: block,
         // milestone_id,
-        // title: block,
+        // subject_id,
       })
       .then(function (res) {
         console.log(res, "add Block ok!");
@@ -184,8 +190,17 @@ function SubjectDetail() {
       .post("/tasks", {
         nameTask,
         descriptionTask,
+        selectMilestoneTask,
         dueTask,
-        selectMilestone,
+        subject_id: id,
+        block_id: selectBlockTask,
+
+        // name,
+        // description,
+        // attachment_url,
+        // due,
+        // block_id,
+        // subject_id,
       })
       .then(function (res) {
         console.log(res.data, "Create Task ok!");
@@ -429,12 +444,31 @@ function SubjectDetail() {
           <select
             name="select"
             id="milestone"
-            value={selectMilestone}
+            value={selectMilestoneTask}
             onChange={(e) => setSelectMilestoneTask(e.target.value)}
             required
           >
             <option value="" selected>
               Selecione um marco
+            </option>
+            {/* map on milestones */}
+            {[0, 1, 2, 3].map((item) => (
+              <option key={item} value="item.id">
+                item.name
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="milestone">Bloco</label>
+          <select
+            name="select"
+            id="milestone"
+            value={selectBlockTask}
+            onChange={(e) => setSelectBlockTask(e.target.value)}
+            required
+          >
+            <option value="" selected>
+              Selecione um bloco
             </option>
             {/* map on milestones */}
             {[0, 1, 2, 3].map((item) => (
