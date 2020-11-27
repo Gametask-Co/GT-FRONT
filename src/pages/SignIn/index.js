@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GoogleLogin from "react-google-login";
 
 import Layout from "../../components/Layout";
@@ -29,12 +30,17 @@ function SignIn() {
     }
   }, [loading, signed]);
 
-  const onSuccess = (res) => {
+  const responseFacebook = (res) => {
+    setEmail(res.email);
+    setPassword(res.userID);
+  };
+
+  const onGoogleSuccess = (res) => {
     setEmail(res.profileObj.email);
     setPassword(res.profileObj.googleId);
   };
 
-  const onFailure = (res) => {
+  const onGoogleFailure = (res) => {
     console.log("Login failed: res:", res);
   };
 
@@ -92,17 +98,21 @@ function SignIn() {
         <span className="align-center">Ou entrar com:</span>
 
         <Styled.LoginWrapperFooter>
-          <button className="facebook">
-            <Facebook />
-            <span>Facebook</span>
-          </button>
-          {/* <button className="google">
-            <Google />
-            <span>Google</span>
-          </button> */}
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+            autoLoad
+            fields="name,email,picture"
+            callback={responseFacebook}
+            render={(renderProps) => (
+              <button onClick={renderProps.onClick} className="facebook">
+                <Facebook />
+                <span>Facebook</span>
+              </button>
+            )}
+          />
 
           <GoogleLogin
-            clientId={process.env.REACT_APP_CLIENT_ID}
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             render={(renderProps) => (
               <button
                 className="google"
@@ -114,8 +124,8 @@ function SignIn() {
               </button>
             )}
             buttonText="Login"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
+            onSuccess={onGoogleSuccess}
+            onFailure={onGoogleFailure}
             cookiePolicy={"single_host_origin"}
           />
         </Styled.LoginWrapperFooter>
