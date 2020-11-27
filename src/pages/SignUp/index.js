@@ -35,23 +35,16 @@ function SignUp() {
   }, [loading, signed]);
 
   const onSuccess = (res) => {
-    // console.log("Login Success: currentUser:", res.profileObj);
-    console.log("Login Success: res data:", res);
+    setName(res.profileObj.name);
+    setEmail(res.profileObj.email);
+    setPassword(res.profileObj.googleId);
+    setConfirmPassword(res.profileObj.googleId);
 
-    // signup
-    // email = res.profileObj.email
-    // password = res.profileObj.googleId
-    alert(
-      `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
-    );
-    // refreshTokenSetup(res);
+    document.getElementById("date").focus();
   };
 
   const onFailure = (res) => {
     console.log("Login failed: res:", res);
-    alert(
-      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-    );
   };
 
   async function handleSignUp(e) {

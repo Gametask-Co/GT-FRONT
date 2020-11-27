@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
         setUser(res.data);
         setLoading(false);
 
-        history.push("/");
+        // history.push("/");
       })
       .catch(function (error) {
         console.log(error, "Auth user error!");

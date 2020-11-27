@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
+import GoogleLogin from "react-google-login";
+
 import Layout from "../../components/Layout";
 
 import * as Styled from "./styled";
@@ -26,6 +28,15 @@ function SignIn() {
       }
     }
   }, [loading, signed]);
+
+  const onSuccess = (res) => {
+    setEmail(res.profileObj.email);
+    setPassword(res.profileObj.googleId);
+  };
+
+  const onFailure = (res) => {
+    console.log("Login failed: res:", res);
+  };
 
   async function handleSignIn(e) {
     e.preventDefault();
@@ -76,20 +87,39 @@ function SignIn() {
               </span>
             </Link>
           </div>
-
-          <span className="align-center">Ou entrar com:</span>
-
-          <div>
-            <button className="facebook">
-              <Facebook />
-              <span>Facebook</span>
-            </button>
-            <button className="google">
-              <Google />
-              <span>Google</span>
-            </button>
-          </div>
         </form>
+
+        <span className="align-center">Ou entrar com:</span>
+
+        <Styled.LoginWrapperFooter>
+          <button className="facebook">
+            <Facebook />
+            <span>Facebook</span>
+          </button>
+          {/* <button className="google">
+            <Google />
+            <span>Google</span>
+          </button> */}
+
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            render={(renderProps) => (
+              <button
+                className="google"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Google />
+                <span>Google</span>
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+        </Styled.LoginWrapperFooter>
+        {/* </form> */}
       </Styled.LoginWrapper>
     </Layout>
   );
