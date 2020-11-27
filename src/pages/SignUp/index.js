@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
+import GoogleLogin from "react-google-login";
+
 import Layout from "../../components/Layout";
 
 import * as Styled from "../SignIn/styled";
@@ -11,7 +13,7 @@ import { ReactComponent as LogIn } from "../../assets/icons/log-in.svg";
 import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
 import { ReactComponent as Google } from "../../assets/icons/google.svg";
 
-function SignIn() {
+function SignUp() {
   const { signed, signUp, loading } = useAuth();
 
   const [name, setName] = useState("");
@@ -31,6 +33,26 @@ function SignIn() {
       }
     }
   }, [loading, signed]);
+
+  const onSuccess = (res) => {
+    // console.log("Login Success: currentUser:", res.profileObj);
+    console.log("Login Success: res data:", res);
+
+    // signup
+    // email = res.profileObj.email
+    // password = res.profileObj.googleId
+    alert(
+      `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
+    );
+    // refreshTokenSetup(res);
+  };
+
+  const onFailure = (res) => {
+    console.log("Login failed: res:", res);
+    alert(
+      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
+    );
+  };
 
   async function handleSignUp(e) {
     e.preventDefault();
@@ -170,23 +192,43 @@ function SignIn() {
               </span>
             </Link>
           </div>
+        </form>
 
-          <span className="align-center">Ou entrar com:</span>
+        <span className="align-center">Ou entrar com:</span>
 
-          <div>
-            <button className="facebook">
-              <Facebook />
-              <span>Facebook</span>
-            </button>
-            <button className="google">
+        <Styled.LoginWrapperFooter>
+          <button className="facebook">
+            <Facebook />
+            <span>Facebook</span>
+          </button>
+
+          {/* <button className="google">
               <Google />
               <span>Google</span>
-            </button>
-          </div>
-        </form>
+            </button> */}
+
+          <GoogleLogin
+            clientId={process.env.REACT_APP_CLIENT_ID}
+            render={(renderProps) => (
+              <button
+                className="google"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Google />
+                <span>Google</span>
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+        </Styled.LoginWrapperFooter>
+        {/* </form> */}
       </Styled.LoginWrapper>
     </Layout>
   );
 }
 
-export default SignIn;
+export default SignUp;

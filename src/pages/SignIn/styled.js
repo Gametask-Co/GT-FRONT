@@ -77,17 +77,6 @@ export const LoginWrapper = styled.div`
         text-decoration: underline;
       }
 
-      .facebook {
-        background-color: blue;
-        color: white;
-        font-size: 1rem;
-      }
-      .google {
-        background-color: firebrick;
-        color: white;
-        font-size: 1rem;
-      }
-
       > button {
         align-items: center;
         display: flex;
@@ -106,11 +95,54 @@ export const LoginWrapper = styled.div`
         > span {
           padding-left: 1rem;
         }
-
-        /* &:first-child {
-          background: transparent;
-        } */
       }
+    }
+  }
+`;
+
+export const LoginWrapperFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  button,
+  a {
+    width: 14rem;
+  }
+
+  .text-und {
+    text-decoration: underline;
+  }
+
+  .facebook {
+    background-color: blue;
+    color: white;
+    font-size: 1rem;
+  }
+  .google {
+    background-color: firebrick;
+    color: white;
+    font-size: 1rem;
+  }
+
+  > button {
+    align-items: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+    background: #3f424d;
+    color: #fff;
+    border: 0;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+
+    > span {
+      padding-left: 1rem;
     }
   }
 `;
@@ -120,7 +152,6 @@ export const LogoIcon = styled(LogoSvg)`
   height: 70px;
   color: white;
 `;
-
 
 export const FilterRadio = styled.section`
   display: flex;
