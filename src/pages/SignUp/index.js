@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import GoogleLogin from "react-google-login";
+
 import Layout from "../../components/Layout";
 
 import * as Styled from "../SignIn/styled";
@@ -11,7 +14,7 @@ import { ReactComponent as LogIn } from "../../assets/icons/log-in.svg";
 import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
 import { ReactComponent as Google } from "../../assets/icons/google.svg";
 
-function SignIn() {
+function SignUp() {
   const { signed, signUp, loading } = useAuth();
 
   const [name, setName] = useState("");
@@ -31,6 +34,28 @@ function SignIn() {
       }
     }
   }, [loading, signed]);
+
+  const responseFacebook = (res) => {
+    setName(res.name);
+    setEmail(res.email);
+    setPassword(res.userID);
+    setConfirmPassword(res.userID);
+
+    document.getElementById("date").focus();
+  };
+
+  const onGoogleSuccess = (res) => {
+    setName(res.profileObj.name);
+    setEmail(res.profileObj.email);
+    setPassword(res.profileObj.googleId);
+    setConfirmPassword(res.profileObj.googleId);
+
+    document.getElementById("date").focus();
+  };
+
+  const onGoogleFailure = (res) => {
+    console.log("Login failed: res:", res);
+  };
 
   async function handleSignUp(e) {
     e.preventDefault();
@@ -170,23 +195,46 @@ function SignIn() {
               </span>
             </Link>
           </div>
-
-          <span className="align-center">Ou entrar com:</span>
-
-          <div>
-            <button className="facebook">
-              <Facebook />
-              <span>Facebook</span>
-            </button>
-            <button className="google">
-              <Google />
-              <span>Google</span>
-            </button>
-          </div>
         </form>
+
+        <span className="align-center">Ou entrar com:</span>
+
+        <Styled.LoginWrapperFooter>
+          <FacebookLogin
+            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+            autoLoad
+            fields="name,email,picture"
+            callback={responseFacebook}
+            render={(renderProps) => (
+              <button onClick={renderProps.onClick} className="facebook">
+                <Facebook />
+                <span>Facebook</span>
+              </button>
+            )}
+          />
+
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+            render={(renderProps) => (
+              <button
+                className="google"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Google />
+                <span>Google</span>
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={onGoogleSuccess}
+            onFailure={onGoogleFailure}
+            cookiePolicy={"single_host_origin"}
+          />
+        </Styled.LoginWrapperFooter>
+        {/* </form> */}
       </Styled.LoginWrapper>
     </Layout>
   );
 }
 
-export default SignIn;
+export default SignUp;

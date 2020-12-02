@@ -36,6 +36,7 @@ function Subject() {
 
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [userFlag, setUserFlag] = useState(false);
 
   const history = useHistory();
 
@@ -54,9 +55,32 @@ function Subject() {
           .get("subjects")
           .then(function (res) {
             console.log("res ------", res);
-            if (res.status != "error") {
-              setSubjects(res.data);
+
+            if (user.student_id !== null) {
+              setSubjects(res.data.student_user);
+              setUserFlag(false);
+            } else {
+              setSubjects(res.data.teacher_user);
+              setUserFlag(true);
             }
+
+            // if (res.status != "error") {
+            //   setSubjects(res.data);
+            // }
+
+            // if (res.data.student_user.length) {
+            //   // setSubjects[res.data.student_user];
+            //   console.log(
+            //     "res.data.student_user.length",
+            //     res.data.student_user.length
+            //   );
+            // } else {
+            //   // setSubjects[res.data.teacher_user];
+            //   console.log(
+            //     "res.data.teacher_user.length",
+            //     res.data.teacher_user.length
+            //   );
+            // }
           })
           .catch((error) => {
             // user student
@@ -65,7 +89,8 @@ function Subject() {
           });
       }
     }
-  }, [signed, subjects, history, loading]);
+    // }, [signed, subjects, history, loading]);
+  }, [signed, history, loading]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -107,7 +132,7 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subjects/students/email", {
+      .post("/subjects/student/email", {
         subject_id: idSubject,
         student_email: students,
       })
@@ -127,10 +152,9 @@ function Subject() {
     <Layout>
       <Styled.MenuWrapper>
         <Styled.CircleProfile />
-        <h3>Professor:</h3>
+        <h3>{userFlag ? "Professor" : "Estudante"}</h3>
         <h1>{userName}</h1>
         <h3>{userEmail}</h3>
-
         <div>
           <h4>Medalhas</h4>
           <div>
