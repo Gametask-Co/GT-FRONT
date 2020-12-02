@@ -21,7 +21,7 @@ import { ReactComponent as Award } from "../../assets/icons/award.svg";
 import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
 
 function SubjectDetail() {
-  const { signed, loading } = useAuth();
+  const { signed, user, loading } = useAuth();
 
   const [show, setShow] = useState(false);
   const [showStudent, setShowStudent] = useState(false);
@@ -62,24 +62,23 @@ function SubjectDetail() {
         // history.push("/signin");
       } else {
         api.get("/subjects").then(function (res) {
-          res.data.map((item) => {
+          res.data.teacher_user.map((item) => {
             if (item.id === id) {
+              console.log("item ---", item);
               setSubjectName(item.name);
               setStudents(item.students);
+              setMilestones(item.milestones);
             }
           });
         });
 
-        // breno's do it
-        api.get("/subjects/milestones").then(function (res) {
-          setMilestones(res.data);
-        });
         api.get("/subjects/blocks").then(function (res) {
           setBlocks(res.data);
         });
       }
     }
-  }, [signed, history, milestones, students, loading]);
+    // }, [signed, history, milestones, students, loading]);
+  }, [signed, history, loading]);
 
   function handleMilestoneModal(e) {
     setShow(!show);
@@ -226,7 +225,7 @@ function SubjectDetail() {
           <div key={item.id}>
             <div>
               <Styled.CircleProfile />
-              <span>Name</span>
+              <span>{item.name}</span>
             </div>
             <div>
               <button onClick={() => handleStudentModal(item.id)}>
@@ -276,7 +275,7 @@ function SubjectDetail() {
         </div>
 
         <Styled.MilestoneWrapper tab={showTab}>
-          {/* milestones.map */}
+          {/* {milestones.map((item) => ( */}
           {[0, 1, 2, 3].map((item) => (
             <Link key={item.id} to={`/milestone/${item.id}`}>
               <CardMilestoneList
