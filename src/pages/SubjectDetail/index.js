@@ -45,8 +45,10 @@ function SubjectDetail() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true);
+  const [milestoneActive, setMilestoneActive] = useState("");
 
   // task
+  const [tasks, setTasks] = useState([]);
   const [nameTask, setNameTask] = useState("");
   const [descriptionTask, setDescriptionTask] = useState("");
   const [dueTask, setDueTask] = useState("");
@@ -64,21 +66,20 @@ function SubjectDetail() {
         api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
-              console.log("item ---", item);
+              // console.log("item --", item);
+              // console.log("item milestones", item.milestones);
+
               setSubjectName(item.name);
               setStudents(item.students);
               setMilestones(item.milestones);
+              // setBlocks(item.milestones.blocks);
             }
           });
-        });
-
-        api.get("/subjects/blocks").then(function (res) {
-          setBlocks(res.data);
         });
       }
     }
     // }, [signed, history, milestones, students, loading]);
-  }, [signed, history, loading]);
+  }, [signed, history, loading, milestones]);
 
   function handleMilestoneModal(e) {
     setShow(!show);
@@ -142,7 +143,8 @@ function SubjectDetail() {
       .post("/subjects/milestones", {
         name,
         description,
-        visibility,
+        subject_id: id,
+        // visibility,
       })
       .then(function (res) {
         console.log(res.data, "Create Milestone ok!");
@@ -152,6 +154,7 @@ function SubjectDetail() {
         setDescriptionTask("");
         setDueTask("");
         setSelectMilestoneTask("");
+        setMilestoneActive(res.data.id);
 
         setShowBlock(!showBlock);
       })
@@ -160,22 +163,22 @@ function SubjectDetail() {
       });
   }
 
-  // need more informations
   async function handleMilestoneBlock(e) {
     e.preventDefault();
 
     await api
       .post("/subjects/blocks", {
-        // name: block,
-        // milestone_id,
-        // subject_id,
+        name: blocks,
+        subject_id: id,
+        milestone_id: milestoneActive,
       })
       .then(function (res) {
         console.log(res, "add Block ok!");
         // setLink("");
         // setStudents("");
+        setMilestoneActive("");
 
-        setBlocks(!showBlock);
+        setShowBlock(!showBlock);
       })
       .catch(function (error) {
         console.log(error, "Error Block error!");
@@ -275,15 +278,14 @@ function SubjectDetail() {
         </div>
 
         <Styled.MilestoneWrapper tab={showTab}>
-          {/* {milestones.map((item) => ( */}
-          {[0, 1, 2, 3].map((item) => (
+          {milestones.map((item, index) => (
             <Link key={item.id} to={`/milestone/${item.id}`}>
               <CardMilestoneList
-                number={item}
-                name="Introdução"
-                deadline="Termina em 11/06/20"
+                number={index}
+                name={item.name}
+                deadline="Termina em 11/06/21"
                 percentage="55"
-                visibility={false}
+                visibility={true}
               />
             </Link>
           ))}
@@ -397,7 +399,7 @@ function SubjectDetail() {
             onChange={(e) => setBlocks(e.target.value)}
             required
           />
-          <span>{blocks}</span>
+          {/* <span>{blocks}</span> */}
 
           <div>
             <button onClick={handleBlockModal}>Pular</button>
@@ -469,7 +471,7 @@ function SubjectDetail() {
             <option value="" selected>
               Selecione um bloco
             </option>
-            {/* map on milestones */}
+            {/* map on blocks */}
             {[0, 1, 2, 3].map((item) => (
               <option key={item} value="item.id">
                 item.name
