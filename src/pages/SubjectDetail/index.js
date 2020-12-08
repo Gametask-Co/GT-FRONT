@@ -38,6 +38,7 @@ function SubjectDetail() {
   const [subjectName, setSubjectName] = useState("");
 
   // subject class
+  const [block, setBlock] = useState("");
   const [blocks, setBlocks] = useState([]);
 
   //milestone
@@ -66,20 +67,20 @@ function SubjectDetail() {
         api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
-              // console.log("item --", item);
-              // console.log("item milestones", item.milestones);
-
               setSubjectName(item.name);
               setStudents(item.students);
               setMilestones(item.milestones);
-              // setBlocks(item.milestones.blocks);
+
+              item.milestones.map((item) => {
+                setBlocks(item.blocks);
+              });
             }
           });
         });
       }
     }
     // }, [signed, history, milestones, students, loading]);
-  }, [signed, history, loading, milestones]);
+  }, [signed, history, loading]);
 
   function handleMilestoneModal(e) {
     setShow(!show);
@@ -168,7 +169,7 @@ function SubjectDetail() {
 
     await api
       .post("/subjects/blocks", {
-        name: blocks,
+        name: block,
         subject_id: id,
         milestone_id: milestoneActive,
       })
@@ -192,17 +193,10 @@ function SubjectDetail() {
       .post("/tasks", {
         nameTask,
         descriptionTask,
-        selectMilestoneTask,
         dueTask,
         subject_id: id,
+        milestone_id: selectMilestoneTask,
         block_id: selectBlockTask,
-
-        // name,
-        // description,
-        // attachment_url,
-        // due,
-        // block_id,
-        // subject_id,
       })
       .then(function (res) {
         console.log(res.data, "Create Task ok!");
@@ -395,11 +389,11 @@ function SubjectDetail() {
             type="text"
             id="blocks"
             placeholder="Nome da Disciplina"
-            value={blocks}
-            onChange={(e) => setBlocks(e.target.value)}
+            value={block}
+            onChange={(e) => setBlock(e.target.value)}
             required
           />
-          {/* <span>{blocks}</span> */}
+          {/* <span>{block}</span> */}
 
           <div>
             <button onClick={handleBlockModal}>Pular</button>
@@ -423,7 +417,7 @@ function SubjectDetail() {
           <input
             type="text"
             id="name"
-            placeholder="Nome do marco"
+            placeholder="Nome da atividade"
             value={nameTask}
             onChange={(e) => setNameTask(e.target.value)}
             required
@@ -452,10 +446,9 @@ function SubjectDetail() {
             <option value="" selected>
               Selecione um marco
             </option>
-            {/* map on milestones */}
-            {[0, 1, 2, 3].map((item) => (
-              <option key={item} value="item.id">
-                item.name
+            {milestones.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
               </option>
             ))}
           </select>
@@ -471,10 +464,9 @@ function SubjectDetail() {
             <option value="" selected>
               Selecione um bloco
             </option>
-            {/* map on blocks */}
-            {[0, 1, 2, 3].map((item) => (
-              <option key={item} value="item.id">
-                item.name
+            {blocks.map((item) => (
+              <option key={item} value={item.id}>
+                {item.name}
               </option>
             ))}
           </select>
