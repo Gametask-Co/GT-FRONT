@@ -190,13 +190,13 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post("/tasks", {
-        nameTask,
-        descriptionTask,
-        dueTask,
+      .post("/subjects/tasks", {
+        name: nameTask,
+        description: descriptionTask,
+        due: dueTask,
         subject_id: id,
-        milestone_id: selectMilestoneTask,
         block_id: selectBlockTask,
+        // milestone_id: selectMilestoneTask,
       })
       .then(function (res) {
         console.log(res.data, "Create Task ok!");
