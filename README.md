@@ -18,6 +18,13 @@ This project was developed with the following technologies:
 
 In view of the project's purpose (managing classes and school / academic activities) the main responsibilities and non-responsibilities of the system are shown below.
 
+### Env
+
+```
+REACT_APP_FACEBOOK_APP_ID=
+REACT_APP_GOOGLE_CLIENT_ID=
+```
+
 ### User Test
 
     email: suporte@gametask.com.br

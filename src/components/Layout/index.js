@@ -10,7 +10,8 @@ const Layout = ({ children, pageTitle, header }) => {
     <>
       <GlobalStyles />
       {header === false ? "" : <Header siteTitle={pageTitle} />}
-      <Container>{children}</Container>
+      {/* <Container>{children}</Container> */}
+      {children}
     </>
   );
 };

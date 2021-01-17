@@ -4,6 +4,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
+import Container from "../../components/Container";
 import CardMilestoneList from "../../components/CardMilestoneList";
 import CardSubjectList from "../../components/CardSubjectList";
 import Modal from "../../components/Modal";
@@ -212,281 +213,283 @@ function SubjectDetail() {
 
   return (
     <Layout pageTitle="Marcos">
-      <Styled.MenuWrapper>
-        <div>
-          <h1>ALUNOS</h1>
-          <span>{students.length}</span>
-        </div>
-
-        {students.map((item) => (
-          <div key={item.id}>
-            <div>
-              <Styled.CircleProfile />
-              <span>{item.name}</span>
-            </div>
-            <div>
-              <button onClick={() => handleStudentModal(item.id)}>
-                <Remove />
-              </button>
-              <button>
-                <Message />
-              </button>
-            </div>
-          </div>
-        ))}
-      </Styled.MenuWrapper>
-      <Styled.SubjectWrapper>
-        <div>
-          <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
-            Detalhes
-          </Styled.ButtonTab>
-          <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
-            Atividades
-          </Styled.ButtonTab>
-        </div>
-        <div>
+      <Container>
+        <Styled.MenuWrapper>
           <div>
-            {showTab ? (
-              <>
-                <button onClick={handleTaskModal}>
-                  <Plus />
-                </button>
-                <button>
-                  <Award />
-                </button>
-                <button>
-                  <Calendar />
-                </button>
-              </>
-            ) : (
-              <>
-                <button onClick={handleMilestoneModal}>
-                  <Plus />
-                </button>
-                <button>
-                  <Edit />
-                </button>
-              </>
-            )}
+            <h1>ALUNOS</h1>
+            <span>{students.length}</span>
           </div>
-        </div>
 
-        <Styled.MilestoneWrapper tab={showTab}>
-          {milestones.map((item, index) => (
-            <Link key={item.id} to={`/milestone/${item.id}`}>
-              <CardMilestoneList
-                number={index}
-                name={item.name}
-                deadline="Termina em 11/06/21"
+          {students.map((item) => (
+            <div key={item.id}>
+              <div>
+                <Styled.CircleProfile />
+                <span>{item.name}</span>
+              </div>
+              <div>
+                <button onClick={() => handleStudentModal(item.id)}>
+                  <Remove />
+                </button>
+                <button>
+                  <Message />
+                </button>
+              </div>
+            </div>
+          ))}
+        </Styled.MenuWrapper>
+        <Styled.SubjectWrapper>
+          <div>
+            <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
+              Detalhes
+            </Styled.ButtonTab>
+            <Styled.ButtonTab onClick={handleShowTab} tab={showTab}>
+              Atividades
+            </Styled.ButtonTab>
+          </div>
+          <div>
+            <div>
+              {showTab ? (
+                <>
+                  <button onClick={handleTaskModal}>
+                    <Plus />
+                  </button>
+                  <button>
+                    <Award />
+                  </button>
+                  <button>
+                    <Calendar />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={handleMilestoneModal}>
+                    <Plus />
+                  </button>
+                  <button>
+                    <Edit />
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          <Styled.MilestoneWrapper tab={showTab}>
+            {milestones.map((item, index) => (
+              <Link key={item.id} to={`/milestone/${item.id}`}>
+                <CardMilestoneList
+                  number={index}
+                  name={item.name}
+                  deadline="Termina em 11/06/21"
+                  percentage="55"
+                  visibility={true}
+                />
+              </Link>
+            ))}
+          </Styled.MilestoneWrapper>
+
+          {/* state show to view tasks.map */}
+          {[0, 1, 2, 3].map((item) => (
+            <Link key={item} to={`/task/${item}`}>
+              <CardSubjectList
+                name="Atividade APOO"
+                description="Descrição da tarefa..."
+                milestone="Gerência de memória"
                 percentage="55"
-                visibility={true}
+                tab={showTab}
               />
             </Link>
           ))}
-        </Styled.MilestoneWrapper>
+        </Styled.SubjectWrapper>
 
-        {/* state show to view tasks.map */}
-        {[0, 1, 2, 3].map((item) => (
-          <Link key={item} to={`/task/${item}`}>
-            <CardSubjectList
-              name="Atividade APOO"
-              description="Descrição da tarefa..."
-              milestone="Gerência de memória"
-              percentage="55"
-              tab={showTab}
-            />
-          </Link>
-        ))}
-      </Styled.SubjectWrapper>
+        <Modal onClose={handleStudentModal} show={showStudent}>
+          <form onSubmit={handleRemoveStudent}>
+            <h2>Remover Aluno</h2>
+            <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
+            <br />
+            <div>
+              <button onClick={handleStudentModal}>Cancelar</button>
+              <button type="submit">Confirmar</button>
+            </div>
+          </form>
+        </Modal>
 
-      <Modal onClose={handleStudentModal} show={showStudent}>
-        <form onSubmit={handleRemoveStudent}>
-          <h2>Remover Aluno</h2>
-          <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
-          <br />
-          <div>
-            <button onClick={handleStudentModal}>Cancelar</button>
-            <button type="submit">Confirmar</button>
-          </div>
-        </form>
-      </Modal>
+        <Modal onClose={handleMilestoneModal} show={show}>
+          <form onSubmit={handleCreateMilestone}>
+            <h2>Adicionar Marco</h2>
 
-      <Modal onClose={handleMilestoneModal} show={show}>
-        <form onSubmit={handleCreateMilestone}>
-          <h2>Adicionar Marco</h2>
-
-          <label htmlFor="name">Nome</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Titulo do marco"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-
-          <label htmlFor="description">Descrição</label>
-          <textarea
-            type="text"
-            id="description"
-            placeholder="Escreva aqui..."
-            rows="5"
-            cols="33"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-
-          <label htmlFor="visibility">Visível para os alunos</label>
-          <Styled.FilterRadio>
+            <label htmlFor="name">Nome</label>
             <input
-              type="radio"
-              id="featured-radio"
-              className="radio-button"
-              name="content-filter"
-              defaultChecked="checked"
-              value={visibility}
-              onChange={() => setVisibility(true)}
+              type="text"
+              id="name"
+              placeholder="Titulo do marco"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
+
+            <label htmlFor="description">Descrição</label>
+            <textarea
+              type="text"
+              id="description"
+              placeholder="Escreva aqui..."
+              rows="5"
+              cols="33"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+
+            <label htmlFor="visibility">Visível para os alunos</label>
+            <Styled.FilterRadio>
+              <input
+                type="radio"
+                id="featured-radio"
+                className="radio-button"
+                name="content-filter"
+                defaultChecked="checked"
+                value={visibility}
+                onChange={() => setVisibility(true)}
+              />
+              <input
+                type="radio"
+                id="personal-radio"
+                className="radio-button"
+                name="content-filter"
+                value={visibility}
+                onChange={() => setVisibility(false)}
+              />
+
+              <label
+                htmlFor="featured-radio"
+                className="filter-label featured"
+                id="feature-label"
+              >
+                Sim
+              </label>
+              <label
+                htmlFor="personal-radio"
+                className="filter-label personal"
+                id="personal-label"
+              >
+                Não
+              </label>
+            </Styled.FilterRadio>
+
+            <div>
+              <button onClick={handleMilestoneModal}>Cancelar</button>
+              <button type="submit">Continuar</button>
+            </div>
+          </form>
+        </Modal>
+
+        <Modal onClose={handleBlockModal} show={showBlock}>
+          <form onSubmit={handleMilestoneBlock}>
+            <h2>Adicionar Blocos</h2>
+
+            <label htmlFor="blocks">Insira o nome do bloco</label>
             <input
-              type="radio"
-              id="personal-radio"
-              className="radio-button"
-              name="content-filter"
-              value={visibility}
-              onChange={() => setVisibility(false)}
+              type="text"
+              id="blocks"
+              placeholder="Nome da Disciplina"
+              value={block}
+              onChange={(e) => setBlock(e.target.value)}
+              required
+            />
+            {/* <span>{block}</span> */}
+
+            <div>
+              <button onClick={handleBlockModal}>Pular</button>
+              <button type="submit">Concluir</button>
+            </div>
+          </form>
+        </Modal>
+
+        <Modal onClose={handleTaskModal} show={showTask}>
+          <form onSubmit={handleCreateTask}>
+            <h2>Adicionar Atividade</h2>
+            {/* task 
+              - milestone_id
+              - name
+              - description
+              - due
+              - attachment_url
+              - total_score */}
+
+            <label htmlFor="name">Nome</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Nome da atividade"
+              value={nameTask}
+              onChange={(e) => setNameTask(e.target.value)}
+              required
             />
 
-            <label
-              htmlFor="featured-radio"
-              className="filter-label featured"
-              id="feature-label"
+            <label htmlFor="description">Descrição</label>
+            <textarea
+              type="text"
+              id="description"
+              placeholder="Escreva aqui..."
+              rows="5"
+              cols="33"
+              value={descriptionTask}
+              onChange={(e) => setDescriptionTask(e.target.value)}
+              required
+            />
+
+            <label htmlFor="milestone">Marco</label>
+            <select
+              name="select"
+              id="milestone"
+              value={selectMilestoneTask}
+              onChange={(e) => setSelectMilestoneTask(e.target.value)}
+              required
             >
-              Sim
-            </label>
-            <label
-              htmlFor="personal-radio"
-              className="filter-label personal"
-              id="personal-label"
+              <option value="" selected>
+                Selecione um marco
+              </option>
+              {milestones.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+
+            <label htmlFor="milestone">Bloco</label>
+            <select
+              name="select"
+              id="milestone"
+              value={selectBlockTask}
+              onChange={(e) => setSelectBlockTask(e.target.value)}
+              required
             >
-              Não
-            </label>
-          </Styled.FilterRadio>
-
-          <div>
-            <button onClick={handleMilestoneModal}>Cancelar</button>
-            <button type="submit">Continuar</button>
-          </div>
-        </form>
-      </Modal>
-
-      <Modal onClose={handleBlockModal} show={showBlock}>
-        <form onSubmit={handleMilestoneBlock}>
-          <h2>Adicionar Blocos</h2>
-
-          <label htmlFor="blocks">Insira o nome do bloco</label>
-          <input
-            type="text"
-            id="blocks"
-            placeholder="Nome da Disciplina"
-            value={block}
-            onChange={(e) => setBlock(e.target.value)}
-            required
-          />
-          {/* <span>{block}</span> */}
-
-          <div>
-            <button onClick={handleBlockModal}>Pular</button>
-            <button type="submit">Concluir</button>
-          </div>
-        </form>
-      </Modal>
-
-      <Modal onClose={handleTaskModal} show={showTask}>
-        <form onSubmit={handleCreateTask}>
-          <h2>Adicionar Atividade</h2>
-          {/* task 
-            - milestone_id
-            - name
-            - description
-            - due
-            - attachment_url
-            - total_score */}
-
-          <label htmlFor="name">Nome</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Nome da atividade"
-            value={nameTask}
-            onChange={(e) => setNameTask(e.target.value)}
-            required
-          />
-
-          <label htmlFor="description">Descrição</label>
-          <textarea
-            type="text"
-            id="description"
-            placeholder="Escreva aqui..."
-            rows="5"
-            cols="33"
-            value={descriptionTask}
-            onChange={(e) => setDescriptionTask(e.target.value)}
-            required
-          />
-
-          <label htmlFor="milestone">Marco</label>
-          <select
-            name="select"
-            id="milestone"
-            value={selectMilestoneTask}
-            onChange={(e) => setSelectMilestoneTask(e.target.value)}
-            required
-          >
-            <option value="" selected>
-              Selecione um marco
-            </option>
-            {milestones.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
+              <option value="" selected>
+                Selecione um bloco
               </option>
-            ))}
-          </select>
+              {blocks.map((item) => (
+                <option key={item} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
 
-          <label htmlFor="milestone">Bloco</label>
-          <select
-            name="select"
-            id="milestone"
-            value={selectBlockTask}
-            onChange={(e) => setSelectBlockTask(e.target.value)}
-            required
-          >
-            <option value="" selected>
-              Selecione um bloco
-            </option>
-            {blocks.map((item) => (
-              <option key={item} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
+            <label htmlFor="due">Prazo</label>
+            <input
+              type="date"
+              name="due"
+              id="due"
+              value={dueTask}
+              onChange={(e) => setDueTask(e.target.value)}
+              required
+            />
 
-          <label htmlFor="due">Prazo</label>
-          <input
-            type="date"
-            name="due"
-            id="due"
-            value={dueTask}
-            onChange={(e) => setDueTask(e.target.value)}
-            required
-          />
-
-          <div>
-            <button onClick={handleTaskModal}>Cancelar</button>
-            <button type="submit">Continuar</button>
-          </div>
-        </form>
-      </Modal>
+            <div>
+              <button onClick={handleTaskModal}>Cancelar</button>
+              <button type="submit">Continuar</button>
+            </div>
+          </form>
+        </Modal>
+      </Container>
     </Layout>
   );
 }
