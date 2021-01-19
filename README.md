@@ -18,6 +18,20 @@ This project was developed with the following technologies:
 
 In view of the project's purpose (managing classes and school / academic activities) the main responsibilities and non-responsibilities of the system are shown below.
 
+### Docker
+
+```console
+❯ sudo docker build -t gametask/react:1.0 .
+❯ sudo docker run -it -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm gametask/react:1.0
+// application running on http://localhost:3001/
+
+** ${PWD} => project path
+** -v => volumes
+** -it => interactive terminal
+** -p => ports
+** -rm => removes the container and volumes, after the container is finished
+```
+
 ### Env
 
 ```
