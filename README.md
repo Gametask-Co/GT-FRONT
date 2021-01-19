@@ -18,7 +18,9 @@ This project was developed with the following technologies:
 
 In view of the project's purpose (managing classes and school / academic activities) the main responsibilities and non-responsibilities of the system are shown below.
 
-### Docker
+* Install docker and docker-compose
+
+### Dockerfile
 
 ```console
 ❯ sudo docker build -t gametask/react:1.0 .
@@ -30,6 +32,13 @@ In view of the project's purpose (managing classes and school / academic activit
 ** -it => interactive terminal
 ** -p => ports
 ** -rm => removes the container and volumes, after the container is finished
+```
+
+### Docker-compose
+
+```console
+❯ docker-compose stop
+❯ docker-compose up -d --build // create image and activate container
 ```
 
 ### Env
