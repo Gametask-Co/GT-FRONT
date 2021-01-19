@@ -23,9 +23,10 @@ In view of the project's purpose (managing classes and school / academic activit
 ### Dockerfile
 
 ```console
-❯ sudo docker build -t gametask/react:1.0 .
-❯ sudo docker run -it -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm gametask/react:1.0
-// application running on http://localhost:3001/
+❯ sudo docker build -t gametask/react .
+❯ sudo docker build -f Dockerfile.dev -t gametask/react .
+❯ sudo docker run -it -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm gametask/react
+  // application running on http://localhost:3001/
 
 ** ${PWD} => project path
 ** -v => volumes
@@ -37,8 +38,8 @@ In view of the project's purpose (managing classes and school / academic activit
 ### Docker-compose
 
 ```console
-❯ docker-compose stop
-❯ docker-compose up -d --build // create image and activate container
+❯ sudo docker-compose stop
+❯ sudo docker-compose up -d --build // create image and activate container
 ```
 
 ### Env

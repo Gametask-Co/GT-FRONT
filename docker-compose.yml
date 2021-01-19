@@ -2,10 +2,11 @@
 version: '3.7'
 services:
   app:
-    container_name: react-app
+    stdin_open: true
+    container_name: react
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - '.:/app'
       - '/app/node_modules' # nescessário para não sobrescrever o dir do build
