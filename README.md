@@ -33,6 +33,9 @@ In view of the project's purpose (managing classes and school / academic activit
 ** -it => interactive terminal
 ** -p => ports
 ** -rm => removes the container and volumes, after the container is finished
+
+** --from=build
+Dockerfile sets up a multi-stage build. We first built our React.js application and then copied the nginx.conf file from our local machine to the image along with our static html and javascript files that were built in the first phase.
 ```
 
 ### Docker-compose
