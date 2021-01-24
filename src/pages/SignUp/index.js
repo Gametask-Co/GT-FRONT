@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import GoogleLogin from 'react-google-login';
 
-import Layout from "../../components/Layout";
+import Layout from '../../components/Layout';
 
-import * as Styled from "../SignIn/styled";
+import * as Styled from '../SignIn/styled';
 
-import { useAuth } from "../../contents/auth";
+import { useAuth } from '../../contents/auth';
 
-import { ReactComponent as LogIn } from "../../assets/icons/log-in.svg";
-import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
-import { ReactComponent as Google } from "../../assets/icons/google.svg";
+import { ReactComponent as LogIn } from '../../assets/icons/log-in.svg';
+import { ReactComponent as Facebook } from '../../assets/icons/facebook.svg';
+import { ReactComponent as Google } from '../../assets/icons/google.svg';
 
 function SignUp() {
   const { signed, signUp, loading } = useAuth();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [date, setDate] = useState("");
-  const [gender, setGender] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [gender, setGender] = useState('');
   const [teacher, setTeacher] = useState(false);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/signin");
+        history.push('/signin');
       }
     }
   }, [loading, signed]);
@@ -41,7 +41,7 @@ function SignUp() {
     setPassword(res.userID);
     setConfirmPassword(res.userID);
 
-    document.getElementById("date").focus();
+    document.getElementById('date').focus();
   };
 
   const onGoogleSuccess = (res) => {
@@ -50,11 +50,11 @@ function SignUp() {
     setPassword(res.profileObj.googleId);
     setConfirmPassword(res.profileObj.googleId);
 
-    document.getElementById("date").focus();
+    document.getElementById('date').focus();
   };
 
   const onGoogleFailure = (res) => {
-    console.log("Login failed: res:", res);
+    console.log('Login failed: res:', res);
   };
 
   async function handleSignUp(e) {
@@ -63,17 +63,17 @@ function SignUp() {
     try {
       if (password === confirmPassword) {
         await signUp(name, email, date, gender, teacher, password);
-        history.push("/signin");
+        history.push('/signin');
       }
     } catch (err) {
-      alert("Erro no cadastro, tente novamente.");
+      alert('Erro no cadastro, tente novamente.');
     }
   }
 
   return (
     <Layout header={false}>
       <Styled.LoginWrapper>
-        <Styled.LogoIcon />
+        <Styled.Gametask />
         <span>Insira seus dados para criar uma conta.</span>
         <form onSubmit={handleSignUp}>
           <label htmlFor="name">Nome</label>
@@ -228,7 +228,7 @@ function SignUp() {
             buttonText="Login"
             onSuccess={onGoogleSuccess}
             onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
+            cookiePolicy={'single_host_origin'}
           />
         </Styled.LoginWrapperFooter>
         {/* </form> */}

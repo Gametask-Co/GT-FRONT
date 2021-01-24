@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-import * as V from "./variables";
+import * as V from './variables';
 
 const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -36,10 +36,10 @@ const GlobalStyles = createGlobalStyle`
   body {
     line-height: 1;
     
-    color: white;
-    background-color: #1C1E23;
+    background-color: ${V.DEFAULT_THEME.color.bgLow};
+    color: ${V.DEFAULT_THEME.color.txtMedium};
     
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
   ol, ul {
     list-style: none;

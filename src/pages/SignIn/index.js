@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import GoogleLogin from 'react-google-login';
 
-import Layout from "../../components/Layout";
+import Layout from '../../components/Layout';
+import { Col, Container } from '../../components/Grid/Index';
 
-import * as Styled from "./styled";
+import * as Styled from './styled';
 
-import { useAuth } from "../../contents/auth";
-
-import { ReactComponent as LogIn } from "../../assets/icons/log-in.svg";
-import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
-import { ReactComponent as Google } from "../../assets/icons/google.svg";
+import { useAuth } from '../../contents/auth';
+import Checkbox from '../../components/Checkbox/Index';
 
 function SignIn() {
   const { signed, signIn, loading } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/");
+        history.push('/');
       }
     }
   }, [loading, signed]);
@@ -41,7 +39,7 @@ function SignIn() {
   };
 
   const onGoogleFailure = (res) => {
-    console.log("Login failed: res:", res);
+    console.log('Login failed: res:', res);
   };
 
   async function handleSignIn(e) {
@@ -49,89 +47,97 @@ function SignIn() {
 
     try {
       await signIn(email, password);
-      history.push("/");
+      history.push('/');
     } catch (err) {
-      alert("Erro no login, tente novamente.");
+      alert('Erro no login, tente novamente.');
     }
   }
 
   return (
-    <Layout header={false}>
-      <Styled.LoginWrapper>
-        <Styled.LogoIcon />
-        <span>Insira seus dados para fazer login.</span>
-        <form onSubmit={handleSignIn}>
-          <label htmlFor="name">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="userEmail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <Styled.Background>
+      <Layout header={false}>
+        <Container>
+          <Styled.RowStyled>
+            <Col lg="4" md="6" sm="8" xs="12">
+              <Styled.LoginWrapper>
+                <Styled.Header>
+                  <Styled.Gametask />
+                  <h1>Entrar</h1>
+                  <p>
+                    Novo usuário? <Link to="/signup">Crie uma conta</Link>
+                  </p>
+                </Styled.Header>
 
-          <label htmlFor="name">Senha</label>
-          <input
-            type="password"
-            name="password"
-            id="userPassword"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+                <Styled.Body>
+                  <form onSubmit={handleSignIn}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="userEmail"
+                      value={email}
+                      placeholder="email@example.com"
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
 
-          <div>
-            <button type="submit">
-              <LogIn />
-              <span>Entrar</span>
-            </button>
-            <Link to="/signup">
-              <span>
-                Ainda não tem conta?{" "}
-                <span className="text-und">Cadastre-se!</span>
-              </span>
-            </Link>
-          </div>
-        </form>
+                    <label htmlFor="password">Senha</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="userPassword"
+                      value={password}
+                      placeholder="••••••••"
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
 
-        <span className="align-center">Ou entrar com:</span>
+                    <Styled.Remember>
+                      <Checkbox>Lembre de mim</Checkbox>
+                      <a href="#">Esqueci a senha</a>
+                    </Styled.Remember>
 
-        <Styled.LoginWrapperFooter>
-          <FacebookLogin
-            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-            autoLoad
-            fields="name,email,picture"
-            callback={responseFacebook}
-            render={(renderProps) => (
-              <button onClick={renderProps.onClick} className="facebook">
-                <Facebook />
-                <span>Facebook</span>
-              </button>
-            )}
-          />
+                    <button type="submit">Entrar</button>
+                  </form>
+                </Styled.Body>
+                <Styled.Footer>
+                  <p>Acesso rápido através de sua conta</p>
+                  <Styled.SocialButtons>
+                    <GoogleLogin
+                      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                      render={(renderProps) => (
+                        <button
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                        >
+                          <Styled.Google />
+                        </button>
+                      )}
+                      buttonText="Login"
+                      onSuccess={onGoogleSuccess}
+                      onFailure={onGoogleFailure}
+                      cookiePolicy={'single_host_origin'}
+                    />
 
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(renderProps) => (
-              <button
-                className="google"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <Google />
-                <span>Google</span>
-              </button>
-            )}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Styled.LoginWrapperFooter>
-        {/* </form> */}
-      </Styled.LoginWrapper>
-    </Layout>
+                    <FacebookLogin
+                      appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                      autoLoad
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                      render={(renderProps) => (
+                        <button onClick={renderProps.onClick}>
+                          <Styled.Facebook />
+                        </button>
+                      )}
+                    />
+                  </Styled.SocialButtons>
+                </Styled.Footer>
+              </Styled.LoginWrapper>
+            </Col>
+          </Styled.RowStyled>
+        </Container>
+      </Layout>
+    </Styled.Background>
   );
 }
 
