@@ -6,12 +6,13 @@ services:
     container_name: react
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+      # dockerfile: Dockerfile.dev # development
     volumes:
       - '.:/app'
-      - '/app/node_modules' # nescessário para não sobrescrever o dir do build
+      - '/app/node_modules' # necessary to not overwrite the build dir.
     ports:
-      - '3001:3000'
+      - '3001:80'
     environment:
       - NODE_ENV=development
       - CI=true
