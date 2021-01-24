@@ -24,6 +24,7 @@ In view of the project's purpose (managing classes and school / academic activit
 
 ```console
 ❯ sudo docker build -t gametask/react .
+// dockerfile to development without nginx
 ❯ sudo docker build -f Dockerfile.dev -t gametask/react .
 ❯ sudo docker run -it -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm gametask/react
   // application running on http://localhost:3001/
@@ -43,6 +44,7 @@ Dockerfile sets up a multi-stage build. We first built our React.js application 
 ```console
 ❯ sudo docker-compose stop
 ❯ sudo docker-compose up -d --build // create image and activate container
+  // application running on http://localhost:3001/
 ```
 
 ### Env
