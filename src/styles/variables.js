@@ -1,30 +1,37 @@
-// ==================================================
-// Variables
-//
-// 1. Spaces
-// 2. Colors
-// ==================================================
-
-// --------------------------------------------------
-// 1. Spaces
-// --------------------------------------------------
-
-export const Space = {
-  xxs: `.4rem`,
-  xs: `.8rem`,
-  sm: `1.6rem`,
-  default: `2.4rem`,
-  md: `3.2rem`,
-  lg: `4.8rem`,
-  xlg: `6.4rem`,
-  xxlg: `9.6rem`,
-};
-
-export const Height = {
-  headerSm: `${Space.lg}`,
-  headerLg: `${Space.xlg}`,
-  footer: `4rem`,
-  mainTop: `${Space.md}`,
+export const DEFAULT_THEME = {
+  color: {
+    bg: '#121212',
+    bgLow: '#1C1E23',
+    bgMedium: '#282A31',
+    bgHigh: '#3F424D',
+    txtLow: '#434343',
+    txtMedium: '#A2A2A2',
+    txtHigh: '#F0F0F0',
+  },
+  spacing: {
+    xxs: '4px',
+    xs: '8px',
+    sm: '16px',
+    md: '24px',
+    lg: '32px',
+    xl: '40px',
+    xxl: '80px',
+    huge: '160px',
+  },
+  fontSize: {
+    xs: '14px',
+    sm: '16px',
+    md: '24px',
+    lg: '32px',
+    xl: '80px',
+  },
+  boxShadow: {
+    l0: 'inset 0px 4px 4px rgba(28, 30, 35, 0.7)',
+    l1: '0px 4px 8px rgba(63, 66, 77, 0.25)',
+    l2: '0px 8px 24px rgba(40, 42, 49, 0.25)',
+    l3: '0px 16px 32px rgba(63, 66, 77, 0.25)',
+    l4: '0px 16px 48px rgba(63, 66, 77, 0.25)',
+  },
 };
 
 // --------------------------------------------------
