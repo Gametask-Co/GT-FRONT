@@ -54,70 +54,12 @@ export const Header = styled(Row)`
 
 export const Body = styled(Row)`
   margin-bottom: ${theme.spacing.lg};
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    > label {
-      margin-bottom: ${theme.spacing.xs};
-
-      color: ${theme.color.txtMedium};
-      font-size: ${theme.fontSize.xs};
-    }
-
-    > input,
-    select {
-      height: 46px;
-      padding: ${theme.spacing.sm};
-      margin-bottom: ${theme.spacing.md};
-
-      border-radius: ${theme.spacing.xs};
-      border: 2px solid ${theme.color.bgHigh};
-      box-shadow: ${theme.boxShadow.l0};
-
-      color: ${theme.color.txtMedium};
-      background-color: ${theme.color.bgMedium};
-
-      outline: none;
-      font-size: ${theme.fontSize.sm};
-      transition: border 0.15s ease;
-
-      &:focus {
-        border-color: ${theme.color.txtMedium};
-      }
-
-      &:disabled {
-        cursor: not-allowed;
-      }
-    }
-
-    > input::placeholder {
-      font-family: 'Poppins', sans-serif;
-      font-size: ${theme.fontSize.sm};
-    }
-
-    > button {
-      padding: ${theme.spacing.sm} ${theme.spacing.md};
-      color: ${theme.color.txtHigh};
-      font-size: ${theme.fontSize.xs};
-      border: none;
-      background: ${theme.color.bgHigh};
-      border-radius: ${theme.spacing.xs};
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
 `;
 
 export const Remember = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${theme.spacing.xl};
 
   > a {
     text-align: right;

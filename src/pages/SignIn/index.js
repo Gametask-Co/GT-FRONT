@@ -11,6 +11,7 @@ import * as Styled from './styled';
 
 import { useAuth } from '../../contents/auth';
 import Checkbox from '../../components/Checkbox/Index';
+import Form from '../../components/Form/Index';
 
 function SignIn() {
   const { signed, signIn, loading } = useAuth();
@@ -69,7 +70,7 @@ function SignIn() {
                 </Styled.Header>
 
                 <Styled.Body>
-                  <form onSubmit={handleSignIn}>
+                  <Form onSubmit={handleSignIn}>
                     <label htmlFor="email">Email</label>
                     <input
                       type="email"
@@ -98,7 +99,7 @@ function SignIn() {
                     </Styled.Remember>
 
                     <button type="submit">Entrar</button>
-                  </form>
+                  </Form>
                 </Styled.Body>
                 <Styled.Footer>
                   <p>Acesso rápido através de sua conta</p>
