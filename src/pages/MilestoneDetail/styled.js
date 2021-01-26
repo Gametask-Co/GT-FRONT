@@ -3,16 +3,30 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   width: 100%;
+
+  width: 900px;
+  max-width: 100%;
+
+  padding-right: 15px;
+  padding-left: 15px;
+
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const Content = styled.div`
   width: 100%;
   font-size: 1rem;
   padding-right: 3rem;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  overflow-y: scroll;
 
   div {
     display: flex;
+
+    h3 {
+      padding-top: 0.5rem;
+    }
 
     span {
       color: #65cba0;
@@ -209,5 +223,5 @@ export const MainContent = styled.div`
 
 export const ContentWrapper = styled.div`
   display: ${(props) => (props.show === true ? "block" : "none")} !important;
-  color: #A2A2A2;
+  color: #a2a2a2;
 `;
