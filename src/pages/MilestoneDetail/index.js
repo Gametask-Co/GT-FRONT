@@ -19,6 +19,8 @@ function MilestoneDetail() {
   const [showTabResources, setShowTabResources] = useState(false);
   const [showTabComments, setShowTabComments] = useState(false);
 
+  const [classActive, setClassActive] = useState("");
+
   const history = useHistory();
 
   useEffect(() => {
@@ -28,6 +30,9 @@ function MilestoneDetail() {
       } else {
         // api.get("/milestones").then(function (res) {
         //   setMilestones(res.data);
+        
+        //   activate first class
+        //   setClassActive(0);
         // });
       }
     }
@@ -49,6 +54,21 @@ function MilestoneDetail() {
     }
   }
 
+  async function handleClassActivate(e) {
+    e.preventDefault();
+
+    await api
+      .get("/blocks")
+      .then(function (res) {
+        console.log(res.data, "Create Class ok!");
+
+        setClassActive(0);
+      })
+      .catch(function (error) {
+        console.log(error, "Error Class error!");
+      });
+  }
+
   return (
     // pageTitle is dynamic, resquest on api
     <Layout pageTitle="Sistemas Operacionais">
@@ -56,6 +76,7 @@ function MilestoneDetail() {
         <Styled.Content>
           <div>
             <div>
+              {/* pageTitle is dynamic, resquest on api */}
               <h4>Sistemas Operacionais</h4>
               <h3>
                 <span>Marco 3 - </span>
@@ -216,7 +237,7 @@ function MilestoneDetail() {
                 <br />
                 <br />
                 <span>
-                  <input type="checkbox" name="class" id="class-id-1" />
+                  <input type="checkbox" name="class" id="class-id-1" onClick={handleClassActivate} />
                   <label htmlFor="class-id-1">
                     Aula - Usos de Memória Cache
                   </label>
