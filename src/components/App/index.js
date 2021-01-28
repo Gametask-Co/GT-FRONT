@@ -1,15 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from "../../pages/Home";
-import Dashboard from "../../pages/Dashboard";
-import SignIn from "../../pages/SignIn";
-import SignUp from "../../pages/SignUp";
-import Subject from "../../pages/Subject";
-import SubjectDetail from "../../pages/SubjectDetail";
-import MilestoneDetail from "../../pages/MilestoneDetail";
+//import Home from "../../pages/Home";
+//import Dashboard from "../../pages/Dashboard";
+import SignIn from '../../pages/SignIn';
+import SignUp from '../../pages/SignUp';
+import Subject from '../../pages/Subject';
+import SubjectDetail from '../../pages/SubjectDetail';
+import MilestoneDetail from '../../pages/MilestoneDetail';
 
-import AuthProvider from "../../contents/auth";
+import AuthProvider from '../../contents/auth';
 
 function App() {
   return (

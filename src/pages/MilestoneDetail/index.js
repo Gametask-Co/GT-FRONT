@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import * as Styled from "./styled";
+import * as Styled from './styled';
 
-import Layout from "../../components/Layout";
-import Container from "../../components/Container";
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
 
-import { useAuth } from "../../contents/auth";
-import api from "../../services/api";
+import { useAuth } from '../../contents/auth';
+//import api from "../../services/api";
 
-import { ReactComponent as Inbox } from "../../assets/icons/inbox.svg";
-import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
-import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { ReactComponent as Inbox } from '../../assets/icons/inbox.svg';
+import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 
 function MilestoneDetail() {
   const { signed, loading } = useAuth();
@@ -35,11 +35,11 @@ function MilestoneDetail() {
   }, [signed, history, loading]);
 
   function handleShowTab(element) {
-    if (element === "Details") {
+    if (element === 'Details') {
       setShowTabDetails(true);
       setShowTabResources(false);
       setShowTabComments(false);
-    } else if (element === "Resources") {
+    } else if (element === 'Resources') {
       setShowTabDetails(false);
       setShowTabResources(true);
       setShowTabComments(false);
@@ -69,6 +69,7 @@ function MilestoneDetail() {
 
             <Styled.EmbedContainer>
               <iframe
+                title="video"
                 src="https://www.youtube.com/embed/QILiHiTD3uc"
                 frameborder="0"
                 allowfullscreen
@@ -78,19 +79,19 @@ function MilestoneDetail() {
             <Styled.MainContent>
               <div>
                 <Styled.ButtonTab
-                  onClick={() => handleShowTab("Details")}
+                  onClick={() => handleShowTab('Details')}
                   tab={showTabDetails}
                 >
                   Detalhes
                 </Styled.ButtonTab>
                 <Styled.ButtonTab
-                  onClick={() => handleShowTab("Resources")}
+                  onClick={() => handleShowTab('Resources')}
                   tab={showTabResources}
                 >
                   Recursos
                 </Styled.ButtonTab>
                 <Styled.ButtonTab
-                  onClick={() => handleShowTab("Comments")}
+                  onClick={() => handleShowTab('Comments')}
                   tab={showTabComments}
                 >
                   Comentários
@@ -116,9 +117,10 @@ function MilestoneDetail() {
                   amet, aliquam rhoncus eu commodo. Rutrum cras massa integer
                   viverra vestibulum quis in. Venenatis ac tellus vitae nisi
                   libero elit justo orci praesent. Enim massa fusce nibh magnis
-                  pellentesque pellentesque.Tristique tincidunt consectetur purus
-                  ac suspendisse. Vel quam tincidunt praesent at justo, eget. Eu
-                  nunc nulla vitae odio. Et sit fames maecenas sed suspendisse.
+                  pellentesque pellentesque.Tristique tincidunt consectetur
+                  purus ac suspendisse. Vel quam tincidunt praesent at justo,
+                  eget. Eu nunc nulla vitae odio. Et sit fames maecenas sed
+                  suspendisse.
                 </p>
                 <p>
                   Ullamcorper elementum dui felis magnis gravida et, placerat.
@@ -127,19 +129,20 @@ function MilestoneDetail() {
                   mauris vulputate aenean pellentesque.
                 </p>
                 <p>
-                  Velit dolor sit metus, leo, consequat libero, sem. Mauris morbi
-                  ligula ornare elementum lacus, libero. Elit lectus urna purus
-                  pellentesque elit, posuere. Netus mauris interdum pellentesque
-                  lacus magna ac maecenas aliquam sodales. Iaculis dignissim id
-                  urna, sed cras laoreet ornare. Velit, pharetra tortor habitant
-                  commodo nulla aenean. Pellentesque condimentum vel convallis
-                  amet. Tempus eu rhoncus malesuada sagittis.
+                  Velit dolor sit metus, leo, consequat libero, sem. Mauris
+                  morbi ligula ornare elementum lacus, libero. Elit lectus urna
+                  purus pellentesque elit, posuere. Netus mauris interdum
+                  pellentesque lacus magna ac maecenas aliquam sodales. Iaculis
+                  dignissim id urna, sed cras laoreet ornare. Velit, pharetra
+                  tortor habitant commodo nulla aenean. Pellentesque condimentum
+                  vel convallis amet. Tempus eu rhoncus malesuada sagittis.
                 </p>
                 <p>
                   Ut malesuada tempor consequat lobortis. Ipsum consequat congue
                   fringilla et facilisis tellus tempus nulla sit. Aliquam
-                  malesuada vitae lectus amet, mauris vestibulum. Integer integer
-                  phasellus tristique nec ullamcorper nunc nunc sodales augue.
+                  malesuada vitae lectus amet, mauris vestibulum. Integer
+                  integer phasellus tristique nec ullamcorper nunc nunc sodales
+                  augue.
                 </p>
                 <p>
                   Aliquam sit cursus in purus mauris netus vel purus turpis.
@@ -154,9 +157,10 @@ function MilestoneDetail() {
                   amet, aliquam rhoncus eu commodo. Rutrum cras massa integer
                   viverra vestibulum quis in. Venenatis ac tellus vitae nisi
                   libero elit justo orci praesent. Enim massa fusce nibh magnis
-                  pellentesque pellentesque.Tristique tincidunt consectetur purus
-                  ac suspendisse. Vel quam tincidunt praesent at justo, eget. Eu
-                  nunc nulla vitae odio. Et sit fames maecenas sed suspendisse.
+                  pellentesque pellentesque.Tristique tincidunt consectetur
+                  purus ac suspendisse. Vel quam tincidunt praesent at justo,
+                  eget. Eu nunc nulla vitae odio. Et sit fames maecenas sed
+                  suspendisse.
                 </p>
                 <p>
                   Ullamcorper elementum dui felis magnis gravida et, placerat.
@@ -165,19 +169,20 @@ function MilestoneDetail() {
                   mauris vulputate aenean pellentesque.
                 </p>
                 <p>
-                  Velit dolor sit metus, leo, consequat libero, sem. Mauris morbi
-                  ligula ornare elementum lacus, libero. Elit lectus urna purus
-                  pellentesque elit, posuere. Netus mauris interdum pellentesque
-                  lacus magna ac maecenas aliquam sodales. Iaculis dignissim id
-                  urna, sed cras laoreet ornare. Velit, pharetra tortor habitant
-                  commodo nulla aenean. Pellentesque condimentum vel convallis
-                  amet. Tempus eu rhoncus malesuada sagittis.
+                  Velit dolor sit metus, leo, consequat libero, sem. Mauris
+                  morbi ligula ornare elementum lacus, libero. Elit lectus urna
+                  purus pellentesque elit, posuere. Netus mauris interdum
+                  pellentesque lacus magna ac maecenas aliquam sodales. Iaculis
+                  dignissim id urna, sed cras laoreet ornare. Velit, pharetra
+                  tortor habitant commodo nulla aenean. Pellentesque condimentum
+                  vel convallis amet. Tempus eu rhoncus malesuada sagittis.
                 </p>
                 <p>
                   Ut malesuada tempor consequat lobortis. Ipsum consequat congue
                   fringilla et facilisis tellus tempus nulla sit. Aliquam
-                  malesuada vitae lectus amet, mauris vestibulum. Integer integer
-                  phasellus tristique nec ullamcorper nunc nunc sodales augue.
+                  malesuada vitae lectus amet, mauris vestibulum. Integer
+                  integer phasellus tristique nec ullamcorper nunc nunc sodales
+                  augue.
                 </p>
               </Styled.ContentWrapper>
 

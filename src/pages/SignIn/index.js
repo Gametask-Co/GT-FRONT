@@ -94,7 +94,7 @@ function SignIn() {
 
                     <Styled.Remember>
                       <Checkbox>Lembre de mim</Checkbox>
-                      <a href="#">Esqueci a senha</a>
+                      <a href="https://google.com">Esqueci a senha</a>
                     </Styled.Remember>
 
                     <ButtomCTA type="submit">Entrar</ButtomCTA>
