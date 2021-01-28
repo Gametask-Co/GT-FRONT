@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //import Home from "../../pages/Home";
 //import Dashboard from "../../pages/Dashboard";
+import Page404 from '../../pages/Page404';
+import Page500 from '../../pages/Page500';
 import SignIn from '../../pages/SignIn';
 import SignUp from '../../pages/SignUp';
 import Subject from '../../pages/Subject';

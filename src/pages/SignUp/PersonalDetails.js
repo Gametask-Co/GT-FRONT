@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import * as Styled from '../SignIn/styled';
 import { useAuth } from '../../contents/auth';
 import { Col, Container, Row } from '../../components/Grid/Index';
-import { Text, Date, Select, RadioGroup } from '../../components/Inputs/Index';
+import { Text, Date, RadioGroup } from '../../components/Inputs/Index';
 import Form from '../../components/Form/Index';
 import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
 
