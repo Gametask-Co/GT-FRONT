@@ -55,7 +55,8 @@ function Subject() {
         api
           .get('subjects')
           .then(function (res) {
-            console.log('res ------', res);
+            console.log("res ------", res);
+            console.log("res ------", res.status);
 
             if (user.student_id !== null) {
               setSubjects(res.data.student_user);
