@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
-import * as Styled from "./styled";
+import * as Styled from './styled';
 
-import Layout from "../../components/Layout";
-import Container from "../../components/Container";
-import CardSubjectList from "../../components/CardSubjectList";
-import Modal from "../../components/Modal";
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
+import CardSubjectList from '../../components/CardSubjectList';
+import Modal from '../../components/Modal';
 
-import { useAuth } from "../../contents/auth";
+import { useAuth } from '../../contents/auth';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
-import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
-import { ReactComponent as Award } from "../../assets/icons/award.svg";
-import { ReactComponent as Star } from "../../assets/icons/star.svg";
+import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
+import { ReactComponent as Award } from '../../assets/icons/award.svg';
+import { ReactComponent as Star } from '../../assets/icons/star.svg';
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -26,17 +26,17 @@ function Subject() {
 
   // subject
   const [subjects, setSubjects] = useState([]);
-  const [idSubject, setIdSubject] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [idSubject, setIdSubject] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
 
   //student
-  const [link, setLink] = useState("");
-  const [students, setStudents] = useState(""); // []
+  const [link, setLink] = useState('');
+  const [students, setStudents] = useState(''); // []
 
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [userFlag, setUserFlag] = useState(false);
 
   const history = useHistory();
@@ -44,7 +44,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/signin");
+        history.push('/signin');
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
@@ -53,7 +53,7 @@ function Subject() {
         // // user.teacher
         // api.get("/teacher/subjects").then(function (res) {
         api
-          .get("subjects")
+          .get('subjects')
           .then(function (res) {
             console.log("res ------", res);
             console.log("res ------", res.status);
@@ -86,13 +86,13 @@ function Subject() {
           })
           .catch((error) => {
             // user student
-            console.log("error ------", error);
+            console.log('error ------', error);
             setSubjects([]);
           });
       }
     }
     // }, [signed, subjects, history, loading]);
-  }, [signed, history, loading]);
+  }, [signed, history, loading, user]);
 
   function handleSubjectModal(e) {
     setShow(!show);
@@ -109,24 +109,24 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subjects", {
+      .post('/subjects', {
         name,
         description,
         image,
       })
       .then(function (res) {
-        console.log(res.data, "Create Subject ok!");
+        console.log(res.data, 'Create Subject ok!');
 
         setShow(!show);
-        setName("");
-        setDescription("");
+        setName('');
+        setDescription('');
 
         setIdSubject(res.data.id);
-        setLink("https://gametask.com.br/subject/" + res.data.id);
+        setLink('https://gametask.com.br/subject/' + res.data.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, "Error Subject error!");
+        console.log(error, 'Error Subject error!');
       });
   }
 
@@ -134,19 +134,19 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subjects/student/email", {
+      .post('/subjects/student/email', {
         subject_id: idSubject,
         student_email: students,
       })
       .then(function (res) {
-        console.log(res, "add Student on Subject ok!");
-        setLink("");
-        setStudents("");
+        console.log(res, 'add Student on Subject ok!');
+        setLink('');
+        setStudents('');
 
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, "Error Student on Subject error!");
+        console.log(error, 'Error Student on Subject error!');
       });
   }
 
@@ -155,7 +155,7 @@ function Subject() {
       <Container>
         <Styled.MenuWrapper>
           <Styled.CircleProfile />
-          <h3>{userFlag ? "Professor" : "Estudante"}</h3>
+          <h3>{userFlag ? 'Professor' : 'Estudante'}</h3>
           <h1>{userName}</h1>
           <h3>{userEmail}</h3>
           <div>
@@ -252,7 +252,7 @@ function Subject() {
               name="image"
               accept="image/*"
               value={image}
-              onChange={(e) => setImage("null")}
+              onChange={(e) => setImage('null')}
               // onChange={(e) => setImage(e.target.value)}
               // required
             />
