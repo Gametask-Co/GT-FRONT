@@ -49,8 +49,8 @@ export const Select = ({ children, label, name, ...props }) => {
   );
 };
 
-export const RadioGroup = ({ children }) => {
-  return <Styled.RadioGroup>{children}</Styled.RadioGroup>;
+export const RadioGroup = ({ children, ...props }) => {
+  return <Styled.RadioGroup {...props}>{children}</Styled.RadioGroup>;
 };
 
 export const Checkbox = ({ children, ...props }) => {

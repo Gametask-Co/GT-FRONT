@@ -39,8 +39,10 @@ export const Label = styled.label`
   font-size: ${theme.fontSize.xs};
 `;
 
+// Custom Date Picker
 export const Date = styled(Input)``;
 
+// Custom Select
 export const Select = styled.select`
   height: 54px;
   padding: ${theme.spacing.sm};
@@ -71,10 +73,12 @@ export const Select = styled.select`
   }
 `;
 
+// Custom Radio Button Group
 export const RadioGroup = styled.div`
   height: 54px;
   display: flex;
   justify-content: center;
+  margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)};
 
   input[type='radio'] {
     width: 0;
@@ -113,6 +117,7 @@ export const RadioGroup = styled.div`
   }
 `;
 
+// Custom Checkbox
 export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);

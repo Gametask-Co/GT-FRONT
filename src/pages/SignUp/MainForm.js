@@ -12,7 +12,7 @@ const defaultData = {
   terms: false,
   avatar: '',
   name: '',
-  gender: '',
+  gender: false,
   birthday: '',
   teacher: false,
 };

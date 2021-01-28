@@ -48,19 +48,6 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
                       Nome Completo
                     </Text>
 
-                    <Select
-                      label="Genero"
-                      name="gender"
-                      defaultValue={gender}
-                      onChange={setForm}
-                      required
-                    >
-                      <option value="">Selecione um genero</option>
-                      <option value="female">Feminino</option>
-                      <option value="male">Masculino</option>
-                      <option value="other">Outro</option>
-                    </Select>
-
                     <Date
                       name="date"
                       defaultValue={birthday}
@@ -70,12 +57,33 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
                       Data de nascimento
                     </Date>
 
+                    <span>Genero</span>
+                    <RadioGroup margin>
+                      <input
+                        type="radio"
+                        id="female"
+                        name="gender-group"
+                        defaultValue={gender}
+                        onChange={setForm}
+                      />
+                      <label htmlFor="female">Feminino</label>
+
+                      <input
+                        type="radio"
+                        id="male"
+                        name="gender-group"
+                        defaultValue={gender}
+                        onChange={setForm}
+                      />
+                      <label htmlFor="male">Masculino</label>
+                    </RadioGroup>
+
                     <span>Eu sou</span>
                     <RadioGroup>
                       <input
                         type="radio"
                         id="students"
-                        name="radio-group"
+                        name="iam"
                         defaultValue={teacher}
                         onChange={setForm}
                       />
@@ -84,7 +92,7 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
                       <input
                         type="radio"
                         id="teacher"
-                        name="radio-group"
+                        name="iam"
                         defaultValue={teacher}
                         onChange={setForm}
                       />
