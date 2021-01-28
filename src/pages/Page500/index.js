@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { Col, Container } from "../../components/Grid/Index";
 
-import * as Styled from "./styled";
+import * as Styled from "../Page404/styled";
 
-function Page404() {
+function Page500() {
   return (
     <Styled.Background>
       <Layout header={false}>
@@ -17,8 +17,8 @@ function Page404() {
                 <Styled.BodyPageError>
                   <Styled.Gametask />
                   <div>
-                    <h1>404!</h1>
-                    <span>Página não encontrada</span>
+                    <h1>500!</h1>
+                    <span>Erro em serviço interno</span>
                     <p>Não sabe como veio parar aqui?</p>
                     <Link to="/">Voltar para página inicial!</Link>
                   </div>
@@ -32,4 +32,4 @@ function Page404() {
   );
 }
 
-export default Page404;
+export default Page500;
