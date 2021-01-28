@@ -54,14 +54,13 @@ export const Header = styled(Row)`
   }
 `;
 
-export const BodyPage404 = styled(Row)`
+export const BodyPageError = styled(Row)`
   display: flex;
   align-items: center;
   text-align: left;
 
   > div {
-    margin-left: 3rem;
-    width: 100%;
+    padding-left: 3rem;
 
     > h1 {
       color: ${theme.color.txtHigh};
