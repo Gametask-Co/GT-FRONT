@@ -33,10 +33,10 @@ function SubjectDetail() {
   //student
   const [students, setStudents] = useState([]);
   const [studentActive, setStudentActive] = useState('');
-  const [studentEmail, setStudentEmail] = useState('');
+  //const [studentEmail, setStudentEmail] = useState('');
 
   //subject
-  const [subjectName, setSubjectName] = useState('');
+  //const [subjectName, setSubjectName] = useState('');
 
   // subject class
   const [block, setBlock] = useState('');
@@ -68,18 +68,22 @@ function SubjectDetail() {
         api.get('/subjects').then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
-              setSubjectName(item.name);
+              //setSubjectName(item.name);
               setStudents(item.students);
               setMilestones(item.milestones);
 
               item.milestones.map((item) => {
-                setBlocks(item.blocks);
+                return setBlocks(item.blocks);
               });
             }
+
+            return null;
           });
         });
       }
     }
+
+    return;
     // }, [signed, history, milestones, students, loading]);
   }, [signed, history, loading, id]);
 
