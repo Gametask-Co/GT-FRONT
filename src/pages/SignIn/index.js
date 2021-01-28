@@ -10,8 +10,9 @@ import { Col, Container } from '../../components/Grid/Index';
 import * as Styled from './styled';
 
 import { useAuth } from '../../contents/auth';
-import Checkbox from '../../components/Checkbox/Index';
 import Form from '../../components/Form/Index';
+import { Email, Password, Checkbox } from '../../components/Inputs/Index';
+import { ButtomCTA } from '../../components/Buttons/Index';
 
 function SignIn() {
   const { signed, signIn, loading } = useAuth();
@@ -27,7 +28,7 @@ function SignIn() {
         history.push('/');
       }
     }
-  }, [loading, signed]);
+  }, [loading, signed, history]);
 
   const responseFacebook = (res) => {
     setEmail(res.email);
@@ -71,34 +72,32 @@ function SignIn() {
 
                 <Styled.Body>
                   <Form onSubmit={handleSignIn}>
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
+                    <Email
                       name="email"
-                      id="userEmail"
                       value={email}
                       placeholder="email@example.com"
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                    />
+                    >
+                      Email
+                    </Email>
 
-                    <label htmlFor="password">Senha</label>
-                    <input
-                      type="password"
+                    <Password
                       name="password"
-                      id="userPassword"
                       value={password}
                       placeholder="••••••••"
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                    />
+                    >
+                      Senha
+                    </Password>
 
                     <Styled.Remember>
                       <Checkbox>Lembre de mim</Checkbox>
                       <a href="#">Esqueci a senha</a>
                     </Styled.Remember>
 
-                    <button type="submit">Entrar</button>
+                    <ButtomCTA type="submit">Entrar</ButtomCTA>
                   </Form>
                 </Styled.Body>
                 <Styled.Footer>

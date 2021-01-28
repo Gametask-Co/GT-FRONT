@@ -29,26 +29,29 @@ export const LoginWrapper = styled.div`
   padding: ${theme.spacing.lg};
   background-color: ${theme.color.bgMedium};
   border-radius: ${theme.spacing.sm};
+
+  > span {
+    color: ${theme.color.txtLow};
+  }
 `;
 
 export const Header = styled(Row)`
   display: flex;
   flex-direction: column;
+  margin-bottom: ${theme.spacing.xl};
 
   > h1 {
     font-size: ${theme.fontSize.lg};
     font-weight: 700;
     line-height: 130%;
-    margin-bottom: ${theme.spacing.sm};
   }
 
   > p {
-    margin-bottom: ${theme.spacing.xl};
+    margin-top: ${theme.spacing.sm};
   }
 
   a {
     color: ${theme.color.txtHigh};
-    margin-bottom: ${theme.spacing.xl};
   }
 `;
 
@@ -154,48 +157,10 @@ export const LoginWrapperFooter = styled.div`
     font-size: 1rem;
   }
 
-  > button {
-    align-items: center;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+  > span {
+    margin-bottom: ${theme.spacing.xs};
 
-    border-radius: 4px;
-    transition: background-color 0.15s ease;
-    background: #3f424d;
-    color: #fff;
-    border: 0;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-
-    > span {
-      padding-left: 1rem;
-    }
-  }
-`;
-
-export const FilterRadio = styled.section`
-  display: flex;
-  justify-content: center;
-  border: 2px solid #3f424d;
-
-  input {
-    display: none;
-  }
-
-  label {
-    width: 100%;
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    text-align: center;
-    cursor: pointer;
-  }
-
-  #featured-radio:checked ~ .featured,
-  #personal-radio:checked ~ .personal,
-  #tech-radio:checked ~ .tech {
-    background-color: #3f424d;
+    color: ${theme.color.txtLow};
+    font-size: ${theme.fontSize.xs};
   }
 `;

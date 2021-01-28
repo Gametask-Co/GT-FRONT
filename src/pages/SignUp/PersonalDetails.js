@@ -1,145 +1,111 @@
-import React, { Component, useEffect } from 'react';
+import React from 'react';
 import Layout from '../../components/Layout';
 import styled from 'styled-components';
 import * as Styled from '../SignIn/styled';
-import { Col, Container, Row } from '../../components/Grid/Index';
-import Form from '../../components/Form/Index';
 import { useAuth } from '../../contents/auth';
-import { useHistory } from 'react-router-dom';
+import { Col, Container, Row } from '../../components/Grid/Index';
+import { Text, Date, Select, RadioGroup } from '../../components/Inputs/Index';
+import Form from '../../components/Form/Index';
+import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
 
-class PersonalDetails extends Component {
-  back = (e) => {
-    e.preventDefault();
-    this.props.prevStep();
-  };
+const PersonalDetails = ({ setForm, formData, navigation }) => {
+  const { email, password, name, gender, birthday, teacher } = formData;
+  const { previous, next } = navigation;
 
-  async sendData(e) {
-    const {
-      email,
-      password,
-      avatar,
-      name,
-      gender,
-      birthday,
-      teacher,
-    } = this.props;
+  const { signUp } = useAuth();
+
+  async function sendData(e) {
     e.preventDefault();
 
     try {
-      await useAuth().signUp(name, email, birthday, gender, teacher, password);
-      useHistory().push('/signin');
-      this.props.nextStep();
+      await signUp(name, email, birthday, gender, teacher, password);
+      next();
     } catch (err) {
       alert('Erro no cadastro, tente novamente.');
     }
   }
 
-  render() {
-    const { values } = this.props;
+  return (
+    <Styled.Background>
+      <Layout header={false}>
+        <Container>
+          <Styled.RowStyled>
+            <Col lg="4" md="6" sm="8" xs="12">
+              <Styled.LoginWrapper>
+                <Styled.Header>
+                  <Styled.Gametask />
+                  <h1>Complete o perfil</h1>
+                </Styled.Header>
+                <Body>
+                  <Form autocomplete="off">
+                    <Text
+                      name="name"
+                      defaultValue={name}
+                      onChange={setForm}
+                      placeholder="Fulano Silva"
+                      required
+                    >
+                      Nome Completo
+                    </Text>
 
-    return (
-      <Styled.Background>
-        <Layout header={false}>
-          <Container>
-            <Styled.RowStyled>
-              <Col lg="4" md="6" sm="8" xs="12">
-                <Styled.LoginWrapper>
-                  <Styled.Header>
-                    <Styled.Gametask />
-                    <h1>Complete o perfil</h1>
-                  </Styled.Header>
-                  <Body>
-                    <Form>
-                      <label htmlFor="name">Nome Completo</label>
+                    <Select
+                      label="Genero"
+                      name="gender"
+                      defaultValue={gender}
+                      onChange={setForm}
+                      required
+                    >
+                      <option value="">Selecione um genero</option>
+                      <option value="female">Feminino</option>
+                      <option value="male">Masculino</option>
+                      <option value="other">Outro</option>
+                    </Select>
+
+                    <Date
+                      name="date"
+                      defaultValue={birthday}
+                      onChange={setForm}
+                      required
+                    >
+                      Data de nascimento
+                    </Date>
+
+                    <span>Eu sou</span>
+                    <RadioGroup>
                       <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        defaultValue={values.name}
-                        onChange={this.props.handleChange('name')}
-                        required
+                        type="radio"
+                        id="students"
+                        name="radio-group"
+                        defaultValue={teacher}
+                        onChange={setForm}
                       />
+                      <label htmlFor="students">Estudante</label>
 
-                      <label htmlFor="date">Data de nascimento</label>
                       <input
-                        type="date"
-                        name="date"
-                        id="date"
-                        defaultValue={values.birthday}
-                        onChange={this.props.handleChange('birthday')}
-                        required
+                        type="radio"
+                        id="teacher"
+                        name="radio-group"
+                        defaultValue={teacher}
+                        onChange={setForm}
                       />
-
-                      <label htmlFor="gender">Selecione o seu gênero:</label>
-                      <select
-                        name="gender"
-                        id="gender"
-                        defaultValue={values.gender}
-                        onChange={this.props.handleChange('gender')}
-                        required
-                      >
-                        <option value="" selected>
-                          Selecione seu gênero
-                        </option>
-                        <option value="male" value="male">
-                          Masculino
-                        </option>
-                        <option value="female" value="female">
-                          Feminino
-                        </option>
-                        <option value="other" value="other">
-                          Outro
-                        </option>
-                      </select>
-
-                      <label htmlFor="iAm">Eu sou</label>
-                      <Styled.FilterRadio>
-                        <input
-                          type="radio"
-                          id="featured-radio"
-                          className="radio-button"
-                          name="content-filter"
-                          defaultChecked="checked"
-                          defaultValue={values.teacher}
-                          onChange={this.props.handleChange('teacher')}
-                        />
-                        <input
-                          type="radio"
-                          id="personal-radio"
-                          className="radio-button"
-                          name="content-filter"
-                          defaultValue={values.teacher}
-                          onChange={this.props.handleChange('teacher')}
-                        />
-
-                        <label
-                          htmlFor="featured-radio"
-                          className="filter-label featured"
-                          id="feature-label"
-                        >
-                          Estudante
-                        </label>
-                        <label
-                          htmlFor="personal-radio"
-                          className="filter-label personal"
-                          id="personal-label"
-                        >
-                          Professor
-                        </label>
-                      </Styled.FilterRadio>
-                      <button onClick={this.back}>Voltar</button>
-                      <button onClick={this.sendData}>Concluir</button>
-                    </Form>
-                  </Body>
-                </Styled.LoginWrapper>
-              </Col>
-            </Styled.RowStyled>
-          </Container>
-        </Layout>
-      </Styled.Background>
-    );
-  }
-}
+                      <label htmlFor="teacher">Professor</label>
+                    </RadioGroup>
+                    <ButtomBar>
+                      <ButtomCTA secondary={true} onClick={previous}>
+                        Voltar
+                      </ButtomCTA>
+                      <ButtomCTA onClick={sendData}>Concluir</ButtomCTA>
+                    </ButtomBar>
+                  </Form>
+                </Body>
+              </Styled.LoginWrapper>
+            </Col>
+          </Styled.RowStyled>
+        </Container>
+      </Layout>
+    </Styled.Background>
+  );
+};
 
 export default PersonalDetails;
 

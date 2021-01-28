@@ -1,73 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useForm, useStep } from 'react-hooks-helper';
 import UserDetails from './UserDetails';
 import PersonalDetails from './PersonalDetails';
 import Success from './Success';
 
-class MainForm extends Component {
-  state = {
-    step: 1,
-    email: '',
-    password: '',
-    avatar: '',
-    name: '',
-    gender: '',
-    birthday: '',
-    teacher: false,
-  };
+const steps = [{ id: 'user' }, { id: 'personal' }, { id: 'success' }];
 
-  nextStep = () => {
-    const { step } = this.state;
-    this.setState({
-      step: step + 1,
-    });
-  };
+const defaultData = {
+  email: '',
+  password: '',
+  terms: false,
+  avatar: '',
+  name: '',
+  gender: '',
+  birthday: '',
+  teacher: false,
+};
 
-  prevStep = () => {
-    const { step } = this.state;
-    this.setState({
-      step: step - 1,
-    });
-  };
+const MainForm = () => {
+  const [formData, setForm] = useForm(defaultData);
+  const { step, navigation } = useStep({ initialStep: 0, steps });
+  const { id } = step;
 
-  handleChange = (input) => (event) => {
-    this.setState({ [input]: event.target.value });
-  };
+  const props = { formData, setForm, navigation };
 
-  render() {
-    const { step } = this.state;
-    const {
-      email,
-      password,
-      avatar,
-      name,
-      gender,
-      birthday,
-      teacher,
-    } = this.state;
-    const values = { email, password, avatar, name, gender, birthday, teacher };
-
-    switch (step) {
-      case 1:
-        return (
-          <UserDetails
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        );
-      case 2:
-        return (
-          <PersonalDetails
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        );
-      case 3:
-        return <Success />;
-    }
+  switch (id) {
+    case 'user':
+      return <UserDetails {...props} />;
+    case 'personal':
+      return <PersonalDetails {...props} />;
+    case 'success':
+      return <Success />;
+    default:
+      return;
   }
-}
+};
 
 export default MainForm;

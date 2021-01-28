@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import { useAuth } from '../../contents/auth';
 
 import MainForm from './MainForm';
@@ -16,7 +15,7 @@ function SignUp() {
         history.push('/signin');
       }
     }
-  }, [loading, signed]);
+  }, [loading, signed, history]);
 
   return <MainForm />;
 }
