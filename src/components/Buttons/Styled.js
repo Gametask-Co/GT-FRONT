@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { DEFAULT_THEME as theme } from '../../styles/constants';
 
 export const Buttom = styled.button`
-  margin-top: ${theme.spacing.xl};
+  margin-top: ${(props) => (props.top ? theme.spacing.xl : 0)};
   padding: ${theme.spacing.sm} ${theme.spacing.md};
 
   color: ${theme.color.txtHigh};

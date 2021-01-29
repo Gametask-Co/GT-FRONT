@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { DEFAULT_THEME as theme } from '../../styles/constants';
+import { Row } from '../../components/Grid/Index';
+import bg from '../../assets/img/bg-login.gif';
+
 import { ReactComponent as LogoGametask } from '../../assets/icons/logotype.svg';
 import { ReactComponent as LogoFacebook } from '../../assets/icons/facebook.svg';
 import { ReactComponent as LogoGoogle } from '../../assets/icons/google.svg';
-import bg from '../../assets/img/bg-login.gif';
-import { Row } from '../../components/Grid/Index';
 
 export const Background = styled.div`
   width: 100%;
@@ -127,4 +128,32 @@ export const Facebook = styled(LogoFacebook)`
   width: ${theme.spacing.md};
   height: ${theme.spacing.md};
   color: ${theme.color.txtHigh};
+`;
+
+export const PageError = styled(Row)`
+  display: flex;
+  align-items: center;
+  text-align: left;
+
+  > div {
+    padding-left: 3rem;
+
+    > h1 {
+      color: ${theme.color.txtHigh};
+      font-size: ${theme.fontSize.xl};
+      font-weight: 700;
+      line-height: 130%;
+    }
+
+    > span {
+      display: block;
+      color: ${theme.color.txtHigh};
+      margin-bottom: ${theme.spacing.md};
+    }
+  }
+
+  > div a {
+    color: ${theme.color.txtHigh} !important;
+    margin-bottom: ${theme.spacing.xl};
+  }
 `;

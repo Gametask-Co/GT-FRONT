@@ -5,6 +5,6 @@ export const ButtomCTA = ({ children, ...props }) => {
   return <Styled.Buttom {...props}>{children}</Styled.Buttom>;
 };
 
-export const ButtomBar = ({ children }) => {
-  return <Styled.Bar>{children}</Styled.Bar>;
+export const ButtomBar = ({ children, ...props }) => {
+  return <Styled.Bar {...props}>{children}</Styled.Bar>;
 };
