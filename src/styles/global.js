@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import * as V from './variables';
+import { DEFAULT_THEME as theme } from './constants';
 
 const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -33,13 +33,10 @@ const GlobalStyles = createGlobalStyle`
   footer, header, hgroup, menu, nav, section {
     display: block;
   }
-  body {
-    line-height: 1;
-    
-    background-color: ${V.DEFAULT_THEME.color.bgLow};
-    color: ${V.DEFAULT_THEME.color.txtMedium};
-    
-    font-family: 'Poppins', sans-serif;
+  body {  
+    color: ${theme.color.txtMedium};
+    font-family: ${theme.fontFamily.primary};
+    background-color: ${theme.color.bg};
   }
   ol, ul {
     list-style: none;
@@ -70,17 +67,6 @@ const GlobalStyles = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: inherit;
-  }
-
-  :root {
-    /* --bg: ${V.Color.white};
-    --bgSolid: ${V.Color.whiteSolid};
-    --bgSecondary: ${V.Color.grayWhite};
-    --borderColor: ${V.Color.grayWhite};
-    --highlightColor: ${V.Color.blue};
-    --primaryColor: ${V.Color.black};
-    --secondaryColor: ${V.Color.gray}; */
-    --boxShadow: rgba(18, 18, 18, .12);
   }
 `;
 

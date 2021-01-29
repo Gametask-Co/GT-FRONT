@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { DEFAULT_THEME as theme } from "../../styles/variables";
-import { ReactComponent as LogoGametask } from "../../assets/icons/logotype.svg";
-import { ReactComponent as LogoFacebook } from "../../assets/icons/facebook.svg";
-import { ReactComponent as LogoGoogle } from "../../assets/icons/google.svg";
+import { DEFAULT_THEME as theme } from '../../styles/constants';
+import { ReactComponent as LogoGametask } from '../../assets/icons/logotype.svg';
+import { ReactComponent as LogoFacebook } from '../../assets/icons/facebook.svg';
+import { ReactComponent as LogoGoogle } from '../../assets/icons/google.svg';
 
-import bg from "../../assets/img/bg-login.gif";
-import { Row } from "../../components/Grid/Index";
+import bg from '../../assets/img/bg-login.gif';
+import { Row } from '../../components/Grid/Index';
 
 export const Background = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ export const LoginWrapper = styled.div`
 
   padding: ${theme.spacing.lg};
   background-color: ${theme.color.bgMedium};
-  border-radius: ${theme.spacing.sm};
+  border-radius: ${theme.borderRadius.sm};
 `;
 
 export const Header = styled(Row)`
@@ -103,7 +103,7 @@ export const Body = styled(Row)`
       padding: ${theme.spacing.sm};
       margin-bottom: ${theme.spacing.md};
 
-      border-radius: ${theme.spacing.xs};
+      border-radius: ${theme.borderRadius.xs};
       border: 2px solid ${theme.color.bgHigh};
       box-shadow: ${theme.boxShadow.l0};
 
@@ -124,7 +124,7 @@ export const Body = styled(Row)`
     }
 
     > input::placeholder {
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-size: ${theme.fontSize.sm};
     }
 
@@ -134,7 +134,7 @@ export const Body = styled(Row)`
       font-size: ${theme.fontSize.xs};
       border: none;
       background: ${theme.color.bgHigh};
-      border-radius: ${theme.spacing.xs};
+      border-radius: ${theme.borderRadius.xs};
 
       &:hover {
         cursor: pointer;
@@ -175,7 +175,7 @@ export const SocialButtons = styled.div`
     border: none;
     color: ${theme.color.txtHigh};
     background: ${theme.color.bgHigh};
-    border-radius: ${theme.spacing.xs};
+    border-radius: ${theme.borderRadius.xs};
 
     > span {
       display: block;
@@ -248,7 +248,7 @@ export const LoginWrapperFooter = styled.div`
     align-content: center;
     justify-content: center;
 
-    border-radius: 4px;
+    border-radius: ${theme.borderRadius.xxs};
     transition: background-color 0.15s ease;
     background: #3f424d;
     color: #fff;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/variables';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 import { ReactComponent as IconCheckmark } from '../../assets/icons/checkmark.svg';
 
 export const Input = styled.input`

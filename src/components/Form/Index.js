@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/variables';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 
 const Form = styled.form`
   display: flex;

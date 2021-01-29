@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/variables';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 import { ReactComponent as LogoGametask } from '../../assets/icons/logotype.svg';
 import { ReactComponent as LogoFacebook } from '../../assets/icons/facebook.svg';
 import { ReactComponent as LogoGoogle } from '../../assets/icons/google.svg';
@@ -28,7 +28,7 @@ export const LoginWrapper = styled.div`
 
   padding: ${theme.spacing.lg};
   background-color: ${theme.color.bgMedium};
-  border-radius: ${theme.spacing.sm};
+  border-radius: ${theme.borderRadius.sm};
 
   > span {
     color: ${theme.color.txtLow};
@@ -90,7 +90,7 @@ export const SocialButtons = styled.div`
     border: none;
     color: ${theme.color.txtHigh};
     background: ${theme.color.bgHigh};
-    border-radius: ${theme.spacing.xs};
+    border-radius: ${theme.borderRadius.xs};
 
     > span {
       display: block;
@@ -118,49 +118,13 @@ export const Gametask = styled(LogoGametask)`
 `;
 
 export const Google = styled(LogoGoogle)`
-  width: 24px;
-  height: 24px;
+  width: ${theme.spacing.md};
+  height: ${theme.spacing.md};
   color: ${theme.color.txtHigh};
 `;
 
 export const Facebook = styled(LogoFacebook)`
-  width: 24px;
-  height: 24px;
+  width: ${theme.spacing.md};
+  height: ${theme.spacing.md};
   color: ${theme.color.txtHigh};
-`;
-
-//Para excluir dps
-
-export const LoginWrapperFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-
-  button,
-  a {
-    width: 14rem;
-  }
-
-  .text-und {
-    text-decoration: underline;
-  }
-
-  .facebook {
-    background-color: blue;
-    color: white;
-    font-size: 1rem;
-  }
-  .google {
-    background-color: firebrick;
-    color: white;
-    font-size: 1rem;
-  }
-
-  > span {
-    margin-bottom: ${theme.spacing.xs};
-
-    color: ${theme.color.txtLow};
-    font-size: ${theme.fontSize.xs};
-  }
 `;
