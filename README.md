@@ -11,6 +11,7 @@ This project was developed with the following technologies:
 - [React JS](https://reactjs.org)
 - [Styled Components](https://styled-components.com/)
 - [Styled Media Query](https://github.com/morajabi/styled-media-query)
+- [Storybook](https://storybook.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Context API](https://pt-br.reactjs.org/docs/context.html)
 
@@ -18,7 +19,7 @@ This project was developed with the following technologies:
 
 In view of the project's purpose (managing classes and school / academic activities) the main responsibilities and non-responsibilities of the system are shown below.
 
-* Install docker and docker-compose
+- Install docker and docker-compose
 
 ### Dockerfile
 
@@ -58,6 +59,12 @@ REACT_APP_GOOGLE_CLIENT_ID=
 
     email: suporte@gametask.com.br
     senha: testXXXX
+
+### Storybook Env
+
+```console
+❯ yarn storybook
+```
 
 ## Links
 
