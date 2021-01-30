@@ -1,16 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import GlobalStyles from "../../styles/global";
-import Header from "../../components/Header";
-import Container from "../../components/Container";
+import GlobalStyles from '../../styles/global';
+import Header from '../../components/Header';
 
 const Layout = ({ children, pageTitle, header }) => {
   return (
     <>
       <GlobalStyles />
-      {header === false ? "" : <Header siteTitle={pageTitle} />}
-      {/* <Container>{children}</Container> */}
+      {header === false ? '' : <Header siteTitle={pageTitle} />}
       {children}
     </>
   );

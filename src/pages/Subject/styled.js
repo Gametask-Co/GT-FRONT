@@ -65,7 +65,7 @@ export const SubjectWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
     button {
       margin-left: 1rem;
       background-color: #282a31;

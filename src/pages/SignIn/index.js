@@ -1,34 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import { useAuth } from '../../contents/auth';
 
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GoogleLogin from "react-google-login";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import GoogleLogin from 'react-google-login';
 
-import Layout from "../../components/Layout";
-
-import * as Styled from "./styled";
-
-import { useAuth } from "../../contents/auth";
-
-import { ReactComponent as LogIn } from "../../assets/icons/log-in.svg";
-import { ReactComponent as Facebook } from "../../assets/icons/facebook.svg";
-import { ReactComponent as Google } from "../../assets/icons/google.svg";
+import {
+  Header,
+  Gametask,
+  Body,
+  Remember,
+  Footer,
+  SocialButtons,
+  Facebook,
+  Google,
+} from '../../components/Modais/styled';
+import { BackgroundModal } from '../../components/Modais';
+import { Email, Password, Checkbox } from '../../components/Inputs/Index';
+import { ButtomCTA } from '../../components/Buttons/Index';
+import Form from '../../components/Form/Index';
 
 function SignIn() {
   const { signed, signIn, loading } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const history = useHistory();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push("/");
+        history.push('/');
       }
     }
-  }, [loading, signed]);
+  }, [loading, signed, history]);
 
   const responseFacebook = (res) => {
     setEmail(res.email);
@@ -41,7 +47,7 @@ function SignIn() {
   };
 
   const onGoogleFailure = (res) => {
-    console.log("Login failed: res:", res);
+    console.log('Login failed: res:', res);
   };
 
   async function handleSignIn(e) {
@@ -49,89 +55,87 @@ function SignIn() {
 
     try {
       await signIn(email, password);
-      history.push("/");
+      history.push('/');
     } catch (err) {
-      alert("Erro no login, tente novamente.");
+      alert('Erro no login, tente novamente.');
     }
   }
 
   return (
-    <Layout header={false}>
-      <Styled.LoginWrapper>
-        <Styled.LogoIcon />
-        <span>Insira seus dados para fazer login.</span>
-        <form onSubmit={handleSignIn}>
-          <label htmlFor="name">Email</label>
-          <input
-            type="email"
+    <BackgroundModal>
+      <Header>
+        <Gametask />
+        <h1>Entrar</h1>
+        <p>
+          Novo usuário? <Link to="/signup">Crie uma conta</Link>
+        </p>
+      </Header>
+
+      <Body>
+        <Form onSubmit={handleSignIn}>
+          <Email
             name="email"
-            id="userEmail"
             value={email}
+            placeholder="email@example.com"
             onChange={(e) => setEmail(e.target.value)}
             required
-          />
+          >
+            Email
+          </Email>
 
-          <label htmlFor="name">Senha</label>
-          <input
-            type="password"
+          <Password
             name="password"
-            id="userPassword"
             value={password}
+            placeholder="••••••••"
             onChange={(e) => setPassword(e.target.value)}
             required
+          >
+            Senha
+          </Password>
+
+          <Remember>
+            <Checkbox>Lembre de mim</Checkbox>
+            <Link to="/forgotpassword">Esqueci a senha</Link>
+          </Remember>
+
+          <ButtomCTA top type="submit">
+            Entrar
+          </ButtomCTA>
+        </Form>
+      </Body>
+      <Footer>
+        <p>Acesso rápido através de sua conta</p>
+        <SocialButtons>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Google />
+              </button>
+            )}
+            buttonText="Login"
+            onSuccess={onGoogleSuccess}
+            onFailure={onGoogleFailure}
+            cookiePolicy={'single_host_origin'}
           />
 
-          <div>
-            <button type="submit">
-              <LogIn />
-              <span>Entrar</span>
-            </button>
-            <Link to="/signup">
-              <span>
-                Ainda não tem conta?{" "}
-                <span className="text-und">Cadastre-se!</span>
-              </span>
-            </Link>
-          </div>
-        </form>
-
-        <span className="align-center">Ou entrar com:</span>
-
-        <Styled.LoginWrapperFooter>
           <FacebookLogin
             appId={process.env.REACT_APP_FACEBOOK_APP_ID}
             autoLoad
             fields="name,email,picture"
             callback={responseFacebook}
             render={(renderProps) => (
-              <button onClick={renderProps.onClick} className="facebook">
+              <button onClick={renderProps.onClick}>
                 <Facebook />
-                <span>Facebook</span>
               </button>
             )}
           />
-
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(renderProps) => (
-              <button
-                className="google"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <Google />
-                <span>Google</span>
-              </button>
-            )}
-            buttonText="Login"
-            onSuccess={onGoogleSuccess}
-            onFailure={onGoogleFailure}
-            cookiePolicy={"single_host_origin"}
-          />
-        </Styled.LoginWrapperFooter>
-        {/* </form> */}
-      </Styled.LoginWrapper>
-    </Layout>
+        </SocialButtons>
+      </Footer>
+    </BackgroundModal>
   );
 }
 
