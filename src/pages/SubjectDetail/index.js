@@ -4,7 +4,7 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import * as Styled from './styled';
 
 import Layout from '../../components/Layout';
-import Container from '../../components/Container';
+import { Container } from '../../components/Grid/Index';
 import CardMilestoneList from '../../components/CardMilestoneList';
 import CardSubjectList from '../../components/CardSubjectList';
 import Modal from '../../components/Modal';
