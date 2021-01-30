@@ -11,6 +11,7 @@ This project was developed with the following technologies:
 - [React JS](https://reactjs.org)
 - [Styled Components](https://styled-components.com/)
 - [Styled Media Query](https://github.com/morajabi/styled-media-query)
+- [Storybook](https://storybook.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Context API](https://pt-br.reactjs.org/docs/context.html)
 
@@ -18,12 +19,13 @@ This project was developed with the following technologies:
 
 In view of the project's purpose (managing classes and school / academic activities) the main responsibilities and non-responsibilities of the system are shown below.
 
-* Install docker and docker-compose
+- Install docker and docker-compose
 
 ### Dockerfile
 
 ```console
 ❯ sudo docker build -t gametask/react .
+// dockerfile to development without nginx
 ❯ sudo docker build -f Dockerfile.dev -t gametask/react .
 ❯ sudo docker run -it -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm gametask/react
   // application running on http://localhost:3001/
@@ -43,6 +45,7 @@ Dockerfile sets up a multi-stage build. We first built our React.js application 
 ```console
 ❯ sudo docker-compose stop
 ❯ sudo docker-compose up -d --build // create image and activate container
+  // application running on http://localhost:3001/
 ```
 
 ### Env
@@ -56,6 +59,12 @@ REACT_APP_GOOGLE_CLIENT_ID=
 
     email: suporte@gametask.com.br
     senha: testXXXX
+
+### Storybook Env
+
+```console
+❯ yarn storybook
+```
 
 ## Links
 

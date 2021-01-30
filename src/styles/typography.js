@@ -1,15 +1,15 @@
-import { css } from "styled-components";
-import media from "styled-media-query";
+import { css } from 'styled-components';
+import media from 'styled-media-query';
 
-import * as V from "styles/variables";
+import { DEFAULT_THEME as theme } from 'styles/constants';
 
 export const Title = css`
   & {
-    color: var(--primaryColor);
+    color: ${theme.color.txtMedium};
     font-size: 3.4rem;
     line-height: 1.1em;
 
-    ${media.greaterThan("medium")`
+    ${media.greaterThan('medium')`
       font-size: 4.2rem;
     `}
   }
@@ -17,12 +17,12 @@ export const Title = css`
 
 export const Subtitle1 = css`
   & {
-    color: var(--secondaryColor);
+    color: ${theme.color.txtLow};
     font-size: 2.1rem;
     letter-spacing: -0.45px;
     line-height: 1.5em;
 
-    ${media.greaterThan("medium")`
+    ${media.greaterThan('medium')`
       font-size: 2.4rem;
     `}
   }
@@ -30,7 +30,7 @@ export const Subtitle1 = css`
 
 export const Subtitle2 = css`
   & {
-    color: var(--secondaryColor);
+    color: ${theme.color.txtLow};
     font-size: 2rem;
     letter-spacing: -0.04px;
     line-height: 1.3em;
@@ -39,13 +39,13 @@ export const Subtitle2 = css`
 
 export const Heading1 = css`
   & {
-    color: var(--primaryColor);
+    color: ${theme.color.txtMedium};
     font-size: 2.6rem;
     font-weight: 600;
     letter-spacing: -0.022em;
     line-height: 1.3em;
 
-    ${media.greaterThan("medium")`
+    ${media.greaterThan('medium')`
       font-size: 3rem;
     `}
   }
@@ -53,13 +53,13 @@ export const Heading1 = css`
 
 export const Heading2 = css`
   & {
-    color: var(--primaryColor);
+    color: ${theme.color.txtMedium};
     font-size: 2.1rem;
     font-weight: 600;
     letter-spacing: -0.04px;
     line-height: 1.5em;
 
-    ${media.greaterThan("medium")`
+    ${media.greaterThan('medium')`
       font-size: 2.4rem;
     `}
   }
@@ -67,13 +67,13 @@ export const Heading2 = css`
 
 export const Heading3 = css`
   & {
-    color: var(--primaryColor);
+    color: ${theme.color.txtMedium};
     font-size: 2.1rem;
     font-weight: 400;
     letter-spacing: -0.04px;
     line-height: 1.5em;
 
-    ${media.greaterThan("medium")`
+    ${media.greaterThan('medium')`
       font-size: 2.4rem;
     `}
   }
@@ -81,7 +81,7 @@ export const Heading3 = css`
 
 export const Heading4 = css`
   & {
-    color: var(--primaryColor);
+    color: ${theme.color.txtMedium};
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: -0.04px;
@@ -110,19 +110,18 @@ export const Text2 = css`
 export const LinkTransition = css`
   & {
     border-bottom: 2px solid transparent;
-    /* transition: border-color ${V.Transition.default}; */
     padding-bottom: 0.1rem;
     will-change: border-color;
   }
 
   &:hover {
-    border-color: var(--highlightColor);
+    border-color: ${theme.color.txtHigh};
   }
 `;
 
 export const Link = css`
   & {
-    color: var(--highlightColor);
+    color: ${theme.color.txtHigh};
     ${LinkTransition}
   }
 `;
