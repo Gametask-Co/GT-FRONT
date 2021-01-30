@@ -4,7 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import * as Styled from './styled';
 
 import Layout from '../../components/Layout';
-import Container from '../../components/Container';
+import { Container, Col, Row } from '../../components/Grid/Index';
 import CardSubjectList from '../../components/CardSubjectList';
 import Modal from '../../components/Modal';
 
@@ -16,6 +16,7 @@ import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Award } from '../../assets/icons/award.svg';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
+import { AvatarXXL } from '../../components/Avatar';
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -55,8 +56,8 @@ function Subject() {
         api
           .get('subjects')
           .then(function (res) {
-            console.log("res ------", res);
-            console.log("res ------", res.status);
+            /* console.log('res ------', res);
+            console.log('res ------', res.status); */
 
             if (user.student_id !== null) {
               setSubjects(res.data.student_user);
@@ -153,156 +154,163 @@ function Subject() {
   return (
     <Layout>
       <Container>
-        <Styled.MenuWrapper>
-          <Styled.CircleProfile />
-          <h3>{userFlag ? 'Professor' : 'Estudante'}</h3>
-          <h1>{userName}</h1>
-          <h3>{userEmail}</h3>
-          <div>
-            <h4>Medalhas</h4>
-            <div>
-              <Styled.Insignia color="#CCAF4E">
-                <Award />
-                999 <span> - Ouro</span>
-              </Styled.Insignia>
-              <Styled.Insignia color="#F0F0F0">
-                <Award />
-                888 <span> - Prata</span>
-              </Styled.Insignia>
-              <Styled.Insignia color="#E2673E">
-                <Award />
-                777 <span> - Bronze</span>
-              </Styled.Insignia>
-            </div>
-          </div>
-          <div>
-            <h4>Troféus</h4>
-            <div>
-              <Styled.Insignia color="#CCAF4E">
-                <Star />
-                999 <span> - Ouro</span>
-              </Styled.Insignia>
-              <Styled.Insignia color="#F0F0F0">
-                <Star />
-                888 <span> - Prata</span>
-              </Styled.Insignia>
-              <Styled.Insignia color="#E2673E">
-                <Star />
-                777 <span> - Bronze</span>
-              </Styled.Insignia>
-            </div>
-          </div>
-        </Styled.MenuWrapper>
-        <Styled.SubjectWrapper>
-          <div>
-            <h1>Disciplinas</h1>
-            <div>
-              <button onClick={handleSubjectModal}>
-                <Plus />
-              </button>
-              <button onClick={handleEditSubjectModal}>
-                <Edit />
-              </button>
-            </div>
-          </div>
+        <Row>
+          <Col lg={3} md={3} sm={3} xs={3}>
+            <Styled.MenuWrapper>
+              <AvatarXXL />
+              <h3>{userFlag ? 'Professor' : 'Estudante'}</h3>
+              <h1>{userName}</h1>
+              <h3>{userEmail}</h3>
+              <div>
+                <h4>Medalhas</h4>
+                <div>
+                  <Styled.Insignia color="#CCAF4E">
+                    <Award />
+                    999 <span> - Ouro</span>
+                  </Styled.Insignia>
+                  <Styled.Insignia color="#F0F0F0">
+                    <Award />
+                    888 <span> - Prata</span>
+                  </Styled.Insignia>
+                  <Styled.Insignia color="#E2673E">
+                    <Award />
+                    777 <span> - Bronze</span>
+                  </Styled.Insignia>
+                </div>
+              </div>
+              <div>
+                <h4>Troféus</h4>
+                <div>
+                  <Styled.Insignia color="#CCAF4E">
+                    <Star />
+                    999 <span> - Ouro</span>
+                  </Styled.Insignia>
+                  <Styled.Insignia color="#F0F0F0">
+                    <Star />
+                    888 <span> - Prata</span>
+                  </Styled.Insignia>
+                  <Styled.Insignia color="#E2673E">
+                    <Star />
+                    777 <span> - Bronze</span>
+                  </Styled.Insignia>
+                </div>
+              </div>
+            </Styled.MenuWrapper>
+          </Col>
 
-          {subjects.map((item) => (
-            <Link key={item.id} to={`/subject/${item.id}`}>
-              <CardSubjectList
-                key={item.id}
-                name={item.name}
-                teacher="Fulano de Tal"
-                percentage="55"
-                tab={true}
+          <Col off={1} lg={8} md={8} sm={8} xs={8}>
+            <Styled.SubjectWrapper>
+              <div>
+                <h1>Disciplinas</h1>
+                <div>
+                  <button onClick={handleSubjectModal}>
+                    <Plus />
+                  </button>
+                  <button onClick={handleEditSubjectModal}>
+                    <Edit />
+                  </button>
+                </div>
+              </div>
+
+              {subjects.map((item) => (
+                <Link key={item.id} to={`/subject/${item.id}`}>
+                  <CardSubjectList
+                    key={item.id}
+                    name={item.name}
+                    teacher="Fulano de Tal"
+                    percentage="55"
+                    tab={true}
+                  />
+                </Link>
+              ))}
+            </Styled.SubjectWrapper>
+          </Col>
+
+          <Modal onClose={handleSubjectModal} show={show}>
+            <form onSubmit={handleCreateSubject}>
+              <h2>Criar Disciplina</h2>
+
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Nome da Disciplina"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
-            </Link>
-          ))}
-        </Styled.SubjectWrapper>
 
-        <Modal onClose={handleSubjectModal} show={show}>
-          <form onSubmit={handleCreateSubject}>
-            <h2>Criar Disciplina</h2>
+              <label htmlFor="description">Descrição</label>
+              <textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
 
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Nome da Disciplina"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+              <label htmlFor="image">Imagem</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                value={image}
+                onChange={(e) => setImage('null')}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              />
 
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
+              <div>
+                <button onClick={handleSubjectModal}>Cancelar</button>
+                <button type="submit">Continuar</button>
+              </div>
+            </form>
+          </Modal>
 
-            <label htmlFor="image">Imagem</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              value={image}
-              onChange={(e) => setImage('null')}
-              // onChange={(e) => setImage(e.target.value)}
-              // required
-            />
+          <Modal onClose={handleStudentModal} show={showStudent}>
+            <form onSubmit={handleStudentSubject}>
+              <h2>Adicionar Alunos</h2>
 
-            <div>
-              <button onClick={handleSubjectModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
+              <label htmlFor="link">Compartilhar link</label>
+              <input
+                type="text"
+                id="link"
+                placeholder="Nome da Disciplina"
+                value={link}
+                disabled
+              />
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleStudentSubject}>
-            <h2>Adicionar Alunos</h2>
+              <label htmlFor="students">Inserir alunos por email</label>
+              <input
+                type="text"
+                id="students"
+                placeholder="Nome da Disciplina"
+                value={students}
+                onChange={(e) => setStudents(e.target.value)}
+                required
+              />
+              {/* <span>{students}</span> */}
 
-            <label htmlFor="link">Compartilhar link</label>
-            <input
-              type="text"
-              id="link"
-              placeholder="Nome da Disciplina"
-              value={link}
-              disabled
-            />
+              <div>
+                <button onClick={handleStudentModal}>Pular</button>
+                <button type="submit">Concluir</button>
+              </div>
+            </form>
+          </Modal>
 
-            <label htmlFor="students">Inserir alunos por email</label>
-            <input
-              type="text"
-              id="students"
-              placeholder="Nome da Disciplina"
-              value={students}
-              onChange={(e) => setStudents(e.target.value)}
-              required
-            />
-            {/* <span>{students}</span> */}
+          <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
+            <h2>Editar Disciplinas</h2>
 
-            <div>
-              <button onClick={handleStudentModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
-        </Modal>
-
-        <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
-          <h2>Editar Disciplinas</h2>
-
-          {subjects.map((item) => (
-            <button key={item.id}>{item.name}</button>
-          ))}
-          <span onClick={handleEditSubjectModal}>Cancelar</span>
-        </Modal>
+            {subjects.map((item) => (
+              <button key={item.id}>{item.name}</button>
+            ))}
+            <span onClick={handleEditSubjectModal}>Cancelar</span>
+          </Modal>
+        </Row>
       </Container>
     </Layout>
   );

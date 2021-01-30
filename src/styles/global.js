@@ -36,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
   body {  
     color: ${theme.color.txtMedium};
     font-family: ${theme.fontFamily.primary};
-    background-color: ${theme.color.bg};
+    background-color: ${theme.color.bgLow};
   }
   ol, ul {
     list-style: none;

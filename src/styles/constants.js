@@ -20,6 +20,11 @@ export const DEFAULT_THEME = {
     xxl: rem(80),
     huge: rem(160),
   },
+  fontWeight: {
+    normal: 400,
+    semiBold: 600,
+    bold: 700,
+  },
   fontSize: {
     xs: rem(14),
     sm: rem(16),
