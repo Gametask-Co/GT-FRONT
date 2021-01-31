@@ -33,7 +33,9 @@ const GlobalStyles = createGlobalStyle`
   footer, header, hgroup, menu, nav, section {
     display: block;
   }
-  body {  
+  body { 
+    max-width: 100vw;
+    max-height: 100vh;
     color: ${theme.color.txtMedium};
     font-family: ${theme.fontFamily.primary};
     background-color: ${theme.color.bgLow};

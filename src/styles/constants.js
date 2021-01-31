@@ -26,6 +26,7 @@ export const DEFAULT_THEME = {
     bold: 700,
   },
   fontSize: {
+    xxs: rem(8),
     xs: rem(14),
     sm: rem(16),
     md: rem(24),

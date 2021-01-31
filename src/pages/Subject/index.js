@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import * as Styled from './styled';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 
 import Layout from '../../components/Layout';
-import { Container, Col, Row } from '../../components/Grid/Index';
+import { Col, Row } from '../../components/Grid/Index';
 import CardSubjectList from '../../components/CardSubjectList';
 import Modal from '../../components/Modal';
 
@@ -153,52 +154,52 @@ function Subject() {
 
   return (
     <Layout>
-      <Container>
+      <Styled.PageWrapper>
         <Row>
-          <Col lg={3} md={3} sm={3} xs={3}>
+          <Col lg={3} md={4} sm={3} xs={3}>
             <Styled.MenuWrapper>
-              <AvatarXXL />
-              <h3>{userFlag ? 'Professor' : 'Estudante'}</h3>
-              <h1>{userName}</h1>
-              <h3>{userEmail}</h3>
-              <div>
+              <Styled.Header>
+                <AvatarXXL bottom={theme.spacing.md} />
+                <Styled.Name>
+                  {userName} <span>{userFlag ? 'Pro' : 'Alu'}</span>
+                </Styled.Name>
+                <Styled.Email>{userEmail}</Styled.Email>
+              </Styled.Header>
+              <Styled.Body>
                 <h4>Medalhas</h4>
-                <div>
-                  <Styled.Insignia color="#CCAF4E">
-                    <Award />
-                    999 <span> - Ouro</span>
-                  </Styled.Insignia>
-                  <Styled.Insignia color="#F0F0F0">
-                    <Award />
-                    888 <span> - Prata</span>
-                  </Styled.Insignia>
-                  <Styled.Insignia color="#E2673E">
-                    <Award />
-                    777 <span> - Bronze</span>
-                  </Styled.Insignia>
-                </div>
-              </div>
-              <div>
+
+                <Styled.Insignia color="#CCAF4E">
+                  <Award />
+                  02 <span> - Ouro</span>
+                </Styled.Insignia>
+                <Styled.Insignia color="#F0F0F0">
+                  <Award />
+                  04 <span> - Prata</span>
+                </Styled.Insignia>
+                <Styled.Insignia color="#E2673E">
+                  <Award />
+                  00 <span> - Bronze</span>
+                </Styled.Insignia>
+
                 <h4>Troféus</h4>
-                <div>
-                  <Styled.Insignia color="#CCAF4E">
-                    <Star />
-                    999 <span> - Ouro</span>
-                  </Styled.Insignia>
-                  <Styled.Insignia color="#F0F0F0">
-                    <Star />
-                    888 <span> - Prata</span>
-                  </Styled.Insignia>
-                  <Styled.Insignia color="#E2673E">
-                    <Star />
-                    777 <span> - Bronze</span>
-                  </Styled.Insignia>
-                </div>
-              </div>
+
+                <Styled.Insignia color="#CCAF4E">
+                  <Star />
+                  09 <span> - Ouro</span>
+                </Styled.Insignia>
+                <Styled.Insignia color="#F0F0F0">
+                  <Star />
+                  11 <span> - Prata</span>
+                </Styled.Insignia>
+                <Styled.Insignia color="#E2673E">
+                  <Star />
+                  03 <span> - Bronze</span>
+                </Styled.Insignia>
+              </Styled.Body>
             </Styled.MenuWrapper>
           </Col>
 
-          <Col off={1} lg={8} md={8} sm={8} xs={8}>
+          <Col off={1} lg={8} md={7} sm={8} xs={8}>
             <Styled.SubjectWrapper>
               <div>
                 <h1>Disciplinas</h1>
@@ -311,7 +312,7 @@ function Subject() {
             <span onClick={handleEditSubjectModal}>Cancelar</span>
           </Modal>
         </Row>
-      </Container>
+      </Styled.PageWrapper>
     </Layout>
   );
 }

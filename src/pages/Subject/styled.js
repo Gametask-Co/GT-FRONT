@@ -1,57 +1,71 @@
-import styled from "styled-components";
-import media from "styled-media-query";
+import styled from 'styled-components';
+import { ellipsis } from 'polished';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
+import { Container } from '../../components/Grid/Index';
 
-export const Container = styled.div`
-  width: 1140px;
-  max-width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-left: auto;
-  margin-right: auto;
-
-  ${media.lessThan("medium")`
-    padding-right: 0px;
-    padding-left: 0px;  
-  `}
+export const PageWrapper = styled(Container)`
+  height: max-content;
+  overflow-y: hidden;
 `;
 
 export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: #282a31;
-  border-radius: 0.9rem;
   align-items: center;
-  height: 100%;
 
-  h1 {
-    font-weight: bold;
-    font-size: 1.2rem;
+  padding: ${theme.spacing.md} ${theme.spacing.sm};
+  background-color: ${theme.color.bgMedium};
+  border-radius: ${theme.borderRadius.sm};
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+export const Email = styled.p`
+  ${ellipsis()}
+  font-size: ${theme.fontSize.xs};
+`;
+
+export const Name = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: ${theme.spacing.sm};
+
+  color: ${theme.color.txtHigh};
+  font-weight: ${theme.fontWeight.bold};
+
+  > span {
+    display: block;
+    margin-left: ${theme.spacing.xs};
+    padding: ${theme.spacing.xxs} ${theme.spacing.xs};
+
+    color: ${theme.color.txtMedium};
+    font-size: ${theme.fontSize.xxs};
+    background-color: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xxs};
   }
-  h3 {
-    color: #a2a2a2;
-    font-size: 0.9rem;
-    padding-top: 0.8rem;
-    padding-bottom: 1rem;
-  }
+`;
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+export const Body = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: ${theme.spacing.xs} ${theme.spacing.sm};
 
-    h4 {
-      text-transform: uppercase;
-      font-weight: bold;
-      color: #a2a2a2;
-      padding: 1rem;
-    }
-
-    > div {
-      display: flex;
-      flex-direction: column;
-      align-items: left;
-    }
+  > h4 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: ${theme.fontSize.xs};
+    font-family: ${theme.fontFamily.secondary};
+    font-weight: ${theme.fontWeight.bold};
+    margin-top: ${theme.spacing.lg};
+    margin-bottom: ${theme.spacing.sm};
   }
 `;
 
@@ -65,7 +79,7 @@ export const SubjectWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     button {
       margin-left: 1rem;
       background-color: #282a31;
@@ -81,32 +95,27 @@ export const SubjectWrapper = styled.div`
   }
 `;
 
-export const CircleProfile = styled.div`
-  height: 100px;
-  width: 100px;
-
-  margin: 1rem;
-  border-radius: 50%;
-
-  background-image: url("https://w7.pngwing.com/pngs/349/288/png-transparent-teacher-education-student-course-school-avatar-child-face-heroes.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
 export const Insignia = styled.p`
-  color: ${(props) => props.color};
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: ${theme.spacing.sm} 0;
+
+  color: ${(props) => props.color};
+  font-size: ${theme.fontSize.xs};
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
 
   svg {
+    width: ${theme.spacing.md};
+    height: ${theme.spacing.md};
     fill: ${(props) => props.color};
-    margin-right: 0.3rem;
+    margin-right: ${theme.spacing.sm};
   }
 
   span {
-    color: #a2a2a2;
-    margin-left: 0.3rem;
+    color: ${theme.color.txtLow};
+    margin-left: ${theme.spacing.xs};
   }
 `;
