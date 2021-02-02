@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
-import {
-  Header,
-  Body,
-  Footer,
-  SocialButtons,
-} from "../../components/Modais/styled";
+import { Header, Body } from "../../components/Modais/styled";
 
 import Form from "../../components/Form/Index";
 import { Text, Textarea, Image } from "../../components/Inputs/Index";
@@ -236,7 +231,6 @@ function Subject() {
 
           <Body>
             <Form onSubmit={handleCreateSubject}>
-              {/* <label htmlFor="name">Nome</label> */}
               <Text
                 name="name"
                 value={name}
