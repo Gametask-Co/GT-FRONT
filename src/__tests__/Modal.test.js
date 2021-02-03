@@ -3,13 +3,14 @@ import React, { useState } from "react";
 // import { renderHook, act } from "@testing-library/react-hooks";
 import { render, fireEvent } from "@testing-library/react";
 
-import Modal from "./index";
+import Modal from "../components/Modal";
 
 describe("Test for Modal component", () => {
   it("Should check who the modal is shown on screen", () => {
     // const [show, setShow] = useState(false);
     // const { result } = renderHook(() => useCounter());
 
+    // const show 
     // const handleShowModal = jest.fn(() => {
     //   setShow(!show);
     // });
