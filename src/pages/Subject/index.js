@@ -4,7 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import { Header, Body } from "../../components/Modais/styled";
 
 import Form from "../../components/Form/Index";
-import { Text, Textarea, Image } from "../../components/Inputs/Index";
+import { Text, Email, Textarea, Image } from "../../components/Inputs/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import * as Styled from "./styled";
@@ -276,34 +276,40 @@ function Subject() {
         </InternModal>
 
         <InternModal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleStudentSubject}>
-            <h2>Adicionar Alunos</h2>
+          <Header>
+            <h1>Adicionar Alunos</h1>
+          </Header>
+          
+          <Body>
+            <Form onSubmit={handleStudentSubject}>
+              <Text
+                name="link"
+                value={link}
+                placeholder="Nome da Disciplina"
+                disabled
+              >
+                Compartilhar link
+              </Text>
+              
+              <Email
+                name="students"
+                value={students}
+                placeholder="Inserir alunos por email"
+                onChange={(e) => setStudents(e.target.value)}
+                required
+              >
+                Inserir alunos por email
+              </Email>
+              {/* <span>{students}</span> */}
 
-            <label htmlFor="link">Compartilhar link</label>
-            <input
-              type="text"
-              id="link"
-              placeholder="Nome da Disciplina"
-              value={link}
-              disabled
-            />
-
-            <label htmlFor="students">Inserir alunos por email</label>
-            <input
-              type="text"
-              id="students"
-              placeholder="Nome da Disciplina"
-              value={students}
-              onChange={(e) => setStudents(e.target.value)}
-              required
-            />
-            {/* <span>{students}</span> */}
-
-            <div>
-              <button onClick={handleStudentModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleStudentModal}>
+                  Pular
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
         </InternModal>
 
         <InternModal onClose={handleEditSubjectModal} show={showEditSubject}>
