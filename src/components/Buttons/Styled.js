@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
+import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
 
 export const Buttom = styled.button`
   margin-top: ${(props) => (props.top ? theme.spacing.xl : 0)};
   padding: ${theme.spacing.sm} ${theme.spacing.md};
 
   color: ${theme.color.txtHigh};
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: ${theme.fontSize.xs};
 
   background: ${(props) =>

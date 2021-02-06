@@ -5,13 +5,14 @@ import { Header, Body } from "../../components/Modais/styled";
 
 import Form from "../../components/Form/Index";
 import { Text, Textarea, Image } from "../../components/Inputs/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import * as Styled from "./styled";
 
 import Layout from "../../components/Layout";
 import Container from "../../components/Container";
 import CardSubjectList from "../../components/CardSubjectList";
-import Modal from "../../components/Modal";
+import { InternModal } from "../../components/Modais";
 
 import { useAuth } from "../../contents/auth";
 
@@ -224,7 +225,7 @@ function Subject() {
           ))}
         </Styled.SubjectWrapper>
 
-        <Modal onClose={handleSubjectModal} show={show}>
+        <InternModal onClose={handleSubjectModal} show={show}>
           <Header>
             <h1>Criar Disciplina</h1>
           </Header>
@@ -264,15 +265,17 @@ function Subject() {
                 Imagem
               </Image>
 
-              <div>
-                <button onClick={handleSubjectModal}>Cancelar</button>
-                <button type="submit">Continuar</button>
-              </div>
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
             </Form>
           </Body>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
+        <InternModal onClose={handleStudentModal} show={showStudent}>
           <form onSubmit={handleStudentSubject}>
             <h2>Adicionar Alunos</h2>
 
@@ -301,16 +304,16 @@ function Subject() {
               <button type="submit">Concluir</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
+        <InternModal onClose={handleEditSubjectModal} show={showEditSubject}>
           <h2>Editar Disciplinas</h2>
 
           {subjects.map((item) => (
             <button key={item.id}>{item.name}</button>
           ))}
           <span onClick={handleEditSubjectModal}>Cancelar</span>
-        </Modal>
+        </InternModal>
       </Container>
     </Layout>
   );

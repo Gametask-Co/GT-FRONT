@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
 
-import * as Styled from './styled';
+import * as Styled from "./styled";
 
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import CardMilestoneList from '../../components/CardMilestoneList';
-import CardSubjectList from '../../components/CardSubjectList';
-import Modal from '../../components/Modal';
+import Layout from "../../components/Layout";
+import Container from "../../components/Container";
+import CardMilestoneList from "../../components/CardMilestoneList";
+import CardSubjectList from "../../components/CardSubjectList";
+import { InternModal } from "../../components/Modais";
 
-import { useAuth } from '../../contents/auth';
+import { useAuth } from "../../contents/auth";
 
-import api from '../../services/api';
+import api from "../../services/api";
 
-import { ReactComponent as Remove } from '../../assets/icons/close.svg';
-import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
-import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
-import { ReactComponent as Message } from '../../assets/icons/message-circle.svg';
+import { ReactComponent as Remove } from "../../assets/icons/close.svg";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
 
-import { ReactComponent as Award } from '../../assets/icons/award.svg';
-import { ReactComponent as Calendar } from '../../assets/icons/calendar.svg';
+import { ReactComponent as Award } from "../../assets/icons/award.svg";
+import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
 
 function SubjectDetail() {
   const { signed, loading } = useAuth();
@@ -32,30 +32,30 @@ function SubjectDetail() {
 
   //student
   const [students, setStudents] = useState([]);
-  const [studentActive, setStudentActive] = useState('');
+  const [studentActive, setStudentActive] = useState("");
   //const [studentEmail, setStudentEmail] = useState('');
 
   //subject
   //const [subjectName, setSubjectName] = useState('');
 
   // subject class
-  const [block, setBlock] = useState('');
+  const [block, setBlock] = useState("");
   const [blocks, setBlocks] = useState([]);
 
   //milestone
   const [milestones, setMilestones] = useState([]);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true);
-  const [milestoneActive, setMilestoneActive] = useState('');
+  const [milestoneActive, setMilestoneActive] = useState("");
 
   // task
   //const [tasks, setTasks] = useState([]);
-  const [nameTask, setNameTask] = useState('');
-  const [descriptionTask, setDescriptionTask] = useState('');
-  const [dueTask, setDueTask] = useState('');
-  const [selectMilestoneTask, setSelectMilestoneTask] = useState('');
-  const [selectBlockTask, setSelectBlockTask] = useState('');
+  const [nameTask, setNameTask] = useState("");
+  const [descriptionTask, setDescriptionTask] = useState("");
+  const [dueTask, setDueTask] = useState("");
+  const [selectMilestoneTask, setSelectMilestoneTask] = useState("");
+  const [selectBlockTask, setSelectBlockTask] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -65,7 +65,7 @@ function SubjectDetail() {
       if (signed === false) {
         // history.push("/signin");
       } else {
-        api.get('/subjects').then(function (res) {
+        api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
               //setSubjectName(item.name);
@@ -126,8 +126,8 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api({
-      method: 'delete',
-      url: '/subjects/students/',
+      method: "delete",
+      url: "/subjects/students/",
       data: {
         subject_id: id,
         student_id: studentActive,
@@ -135,10 +135,10 @@ function SubjectDetail() {
     })
       .then(function (res) {
         setShowStudent(!showStudent);
-        setStudentActive('');
+        setStudentActive("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Student on Subject error!');
+        console.log(error, "Error Student on Subject error!");
       });
   }
 
@@ -146,26 +146,26 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/milestones', {
+      .post("/subjects/milestones", {
         name,
         description,
         subject_id: id,
         // visibility,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Milestone ok!');
+        console.log(res.data, "Create Milestone ok!");
 
         setShow(!show);
-        setNameTask('');
-        setDescriptionTask('');
-        setDueTask('');
-        setSelectMilestoneTask('');
+        setNameTask("");
+        setDescriptionTask("");
+        setDueTask("");
+        setSelectMilestoneTask("");
         setMilestoneActive(res.data.id);
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Milestone error!');
+        console.log(error, "Error Milestone error!");
       });
   }
 
@@ -173,21 +173,21 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/blocks', {
+      .post("/subjects/blocks", {
         name: block,
         subject_id: id,
         milestone_id: milestoneActive,
       })
       .then(function (res) {
-        console.log(res, 'add Block ok!');
+        console.log(res, "add Block ok!");
         // setLink("");
         // setStudents("");
-        setMilestoneActive('');
+        setMilestoneActive("");
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Block error!');
+        console.log(error, "Error Block error!");
       });
   }
 
@@ -195,7 +195,7 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/tasks', {
+      .post("/subjects/tasks", {
         name: nameTask,
         description: descriptionTask,
         due: dueTask,
@@ -204,14 +204,14 @@ function SubjectDetail() {
         // milestone_id: selectMilestoneTask,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Task ok!');
+        console.log(res.data, "Create Task ok!");
 
         setShowTask(!showTask);
-        setName('');
-        setDescription('');
+        setName("");
+        setDescription("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Task error!');
+        console.log(error, "Error Task error!");
       });
   }
 
@@ -305,7 +305,7 @@ function SubjectDetail() {
           ))}
         </Styled.SubjectWrapper>
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
+        <InternModal onClose={handleStudentModal} show={showStudent}>
           <form onSubmit={handleRemoveStudent}>
             <h2>Remover Aluno</h2>
             <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
@@ -315,9 +315,9 @@ function SubjectDetail() {
               <button type="submit">Confirmar</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleMilestoneModal} show={show}>
+        <InternModal onClose={handleMilestoneModal} show={show}>
           <form onSubmit={handleCreateMilestone}>
             <h2>Adicionar Marco</h2>
 
@@ -384,9 +384,9 @@ function SubjectDetail() {
               <button type="submit">Continuar</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleBlockModal} show={showBlock}>
+        <InternModal onClose={handleBlockModal} show={showBlock}>
           <form onSubmit={handleMilestoneBlock}>
             <h2>Adicionar Blocos</h2>
 
@@ -406,9 +406,9 @@ function SubjectDetail() {
               <button type="submit">Concluir</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleTaskModal} show={showTask}>
+        <InternModal onClose={handleTaskModal} show={showTask}>
           <form onSubmit={handleCreateTask}>
             <h2>Adicionar Atividade</h2>
             {/* task 
@@ -492,7 +492,7 @@ function SubjectDetail() {
               <button type="submit">Continuar</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
       </Container>
     </Layout>
   );
