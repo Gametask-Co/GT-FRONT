@@ -311,6 +311,48 @@ function Subject() {
           ))}
           <span onClick={handleEditSubjectModal}>Cancelar</span>
         </Modal>
+
+        <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
+          <Header>
+            <h1>Editar Disciplina</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleEditSubjectModal}>
+            <Text name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              >
+                Nome
+              </Text>
+
+              <Textarea
+                name="description"
+                value={description}
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                >
+                  Descrição
+              </Textarea>
+
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage("null")}
+                >
+                  Imagem
+              </Image>
+
+              <div>
+                <button onClick={handleEditSubjectModal}>Cancelar</button>
+                <button type="submit">Salvar</button>
+              </div>
+            </Form>
+          </Body>
+        </Modal>
       </Container>
     </Layout>
   );
