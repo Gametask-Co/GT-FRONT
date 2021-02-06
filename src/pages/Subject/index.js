@@ -22,6 +22,7 @@ import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 import { ReactComponent as Award } from "../../assets/icons/award.svg";
 import { ReactComponent as Star } from "../../assets/icons/star.svg";
+import { ReactComponent as Trash } from "../../assets/icons/trash-2.svg";
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -133,6 +134,27 @@ function Subject() {
       })
       .catch(function (error) {
         console.log(error, "Error Subject error!");
+      });
+  }
+
+  async function handleEditSubject(e, pk) {
+    e.preventDefault();
+
+    await api
+      .put(`/subjects/${pk}`, {
+        name,
+        description,
+        image,
+      })
+      .then(function (res) {
+        console.log(res.data, "Edit Subject ok!");
+
+        setShowEditSubject(!showEditSubject);
+        setName("");
+        setDescription("");
+      })
+      .catch(function (error) {
+        console.log(error, "Error Edit Subject error!");
       });
   }
 
@@ -279,7 +301,7 @@ function Subject() {
           <Header>
             <h1>Adicionar Alunos</h1>
           </Header>
-          
+
           <Body>
             <Form onSubmit={handleStudentSubject}>
               <Text
@@ -290,7 +312,7 @@ function Subject() {
               >
                 Compartilhar link
               </Text>
-              
+
               <Email
                 name="students"
                 value={students}
@@ -312,13 +334,98 @@ function Subject() {
           </Body>
         </InternModal>
 
+        {/* when click on image, call function subjectSelected() to change [name, description and image] and show modal */}
         <InternModal onClose={handleEditSubjectModal} show={showEditSubject}>
-          <h2>Editar Disciplinas</h2>
+          <Header>
+            <h1>Editar Disciplina</h1>
+            <Trash
+              style={{
+                position: "absolute",
+                right: "2rem",
+                color: "red",
+                top: "2.5rem",
+                border: "2px red solid",
+                borderRadius: "4px",
+                fontSize: "2rem",
+              }}
+            />
+          </Header>
 
-          {subjects.map((item) => (
-            <button key={item.id}>{item.name}</button>
-          ))}
-          <span onClick={handleEditSubjectModal}>Cancelar</span>
+          <Body>
+            {/* handleEditSubject(pk) */}
+            <Form onSubmit={handleEditSubject}>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Nome da Disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Nome
+              </Text>
+
+              <Textarea
+                name="description"
+                value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage("null")}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Imagem
+              </Image>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleEditSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal show={false}>
+          <Header>
+            <h1>Excluir Disciplina</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleEditSubject}>
+              <span>
+                Cuidado! Essa é uma ação permanente, para confirmar a exclusão
+                da disciplina Sistemas Operacionais digite abaixo o nome da
+                disciplina:
+              </span>
+
+              <Text
+                name="name"
+                value={name}
+                placeholder="Digite o nome da disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+
+              <ButtomBar>
+                <ButtomCTA secondary>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA danger type="submit">Excluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
         </InternModal>
       </Container>
     </Layout>
