@@ -1,13 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { Header, Gametask } from '../../components/Modais/styled';
-import { BackgroundModal } from '../../components/Modais';
-import { useAuth } from '../../contents/auth';
-import { Row } from '../../components/Grid/Index';
-import { Text, Date, RadioGroup } from '../../components/Inputs/Index';
-import Form from '../../components/Form/Index';
-import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
+import { Header, Gametask } from "../../components/Modais/styled";
+import { BackgroundModal } from "../../components/Modais";
+import { useAuth } from "../../contents/auth";
+import { Row } from "../../components/Grid/Index";
+import { Text, Date, RadioGroup } from "../../components/Inputs/Index";
+import Form from "../../components/Form/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
+
+import { userSchema } from "../../validations/userValidation";
 
 const PersonalDetails = ({ setForm, formData, navigation }) => {
   const { email, password, name, gender, birthday, teacher } = formData;
@@ -19,10 +21,15 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
     e.preventDefault();
 
     try {
-      await signUp(name, email, birthday, gender, teacher, password);
-      next();
+      const isValid = await userSchema.isValid(formData);
+      // birthday format: 2021-02-25
+
+      if (isValid) {
+        await signUp(name, email, birthday, gender, teacher, password);
+        next();
+      }
     } catch (err) {
-      alert('Erro no cadastro, tente novamente.');
+      alert("Erro no cadastro, tente novamente.");
     }
   }
 
@@ -33,7 +40,7 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
         <h1>Complete o perfil</h1>
       </Header>
       <Body>
-        <Form autocomplete="off">
+        <Form onSubmit={sendData} autocomplete="off">
           <Text
             name="name"
             defaultValue={name}
@@ -44,7 +51,12 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             Nome Completo
           </Text>
 
-          <Date name="date" defaultValue={birthday} onChange={setForm} required>
+          <Date
+            name="birthday"
+            defaultValue={birthday}
+            onChange={setForm}
+            required
+          >
             Data de nascimento
           </Date>
 
@@ -93,7 +105,7 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <ButtomCTA top secondary onClick={previous}>
               Voltar
             </ButtomCTA>
-            <ButtomCTA top onClick={sendData}>
+            <ButtomCTA top type="submit">
               Concluir
             </ButtomCTA>
           </ButtomBar>

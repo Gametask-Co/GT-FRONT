@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { Header, Gametask } from '../../components/Modais/styled';
-import { BackgroundModal } from '../../components/Modais';
+import { Header, Gametask } from "../../components/Modais/styled";
+import { BackgroundModal } from "../../components/Modais";
 
-import { Row } from '../../components/Grid/Index';
-import Form from '../../components/Form/Index';
-import { Email, Password, Checkbox } from '../../components/Inputs/Index';
-import { ButtomCTA } from '../../components/Buttons/Index';
+import { Row } from "../../components/Grid/Index";
+import Form from "../../components/Form/Index";
+import { Email, Password, Checkbox } from "../../components/Inputs/Index";
+import { ButtomCTA } from "../../components/Buttons/Index";
 
 const UserDetails = ({ setForm, formData, navigation }) => {
   const { email, password, terms } = formData;
@@ -24,7 +24,7 @@ const UserDetails = ({ setForm, formData, navigation }) => {
         </p>
       </Header>
       <Body>
-        <Form autocomplete="off">
+        <Form onSubmit={next} autocomplete="off">
           <Email
             name="email"
             defaultValue={email}
@@ -56,7 +56,7 @@ const UserDetails = ({ setForm, formData, navigation }) => {
           </Password>
 
           <Checkbox defaultValue={terms} onChange={setForm}>
-            Eu li e concordo com os{' '}
+            Eu li e concordo com os{" "}
             <a
               href="https://github.com/"
               target="_blank"
@@ -65,7 +65,7 @@ const UserDetails = ({ setForm, formData, navigation }) => {
               Termos e Condições
             </a>
           </Checkbox>
-          <ButtomCTA top onClick={next}>
+          <ButtomCTA top type="submit">
             Continuar
           </ButtomCTA>
         </Form>
