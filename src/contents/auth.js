@@ -65,7 +65,6 @@ const AuthProvider = ({ children }) => {
         email,
         birthday,
         gender,
-        teacher,
         password,
       })
       .then(() => {
