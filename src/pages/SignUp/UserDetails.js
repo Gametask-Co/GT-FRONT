@@ -12,8 +12,6 @@ import { ButtomCTA } from "../../components/Buttons/Index";
 
 const UserDetails = ({ setForm, formData, navigation }) => {
   const { email, password, terms } = formData;
-  console.log("email", email);
-  console.log("password", password);
   const { next } = navigation;
 
   return (

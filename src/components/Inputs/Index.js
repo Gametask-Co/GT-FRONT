@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Checkmark from '../../assets/icons/checkmark.svg';
-import * as Styled from './Styled';
+import React, { useState } from "react";
+import Checkmark from "../../assets/icons/checkmark.svg";
+import * as Styled from "./Styled";
 
 export const Text = ({ children, name, ...props }) => {
   return (
