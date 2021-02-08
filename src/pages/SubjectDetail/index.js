@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
 
-import * as Styled from './styled';
+import * as Styled from "./styled";
 
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import CardMilestoneList from '../../components/CardMilestoneList';
-import CardSubjectList from '../../components/CardSubjectList';
-import Modal from '../../components/Modal';
+import { Header, Body } from "../../components/Modais/styled";
 
-import { useAuth } from '../../contents/auth';
+import Layout from "../../components/Layout";
+import Container from "../../components/Container";
+import CardMilestoneList from "../../components/CardMilestoneList";
+import CardSubjectList from "../../components/CardSubjectList";
+import { InternModal } from "../../components/Modais";
 
-import api from '../../services/api';
+import { useAuth } from "../../contents/auth";
 
-import { ReactComponent as Remove } from '../../assets/icons/close.svg';
-import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
-import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
-import { ReactComponent as Message } from '../../assets/icons/message-circle.svg';
+import api from "../../services/api";
 
-import { ReactComponent as Award } from '../../assets/icons/award.svg';
-import { ReactComponent as Calendar } from '../../assets/icons/calendar.svg';
+import { ReactComponent as Remove } from "../../assets/icons/close.svg";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { ReactComponent as Message } from "../../assets/icons/message-circle.svg";
+
+import { ReactComponent as Award } from "../../assets/icons/award.svg";
+import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
+import { ButtomCTA } from "../../components/Buttons/Index";
 
 function SubjectDetail() {
   const { signed, loading } = useAuth();
@@ -32,30 +35,30 @@ function SubjectDetail() {
 
   //student
   const [students, setStudents] = useState([]);
-  const [studentActive, setStudentActive] = useState('');
+  const [studentActive, setStudentActive] = useState("");
   //const [studentEmail, setStudentEmail] = useState('');
 
   //subject
   //const [subjectName, setSubjectName] = useState('');
 
   // subject class
-  const [block, setBlock] = useState('');
+  const [block, setBlock] = useState("");
   const [blocks, setBlocks] = useState([]);
 
   //milestone
   const [milestones, setMilestones] = useState([]);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true);
-  const [milestoneActive, setMilestoneActive] = useState('');
+  const [milestoneActive, setMilestoneActive] = useState("");
 
   // task
   //const [tasks, setTasks] = useState([]);
-  const [nameTask, setNameTask] = useState('');
-  const [descriptionTask, setDescriptionTask] = useState('');
-  const [dueTask, setDueTask] = useState('');
-  const [selectMilestoneTask, setSelectMilestoneTask] = useState('');
-  const [selectBlockTask, setSelectBlockTask] = useState('');
+  const [nameTask, setNameTask] = useState("");
+  const [descriptionTask, setDescriptionTask] = useState("");
+  const [dueTask, setDueTask] = useState("");
+  const [selectMilestoneTask, setSelectMilestoneTask] = useState("");
+  const [selectBlockTask, setSelectBlockTask] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -65,7 +68,7 @@ function SubjectDetail() {
       if (signed === false) {
         // history.push("/signin");
       } else {
-        api.get('/subjects').then(function (res) {
+        api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
               //setSubjectName(item.name);
@@ -126,8 +129,8 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api({
-      method: 'delete',
-      url: '/subjects/students/',
+      method: "delete",
+      url: "/subjects/students/",
       data: {
         subject_id: id,
         student_id: studentActive,
@@ -135,10 +138,10 @@ function SubjectDetail() {
     })
       .then(function (res) {
         setShowStudent(!showStudent);
-        setStudentActive('');
+        setStudentActive("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Student on Subject error!');
+        console.log(error, "Error Student on Subject error!");
       });
   }
 
@@ -146,26 +149,26 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/milestones', {
+      .post("/subjects/milestones", {
         name,
         description,
         subject_id: id,
         // visibility,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Milestone ok!');
+        console.log(res.data, "Create Milestone ok!");
 
         setShow(!show);
-        setNameTask('');
-        setDescriptionTask('');
-        setDueTask('');
-        setSelectMilestoneTask('');
+        setNameTask("");
+        setDescriptionTask("");
+        setDueTask("");
+        setSelectMilestoneTask("");
         setMilestoneActive(res.data.id);
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Milestone error!');
+        console.log(error, "Error Milestone error!");
       });
   }
 
@@ -173,21 +176,21 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/blocks', {
+      .post("/subjects/blocks", {
         name: block,
         subject_id: id,
         milestone_id: milestoneActive,
       })
       .then(function (res) {
-        console.log(res, 'add Block ok!');
+        console.log(res, "add Block ok!");
         // setLink("");
         // setStudents("");
-        setMilestoneActive('');
+        setMilestoneActive("");
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Block error!');
+        console.log(error, "Error Block error!");
       });
   }
 
@@ -195,7 +198,7 @@ function SubjectDetail() {
     e.preventDefault();
 
     await api
-      .post('/subjects/tasks', {
+      .post("/subjects/tasks", {
         name: nameTask,
         description: descriptionTask,
         due: dueTask,
@@ -204,14 +207,14 @@ function SubjectDetail() {
         // milestone_id: selectMilestoneTask,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Task ok!');
+        console.log(res.data, "Create Task ok!");
 
         setShowTask(!showTask);
-        setName('');
-        setDescription('');
+        setName("");
+        setDescription("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Task error!');
+        console.log(error, "Error Task error!");
       });
   }
 
@@ -305,7 +308,7 @@ function SubjectDetail() {
           ))}
         </Styled.SubjectWrapper>
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
+        <InternModal onClose={handleStudentModal} show={showStudent}>
           <form onSubmit={handleRemoveStudent}>
             <h2>Remover Aluno</h2>
             <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
@@ -315,100 +318,95 @@ function SubjectDetail() {
               <button type="submit">Confirmar</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
 
-        <Modal onClose={handleMilestoneModal} show={show}>
-          <form onSubmit={handleCreateMilestone}>
+        <InternModal onClose={handleMilestoneModal} show={show}>
+          <Header>
             <h2>Adicionar Marco</h2>
-
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Titulo do marco"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-
-            <label htmlFor="visibility">Visível para os alunos</label>
-            <Styled.FilterRadio>
-              <input
-                type="radio"
-                id="featured-radio"
-                className="radio-button"
-                name="content-filter"
-                defaultChecked="checked"
-                value={visibility}
-                onChange={() => setVisibility(true)}
-              />
-              <input
-                type="radio"
-                id="personal-radio"
-                className="radio-button"
-                name="content-filter"
-                value={visibility}
-                onChange={() => setVisibility(false)}
-              />
-
-              <label
-                htmlFor="featured-radio"
-                className="filter-label featured"
-                id="feature-label"
+          </Header>
+          <Body>
+            <Form onSubmit={handleCreateMilestone}>
+              <Text
+                type="text"
+                id="name"
+                placeholder="Titulo do marco"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               >
-                Sim
-              </label>
-              <label
-                htmlFor="personal-radio"
-                className="filter-label personal"
-                id="personal-label"
+                Título
+              </Text>
+
+              <Textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
               >
-                Não
-              </label>
-            </Styled.FilterRadio>
+                Descrição
+              </Textarea>
 
-            <div>
-              <button onClick={handleMilestoneModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
+              <span>Visível para os alunos</span>
+              <RadioGroup>
+                <input
+                  type="radio"
+                  id="yes"
+                  name="visible"
+                  defaultValue={}
+                  onChange={setForm}
+                />
+                <label htmlFor="yes">Sim</label>
 
-        <Modal onClose={handleBlockModal} show={showBlock}>
-          <form onSubmit={handleMilestoneBlock}>
+                <input
+                  type="radio"
+                  id="no"
+                  name="visible"
+                  defaultValue={}
+                  onChange={setForm}
+                />
+                <label htmlFor="no">Não</label>
+              </RadioGroup>
+
+              <ButtomBar>
+                <ButtomCTA onClick={handleMilestoneModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleBlockModal} show={showBlock}>
+          <Header>
             <h2>Adicionar Blocos</h2>
+          </Header>
 
-            <label htmlFor="blocks">Insira o nome do bloco</label>
-            <input
-              type="text"
-              id="blocks"
-              placeholder="Nome da Disciplina"
-              value={block}
-              onChange={(e) => setBlock(e.target.value)}
-              required
-            />
-            {/* <span>{block}</span> */}
+            <Body>
+              <Form onSubmit={handleMilestoneBlock}>
+                <Text
+                  type="text"
+                  id="blocks"
+                  placeholder="Nome da Disciplina"
+                  value={block}
+                  onChange={(e) => setBlock(e.target.value)}
+                  required
+                >
+                  Insira o nome do bloco
+                </Text>
+                {/* <span>{block}</span> */}
 
-            <div>
-              <button onClick={handleBlockModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
-        </Modal>
+                <ButtomBar>
+                  <ButtomCTA onClick={handleBlockModal}>Pular</ButtomCTA>
+                  <ButtomCTA type="submit">Concluir</ButtomCTA>
+                </ButtomBar>
+              </Form>
+            </Body>
+        </InternModal>
 
-        <Modal onClose={handleTaskModal} show={showTask}>
+        <InternModal onClose={handleTaskModal} show={showTask}>
           <form onSubmit={handleCreateTask}>
             <h2>Adicionar Atividade</h2>
             {/* task 
@@ -492,7 +490,98 @@ function SubjectDetail() {
               <button type="submit">Continuar</button>
             </div>
           </form>
-        </Modal>
+        </InternModal>
+
+        <InternModal onClose={handleTaskModal} show={showTask}>
+          <Header>
+            <h2>Editar Marco</h2>
+          </Header>
+          
+          <Body>
+            <Form onSubmit={}>
+
+            <Text
+              type="text"
+              id="title"
+              placeholder="Nome da Disciplina"
+              value={nameTask}
+              onChange={(e) => setNameTask(e.target.value)}
+              required
+            >
+              Título
+            </Text>
+
+            <Textarea
+              type="text"
+              id="description"
+              placeholder="Escreva aqui..."
+              rows="5"
+              cols="33"
+              value={descriptionTask}
+              onChange={(e) => setDescriptionTask(e.target.value)}
+              required
+            >
+              Descrição
+            </Textarea>
+
+            <span>Visível para os alunos</span>
+            <RadioGroup>
+              <input
+                type="radio"
+                id="yes"
+                name="visible"
+                defaultValue={}
+                onChange={setForm}
+              />
+              <label htmlFor="yes">Sim</label>
+
+              <input
+                type="radio"
+                id="no"
+                name="visible"
+                defaultValue={}
+                onChange={setForm}
+              />
+              <label htmlFor="no">Não</label>
+            </RadioGroup>
+
+            <ButtomBar>
+              <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
+              <ButtomCTA type="submit">Salvar</ButtomCTA>
+            </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal>
+          <Header>
+            <h1>Excluir Marco</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={}>
+            <span>
+            Cuidado! Essa é uma ação permanente, para confirmar a exclusão do 
+            marco Introdução digite abaixo o nome do marco:
+            </span>
+
+            <Text
+              name="name"
+              value={name}
+              placeholder="Digite o nome do marco"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+              <ButtomBar>
+                <ButtomCTA secondary>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA danger type="submit">Excluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
       </Container>
     </Layout>
   );
