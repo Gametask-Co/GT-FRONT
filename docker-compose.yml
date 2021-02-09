@@ -13,4 +13,6 @@ services:
       - '{{ port }}:80'
     environment:
       - NODE_ENV=development
+      - REACT_APP_FACEBOOK_APP_ID=$CI_REACT_APP_FACEBOOK_APP_ID
+      - REACT_APP_GOOGLE_CLIENT_ID=$CI_REACT_APP_GOOGLE_CLIENT_ID
       - CI=true

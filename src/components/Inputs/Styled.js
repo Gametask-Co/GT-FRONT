@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
-import { ReactComponent as IconCheckmark } from '../../assets/icons/checkmark.svg';
+import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
+import { ReactComponent as IconCheckmark } from "../../assets/icons/checkmark.svg";
 
 export const Input = styled.input`
   height: 54px;
@@ -27,7 +27,7 @@ export const Input = styled.input`
   }
 
   &::placeholder {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: ${theme.fontSize.sm};
   }
 `;
@@ -68,7 +68,7 @@ export const Select = styled.select`
   }
 
   &::placeholder {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: ${theme.fontSize.sm};
   }
 `;
@@ -80,7 +80,7 @@ export const RadioGroup = styled.div`
   justify-content: center;
   margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)};
 
-  input[type='radio'] {
+  input[type="radio"] {
     width: 0;
     opacity: 0;
     position: fixed;
@@ -104,7 +104,7 @@ export const RadioGroup = styled.div`
     padding: ${theme.spacing.sm};
     background-color: ${theme.color.bgHigh};
 
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: ${theme.fontSize.sm};
     border: 2px solid ${theme.color.bgHigh};
 
@@ -118,7 +118,7 @@ export const RadioGroup = styled.div`
 `;
 
 // Custom Checkbox
-export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -136,7 +136,7 @@ export const Checkmark = styled(IconCheckmark)`
   height: 16px;
 
   color: ${theme.color.txtHigh};
-  display: ${(props) => (props.checked ? 'flex' : 'none')};
+  display: ${(props) => (props.checked ? "flex" : "none")};
 `;
 
 export const CheckboxLabel = styled.label`
@@ -164,7 +164,7 @@ export const StyledCheckbox = styled.label`
       : `2px solid ${theme.color.bgHigh}`};
 
   img {
-    display: ${(props) => (props.checked ? 'flex' : 'none')};
+    display: ${(props) => (props.checked ? "flex" : "none")};
     width: 16px;
     height: 16px;
     color: ${theme.color.txtHigh};
@@ -174,4 +174,33 @@ export const StyledCheckbox = styled.label`
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const Textarea = styled.textarea`
+  padding: ${theme.spacing.sm};
+  margin-bottom: ${theme.spacing.md};
+
+  border-radius: ${theme.spacing.xs};
+  border: 2px solid ${theme.color.bgHigh};
+  box-shadow: ${theme.boxShadow.l0};
+
+  color: ${theme.color.txtHigh};
+  background-color: ${theme.color.bgMedium};
+
+  outline: none;
+  font-size: ${theme.fontSize.sm};
+  transition: border 0.15s ease;
+
+  &:focus {
+    border-color: ${theme.color.txtMedium};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-size: ${theme.fontSize.sm};
+  }
 `;

@@ -81,3 +81,21 @@ export const Checkbox = ({ children, ...props }) => {
     </>
   );
 };
+
+export const Textarea = ({ children, name, ...props }) => {
+  return (
+    <>
+      <Styled.Label htmlFor={name}>{children}</Styled.Label>
+      <Styled.Textarea name={name} id={name} {...props} />
+    </>
+  );
+};
+
+export const Image = ({ children, name, ...props }) => {
+  return (
+    <>
+      <Styled.Label htmlFor={name}>{children}</Styled.Label>
+      <Styled.Input type="file" name={name} id={name} {...props} />
+    </>
+  );
+};
