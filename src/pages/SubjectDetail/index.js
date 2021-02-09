@@ -5,6 +5,10 @@ import * as Styled from "./styled";
 
 import { Header, Body } from "../../components/Modais/styled";
 
+import Form from "../../components/Form/Index";
+import { Text, Textarea, RadioGroup } from "../../components/Inputs/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
+
 import Layout from "../../components/Layout";
 import Container from "../../components/Container";
 import CardMilestoneList from "../../components/CardMilestoneList";
@@ -22,7 +26,6 @@ import { ReactComponent as Message } from "../../assets/icons/message-circle.svg
 
 import { ReactComponent as Award } from "../../assets/icons/award.svg";
 import { ReactComponent as Calendar } from "../../assets/icons/calendar.svg";
-import { ButtomCTA } from "../../components/Buttons/Index";
 
 function SubjectDetail() {
   const { signed, loading } = useAuth();
@@ -66,7 +69,7 @@ function SubjectDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        // history.push("/signin");
+        history.push("/signin");
       } else {
         api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
@@ -309,20 +312,26 @@ function SubjectDetail() {
         </Styled.SubjectWrapper>
 
         <InternModal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleRemoveStudent}>
-            <h2>Remover Aluno</h2>
-            <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
-            <br />
-            <div>
-              <button onClick={handleStudentModal}>Cancelar</button>
-              <button type="submit">Confirmar</button>
-            </div>
-          </form>
+          <Header>
+            <h1>Remover Aluno</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleRemoveStudent}>
+              <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
+              <br />
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleStudentModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Confirmar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
         </InternModal>
 
         <InternModal onClose={handleMilestoneModal} show={show}>
           <Header>
-            <h2>Adicionar Marco</h2>
+            <h1>Adicionar Marco</h1>
           </Header>
           <Body>
             <Form onSubmit={handleCreateMilestone}>
@@ -356,8 +365,8 @@ function SubjectDetail() {
                   type="radio"
                   id="yes"
                   name="visible"
-                  defaultValue={}
-                  onChange={setForm}
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
                 />
                 <label htmlFor="yes">Sim</label>
 
@@ -365,8 +374,8 @@ function SubjectDetail() {
                   type="radio"
                   id="no"
                   name="visible"
-                  defaultValue={}
-                  onChange={setForm}
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(false)}
                 />
                 <label htmlFor="no">Não</label>
               </RadioGroup>
@@ -383,33 +392,35 @@ function SubjectDetail() {
           <Header>
             <h2>Adicionar Blocos</h2>
           </Header>
+          <Body>
+            <Form onSubmit={handleMilestoneBlock}>
+              <Text
+                type="text"
+                id="blocks"
+                placeholder="Nome da Disciplina"
+                value={block}
+                onChange={(e) => setBlock(e.target.value)}
+                required
+              >
+                Insira o nome do bloco
+              </Text>
+              {/* <span>{block}</span> */}
 
-            <Body>
-              <Form onSubmit={handleMilestoneBlock}>
-                <Text
-                  type="text"
-                  id="blocks"
-                  placeholder="Nome da Disciplina"
-                  value={block}
-                  onChange={(e) => setBlock(e.target.value)}
-                  required
-                >
-                  Insira o nome do bloco
-                </Text>
-                {/* <span>{block}</span> */}
-
-                <ButtomBar>
-                  <ButtomCTA onClick={handleBlockModal}>Pular</ButtomCTA>
-                  <ButtomCTA type="submit">Concluir</ButtomCTA>
-                </ButtomBar>
-              </Form>
-            </Body>
+              <ButtomBar>
+                <ButtomCTA onClick={handleBlockModal}>Pular</ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
         </InternModal>
 
         <InternModal onClose={handleTaskModal} show={showTask}>
-          <form onSubmit={handleCreateTask}>
-            <h2>Adicionar Atividade</h2>
-            {/* task 
+          <Header>
+            <h1>Adicionar Atividade</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleCreateTask}>
+              {/* task 
               - milestone_id
               - name
               - description
@@ -417,138 +428,137 @@ function SubjectDetail() {
               - attachment_url
               - total_score */}
 
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Nome da atividade"
-              value={nameTask}
-              onChange={(e) => setNameTask(e.target.value)}
-              required
-            />
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Nome da atividade"
+                value={nameTask}
+                onChange={(e) => setNameTask(e.target.value)}
+                required
+              />
 
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={descriptionTask}
-              onChange={(e) => setDescriptionTask(e.target.value)}
-              required
-            />
+              <label htmlFor="description">Descrição</label>
+              <textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={descriptionTask}
+                onChange={(e) => setDescriptionTask(e.target.value)}
+                required
+              />
 
-            <label htmlFor="milestone">Marco</label>
-            <select
-              name="select"
-              id="milestone"
-              value={selectMilestoneTask}
-              onChange={(e) => setSelectMilestoneTask(e.target.value)}
-              required
-            >
-              <option value="" selected>
-                Selecione um marco
-              </option>
-              {milestones.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
+              <label htmlFor="milestone">Marco</label>
+              <select
+                name="select"
+                id="milestone"
+                value={selectMilestoneTask}
+                onChange={(e) => setSelectMilestoneTask(e.target.value)}
+                required
+              >
+                <option value="" selected>
+                  Selecione um marco
                 </option>
-              ))}
-            </select>
+                {milestones.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
 
-            <label htmlFor="milestone">Bloco</label>
-            <select
-              name="select"
-              id="milestone"
-              value={selectBlockTask}
-              onChange={(e) => setSelectBlockTask(e.target.value)}
-              required
-            >
-              <option value="" selected>
-                Selecione um bloco
-              </option>
-              {blocks.map((item) => (
-                <option key={item} value={item.id}>
-                  {item.name}
+              <label htmlFor="milestone">Bloco</label>
+              <select
+                name="select"
+                id="milestone"
+                value={selectBlockTask}
+                onChange={(e) => setSelectBlockTask(e.target.value)}
+                required
+              >
+                <option value="" selected>
+                  Selecione um bloco
                 </option>
-              ))}
-            </select>
+                {blocks.map((item) => (
+                  <option key={item} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
 
-            <label htmlFor="due">Prazo</label>
-            <input
-              type="date"
-              name="due"
-              id="due"
-              value={dueTask}
-              onChange={(e) => setDueTask(e.target.value)}
-              required
-            />
+              <label htmlFor="due">Prazo</label>
+              <input
+                type="date"
+                name="due"
+                id="due"
+                value={dueTask}
+                onChange={(e) => setDueTask(e.target.value)}
+                required
+              />
 
-            <div>
-              <button onClick={handleTaskModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
+              <ButtomBar>
+                <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
         </InternModal>
 
         <InternModal onClose={handleTaskModal} show={showTask}>
           <Header>
-            <h2>Editar Marco</h2>
+            <h1>Editar Marco</h1>
           </Header>
-          
           <Body>
-            <Form onSubmit={}>
+            <Form onSubmit={() => {}}>
+              <Text
+                type="text"
+                id="title"
+                placeholder="Nome da Disciplina"
+                value={nameTask}
+                onChange={(e) => setNameTask(e.target.value)}
+                required
+              >
+                Título
+              </Text>
 
-            <Text
-              type="text"
-              id="title"
-              placeholder="Nome da Disciplina"
-              value={nameTask}
-              onChange={(e) => setNameTask(e.target.value)}
-              required
-            >
-              Título
-            </Text>
+              <Textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={descriptionTask}
+                onChange={(e) => setDescriptionTask(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
 
-            <Textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={descriptionTask}
-              onChange={(e) => setDescriptionTask(e.target.value)}
-              required
-            >
-              Descrição
-            </Textarea>
+              <span>Visível para os alunos</span>
+              <RadioGroup>
+                <input
+                  type="radio"
+                  id="yes"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
+                />
+                <label htmlFor="yes">Sim</label>
 
-            <span>Visível para os alunos</span>
-            <RadioGroup>
-              <input
-                type="radio"
-                id="yes"
-                name="visible"
-                defaultValue={}
-                onChange={setForm}
-              />
-              <label htmlFor="yes">Sim</label>
+                <input
+                  type="radio"
+                  id="no"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
+                />
+                <label htmlFor="no">Não</label>
+              </RadioGroup>
 
-              <input
-                type="radio"
-                id="no"
-                name="visible"
-                defaultValue={}
-                onChange={setForm}
-              />
-              <label htmlFor="no">Não</label>
-            </RadioGroup>
-
-            <ButtomBar>
-              <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
-              <ButtomCTA type="submit">Salvar</ButtomCTA>
-            </ButtomBar>
+              <ButtomBar>
+                <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Salvar</ButtomCTA>
+              </ButtomBar>
             </Form>
           </Body>
         </InternModal>
@@ -559,29 +569,28 @@ function SubjectDetail() {
           </Header>
 
           <Body>
-            <Form onSubmit={}>
-            <span>
-            Cuidado! Essa é uma ação permanente, para confirmar a exclusão do 
-            marco Introdução digite abaixo o nome do marco:
-            </span>
+            <Form onSubmit={() => {}}>
+              <span>
+                Cuidado! Essa é uma ação permanente, para confirmar a exclusão
+                do marco Introdução digite abaixo o nome do marco:
+              </span>
 
-            <Text
-              name="name"
-              value={name}
-              placeholder="Digite o nome do marco"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+              <Text
+                name="name"
+                value={name}
+                placeholder="Digite o nome do marco"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
               <ButtomBar>
-                <ButtomCTA secondary>
-                  Cancelar
+                <ButtomCTA secondary>Cancelar</ButtomCTA>
+                <ButtomCTA danger type="submit">
+                  Excluir
                 </ButtomCTA>
-                <ButtomCTA danger type="submit">Excluir</ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
         </InternModal>
-
       </Container>
     </Layout>
   );

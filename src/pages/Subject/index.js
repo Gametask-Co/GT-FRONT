@@ -51,7 +51,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        // history.push('/signin');
+        history.push("/signin");
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
@@ -419,10 +419,10 @@ function Subject() {
               />
 
               <ButtomBar>
-                <ButtomCTA secondary>
-                  Cancelar
+                <ButtomCTA secondary>Cancelar</ButtomCTA>
+                <ButtomCTA danger type="submit">
+                  Excluir
                 </ButtomCTA>
-                <ButtomCTA danger type="submit">Excluir</ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
