@@ -1,80 +1,89 @@
-import styled from "styled-components";
+import { rem, ellipsis } from 'polished';
+import styled from 'styled-components';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 
 export const Wrapper = styled.div`
-  display: flex;
-  /* justify-content: space-between; */
-  align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  display: ${(props) => !props.tab && 'none'};
   cursor: pointer;
-  display: ${(props) => (props.tab ? "flex" : "none")};
+  display: flex;
+  align-items: center;
+  margin-bottom: ${theme.spacing.xl};
+`;
 
-  > img {
-    margin-right: 1rem;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-between;
-
-    > span {
-      font-size: 0.8rem;
-      color: #65cba0;
-      padding-top: 0.5rem;
-    }
-
-    > div {
-      display: flex;
-      align-items: center;
-    }
-  }
+export const RightSide = styled.div`
+  height: ${rem(160)};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const Thumbnail = styled.div`
-  width: 250px;
-  height: 160px;
+  width: ${rem(280)};
+  height: ${rem(160)};
 
-  margin-right: 1rem;
-  border-radius: 0.9rem;
+  margin-right: ${theme.spacing.lg};
+  border-radius: ${theme.borderRadius.sm};
 
-  background-image: url("https://upload.wikimedia.org/wikibooks/pt/8/81/Introducao_programacao_cover.png");
+  background-image: url('https://picsum.photos/400/300');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 `;
 
-export const CircleProfile = styled.div`
-  height: 30px;
-  width: 30px;
+export const Text = styled.div``;
 
-  margin-right: 1rem;
+export const Title = styled.h3`
+  ${ellipsis(rem(457), 2)}
+  margin-bottom: ${theme.spacing.sm};
+  color: ${theme.color.txtMedium};
+  font-size: ${theme.fontSize.md};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeight.sm};
+`;
 
-  background-color: #3f424d;
-  border-radius: 50%;
+export const Description = styled.p`
+  display: none;
+  color: ${theme.color.txtMedium};
+  font-size: ${theme.fontSize.md};
+  font-weight: ${theme.fontWeight.bold};
+  line-height: ${theme.lineHeight.sm};
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Teacher = styled.span`
+  margin-left: ${theme.spacing.xs};
+  color: ${theme.color.txtMedium};
+  font-size: ${theme.fontSize.xs};
+  line-height: ${theme.lineHeight.md};
+`;
+
+export const ProgressBar = styled.div`
+  > span {
+    font-size: ${theme.fontSize.xs};
+    color: ${theme.color.turquoise};
+  }
 `;
 
 export const Percentage = styled.div.attrs((props) => ({
   percentage: props.percentage,
 }))`
-  --progress: ${(props) => (props.percentage ? props.percentage : "0")};
-  height: 20px;
+  --progress: ${(props) => (props.percentage ? props.percentage : '0')};
+  height: ${theme.spacing.xs};
+  width: ${rem(287)};
   display: flex;
-
-  margin-top: 4rem;
-
-  background-color: #282a31;
-  border-radius: 50px;
+  background-color: ${theme.color.bgMedium};
+  border-radius: ${theme.borderRadius.xxs};
 
   &::before {
-    content: "";
-    padding: 0.5rem;
-
+    content: '';
     width: calc(var(--progress) * 1%);
-    /* background-color: hsl(calc(var(--progress) * 1.2), 80%, 50%); */
-    background-color: #65cba0;
+    padding: ${theme.spacing.xxs};
+    border-radius: ${theme.borderRadius.xxs};
+    background-color: ${theme.color.turquoise};
     transition: all 0.2s ease;
-    border-radius: 50px;
   }
 `;

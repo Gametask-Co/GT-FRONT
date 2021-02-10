@@ -9,6 +9,7 @@ export const DEFAULT_THEME = {
     txtLow: '#434343',
     txtMedium: '#A2A2A2',
     txtHigh: '#F0F0F0',
+    turquoise: '#65CBA0',
   },
   spacing: {
     xxs: rem(4),
@@ -48,6 +49,7 @@ export const DEFAULT_THEME = {
     xxs: rem(4),
     xs: rem(8),
     sm: rem(16),
+    pill: '50%',
   },
   boxShadow: {
     l0: 'inset 0px 4px 4px rgba(28, 30, 35, 0.7)',

@@ -4,11 +4,11 @@ import { DEFAULT_THEME as theme } from '../../styles/constants';
 import { Container } from '../../components/Grid/Index';
 
 export const PageWrapper = styled(Container)`
-  height: max-content;
-  overflow-y: hidden;
+  height: calc(100% - 106px); // header
+  width: 100%;
 `;
 
-export const MenuWrapper = styled.div`
+export const MenuWrapper = styled.aside`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -69,32 +69,6 @@ export const Body = styled.div`
   }
 `;
 
-export const SubjectWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
-
-  > div:first-child {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    button {
-      margin-left: 1rem;
-      background-color: #282a31;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 0.6rem;
-
-      &:hover {
-        cursor: pointer;
-        background-color: gray;
-      }
-    }
-  }
-`;
-
 export const Insignia = styled.p`
   display: flex;
   align-items: center;
@@ -118,4 +92,45 @@ export const Insignia = styled.p`
     color: ${theme.color.txtLow};
     margin-left: ${theme.spacing.xs};
   }
+`;
+
+export const ActionBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: ${theme.spacing.lg};
+
+  > h1 {
+    color: ${theme.color.txtHigh};
+    font-size: ${theme.fontSize.sm};
+    font-weight: ${theme.fontWeight.bold};
+  }
+`;
+
+export const ActionButtons = styled.div`
+  > button {
+    margin-left: ${theme.spacing.xs};
+    padding: ${theme.spacing.xs};
+    border: none;
+    background-color: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xs};
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${theme.color.bgHigh};
+    }
+
+    > * {
+      width: ${theme.spacing.md};
+      height: ${theme.spacing.md};
+    }
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 106px - 75px);
+  overflow-y: hidden;
 `;

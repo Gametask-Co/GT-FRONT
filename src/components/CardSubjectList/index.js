@@ -1,43 +1,27 @@
-import React from "react";
+import React from 'react';
+import * as Styled from './styled';
+import { AvatarMD } from '../Avatar';
 
-import * as Styled from "./styled";
-
-const CardSubjectList = ({
-  name,
-  teacher,
-  percentage,
-  tab,
-  milestone,
-  description,
-}) => {
+const CardSubjectList = ({ name, teacher, percentage, tab, description }) => {
   return (
     <Styled.Wrapper tab={tab}>
       <Styled.Thumbnail />
-      <div>
-        <h2>{name}</h2>
-        <h3>{description}</h3>
-
-        {milestone ? (
-          <div>
-            <span> {milestone}</span>
-          </div>
-        ) : (
-          <div>
-            <Styled.CircleProfile />
-            <span> {teacher}</span>
-            <span> {milestone}</span>
-          </div>
-        )}
-
-        {percentage ? (
-          <>
+      <Styled.RightSide>
+        <Styled.Text>
+          <Styled.Title>{name}</Styled.Title>
+          <Styled.Description>{description}</Styled.Description>
+          <Styled.Flex>
+            <AvatarMD />
+            <Styled.Teacher>{teacher}</Styled.Teacher>
+          </Styled.Flex>
+        </Styled.Text>
+        {percentage && (
+          <Styled.ProgressBar>
             <Styled.Percentage percentage={percentage} />
             <span>{percentage}% Completo</span>
-          </>
-        ) : (
-          ""
+          </Styled.ProgressBar>
         )}
-      </div>
+      </Styled.RightSide>
     </Styled.Wrapper>
   );
 };
