@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import * as Styled from './styled';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
+
+import { Col } from '../../components/Grid/Index';
+import { Header, Body } from '../../components/Modais/styled';
+
+import Form from '../../components/Form/Index';
+import { Text, Email, Textarea, Image } from '../../components/Inputs/Index';
+import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
 
 import Layout from '../../components/Layout';
-import Container from '../../components/Container';
 import CardSubjectList from '../../components/CardSubjectList';
-import Modal from '../../components/Modal';
+import { InternModal } from '../../components/Modais';
 
+import { AvatarXXL } from '../../components/Avatar';
 import { useAuth } from '../../contents/auth';
 
 import api from '../../services/api';
@@ -16,6 +24,7 @@ import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Award } from '../../assets/icons/award.svg';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
+import { ReactComponent as Trash } from '../../assets/icons/trash-2.svg';
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -25,7 +34,7 @@ function Subject() {
   const [showEditSubject, setShowEditSubject] = useState(false);
 
   // subject
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState(null);
   const [idSubject, setIdSubject] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -55,8 +64,8 @@ function Subject() {
         api
           .get('subjects')
           .then(function (res) {
-            console.log("res ------", res);
-            console.log("res ------", res.status);
+            /* console.log('res ------', res);
+            console.log('res ------', res.status); */
 
             if (user.student_id !== null) {
               setSubjects(res.data.student_user);
@@ -65,7 +74,6 @@ function Subject() {
               setSubjects(res.data.teacher_user);
               setUserFlag(true);
             }
-
             // if (res.status != "error") {
             //   setSubjects(res.data);
             // }
@@ -87,7 +95,7 @@ function Subject() {
           .catch((error) => {
             // user student
             console.log('error ------', error);
-            setSubjects([]);
+            setSubjects(null);
           });
       }
     }
@@ -130,6 +138,27 @@ function Subject() {
       });
   }
 
+  async function handleEditSubject(e, pk) {
+    e.preventDefault();
+
+    await api
+      .put(`/subjects/${pk}`, {
+        name,
+        description,
+        image,
+      })
+      .then(function (res) {
+        console.log(res.data, 'Edit Subject ok!');
+
+        setShowEditSubject(!showEditSubject);
+        setName('');
+        setDescription('');
+      })
+      .catch(function (error) {
+        console.log(error, 'Error Edit Subject error!');
+      });
+  }
+
   async function handleStudentSubject(e) {
     e.preventDefault();
 
@@ -152,158 +181,267 @@ function Subject() {
 
   return (
     <Layout>
-      <Container>
-        <Styled.MenuWrapper>
-          <Styled.CircleProfile />
-          <h3>{userFlag ? 'Professor' : 'Estudante'}</h3>
-          <h1>{userName}</h1>
-          <h3>{userEmail}</h3>
-          <div>
-            <h4>Medalhas</h4>
-            <div>
+      <Styled.PageWrapper>
+        <Col lg={3} md={4} sm={3} xs={3}>
+          <Styled.MenuWrapper>
+            <Styled.Header>
+              <AvatarXXL bottom={theme.spacing.md} />
+              <Styled.Name>
+                {userName} <span>{userFlag ? 'Pro' : 'Alu'}</span>
+              </Styled.Name>
+              <Styled.Email>{userEmail}</Styled.Email>
+            </Styled.Header>
+
+            <Styled.Body>
+              <h4>Medalhas</h4>
               <Styled.Insignia color="#CCAF4E">
                 <Award />
-                999 <span> - Ouro</span>
+                02 <span> - Ouro</span>
               </Styled.Insignia>
               <Styled.Insignia color="#F0F0F0">
                 <Award />
-                888 <span> - Prata</span>
+                04 <span> - Prata</span>
               </Styled.Insignia>
               <Styled.Insignia color="#E2673E">
                 <Award />
-                777 <span> - Bronze</span>
+                00 <span> - Bronze</span>
               </Styled.Insignia>
-            </div>
-          </div>
-          <div>
-            <h4>Troféus</h4>
-            <div>
+
+              <h4>Troféus</h4>
               <Styled.Insignia color="#CCAF4E">
                 <Star />
-                999 <span> - Ouro</span>
+                09 <span> - Ouro</span>
               </Styled.Insignia>
               <Styled.Insignia color="#F0F0F0">
                 <Star />
-                888 <span> - Prata</span>
+                11 <span> - Prata</span>
               </Styled.Insignia>
               <Styled.Insignia color="#E2673E">
                 <Star />
-                777 <span> - Bronze</span>
+                03 <span> - Bronze</span>
               </Styled.Insignia>
-            </div>
-          </div>
-        </Styled.MenuWrapper>
-        <Styled.SubjectWrapper>
-          <div>
+            </Styled.Body>
+          </Styled.MenuWrapper>
+        </Col>
+
+        <Col off={1} lg={8} md={7} sm={8} xs={8}>
+          <Styled.ActionBar>
             <h1>Disciplinas</h1>
-            <div>
+            <Styled.ActionButtons>
               <button onClick={handleSubjectModal}>
                 <Plus />
               </button>
               <button onClick={handleEditSubjectModal}>
                 <Edit />
               </button>
-            </div>
-          </div>
+            </Styled.ActionButtons>
+          </Styled.ActionBar>
 
-          {subjects.map((item) => (
-            <Link key={item.id} to={`/subject/${item.id}`}>
-              <CardSubjectList
-                key={item.id}
-                name={item.name}
-                teacher="Fulano de Tal"
-                percentage="55"
-                tab={true}
+          <Styled.ContentWrapper>
+            {subjects ? (
+              subjects?.map((item) => (
+                <Link key={item.id} to={`/subject/${item.id}`}>
+                  <CardSubjectList
+                    key={item.id}
+                    name={item.name}
+                    teacher="Fulano de Tal"
+                    percentage="55"
+                    tab
+                  />
+                </Link>
+              ))
+            ) : (
+              <Styled.NewSubject>
+                Parece que nao tem nada aqui por enquanto.
+                <Link onClick={handleSubjectModal}>
+                  Adicionar uma disciplina?
+                </Link>
+              </Styled.NewSubject>
+            )}
+          </Styled.ContentWrapper>
+        </Col>
+
+        <InternModal onClose={handleSubjectModal} show={show}>
+          <Header>
+            <h1>Criar Disciplina</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleCreateSubject}>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Nome da Disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Nome
+              </Text>
+
+              <Textarea
+                name="description"
+                value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage('null')}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Imagem
+              </Image>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleStudentModal} show={showStudent}>
+          <Header>
+            <h1>Adicionar Alunos</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleStudentSubject}>
+              <Text
+                name="link"
+                value={link}
+                placeholder="Nome da Disciplina"
+                disabled
+              >
+                Compartilhar link
+              </Text>
+
+              <Email
+                name="students"
+                value={students}
+                placeholder="Inserir alunos por email"
+                onChange={(e) => setStudents(e.target.value)}
+                required
+              >
+                Inserir alunos por email
+              </Email>
+              {/* <span>{students}</span> */}
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleStudentModal}>
+                  Pular
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        {/* when click on image, call function subjectSelected() to change [name, description and image] and show modal */}
+        <InternModal onClose={handleEditSubjectModal} show={showEditSubject}>
+          <Header>
+            <h1>Editar Disciplina</h1>
+            <Trash
+              style={{
+                position: 'absolute',
+                right: '2rem',
+                color: 'red',
+                top: '2.5rem',
+                border: '2px red solid',
+                borderRadius: '4px',
+                fontSize: '2rem',
+              }}
+            />
+          </Header>
+
+          <Body>
+            {/* handleEditSubject(pk) */}
+            <Form onSubmit={handleEditSubject}>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Nome da Disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Nome
+              </Text>
+
+              <Textarea
+                name="description"
+                value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage('null')}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Imagem
+              </Image>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleEditSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal show={false}>
+          <Header>
+            <h1>Excluir Disciplina</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleEditSubject}>
+              <span>
+                Cuidado! Essa é uma ação permanente, para confirmar a exclusão
+                da disciplina Sistemas Operacionais digite abaixo o nome da
+                disciplina:
+              </span>
+
+              <Text
+                name="name"
+                value={name}
+                placeholder="Digite o nome da disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
               />
-            </Link>
-          ))}
-        </Styled.SubjectWrapper>
 
-        <Modal onClose={handleSubjectModal} show={show}>
-          <form onSubmit={handleCreateSubject}>
-            <h2>Criar Disciplina</h2>
-
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Nome da Disciplina"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-
-            <label htmlFor="image">Imagem</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              value={image}
-              onChange={(e) => setImage('null')}
-              // onChange={(e) => setImage(e.target.value)}
-              // required
-            />
-
-            <div>
-              <button onClick={handleSubjectModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
-
-        <Modal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleStudentSubject}>
-            <h2>Adicionar Alunos</h2>
-
-            <label htmlFor="link">Compartilhar link</label>
-            <input
-              type="text"
-              id="link"
-              placeholder="Nome da Disciplina"
-              value={link}
-              disabled
-            />
-
-            <label htmlFor="students">Inserir alunos por email</label>
-            <input
-              type="text"
-              id="students"
-              placeholder="Nome da Disciplina"
-              value={students}
-              onChange={(e) => setStudents(e.target.value)}
-              required
-            />
-            {/* <span>{students}</span> */}
-
-            <div>
-              <button onClick={handleStudentModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
-        </Modal>
-
-        <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
-          <h2>Editar Disciplinas</h2>
-
-          {subjects.map((item) => (
-            <button key={item.id}>{item.name}</button>
-          ))}
-          <span onClick={handleEditSubjectModal}>Cancelar</span>
-        </Modal>
-      </Container>
+              <ButtomBar>
+                <ButtomCTA secondary>Cancelar</ButtomCTA>
+                <ButtomCTA danger type="submit">
+                  Excluir
+                </ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+      </Styled.PageWrapper>
     </Layout>
   );
 }

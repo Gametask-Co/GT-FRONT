@@ -9,6 +9,8 @@ export const DEFAULT_THEME = {
     txtLow: '#434343',
     txtMedium: '#A2A2A2',
     txtHigh: '#F0F0F0',
+    turquoise: '#65CBA0',
+    txtDanger: '#E2673E',
   },
   spacing: {
     xxs: rem(4),
@@ -20,7 +22,13 @@ export const DEFAULT_THEME = {
     xxl: rem(80),
     huge: rem(160),
   },
+  fontWeight: {
+    normal: 400,
+    semiBold: 600,
+    bold: 700,
+  },
   fontSize: {
+    xxs: rem(8),
     xs: rem(14),
     sm: rem(16),
     md: rem(24),
@@ -42,6 +50,7 @@ export const DEFAULT_THEME = {
     xxs: rem(4),
     xs: rem(8),
     sm: rem(16),
+    pill: '50%',
   },
   boxShadow: {
     l0: 'inset 0px 4px 4px rgba(28, 30, 35, 0.7)',
