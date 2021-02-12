@@ -132,5 +132,20 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 106px - 75px);
-  overflow-y: hidden;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: ${theme.spacing.xs};
+  }
+  ::-webkit-scrollbar-track {
+    background: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${theme.color.txtMedium};
+  }
 `;
