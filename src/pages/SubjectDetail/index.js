@@ -12,11 +12,6 @@ import { Header, Body } from '../../components/Modais/styled';
 import Form from '../../components/Form/Index';
 import { Text, Textarea, RadioGroup } from '../../components/Inputs/Index';
 import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
-
-import Layout from '../../components/Layout';
-import Container from '../../components/Container';
-import CardMilestoneList from '../../components/CardMilestoneList';
-import CardSubjectList from '../../components/CardSubjectList';
 import { InternModal } from '../../components/Modais';
 
 import { useAuth } from '../../contents/auth';

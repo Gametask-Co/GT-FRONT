@@ -11,10 +11,7 @@ import Form from '../../components/Form/Index';
 import { Text, Email, Textarea, Image } from '../../components/Inputs/Index';
 import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
 
-import * as Styled from './styled';
-
 import Layout from '../../components/Layout';
-import Container from '../../components/Container';
 import CardSubjectList from '../../components/CardSubjectList';
 import { InternModal } from '../../components/Modais';
 
