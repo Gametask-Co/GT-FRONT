@@ -1,63 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { useAuth } from '../../contents/auth';
+import { Link, useHistory } from 'react-router-dom';
 
 import * as Styled from './styled';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 
-import { ReactComponent as Logo } from '../../assets/icons/logotype.svg';
-import { ReactComponent as Message } from '../../assets/icons/message-circle.svg';
-import { ReactComponent as Bell } from '../../assets/icons/bell.svg';
+import DropdownMenu from '../DropdownMenu';
+import { GametaskLG, MessageMD, BellMD } from '../Icons';
+import { AvatarLG } from '../Avatar';
 
-const Header = ({ siteTitle }) => {
-  const { signed, signOut } = useAuth();
+const Header = ({ Title }) => {
+  const { signOut } = useAuth();
+  const history = useHistory();
+
+  const pageBack = () => {
+    history.goBack();
+  };
 
   return (
     <Styled.Header>
-      <Styled.Container>
-        <div>
-          <Logo />
-          {siteTitle ? (
-            <>
-              <a href="/">
-                <Styled.KeyboardArrowLeftIcon />
-                <span>{siteTitle}</span>
-              </a>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
-        {signed ? (
-          <div>
-            <Message />
-            <Bell />
-
-            <Styled.CircleProfile />
-            <Styled.Dropdown>
-              <Styled.KeyboardArrowDownIcon />
-              <Styled.DropDownContent>
-                <a href="https://google.com">Perfil</a>
-                <a href="/" onClick={signOut}>
-                  Sair
-                </a>
-              </Styled.DropDownContent>
-            </Styled.Dropdown>
-          </div>
-        ) : (
-          ''
+      <Styled.LeftSide>
+        <GametaskLG right={theme.spacing.lg} />
+        {Title && (
+          <Styled.WrapperTitle to={pageBack}>
+            <Styled.ArrowLeftIcon />
+            <Styled.Title>{Title}</Styled.Title>
+          </Styled.WrapperTitle>
         )}
-      </Styled.Container>
+      </Styled.LeftSide>
+
+      <Styled.RightSide>
+        <MessageMD right={theme.spacing.lg} />
+        <BellMD right={theme.spacing.lg} />
+        <AvatarLG />
+        <DropdownMenu>
+          <Link to="/profile">Perfil</Link>
+          <Link to="/" onClick={signOut}>
+            Sair
+          </Link>
+        </DropdownMenu>
+      </Styled.RightSide>
     </Styled.Header>
   );
 };
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
+  Title: PropTypes.string,
 };
-
 Header.defaultProps = {
-  siteTitle: ``,
+  Title: ``,
 };
 
 export default Header;

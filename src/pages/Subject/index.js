@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 
-import { Header, Body } from "../../components/Modais/styled";
+import * as Styled from './styled';
+import { DEFAULT_THEME as theme } from '../../styles/constants';
 
-import Form from "../../components/Form/Index";
-import { Text, Email, Textarea, Image } from "../../components/Inputs/Index";
-import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
+import { Col } from '../../components/Grid/Index';
+import { Header, Body } from '../../components/Modais/styled';
 
-import * as Styled from "./styled";
+import Form from '../../components/Form/Index';
+import { Text, Email, Textarea, Image } from '../../components/Inputs/Index';
+import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
 
-import Layout from "../../components/Layout";
-import Container from "../../components/Container";
-import CardSubjectList from "../../components/CardSubjectList";
-import { InternModal } from "../../components/Modais";
+import Layout from '../../components/Layout';
+import CardSubjectList from '../../components/CardSubjectList';
+import { InternModal } from '../../components/Modais';
 
-import { useAuth } from "../../contents/auth";
+import { AvatarXXL } from '../../components/Avatar';
+import { useAuth } from '../../contents/auth';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
-import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
-import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
-import { ReactComponent as Award } from "../../assets/icons/award.svg";
-import { ReactComponent as Star } from "../../assets/icons/star.svg";
-import { ReactComponent as Trash } from "../../assets/icons/trash-2.svg";
+import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
+import { ReactComponent as Award } from '../../assets/icons/award.svg';
+import { ReactComponent as Star } from '../../assets/icons/star.svg';
+import { ReactComponent as Trash } from '../../assets/icons/trash-2.svg';
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -32,18 +34,18 @@ function Subject() {
   const [showEditSubject, setShowEditSubject] = useState(false);
 
   // subject
-  const [subjects, setSubjects] = useState([]);
-  const [idSubject, setIdSubject] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [subjects, setSubjects] = useState(null);
+  const [idSubject, setIdSubject] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
 
   //student
-  const [link, setLink] = useState("");
-  const [students, setStudents] = useState(""); // []
+  const [link, setLink] = useState('');
+  const [students, setStudents] = useState(''); // []
 
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [userFlag, setUserFlag] = useState(false);
 
   const history = useHistory();
@@ -51,7 +53,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push("/signin");
+        history.push('/signin');
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
@@ -60,10 +62,10 @@ function Subject() {
         // // user.teacher
         // api.get("/teacher/subjects").then(function (res) {
         api
-          .get("subjects")
+          .get('subjects')
           .then(function (res) {
-            console.log("res ------", res);
-            console.log("res ------", res.status);
+            /* console.log('res ------', res);
+            console.log('res ------', res.status); */
 
             if (user.student_id !== null) {
               setSubjects(res.data.student_user);
@@ -72,7 +74,6 @@ function Subject() {
               setSubjects(res.data.teacher_user);
               setUserFlag(true);
             }
-
             // if (res.status != "error") {
             //   setSubjects(res.data);
             // }
@@ -93,8 +94,8 @@ function Subject() {
           })
           .catch((error) => {
             // user student
-            console.log("error ------", error);
-            setSubjects([]);
+            console.log('error ------', error);
+            setSubjects(null);
           });
       }
     }
@@ -116,24 +117,24 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subjects", {
+      .post('/subjects', {
         name,
         description,
         image,
       })
       .then(function (res) {
-        console.log(res.data, "Create Subject ok!");
+        console.log(res.data, 'Create Subject ok!');
 
         setShow(!show);
-        setName("");
-        setDescription("");
+        setName('');
+        setDescription('');
 
         setIdSubject(res.data.id);
-        setLink("https://gametask.com.br/subject/" + res.data.id);
+        setLink('https://gametask.com.br/subject/' + res.data.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, "Error Subject error!");
+        console.log(error, 'Error Subject error!');
       });
   }
 
@@ -147,14 +148,14 @@ function Subject() {
         image,
       })
       .then(function (res) {
-        console.log(res.data, "Edit Subject ok!");
+        console.log(res.data, 'Edit Subject ok!');
 
         setShowEditSubject(!showEditSubject);
-        setName("");
-        setDescription("");
+        setName('');
+        setDescription('');
       })
       .catch(function (error) {
-        console.log(error, "Error Edit Subject error!");
+        console.log(error, 'Error Edit Subject error!');
       });
   }
 
@@ -162,90 +163,103 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post("/subjects/student/email", {
+      .post('/subjects/student/email', {
         subject_id: idSubject,
         student_email: students,
       })
       .then(function (res) {
-        console.log(res, "add Student on Subject ok!");
-        setLink("");
-        setStudents("");
+        console.log(res, 'add Student on Subject ok!');
+        setLink('');
+        setStudents('');
 
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, "Error Student on Subject error!");
+        console.log(error, 'Error Student on Subject error!');
       });
   }
 
   return (
     <Layout>
-      <Container>
-        <Styled.MenuWrapper>
-          <Styled.CircleProfile />
-          <h3>{userFlag ? "Professor" : "Estudante"}</h3>
-          <h1>{userName}</h1>
-          <h3>{userEmail}</h3>
-          <div>
-            <h4>Medalhas</h4>
-            <div>
+      <Styled.PageWrapper>
+        <Col lg={3} md={4} sm={3} xs={3}>
+          <Styled.MenuWrapper>
+            <Styled.Header>
+              <AvatarXXL bottom={theme.spacing.md} />
+              <Styled.Name>
+                {userName} <span>{userFlag ? 'Pro' : 'Alu'}</span>
+              </Styled.Name>
+              <Styled.Email>{userEmail}</Styled.Email>
+            </Styled.Header>
+
+            <Styled.Body>
+              <h4>Medalhas</h4>
               <Styled.Insignia color="#CCAF4E">
                 <Award />
-                999 <span> - Ouro</span>
+                02 <span> - Ouro</span>
               </Styled.Insignia>
               <Styled.Insignia color="#F0F0F0">
                 <Award />
-                888 <span> - Prata</span>
+                04 <span> - Prata</span>
               </Styled.Insignia>
               <Styled.Insignia color="#E2673E">
                 <Award />
-                777 <span> - Bronze</span>
+                00 <span> - Bronze</span>
               </Styled.Insignia>
-            </div>
-          </div>
-          <div>
-            <h4>Troféus</h4>
-            <div>
+
+              <h4>Troféus</h4>
               <Styled.Insignia color="#CCAF4E">
                 <Star />
-                999 <span> - Ouro</span>
+                09 <span> - Ouro</span>
               </Styled.Insignia>
               <Styled.Insignia color="#F0F0F0">
                 <Star />
-                888 <span> - Prata</span>
+                11 <span> - Prata</span>
               </Styled.Insignia>
               <Styled.Insignia color="#E2673E">
                 <Star />
-                777 <span> - Bronze</span>
+                03 <span> - Bronze</span>
               </Styled.Insignia>
-            </div>
-          </div>
-        </Styled.MenuWrapper>
-        <Styled.SubjectWrapper>
-          <div>
+            </Styled.Body>
+          </Styled.MenuWrapper>
+        </Col>
+
+        <Col off={1} lg={8} md={7} sm={8} xs={8}>
+          <Styled.ActionBar>
             <h1>Disciplinas</h1>
-            <div>
+            <Styled.ActionButtons>
               <button onClick={handleSubjectModal}>
                 <Plus />
               </button>
               <button onClick={handleEditSubjectModal}>
                 <Edit />
               </button>
-            </div>
-          </div>
+            </Styled.ActionButtons>
+          </Styled.ActionBar>
 
-          {subjects.map((item) => (
-            <Link key={item.id} to={`/subject/${item.id}`}>
-              <CardSubjectList
-                key={item.id}
-                name={item.name}
-                teacher="Fulano de Tal"
-                percentage="55"
-                tab={true}
-              />
-            </Link>
-          ))}
-        </Styled.SubjectWrapper>
+          <Styled.ContentWrapper>
+            {subjects ? (
+              subjects?.map((item) => (
+                <Link key={item.id} to={`/subject/${item.id}`}>
+                  <CardSubjectList
+                    key={item.id}
+                    name={item.name}
+                    teacher="Fulano de Tal"
+                    percentage="55"
+                    tab
+                  />
+                </Link>
+              ))
+            ) : (
+              <Styled.NewSubject>
+                Parece que nao tem nada aqui por enquanto.
+                <Link onClick={handleSubjectModal}>
+                  Adicionar uma disciplina?
+                </Link>
+              </Styled.NewSubject>
+            )}
+          </Styled.ContentWrapper>
+        </Col>
 
         <InternModal onClose={handleSubjectModal} show={show}>
           <Header>
@@ -280,7 +294,7 @@ function Subject() {
                 name="image"
                 value={image}
                 accept="image/*"
-                onChange={(e) => setImage("null")}
+                onChange={(e) => setImage('null')}
                 // onChange={(e) => setImage(e.target.value)}
                 // required
               >
@@ -340,13 +354,13 @@ function Subject() {
             <h1>Editar Disciplina</h1>
             <Trash
               style={{
-                position: "absolute",
-                right: "2rem",
-                color: "red",
-                top: "2.5rem",
-                border: "2px red solid",
-                borderRadius: "4px",
-                fontSize: "2rem",
+                position: 'absolute',
+                right: '2rem',
+                color: 'red',
+                top: '2.5rem',
+                border: '2px red solid',
+                borderRadius: '4px',
+                fontSize: '2rem',
               }}
             />
           </Header>
@@ -380,7 +394,7 @@ function Subject() {
                 name="image"
                 value={image}
                 accept="image/*"
-                onChange={(e) => setImage("null")}
+                onChange={(e) => setImage('null')}
                 // onChange={(e) => setImage(e.target.value)}
                 // required
               >
@@ -427,7 +441,7 @@ function Subject() {
             </Form>
           </Body>
         </InternModal>
-      </Container>
+      </Styled.PageWrapper>
     </Layout>
   );
 }
