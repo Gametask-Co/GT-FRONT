@@ -27,7 +27,7 @@ function Subject() {
   const [showEditSubject, setShowEditSubject] = useState(false);
 
   // subject
-  const [subjects, setSubjects] = useState([]);
+  const [subjects, setSubjects] = useState(null);
   const [idSubject, setIdSubject] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -67,7 +67,6 @@ function Subject() {
               setSubjects(res.data.teacher_user);
               setUserFlag(true);
             }
-
             // if (res.status != "error") {
             //   setSubjects(res.data);
             // }
@@ -89,7 +88,10 @@ function Subject() {
           .catch((error) => {
             // user student
             console.log('error ------', error);
-            setSubjects([]);
+            setSubjects(null);
+          })
+          .finally(() => {
+            console.log(subjects);
           });
       }
     }
@@ -211,53 +213,26 @@ function Subject() {
           </Styled.ActionBar>
 
           <Styled.ContentWrapper>
-            <CardSubjectList
-              name="Sistemas Operacionais"
-              teacher="Fulano de Tal"
-              percentage="55"
-              tab
-            />
-            <CardSubjectList
-              name="Análise e Projeto Orientado a Objetos"
-              teacher="Fulano de Tal"
-              percentage="55"
-            />
-            <CardSubjectList
-              name="Seminário de Orientação ao Projeto de Desenvolvimento de Sistema Web"
-              teacher="Fulano de Tal"
-              percentage="55"
-              tab
-            />
-            <CardSubjectList
-              name="Desenvolvimento para Dispositivos Móveis"
-              teacher="Fulano de Tal"
-              percentage="55"
-              tab
-            />
-            <CardSubjectList
-              name="Teste"
-              teacher="Fulano de Tal"
-              percentage="55"
-              tab
-            />
-            <CardSubjectList
-              name="Teste"
-              teacher="Fulano de Tal"
-              percentage="55"
-              tab
-            />
-
-            {subjects.map((item) => (
-              <Link key={item.id} to={`/subject/${item.id}`}>
-                <CardSubjectList
-                  key={item.id}
-                  name={item.name}
-                  teacher="Fulano de Tal"
-                  percentage="55"
-                  tab={true}
-                />
-              </Link>
-            ))}
+            {subjects ? (
+              subjects?.map((item) => (
+                <Link key={item.id} to={`/subject/${item.id}`}>
+                  <CardSubjectList
+                    key={item.id}
+                    name={item.name}
+                    teacher="Fulano de Tal"
+                    percentage="55"
+                    tab
+                  />
+                </Link>
+              ))
+            ) : (
+              <Styled.NewSubject>
+                Parece que nao tem nada aqui por enquanto.
+                <Link onClick={handleSubjectModal}>
+                  Adicionar uma disciplina?
+                </Link>
+              </Styled.NewSubject>
+            )}
           </Styled.ContentWrapper>
         </Col>
 
@@ -340,7 +315,7 @@ function Subject() {
         <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
           <h2>Editar Disciplinas</h2>
 
-          {subjects.map((item) => (
+          {subjects?.map((item) => (
             <button key={item.id}>{item.name}</button>
           ))}
           <span onClick={handleEditSubjectModal}>Cancelar</span>

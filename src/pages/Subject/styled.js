@@ -149,3 +149,18 @@ export const ContentWrapper = styled.div`
     background: ${theme.color.txtMedium};
   }
 `;
+
+export const NewSubject = styled.h2`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: ${theme.spacing.huge};
+  color: ${theme.color.txtMedium};
+  font-weight: ${theme.fontWeight.bold};
+
+  > a {
+    margin-top: ${theme.spacing.sm};
+    color: ${theme.color.txtHigh};
+  }
+`;
