@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Checkmark from '../../assets/icons/checkmark.svg';
-import * as Styled from './Styled';
+import React, { useState } from "react";
+import Checkmark from "../../assets/icons/checkmark.svg";
+import * as Styled from "./Styled";
 
 export const Text = ({ children, name, ...props }) => {
   return (
@@ -78,6 +78,24 @@ export const Checkbox = ({ children, ...props }) => {
           {children}
         </Styled.CheckboxLabel>
       </Styled.CheckboxContainer>
+    </>
+  );
+};
+
+export const Textarea = ({ children, name, ...props }) => {
+  return (
+    <>
+      <Styled.Label htmlFor={name}>{children}</Styled.Label>
+      <Styled.Textarea name={name} id={name} {...props} />
+    </>
+  );
+};
+
+export const Image = ({ children, name, ...props }) => {
+  return (
+    <>
+      <Styled.Label htmlFor={name}>{children}</Styled.Label>
+      <Styled.Input type="file" name={name} id={name} {...props} />
     </>
   );
 };

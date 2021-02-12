@@ -7,7 +7,17 @@ import Layout from '../../components/Layout';
 import { Container } from '../../components/Grid/Index';
 import CardMilestoneList from '../../components/CardMilestoneList';
 import CardSubjectList from '../../components/CardSubjectList';
-import Modal from '../../components/Modal';
+import { Header, Body } from '../../components/Modais/styled';
+
+import Form from '../../components/Form/Index';
+import { Text, Textarea, RadioGroup } from '../../components/Inputs/Index';
+import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
+
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
+import CardMilestoneList from '../../components/CardMilestoneList';
+import CardSubjectList from '../../components/CardSubjectList';
+import { InternModal } from '../../components/Modais';
 
 import { useAuth } from '../../contents/auth';
 
@@ -63,7 +73,7 @@ function SubjectDetail() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        // history.push("/signin");
+        history.push('/signin');
       } else {
         api.get('/subjects').then(function (res) {
           res.data.teacher_user.map((item) => {
@@ -305,113 +315,116 @@ function SubjectDetail() {
           ))}
         </Styled.SubjectWrapper>
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleRemoveStudent}>
-            <h2>Remover Aluno</h2>
-            <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
-            <br />
-            <div>
-              <button onClick={handleStudentModal}>Cancelar</button>
-              <button type="submit">Confirmar</button>
-            </div>
-          </form>
-        </Modal>
+        <InternModal onClose={handleStudentModal} show={showStudent}>
+          <Header>
+            <h1>Remover Aluno</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleRemoveStudent}>
+              <p>Deseja realmente resolver o aluno da disciplina?</p> <br />
+              <br />
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleStudentModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Confirmar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
 
-        <Modal onClose={handleMilestoneModal} show={show}>
-          <form onSubmit={handleCreateMilestone}>
-            <h2>Adicionar Marco</h2>
-
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Titulo do marco"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-
-            <label htmlFor="visibility">Visível para os alunos</label>
-            <Styled.FilterRadio>
-              <input
-                type="radio"
-                id="featured-radio"
-                className="radio-button"
-                name="content-filter"
-                defaultChecked="checked"
-                value={visibility}
-                onChange={() => setVisibility(true)}
-              />
-              <input
-                type="radio"
-                id="personal-radio"
-                className="radio-button"
-                name="content-filter"
-                value={visibility}
-                onChange={() => setVisibility(false)}
-              />
-
-              <label
-                htmlFor="featured-radio"
-                className="filter-label featured"
-                id="feature-label"
+        <InternModal onClose={handleMilestoneModal} show={show}>
+          <Header>
+            <h1>Adicionar Marco</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleCreateMilestone}>
+              <Text
+                type="text"
+                id="name"
+                placeholder="Titulo do marco"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               >
-                Sim
-              </label>
-              <label
-                htmlFor="personal-radio"
-                className="filter-label personal"
-                id="personal-label"
+                Título
+              </Text>
+
+              <Textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
               >
-                Não
-              </label>
-            </Styled.FilterRadio>
+                Descrição
+              </Textarea>
 
-            <div>
-              <button onClick={handleMilestoneModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
+              <span>Visível para os alunos</span>
+              <RadioGroup>
+                <input
+                  type="radio"
+                  id="yes"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
+                />
+                <label htmlFor="yes">Sim</label>
 
-        <Modal onClose={handleBlockModal} show={showBlock}>
-          <form onSubmit={handleMilestoneBlock}>
+                <input
+                  type="radio"
+                  id="no"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(false)}
+                />
+                <label htmlFor="no">Não</label>
+              </RadioGroup>
+
+              <ButtomBar>
+                <ButtomCTA onClick={handleMilestoneModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleBlockModal} show={showBlock}>
+          <Header>
             <h2>Adicionar Blocos</h2>
+          </Header>
+          <Body>
+            <Form onSubmit={handleMilestoneBlock}>
+              <Text
+                type="text"
+                id="blocks"
+                placeholder="Nome da Disciplina"
+                value={block}
+                onChange={(e) => setBlock(e.target.value)}
+                required
+              >
+                Insira o nome do bloco
+              </Text>
+              {/* <span>{block}</span> */}
 
-            <label htmlFor="blocks">Insira o nome do bloco</label>
-            <input
-              type="text"
-              id="blocks"
-              placeholder="Nome da Disciplina"
-              value={block}
-              onChange={(e) => setBlock(e.target.value)}
-              required
-            />
-            {/* <span>{block}</span> */}
+              <ButtomBar>
+                <ButtomCTA onClick={handleBlockModal}>Pular</ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
 
-            <div>
-              <button onClick={handleBlockModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
-        </Modal>
-
-        <Modal onClose={handleTaskModal} show={showTask}>
-          <form onSubmit={handleCreateTask}>
-            <h2>Adicionar Atividade</h2>
-            {/* task 
+        <InternModal onClose={handleTaskModal} show={showTask}>
+          <Header>
+            <h1>Adicionar Atividade</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={handleCreateTask}>
+              {/* task 
               - milestone_id
               - name
               - description
@@ -419,80 +432,169 @@ function SubjectDetail() {
               - attachment_url
               - total_score */}
 
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Nome da atividade"
-              value={nameTask}
-              onChange={(e) => setNameTask(e.target.value)}
-              required
-            />
+              <label htmlFor="name">Nome</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Nome da atividade"
+                value={nameTask}
+                onChange={(e) => setNameTask(e.target.value)}
+                required
+              />
 
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={descriptionTask}
-              onChange={(e) => setDescriptionTask(e.target.value)}
-              required
-            />
+              <label htmlFor="description">Descrição</label>
+              <textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={descriptionTask}
+                onChange={(e) => setDescriptionTask(e.target.value)}
+                required
+              />
 
-            <label htmlFor="milestone">Marco</label>
-            <select
-              name="select"
-              id="milestone"
-              value={selectMilestoneTask}
-              onChange={(e) => setSelectMilestoneTask(e.target.value)}
-              required
-            >
-              <option value="" selected>
-                Selecione um marco
-              </option>
-              {milestones.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
+              <label htmlFor="milestone">Marco</label>
+              <select
+                name="select"
+                id="milestone"
+                value={selectMilestoneTask}
+                onChange={(e) => setSelectMilestoneTask(e.target.value)}
+                required
+              >
+                <option value="" selected>
+                  Selecione um marco
                 </option>
-              ))}
-            </select>
+                {milestones.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
 
-            <label htmlFor="milestone">Bloco</label>
-            <select
-              name="select"
-              id="milestone"
-              value={selectBlockTask}
-              onChange={(e) => setSelectBlockTask(e.target.value)}
-              required
-            >
-              <option value="" selected>
-                Selecione um bloco
-              </option>
-              {blocks.map((item) => (
-                <option key={item} value={item.id}>
-                  {item.name}
+              <label htmlFor="milestone">Bloco</label>
+              <select
+                name="select"
+                id="milestone"
+                value={selectBlockTask}
+                onChange={(e) => setSelectBlockTask(e.target.value)}
+                required
+              >
+                <option value="" selected>
+                  Selecione um bloco
                 </option>
-              ))}
-            </select>
+                {blocks.map((item) => (
+                  <option key={item} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
 
-            <label htmlFor="due">Prazo</label>
-            <input
-              type="date"
-              name="due"
-              id="due"
-              value={dueTask}
-              onChange={(e) => setDueTask(e.target.value)}
-              required
-            />
+              <label htmlFor="due">Prazo</label>
+              <input
+                type="date"
+                name="due"
+                id="due"
+                value={dueTask}
+                onChange={(e) => setDueTask(e.target.value)}
+                required
+              />
 
-            <div>
-              <button onClick={handleTaskModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
+              <ButtomBar>
+                <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleTaskModal} show={showTask}>
+          <Header>
+            <h1>Editar Marco</h1>
+          </Header>
+          <Body>
+            <Form onSubmit={() => {}}>
+              <Text
+                type="text"
+                id="title"
+                placeholder="Nome da Disciplina"
+                value={nameTask}
+                onChange={(e) => setNameTask(e.target.value)}
+                required
+              >
+                Título
+              </Text>
+
+              <Textarea
+                type="text"
+                id="description"
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                value={descriptionTask}
+                onChange={(e) => setDescriptionTask(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <span>Visível para os alunos</span>
+              <RadioGroup>
+                <input
+                  type="radio"
+                  id="yes"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
+                />
+                <label htmlFor="yes">Sim</label>
+
+                <input
+                  type="radio"
+                  id="no"
+                  name="visible"
+                  defaultValue={visibility}
+                  onChange={(e) => setVisibility(true)}
+                />
+                <label htmlFor="no">Não</label>
+              </RadioGroup>
+
+              <ButtomBar>
+                <ButtomCTA onClick={handleTaskModal}>Cancelar</ButtomCTA>
+                <ButtomCTA type="submit">Salvar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal>
+          <Header>
+            <h1>Excluir Marco</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={() => {}}>
+              <span>
+                Cuidado! Essa é uma ação permanente, para confirmar a exclusão
+                do marco Introdução digite abaixo o nome do marco:
+              </span>
+
+              <Text
+                name="name"
+                value={name}
+                placeholder="Digite o nome do marco"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <ButtomBar>
+                <ButtomCTA secondary>Cancelar</ButtomCTA>
+                <ButtomCTA danger type="submit">
+                  Excluir
+                </ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
       </Container>
     </Layout>
   );

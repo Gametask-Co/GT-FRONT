@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { DEFAULT_THEME as theme } from '../../styles/constants';
+
 import { Row } from '../../components/Grid/Index';
 import bg from '../../assets/img/bg-login.gif';
 
@@ -156,4 +157,38 @@ export const PageError = styled(Row)`
     color: ${theme.color.txtHigh} !important;
     margin-bottom: ${theme.spacing.xl};
   }
+`;
+
+// Intern Modal
+
+export const ContainerModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+  transition: all ease 4s;
+`;
+
+export const ModalMain = styled.section`
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: ${theme.spacing.lg};
+
+  background: ${theme.color.bgMedium};
+
+  box-shadow: ${theme.boxShadow.l4};
+  border-radius: ${theme.borderRadius.sm};
+
+  width: 30%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: ${theme.color.txtMedium};
 `;

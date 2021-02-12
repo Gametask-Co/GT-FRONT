@@ -4,11 +4,21 @@ import { useHistory, Link } from 'react-router-dom';
 import * as Styled from './styled';
 import { DEFAULT_THEME as theme } from '../../styles/constants';
 
-import Layout from '../../components/Layout';
 import { Col } from '../../components/Grid/Index';
-import CardSubjectList from '../../components/CardSubjectList';
-import Modal from '../../components/Modal';
+import { Header, Body } from '../../components/Modais/styled';
 
+import Form from '../../components/Form/Index';
+import { Text, Email, Textarea, Image } from '../../components/Inputs/Index';
+import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
+
+import * as Styled from './styled';
+
+import Layout from '../../components/Layout';
+import Container from '../../components/Container';
+import CardSubjectList from '../../components/CardSubjectList';
+import { InternModal } from '../../components/Modais';
+
+import { AvatarXXL } from '../../components/Avatar';
 import { useAuth } from '../../contents/auth';
 
 import api from '../../services/api';
@@ -17,7 +27,7 @@ import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
 import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 import { ReactComponent as Award } from '../../assets/icons/award.svg';
 import { ReactComponent as Star } from '../../assets/icons/star.svg';
-import { AvatarXXL } from '../../components/Avatar';
+import { ReactComponent as Trash } from '../../assets/icons/trash-2.svg';
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -89,9 +99,6 @@ function Subject() {
             // user student
             console.log('error ------', error);
             setSubjects(null);
-          })
-          .finally(() => {
-            console.log(subjects);
           });
       }
     }
@@ -131,6 +138,27 @@ function Subject() {
       })
       .catch(function (error) {
         console.log(error, 'Error Subject error!');
+      });
+  }
+
+  async function handleEditSubject(e, pk) {
+    e.preventDefault();
+
+    await api
+      .put(`/subjects/${pk}`, {
+        name,
+        description,
+        image,
+      })
+      .then(function (res) {
+        console.log(res.data, 'Edit Subject ok!');
+
+        setShowEditSubject(!showEditSubject);
+        setName('');
+        setDescription('');
+      })
+      .catch(function (error) {
+        console.log(error, 'Error Edit Subject error!');
       });
   }
 
@@ -236,90 +264,186 @@ function Subject() {
           </Styled.ContentWrapper>
         </Col>
 
-        <Modal onClose={handleSubjectModal} show={show}>
-          <form onSubmit={handleCreateSubject}>
-            <h2>Criar Disciplina</h2>
+        <InternModal onClose={handleSubjectModal} show={show}>
+          <Header>
+            <h1>Criar Disciplina</h1>
+          </Header>
 
-            <label htmlFor="name">Nome</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Nome da Disciplina"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+          <Body>
+            <Form onSubmit={handleCreateSubject}>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Nome da Disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Nome
+              </Text>
+
+              <Textarea
+                name="description"
+                value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage('null')}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Imagem
+              </Image>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleStudentModal} show={showStudent}>
+          <Header>
+            <h1>Adicionar Alunos</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleStudentSubject}>
+              <Text
+                name="link"
+                value={link}
+                placeholder="Nome da Disciplina"
+                disabled
+              >
+                Compartilhar link
+              </Text>
+
+              <Email
+                name="students"
+                value={students}
+                placeholder="Inserir alunos por email"
+                onChange={(e) => setStudents(e.target.value)}
+                required
+              >
+                Inserir alunos por email
+              </Email>
+              {/* <span>{students}</span> */}
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleStudentModal}>
+                  Pular
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        {/* when click on image, call function subjectSelected() to change [name, description and image] and show modal */}
+        <InternModal onClose={handleEditSubjectModal} show={showEditSubject}>
+          <Header>
+            <h1>Editar Disciplina</h1>
+            <Trash
+              style={{
+                position: 'absolute',
+                right: '2rem',
+                color: 'red',
+                top: '2.5rem',
+                border: '2px red solid',
+                borderRadius: '4px',
+                fontSize: '2rem',
+              }}
             />
+          </Header>
 
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              type="text"
-              id="description"
-              placeholder="Escreva aqui..."
-              rows="5"
-              cols="33"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
+          <Body>
+            {/* handleEditSubject(pk) */}
+            <Form onSubmit={handleEditSubject}>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Nome da Disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Nome
+              </Text>
 
-            <label htmlFor="image">Imagem</label>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              value={image}
-              onChange={(e) => setImage('null')}
-              // onChange={(e) => setImage(e.target.value)}
-              // required
-            />
+              <Textarea
+                name="description"
+                value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
 
-            <div>
-              <button onClick={handleSubjectModal}>Cancelar</button>
-              <button type="submit">Continuar</button>
-            </div>
-          </form>
-        </Modal>
+              <Image
+                name="image"
+                value={image}
+                accept="image/*"
+                onChange={(e) => setImage('null')}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Imagem
+              </Image>
 
-        <Modal onClose={handleStudentModal} show={showStudent}>
-          <form onSubmit={handleStudentSubject}>
-            <h2>Adicionar Alunos</h2>
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleEditSubjectModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
 
-            <label htmlFor="link">Compartilhar link</label>
-            <input
-              type="text"
-              id="link"
-              placeholder="Nome da Disciplina"
-              value={link}
-              disabled
-            />
+        <InternModal show={false}>
+          <Header>
+            <h1>Excluir Disciplina</h1>
+          </Header>
 
-            <label htmlFor="students">Inserir alunos por email</label>
-            <input
-              type="text"
-              id="students"
-              placeholder="Nome da Disciplina"
-              value={students}
-              onChange={(e) => setStudents(e.target.value)}
-              required
-            />
-            {/* <span>{students}</span> */}
+          <Body>
+            <Form onSubmit={handleEditSubject}>
+              <span>
+                Cuidado! Essa é uma ação permanente, para confirmar a exclusão
+                da disciplina Sistemas Operacionais digite abaixo o nome da
+                disciplina:
+              </span>
 
-            <div>
-              <button onClick={handleStudentModal}>Pular</button>
-              <button type="submit">Concluir</button>
-            </div>
-          </form>
-        </Modal>
+              <Text
+                name="name"
+                value={name}
+                placeholder="Digite o nome da disciplina"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-        <Modal onClose={handleEditSubjectModal} show={showEditSubject}>
-          <h2>Editar Disciplinas</h2>
-
-          {subjects?.map((item) => (
-            <button key={item.id}>{item.name}</button>
-          ))}
-          <span onClick={handleEditSubjectModal}>Cancelar</span>
-        </Modal>
+              <ButtomBar>
+                <ButtomCTA secondary>Cancelar</ButtomCTA>
+                <ButtomCTA danger type="submit">
+                  Excluir
+                </ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
       </Styled.PageWrapper>
     </Layout>
   );
