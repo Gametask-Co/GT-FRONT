@@ -22,10 +22,15 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
 
     try {
       const isValid = await userSchema.isValid(formData);
-      // birthday format: 2021-02-25
-
       if (isValid) {
-        await signUp(name, email, birthday, gender, teacher, password);
+        await signUp(
+          name,
+          email,
+          birthday,
+          JSON.parse(gender),
+          JSON.parse(teacher),
+          password
+        );
         next();
       }
     } catch (err) {
@@ -65,8 +70,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="female"
-              name="gender-group"
-              defaultValue={gender}
+              name="gender"
+              defaultValue={false}
               onChange={setForm}
             />
             <label htmlFor="female">Feminino</label>
@@ -74,8 +79,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="male"
-              name="gender-group"
-              defaultValue={gender}
+              name="gender"
+              defaultValue={true}
               onChange={setForm}
             />
             <label htmlFor="male">Masculino</label>
@@ -86,8 +91,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="students"
-              name="iam"
-              defaultValue={teacher}
+              name="teacher"
+              defaultValue={false}
               onChange={setForm}
             />
             <label htmlFor="students">Estudante</label>
@@ -95,8 +100,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="teacher"
-              name="iam"
-              defaultValue={teacher}
+              name="teacher"
+              defaultValue={true}
               onChange={setForm}
             />
             <label htmlFor="teacher">Professor</label>
