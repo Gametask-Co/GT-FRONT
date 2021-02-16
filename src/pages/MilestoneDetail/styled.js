@@ -42,65 +42,6 @@ export const ActionButtons = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
-  display: flex;
-  width: 100%;
-
-  width: 900px;
-  max-width: 100%;
-
-  padding-right: 15px;
-  padding-left: 15px;
-
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-export const Content = styled.div`
-  width: 100%;
-  font-size: 1rem;
-  padding-right: 3rem;
-  /* overflow-y: auto; */
-  overflow-y: scroll;
-
-  div {
-    display: flex;
-
-    h3 {
-      padding-top: 0.5rem;
-    }
-
-    span {
-      color: #65cba0;
-    }
-
-    &:first-child {
-      width: 100%;
-      align-items: center;
-
-      justify-content: space-between;
-
-      div {
-        flex-direction: column;
-        align-items: start;
-      }
-    }
-
-    > button {
-      padding: 0.1rem;
-      background-color: #282a31;
-      color: white;
-      border: none;
-      font-size: 1rem;
-
-      &:hover {
-        cursor: pointer;
-        background-color: gray;
-      }
-    }
-  }
-`;
-
 export const EmbedContainer = styled.div`
   display: flex;
   position: relative;
@@ -118,32 +59,6 @@ export const EmbedContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-  }
-`;
-
-export const Block = styled.div`
-  /* display: flex; */
-  width: 40%;
-  padding-left: 1rem;
-
-  > div:first-child {
-    display: flex;
-    align-items: right;
-    align-content: right;
-
-    button {
-      margin-left: 1rem;
-      background-color: #282a31;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 0.6rem;
-      align-items: center;
-
-      &:hover {
-        cursor: pointer;
-        background-color: gray;
-      }
-    }
   }
 `;
 
