@@ -1,4 +1,46 @@
 import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
+import { Container } from "../../components/Grid/Index";
+
+export const PageWrapper = styled(Container)`
+  height: calc(100% - 106px);
+  width: 100%;
+`;
+
+export const ActionBar = styled.div`
+  display: flex;
+  align-items: right;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: ${theme.spacing.lg};
+
+  > h1 {
+    color: ${theme.color.txtHigh};
+    font-size: ${theme.fontSize.sm};
+    font-weight: ${theme.fontWeight.bold};
+  }
+`;
+
+export const ActionButtons = styled.div`
+
+  > button {
+    margin-left: ${theme.spacing.xs};
+    padding: ${theme.spacing.xs};
+    border: none;
+    background-color: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xs};
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${theme.color.bgHigh};
+    }
+
+    > * {
+      width: ${theme.spacing.md};
+      height: ${theme.spacing.md};
+    }
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -183,7 +225,8 @@ export const ButtonTab = styled.button`
   background: transparent !important;
   margin-left: 1rem !important;
 
-  border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")} !important;
+  border-bottom: 2px solid ${(props) =>
+    props.tab ? "white" : "transparent"} !important;
   color: ${(props) => (props.tab ? "white" : "gray")} !important;
 
   &:first-child {
@@ -203,21 +246,22 @@ export const ButtonTab = styled.button`
 export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 106px - 75px);
+  overflow-y: auto;
 
-  > div:first-child {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-
-    > div {
-      button {
-        border-radius: 0.3rem;
-      }
-    }
+  ::-webkit-scrollbar {
+    width: ${theme.spacing.xs};
   }
-
-  > div {
-    padding-top: 1rem;
+  ::-webkit-scrollbar-track {
+    background: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${theme.color.txtMedium};
   }
 `;
 
