@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import * as Styled from "./styled";
 
 import { Col } from "../../components/Grid/Index";
-import { Header, Body } from "../../components/Modais/styled";
+// import { Header, Body } from "../../components/Modais/styled";
 
 import Layout from "../../components/Layout";
 
@@ -31,11 +31,11 @@ function MilestoneDetail() {
       if (signed === false) {
         history.push("/signin");
       } else {
-        // api.get("/milestones").then(function (res) {
-        //   setMilestones(res.data);
-        //   // activate first class
-        //   setClassActive(0);
-        // });
+        api.get("/milestones").then(function (res) {
+          setMilestones(res.data);
+          // activate first class
+          setClassActive(0);
+        });
       }
     }
   }, [signed, history, loading]);
