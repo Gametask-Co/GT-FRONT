@@ -7,12 +7,24 @@ export const PageWrapper = styled(Container)`
   width: 100%;
 `;
 
+export const HeaderContent = styled.div`
+  > p {
+    font-size: ${theme.fontSize.sm};
+    font-weight: ${theme.fontWeight.semiBold};
+    color: ${theme.color.txtHigh};
+
+    > span {
+      color: ${theme.color.turquoise};
+    }
+  }
+`;
+
 export const ActionBar = styled.div`
   display: flex;
   align-items: right;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   width: 100%;
-  margin-bottom: ${theme.spacing.lg};
 
   > h1 {
     color: ${theme.color.txtHigh};
@@ -22,7 +34,6 @@ export const ActionBar = styled.div`
 `;
 
 export const ActionButtons = styled.div`
-
   > button {
     margin-left: ${theme.spacing.xs};
     padding: ${theme.spacing.xs};
@@ -60,6 +71,12 @@ export const EmbedContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
+
+export const TabControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 1rem;
 `;
 
 export const WrapCollabsible = styled.div`
@@ -134,20 +151,21 @@ export const WrapCollabsible = styled.div`
   }
 `;
 
-// styles on content
 export const ButtonTab = styled.button`
-  border: none !important;
-  background: transparent !important;
-  margin-left: 1rem !important;
+  padding: ${theme.spacing.xs};
 
-  border-bottom: 2px solid ${(props) =>
-    props.tab ? "white" : "transparent"} !important;
-  color: ${(props) => (props.tab ? "white" : "gray")} !important;
+  font-size: ${theme.fontSize.sm};
+  font-weight: ${theme.fontWeight.semiBold};
+  margin-left: 1rem !important;
+  background: transparent !important;
+
+  border: none !important;
+  border-bottom: 2px solid
+    ${(props) => (props.tab ? theme.color.txtHigh : "transparent")} !important;
+  color: ${(props) =>
+    props.tab ? theme.color.txtHigh : theme.color.txtLow} !important;
 
   &:first-child {
-    /* border-bottom: 2px solid ${(props) =>
-      props.tab ? "transparent" : "white"} !important; */
-    /* color: ${(props) => (props.tab ? "gray" : "white")} !important; */
     margin-left: 0rem !important;
   }
 
@@ -181,6 +199,7 @@ export const MainContent = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
+  font-size: ${theme.fontSize.xs};
+  color: ${theme.color.txtMedium};
   display: ${(props) => (props.show === true ? "block" : "none")} !important;
-  color: #a2a2a2;
 `;

@@ -22,7 +22,7 @@ function MilestoneDetail() {
   const [showTabResources, setShowTabResources] = useState(false);
   const [showTabComments, setShowTabComments] = useState(false);
 
-  const [classActive, setClassActive] = useState("");
+  // const [classActive, setClassActive] = useState("");
 
   const history = useHistory();
 
@@ -32,9 +32,9 @@ function MilestoneDetail() {
         history.push("/signin");
       } else {
         api.get("/milestones").then(function (res) {
-          setMilestones(res.data);
+          // setMilestones(res.data);
           // activate first class
-          setClassActive(0);
+          // setClassActive(0);
         });
       }
     }
@@ -64,7 +64,7 @@ function MilestoneDetail() {
       .then(function (res) {
         console.log(res.data, "Create Class ok!");
 
-        setClassActive(0);
+        // setClassActive(0);
       })
       .catch(function (error) {
         console.log(error, "Error Class error!");
@@ -73,27 +73,27 @@ function MilestoneDetail() {
 
   return (
     // pageTitle is dynamic, resquest on api
-    <Layout pageTitle="Sistemas Operacionais">
+    <Layout header={true} pageTitle="Sistemas Operacionais">
       <Styled.PageWrapper>
         <Col off={1} lg={8} md={7} sm={8} xs={8}>
-          <div>
+          <Styled.HeaderContent>
             <h1>Sistemas Operacionais</h1>
             <p>
               <span>Marco 3</span>- Gerência de Memória
             </p>
-          </div>
+          </Styled.HeaderContent>
 
           <Styled.MainContent>
             <Styled.EmbedContainer>
               <iframe
                 title="video"
                 src="https://www.youtube.com/embed/QILiHiTD3uc"
-                frameborder="0"
-                allowfullscreen
+                frameBorder="0"
+                allowFullScreen
               ></iframe>
             </Styled.EmbedContainer>
 
-            <div>
+            <Styled.TabControls>
               <Styled.ButtonTab
                 onClick={() => handleShowTab("Details")}
                 tab={showTabDetails}
@@ -112,12 +112,15 @@ function MilestoneDetail() {
               >
                 Comentários
               </Styled.ButtonTab>
-              <div>
-                <button>
-                  <Edit />
-                </button>
-              </div>
-            </div>
+
+              <Styled.ActionBar>
+                <Styled.ActionButtons>
+                  <button onClick={() => {}}>
+                    <Edit />
+                  </button>
+                </Styled.ActionButtons>
+              </Styled.ActionBar>
+            </Styled.TabControls>
 
             <Styled.ContentWrapper show={showTabDetails}>
               <p>
@@ -210,7 +213,7 @@ function MilestoneDetail() {
         <Col lg={3} md={4} sm={3} xs={3}>
           <Styled.ActionBar>
             <Styled.ActionButtons>
-              <button onClick={() => {}}>
+              <button disabled onClick={() => {}}>
                 <Inbox />
               </button>
               <button onClick={() => {}}>
