@@ -4,9 +4,14 @@ import { useHistory } from "react-router-dom";
 import * as Styled from "./styled";
 
 import { Col } from "../../components/Grid/Index";
-// import { Header, Body } from "../../components/Modais/styled";
+import { Header, Body } from "../../components/Modais/styled";
 
 import Layout from "../../components/Layout";
+
+import Form from "../../components/Form/Index";
+import { Text, Textarea } from "../../components/Inputs/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
+import { InternModal } from "../../components/Modais";
 
 import { useAuth } from "../../contents/auth";
 import api from "../../services/api";
@@ -17,6 +22,8 @@ import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
 
 function MilestoneDetail() {
   const { signed, loading } = useAuth();
+
+  const [show, setShow] = useState(false);
 
   const [showTabDetails, setShowTabDetails] = useState(true);
   const [showTabResources, setShowTabResources] = useState(false);
@@ -39,6 +46,10 @@ function MilestoneDetail() {
       }
     }
   }, [signed, history, loading]);
+
+  function handleClassModal(e) {
+    setShow(!show);
+  }
 
   function handleShowTab(element) {
     if (element === "Details") {
@@ -71,6 +82,31 @@ function MilestoneDetail() {
       });
   }
 
+  async function handleCreateClass(e) {
+    e.preventDefault();
+
+    // await api
+    //   .post('/subjects', {
+    //     name,
+    //     description,
+    //     image,
+    //   })
+    //   .then(function (res) {
+    //     console.log(res.data, 'Create Subject ok!');
+
+    //     setShow(!show);
+    //     setName('');
+    //     setDescription('');
+
+    //     setIdSubject(res.data.id);
+    //     setLink('https://gametask.com.br/subject/' + res.data.id);
+    //     setShowStudent(!showStudent);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error, 'Error Subject error!');
+    //   });
+  }
+
   return (
     // pageTitle is dynamic, resquest on api
     <Layout header={true} pageTitle="Sistemas Operacionais">
@@ -79,7 +115,7 @@ function MilestoneDetail() {
           <Styled.HeaderContent>
             <h1>Sistemas Operacionais</h1>
             <p>
-              <span>Marco 3</span>- Gerência de Memória
+              <span>Marco 3 </span>- Gerência de Memória
             </p>
           </Styled.HeaderContent>
 
@@ -216,7 +252,7 @@ function MilestoneDetail() {
               <button disabled onClick={() => {}}>
                 <Inbox />
               </button>
-              <button onClick={() => {}}>
+              <button onClick={handleClassModal}>
                 <Plus />
               </button>
               <button onClick={() => {}}>
@@ -255,6 +291,56 @@ function MilestoneDetail() {
             </div>
           </Styled.WrapCollabsible>
         </Col>
+
+        {/* modais */}
+        <InternModal onClose={handleClassModal} show={show}>
+          <Header>
+            <h1>Criar Aula</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleCreateClass}>
+              <Text
+                name="name"
+                // value={name}
+                placeholder="Título da aula"
+                // onChange={(e) => setName(e.target.value)}
+                required
+              >
+                Título
+              </Text>
+
+              <Textarea
+                name="description"
+                // value={description}
+                placeholder="Escreva aqui..."
+                rows="5"
+                cols="33"
+                // onChange={(e) => setDescription(e.target.value)}
+                required
+              >
+                Descrição
+              </Textarea>
+
+              <Text
+                name="link"
+                // value={link}
+                placeholder="www.youtube.com/exemplo"
+                // onChange={(e) => setLink(e.target.value)}
+                required
+              >
+                Vídeo externo (opcional)
+              </Text>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleClassModal}>
+                  Cancelar
+                </ButtomCTA>
+                <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
       </Styled.PageWrapper>
     </Layout>
   );
