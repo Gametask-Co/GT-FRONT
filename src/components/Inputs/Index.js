@@ -91,11 +91,27 @@ export const Textarea = ({ children, name, ...props }) => {
   );
 };
 
-export const Image = ({ children, name, ...props }) => {
+export const Upload = ({ children, name, ...props }) => {
   return (
     <>
       <Styled.Label htmlFor={name}>{children}</Styled.Label>
       <Styled.Input type="file" name={name} id={name} {...props} />
+    </>
+  );
+};
+
+export const Badge = ({ children, name, ...props }) => {
+  return (
+    <>
+      <Styled.Label htmlFor={name}>{children}</Styled.Label>
+      <Styled.Input type="text" name={name} id={name} {...props} />
+      <Styled.BadgeWrapper>
+        {props.value
+          ? props.value
+              .split(";")
+              ?.map((item, index) => <span key={index}>{item}</span>)
+          : ""}
+      </Styled.BadgeWrapper>
     </>
   );
 };

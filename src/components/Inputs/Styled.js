@@ -204,3 +204,17 @@ export const Textarea = styled.textarea`
     font-size: ${theme.fontSize.sm};
   }
 `;
+
+export const BadgeWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  span {
+    background: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xs};
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+  }
+`;

@@ -9,7 +9,7 @@ import { Header, Body } from "../../components/Modais/styled";
 import Layout from "../../components/Layout";
 
 import Form from "../../components/Form/Index";
-import { Text, Textarea } from "../../components/Inputs/Index";
+import { Text, Textarea, Badge, Upload } from "../../components/Inputs/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 import { InternModal } from "../../components/Modais";
 
@@ -24,11 +24,13 @@ function MilestoneDetail() {
   const { signed, loading } = useAuth();
 
   const [show, setShow] = useState(false);
+  const [showResources, setShowResources] = useState(false);
 
   const [showTabDetails, setShowTabDetails] = useState(true);
   const [showTabResources, setShowTabResources] = useState(false);
   const [showTabComments, setShowTabComments] = useState(false);
 
+  const [link, setLink] = useState("");
   // const [classActive, setClassActive] = useState("");
 
   const history = useHistory();
@@ -49,6 +51,9 @@ function MilestoneDetail() {
 
   function handleClassModal(e) {
     setShow(!show);
+  }
+  function handleResourcesModal(e) {
+    setShowResources(!showResources);
   }
 
   function handleShowTab(element) {
@@ -107,6 +112,10 @@ function MilestoneDetail() {
     //   });
   }
 
+  async function handleCreateResources(e) {
+    e.preventDefault();
+  }
+
   return (
     // pageTitle is dynamic, resquest on api
     <Layout header={true} pageTitle="Sistemas Operacionais">
@@ -151,7 +160,7 @@ function MilestoneDetail() {
 
               <Styled.ActionBar>
                 <Styled.ActionButtons>
-                  <button onClick={() => {}}>
+                  <button onClick={handleResourcesModal}>
                     <Edit />
                   </button>
                 </Styled.ActionButtons>
@@ -337,6 +346,44 @@ function MilestoneDetail() {
                   Cancelar
                 </ButtomCTA>
                 <ButtomCTA type="submit">Continuar</ButtomCTA>
+              </ButtomBar>
+            </Form>
+          </Body>
+        </InternModal>
+
+        <InternModal onClose={handleResourcesModal} show={showResources}>
+          <Header>
+            <h1>Adicionar Recursos</h1>
+          </Header>
+
+          <Body>
+            <Form onSubmit={handleCreateResources}>
+              <Upload
+                name="download"
+                // value={image}
+                accept="*"
+                // onChange={(e) => setImage("null")}
+                // onChange={(e) => setImage(e.target.value)}
+                // required
+              >
+                Download
+              </Upload>
+
+              <Badge
+                name="links"
+                value={link}
+                placeholder="exemplo.com;"
+                onChange={(e) => setLink(e.target.value)}
+                required
+              >
+                Links
+              </Badge>
+
+              <ButtomBar>
+                <ButtomCTA secondary onClick={handleResourcesModal}>
+                  Pular
+                </ButtomCTA>
+                <ButtomCTA type="submit">Concluir</ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
