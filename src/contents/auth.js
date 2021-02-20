@@ -68,7 +68,7 @@ const AuthProvider = ({ children }) => {
         password,
       })
       .then(() => {
-        if (teacher === true) {
+        if (teacher) {
           api
             .post("/sessions", {
               email,
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
 
               api.post("/teachers").then(() => {
                 // history.push("/signin");
-                console.log("Adds associated!");
+                console.log("Adds associated teacher!");
               });
             });
         } else {
@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
 
               api.post("/students").then(() => {
                 // history.push("/signin");
-                console.log("Adds associated!");
+                console.log("Adds associated students!");
               });
             });
         }
