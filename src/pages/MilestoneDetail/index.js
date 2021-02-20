@@ -362,6 +362,7 @@ function MilestoneDetail() {
                 name="download"
                 // value={image}
                 accept="*"
+                placeholder="Arquivo"
                 // onChange={(e) => setImage("null")}
                 // onChange={(e) => setImage(e.target.value)}
                 // required

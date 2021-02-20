@@ -5,14 +5,14 @@ import { Header, Gametask } from "../../components/Modais/styled";
 import { BackgroundModal } from "../../components/Modais";
 import { useAuth } from "../../contents/auth";
 import { Row } from "../../components/Grid/Index";
-import { Text, Date, RadioGroup } from "../../components/Inputs/Index";
+import { Text, Date, RadioGroup, Upload } from "../../components/Inputs/Index";
 import Form from "../../components/Form/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import { userSchema } from "../../validations/userValidation";
 
 const PersonalDetails = ({ setForm, formData, navigation }) => {
-  const { email, password, name, gender, birthday, teacher } = formData;
+  const { email, password, name, avatar, gender, birthday, teacher } = formData;
   const { previous, next } = navigation;
 
   const { signUp } = useAuth();
@@ -25,6 +25,7 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
       if (isValid) {
         await signUp(
           name,
+          avatar,
           email,
           birthday,
           JSON.parse(gender),
@@ -46,6 +47,17 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
       </Header>
       <Body>
         <Form onSubmit={sendData} autocomplete="off">
+          <Upload
+            name="avatar"
+            defaultValue={avatar}
+            onChange={setForm}
+            accept="image/*"
+            placeholder="Escolha uma foto sua"
+            required
+          >
+            Avatar
+          </Upload>
+
           <Text
             name="name"
             defaultValue={name}

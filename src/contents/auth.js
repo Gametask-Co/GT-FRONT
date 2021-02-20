@@ -58,10 +58,19 @@ const AuthProvider = ({ children }) => {
   }
 
   // async function signUp(name, email, date, gender, teacher, password) {
-  async function signUp(name, email, birthday, gender, teacher, password) {
+  async function signUp(
+    name,
+    avatar,
+    email,
+    birthday,
+    gender,
+    teacher,
+    password
+  ) {
     await api
       .post("/users", {
         name,
+        avatar: "",
         email,
         birthday,
         gender,
