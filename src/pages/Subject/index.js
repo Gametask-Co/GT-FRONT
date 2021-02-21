@@ -416,7 +416,9 @@ function Subject() {
                 <ButtomCTA secondary onClick={handleEditSubjectModal}>
                   Cancelar
                 </ButtomCTA>
-                <ButtomCTA type="submit">Concluir</ButtomCTA>
+                <ButtomCTA type="submit" onSubmit={handleEditSubject}>
+                  Concluir
+                </ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
