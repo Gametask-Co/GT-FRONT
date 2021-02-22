@@ -1,15 +1,7 @@
 import React from "react";
-import axios from "axios";
 
-import { renderHook, act } from "@testing-library/react-hooks";
-import {
-  render,
-  fireEvent,
-  cleanup,
-  waitFor,
-  update,
-  screen,
-} from "@testing-library/react";
+import { act } from "@testing-library/react-hooks";
+import { render, fireEvent, cleanup, waitFor } from "@testing-library/react";
 
 import App from "../../components/App";
 import Subject from "../../pages/Subject";
