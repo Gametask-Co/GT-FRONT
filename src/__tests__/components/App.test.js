@@ -12,6 +12,8 @@ describe("Test routes on App component", () => {
   it("Should check bad router", () => {
     const history = createMemoryHistory();
     history.push("/bad/request");
+
+    // componentes que sofrem alterações no state
     act(() => {
       render(
         <Router history={history}>
