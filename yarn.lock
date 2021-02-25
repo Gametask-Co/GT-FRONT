@@ -3571,6 +3571,11 @@ ansi-to-html@^0.6.11:
   dependencies:
     entities "^1.1.2"
 
+any-base@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/any-base/-/any-base-1.1.0.tgz#ae101a62bc08a597b4c9ab5b7089d456630549fe"
+  integrity sha512-uMgjozySS8adZZYePpaWs8cxB9/kdzmpX6SgJZ+wbz1K5eYk5QMYDVJaZKhxyIHUdnnJkfR7SVgStgH7LkGUyg==
+
 anymatch@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/anymatch/-/anymatch-2.0.0.tgz#bcb24b4f37934d9aa7ac17b4adaf89e7c76ef2eb"
@@ -5458,6 +5463,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^3.1.9-1:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.3.0.tgz#846dd1cce2f68aacfa156c8578f926a609b7976b"
+  integrity sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==
 
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
@@ -12123,6 +12133,14 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-aws-s3@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-aws-s3/-/react-aws-s3-1.4.0.tgz#268e8856dc0e5dd6f070252441728fc2722907a3"
+  integrity sha512-Pg6ufVboqoYbjoxPgBLs7sTDJFfeHMWwjYU9shZT/aahMr5dAVhp2m/P9OHHYKVWNRXUBIs6uFIy6pAFt28YsQ==
+  dependencies:
+    crypto-js "^3.1.9-1"
+    short-uuid "^3.1.0"
+
 react-color@^2.17.0:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
@@ -13279,6 +13297,14 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+
+short-uuid@^3.1.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/short-uuid/-/short-uuid-3.1.1.tgz#3ff427074b5fa7822c3793994d18a7a82e2f73a4"
+  integrity sha512-7dI69xtJYpTIbg44R6JSgrbDtZFuZ9vAwwmnF/L0PinykbFrhQ7V8omKsQcVw1TP0nYJ7uQp1PN6/aVMkzQFGQ==
+  dependencies:
+    any-base "^1.1.0"
+    uuid "^3.3.2"
 
 side-channel@^1.0.2:
   version "1.0.3"

@@ -11,6 +11,8 @@ import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import { userSchema } from "../../validations/userValidation";
 
+import ReactS3Client from "../../services/amazonS3";
+
 const PersonalDetails = ({ setForm, formData, navigation }) => {
   const { email, password, name, avatar, gender, birthday, teacher } = formData;
   const { previous, next } = navigation;
@@ -23,16 +25,25 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
     try {
       const isValid = await userSchema.isValid(formData);
       if (isValid) {
-        await signUp(
-          name,
-          avatar,
-          email,
-          birthday,
-          JSON.parse(gender),
-          JSON.parse(teacher),
-          password
-        );
-        next();
+
+        // post image and get url to set on variable "avatar"
+        const newFileName = "test-file.jpg";
+        ReactS3Client.uploadFile(file, newFileName)
+          .then((data) => {
+            console.log(data); // get url new image
+
+            // await signUp(
+            //   name,
+            //   avatar,
+            //   email,
+            //   birthday,
+            //   JSON.parse(gender),
+            //   JSON.parse(teacher),
+            //   password
+            // );
+            // next();
+          })
+          .catch((err) => console.error(err));
       }
     } catch (err) {
       alert("Erro no cadastro, tente novamente.");
