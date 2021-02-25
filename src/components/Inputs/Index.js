@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+
 import Checkmark from "../../assets/icons/checkmark.svg";
+import { ReactComponent as UploadIcon } from "../../assets/icons/upload.svg";
+
 import * as Styled from "./Styled";
 
 export const Text = ({ children, name, ...props }) => {
@@ -33,7 +36,13 @@ export const Date = ({ children, name, ...props }) => {
   return (
     <>
       <Styled.Label htmlFor={name}>{children}</Styled.Label>
-      <Styled.Date type="date" name={name} id={name} {...props} />
+      <Styled.Date
+        type="date"
+        placeholder="dd-mm-yyyy"
+        name={name}
+        id={name}
+        {...props}
+      />
     </>
   );
 };
@@ -91,11 +100,25 @@ export const Textarea = ({ children, name, ...props }) => {
   );
 };
 
-export const Upload = ({ children, name, ...props }) => {
+export const Upload = ({ children, name, placeholder, ...props }) => {
   return (
     <>
       <Styled.Label htmlFor={name}>{children}</Styled.Label>
-      <Styled.Input type="file" name={name} id={name} {...props} />
+      <Styled.InputFake htmlFor={name}>
+        {placeholder}
+        <Styled.ActionButtons>
+          <button>
+            <UploadIcon />
+          </button>
+        </Styled.ActionButtons>
+      </Styled.InputFake>
+      <input
+        type="file"
+        name={name}
+        id={name}
+        {...props}
+        style={{ display: "none" }}
+      />
     </>
   );
 };

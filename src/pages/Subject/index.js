@@ -301,6 +301,7 @@ function Subject() {
                 value={image}
                 accept="image/*"
                 onChange={(e) => setImage("null")}
+                placeholder="Arquivo"
                 // onChange={(e) => setImage(e.target.value)}
                 // required
               >
