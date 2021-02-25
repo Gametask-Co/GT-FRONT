@@ -228,7 +228,10 @@ function Subject() {
           <Styled.ActionBar>
             <h1>Disciplinas</h1>
             <Styled.ActionButtons>
-              <button onClick={handleSubjectModal}>
+              <button
+                data-testid="open-modal-button"
+                onClick={handleSubjectModal}
+              >
                 <Plus />
               </button>
               <button onClick={handleEditSubjectModal}>
@@ -237,7 +240,7 @@ function Subject() {
             </Styled.ActionButtons>
           </Styled.ActionBar>
 
-          <Styled.ContentWrapper>
+          <Styled.ContentWrapper data-testid="card-subject">
             {subjects ? (
               subjects?.map((item) => (
                 <Link key={item.id} to={`/subject/${item.id}`}>
@@ -253,9 +256,12 @@ function Subject() {
             ) : (
               <Styled.NewSubject>
                 Parece que nao tem nada aqui por enquanto.
-                <Link onClick={handleSubjectModal}>
+                {/* <Link onClick={handleSubjectModal}>
                   Adicionar uma disciplina?
-                </Link>
+                </Link> */}
+                <ButtomCTA onClick={handleSubjectModal}>
+                  Adicionar uma disciplina?
+                </ButtomCTA>
               </Styled.NewSubject>
             )}
           </Styled.ContentWrapper>
@@ -305,7 +311,12 @@ function Subject() {
                 <ButtomCTA secondary onClick={handleSubjectModal}>
                   Cancelar
                 </ButtomCTA>
-                <ButtomCTA type="submit">Concluir</ButtomCTA>
+                <ButtomCTA
+                  type="submit"
+                  data-testid="submit-create-subject-button"
+                >
+                  Concluir
+                </ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
@@ -405,7 +416,9 @@ function Subject() {
                 <ButtomCTA secondary onClick={handleEditSubjectModal}>
                   Cancelar
                 </ButtomCTA>
-                <ButtomCTA type="submit">Concluir</ButtomCTA>
+                <ButtomCTA type="submit" onSubmit={handleEditSubject}>
+                  Concluir
+                </ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
