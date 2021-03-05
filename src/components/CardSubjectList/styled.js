@@ -79,7 +79,7 @@ export const Percentage = styled.div.attrs((props) => ({
   border-radius: ${theme.borderRadius.xxs};
 
   &::before {
-    content: '';
+    ${({ percentage }) => percentage && "content: '';"}
     width: calc(var(--progress) * 1%);
     padding: ${theme.spacing.xxs};
     border-radius: ${theme.borderRadius.xxs};
