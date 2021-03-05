@@ -105,6 +105,8 @@ function MilestoneList() {
     setStudentActive(student_id);
   }
 
+  console.log(handleShowTab);
+
   // adds student on subject
   /* async function handleAddStudent(e) {
     e.preventDefault();
