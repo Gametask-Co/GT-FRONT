@@ -11,7 +11,7 @@ import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import { userSchema } from "../../validations/userValidation";
 
-import { UploadFile } from "../../services/amazonS3";
+// import { UploadFile } from "../../services/amazonS3";
 
 const PersonalDetails = ({ setForm, formData, navigation }) => {
   const { email, password, name, avatar, gender, birthday, teacher } = formData;
@@ -25,28 +25,38 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
     try {
       const isValid = await userSchema.isValid(formData);
       if (isValid) {
-        // post image and get url to set on variable "avatar"
-        const newFileName = "test-file.jpg";
-        //image value = e.target.files[0]
-        console.log("avatar", avatar);
-        
-        UploadFile(newFileName)
-          .then((data) => {
-            console.log("data", data); // get url new image
-            console.log("data", data.location); // get url new image
+        signUp(
+          name,
+          avatar,
+          email,
+          birthday,
+          JSON.parse(gender),
+          JSON.parse(teacher),
+          password
+        );
+        next();
 
-            // await signUp(
-            //   name,
-            //   avatar,
-            //   email,
-            //   birthday,
-            //   JSON.parse(gender),
-            //   JSON.parse(teacher),
-            //   password
-            // );
-            // next();
-          })
-          .catch((err) => console.error("err", err));
+        // // post image and get url to set on variable "avatar"
+        // const newFileName = "test-file.jpg";
+        // //image value = e.target.files[0]
+        // console.log("avatar", avatar);
+
+        // UploadFile(newFileName)
+        //   .then((data) => {
+        //     console.log("data", data.location); // get url new image
+
+        //     signUp(
+        //       name,
+        //       avatar,
+        //       email,
+        //       birthday,
+        //       JSON.parse(gender),
+        //       JSON.parse(teacher),
+        //       password
+        //     );
+        //     next();
+        //   })
+        //   .catch((err) => console.error("err", err));
       }
     } catch (err) {
       alert("Erro no cadastro, tente novamente.");
