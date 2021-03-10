@@ -99,7 +99,6 @@ function Subject() {
           });
       }
     }
-    // }, [signed, subjects, history, loading]);
   }, [signed, history, loading, user]);
 
   function handleSubjectModal(e) {
