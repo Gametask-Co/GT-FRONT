@@ -328,8 +328,7 @@ function Subject() {
           </Body>
         </InternModal>
 
-        {/* <InternModal onClose={handleStudentModal} show={showStudent}> */}
-        <InternModal onClose={handleStudentModal} show={true}>
+        <InternModal onClose={handleStudentModal} show={showStudent}>
           <Header>
             <h1>Adicionar Alunos</h1>
           </Header>
