@@ -58,17 +58,26 @@ const AuthProvider = ({ children }) => {
   }
 
   // async function signUp(name, email, date, gender, teacher, password) {
-  async function signUp(name, email, birthday, gender, teacher, password) {
+  async function signUp(
+    name,
+    avatar,
+    email,
+    birthday,
+    gender,
+    teacher,
+    password
+  ) {
     await api
       .post("/users", {
         name,
+        avatar: "",
         email,
         birthday,
         gender,
         password,
       })
       .then(() => {
-        if (teacher === true) {
+        if (teacher) {
           api
             .post("/sessions", {
               email,
@@ -80,7 +89,7 @@ const AuthProvider = ({ children }) => {
 
               api.post("/teachers").then(() => {
                 // history.push("/signin");
-                console.log("Adds associated!");
+                console.log("Adds associated teacher!");
               });
             });
         } else {
@@ -95,7 +104,7 @@ const AuthProvider = ({ children }) => {
 
               api.post("/students").then(() => {
                 // history.push("/signin");
-                console.log("Adds associated!");
+                console.log("Adds associated students!");
               });
             });
         }

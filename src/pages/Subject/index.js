@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useHistory, Link } from "react-router-dom";
 
-import * as Styled from './styled';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
+import * as Styled from "./styled";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
 
-import { Col } from '../../components/Grid/Index';
-import { Header, Body } from '../../components/Modais/styled';
+import { Col } from "../../components/Grid/Index";
+import { Header, Body } from "../../components/Modais/styled";
 
-import Form from '../../components/Form/Index';
-import { Text, Email, Textarea, Image } from '../../components/Inputs/Index';
-import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
+import Form from "../../components/Form/Index";
+import { Text, Badge, Textarea, Upload } from "../../components/Inputs/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
-import Layout from '../../components/Layout';
-import CardSubjectList from '../../components/CardSubjectList';
-import { InternModal } from '../../components/Modais';
+import Layout from "../../components/Layout";
+import CardSubjectList from "../../components/CardSubjectList";
+import { InternModal } from "../../components/Modais";
 
-import { AvatarXXL } from '../../components/Avatar';
-import { useAuth } from '../../contents/auth';
+import { AvatarXXL } from "../../components/Avatar";
+import { useAuth } from "../../contents/auth";
 
-import api from '../../services/api';
+import api from "../../services/api";
 
-import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
-import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
-import { ReactComponent as Award } from '../../assets/icons/award.svg';
-import { ReactComponent as Star } from '../../assets/icons/star.svg';
-import { ReactComponent as Trash } from '../../assets/icons/trash-2.svg';
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { ReactComponent as Award } from "../../assets/icons/award.svg";
+import { ReactComponent as Star } from "../../assets/icons/star.svg";
+import { ReactComponent as Trash } from "../../assets/icons/trash-2.svg";
 
 function Subject() {
   const { signed, user, loading } = useAuth();
@@ -35,17 +35,17 @@ function Subject() {
 
   // subject
   const [subjects, setSubjects] = useState(null);
-  const [idSubject, setIdSubject] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+  const [idSubject, setIdSubject] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   //student
-  const [link, setLink] = useState('');
-  const [students, setStudents] = useState(''); // []
+  const [link, setLink] = useState("");
+  const [students, setStudents] = useState(""); // []
 
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [userFlag, setUserFlag] = useState(false);
 
   const history = useHistory();
@@ -53,7 +53,7 @@ function Subject() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push('/signin');
+        history.push("/signin");
       } else {
         setUserName(user.name);
         setUserEmail(user.email);
@@ -62,7 +62,7 @@ function Subject() {
         // // user.teacher
         // api.get("/teacher/subjects").then(function (res) {
         api
-          .get('subjects')
+          .get("subjects")
           .then(function (res) {
             /* console.log('res ------', res);
             console.log('res ------', res.status); */
@@ -94,12 +94,11 @@ function Subject() {
           })
           .catch((error) => {
             // user student
-            console.log('error ------', error);
+            console.log("error ------", error);
             setSubjects(null);
           });
       }
     }
-    // }, [signed, subjects, history, loading]);
   }, [signed, history, loading, user]);
 
   function handleSubjectModal(e) {
@@ -117,24 +116,24 @@ function Subject() {
     e.preventDefault();
 
     await api
-      .post('/subjects', {
+      .post("/subjects", {
         name,
         description,
         image,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Subject ok!');
+        console.log(res.data, "Create Subject ok!");
 
         setShow(!show);
-        setName('');
-        setDescription('');
+        setName("");
+        setDescription("");
 
         setIdSubject(res.data.id);
-        setLink('https://gametask.com.br/subject/' + res.data.id);
+        setLink("https://gametask.com.br/classroom/" + res.data.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
-        console.log(error, 'Error Subject error!');
+        console.log(error, "Error Subject error!");
       });
   }
 
@@ -148,35 +147,41 @@ function Subject() {
         image,
       })
       .then(function (res) {
-        console.log(res.data, 'Edit Subject ok!');
+        console.log(res.data, "Edit Subject ok!");
 
         setShowEditSubject(!showEditSubject);
-        setName('');
-        setDescription('');
+        setName("");
+        setDescription("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Edit Subject error!');
+        console.log(error, "Error Edit Subject error!");
       });
   }
 
   async function handleStudentSubject(e) {
     e.preventDefault();
+    let emailStudents = students.split(";");
 
-    await api
-      .post('/subjects/student/email', {
-        subject_id: idSubject,
-        student_email: students,
-      })
-      .then(function (res) {
-        console.log(res, 'add Student on Subject ok!');
-        setLink('');
-        setStudents('');
+    await emailStudents.map((item) => {
+      api
+        .post("/subjects/student/email", {
+          subject_id: idSubject,
+          student_email: item,
+        })
+        .then(function (res) {
+          console.log(res, "add Student on Subject ok!");
+          setLink("");
+          setStudents("");
 
-        setShowStudent(!showStudent);
-      })
-      .catch(function (error) {
-        console.log(error, 'Error Student on Subject error!');
-      });
+          setShowStudent(!showStudent);
+        })
+        .catch(function (error) {
+          console.log(error, "Error Student on Subject error!");
+          alert("O email inserido não é de um estudante cadastrado!");
+        });
+
+      return false;
+    });
   }
 
   return (
@@ -187,7 +192,7 @@ function Subject() {
             <Styled.Header>
               <AvatarXXL bottom={theme.spacing.md} />
               <Styled.Name>
-                {userName} <span>{userFlag ? 'Pro' : 'Alu'}</span>
+                {userName} <span>{userFlag ? "Pro" : "Alu"}</span>
               </Styled.Name>
               <Styled.Email>{userEmail}</Styled.Email>
             </Styled.Header>
@@ -228,7 +233,10 @@ function Subject() {
           <Styled.ActionBar>
             <h1>Disciplinas</h1>
             <Styled.ActionButtons>
-              <button onClick={handleSubjectModal}>
+              <button
+                data-testid="open-modal-button"
+                onClick={handleSubjectModal}
+              >
                 <Plus />
               </button>
               <button onClick={handleEditSubjectModal}>
@@ -237,7 +245,7 @@ function Subject() {
             </Styled.ActionButtons>
           </Styled.ActionBar>
 
-          <Styled.ContentWrapper>
+          <Styled.ContentWrapper data-testid="card-subject">
             {subjects ? (
               subjects?.map((item) => (
                 <Link key={item.id} to={`/subject/${item.id}`}>
@@ -253,9 +261,12 @@ function Subject() {
             ) : (
               <Styled.NewSubject>
                 Parece que nao tem nada aqui por enquanto.
-                <Link onClick={handleSubjectModal}>
+                {/* <Link onClick={handleSubjectModal}>
                   Adicionar uma disciplina?
-                </Link>
+                </Link> */}
+                <ButtomCTA onClick={handleSubjectModal}>
+                  Adicionar uma disciplina?
+                </ButtomCTA>
               </Styled.NewSubject>
             )}
           </Styled.ContentWrapper>
@@ -290,22 +301,28 @@ function Subject() {
                 Descrição
               </Textarea>
 
-              <Image
+              <Upload
                 name="image"
                 value={image}
                 accept="image/*"
-                onChange={(e) => setImage('null')}
+                onChange={(e) => setImage("null")}
+                placeholder="Arquivo"
                 // onChange={(e) => setImage(e.target.value)}
                 // required
               >
                 Imagem
-              </Image>
+              </Upload>
 
               <ButtomBar>
                 <ButtomCTA secondary onClick={handleSubjectModal}>
                   Cancelar
                 </ButtomCTA>
-                <ButtomCTA type="submit">Concluir</ButtomCTA>
+                <ButtomCTA
+                  type="submit"
+                  data-testid="submit-create-subject-button"
+                >
+                  Concluir
+                </ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>
@@ -327,7 +344,7 @@ function Subject() {
                 Compartilhar link
               </Text>
 
-              <Email
+              {/* <Email
                 name="students"
                 value={students}
                 placeholder="Inserir alunos por email"
@@ -335,8 +352,18 @@ function Subject() {
                 required
               >
                 Inserir alunos por email
-              </Email>
+              </Email> */}
               {/* <span>{students}</span> */}
+
+              <Badge
+                name="students"
+                value={students}
+                placeholder="exemplo@hotmail.com;"
+                required
+                onChange={(e) => setStudents(e.target.value)}
+              >
+                Inserir alunos por email
+              </Badge>
 
               <ButtomBar>
                 <ButtomCTA secondary onClick={handleStudentModal}>
@@ -354,13 +381,13 @@ function Subject() {
             <h1>Editar Disciplina</h1>
             <Trash
               style={{
-                position: 'absolute',
-                right: '2rem',
-                color: 'red',
-                top: '2.5rem',
-                border: '2px red solid',
-                borderRadius: '4px',
-                fontSize: '2rem',
+                position: "absolute",
+                right: "2rem",
+                color: "red",
+                top: "2.5rem",
+                border: "2px red solid",
+                borderRadius: "4px",
+                fontSize: "2rem",
               }}
             />
           </Header>
@@ -390,22 +417,24 @@ function Subject() {
                 Descrição
               </Textarea>
 
-              <Image
+              <Upload
                 name="image"
                 value={image}
                 accept="image/*"
-                onChange={(e) => setImage('null')}
+                onChange={(e) => setImage("null")}
                 // onChange={(e) => setImage(e.target.value)}
                 // required
               >
                 Imagem
-              </Image>
+              </Upload>
 
               <ButtomBar>
                 <ButtomCTA secondary onClick={handleEditSubjectModal}>
                   Cancelar
                 </ButtomCTA>
-                <ButtomCTA type="submit">Concluir</ButtomCTA>
+                <ButtomCTA type="submit" onSubmit={handleEditSubject}>
+                  Concluir
+                </ButtomCTA>
               </ButtomBar>
             </Form>
           </Body>

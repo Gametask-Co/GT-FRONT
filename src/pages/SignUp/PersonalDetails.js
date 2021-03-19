@@ -5,14 +5,16 @@ import { Header, Gametask } from "../../components/Modais/styled";
 import { BackgroundModal } from "../../components/Modais";
 import { useAuth } from "../../contents/auth";
 import { Row } from "../../components/Grid/Index";
-import { Text, Date, RadioGroup } from "../../components/Inputs/Index";
+import { Text, Date, RadioGroup, Upload } from "../../components/Inputs/Index";
 import Form from "../../components/Form/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import { userSchema } from "../../validations/userValidation";
 
+// import { UploadFile } from "../../services/amazonS3";
+
 const PersonalDetails = ({ setForm, formData, navigation }) => {
-  const { email, password, name, gender, birthday, teacher } = formData;
+  const { email, password, name, avatar, gender, birthday, teacher } = formData;
   const { previous, next } = navigation;
 
   const { signUp } = useAuth();
@@ -22,11 +24,39 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
 
     try {
       const isValid = await userSchema.isValid(formData);
-      // birthday format: 2021-02-25
-
       if (isValid) {
-        await signUp(name, email, birthday, gender, teacher, password);
+        signUp(
+          name,
+          avatar,
+          email,
+          birthday,
+          JSON.parse(gender),
+          JSON.parse(teacher),
+          password
+        );
         next();
+
+        // // post image and get url to set on variable "avatar"
+        // const newFileName = "test-file.jpg";
+        // //image value = e.target.files[0]
+        // console.log("avatar", avatar);
+
+        // UploadFile(newFileName)
+        //   .then((data) => {
+        //     console.log("data", data.location); // get url new image
+
+        //     signUp(
+        //       name,
+        //       avatar,
+        //       email,
+        //       birthday,
+        //       JSON.parse(gender),
+        //       JSON.parse(teacher),
+        //       password
+        //     );
+        //     next();
+        //   })
+        //   .catch((err) => console.error("err", err));
       }
     } catch (err) {
       alert("Erro no cadastro, tente novamente.");
@@ -41,6 +71,17 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
       </Header>
       <Body>
         <Form onSubmit={sendData} autocomplete="off">
+          <Upload
+            name="avatar"
+            defaultValue={avatar}
+            onChange={setForm}
+            accept="image/*"
+            placeholder="Escolha uma foto sua"
+            required
+          >
+            Avatar
+          </Upload>
+
           <Text
             name="name"
             defaultValue={name}
@@ -65,8 +106,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="female"
-              name="gender-group"
-              defaultValue={gender}
+              name="gender"
+              defaultValue={false}
               onChange={setForm}
             />
             <label htmlFor="female">Feminino</label>
@@ -74,8 +115,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="male"
-              name="gender-group"
-              defaultValue={gender}
+              name="gender"
+              defaultValue={true}
               onChange={setForm}
             />
             <label htmlFor="male">Masculino</label>
@@ -86,8 +127,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="students"
-              name="iam"
-              defaultValue={teacher}
+              name="teacher"
+              defaultValue={false}
               onChange={setForm}
             />
             <label htmlFor="students">Estudante</label>
@@ -95,8 +136,8 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
             <input
               type="radio"
               id="teacher"
-              name="iam"
-              defaultValue={teacher}
+              name="teacher"
+              defaultValue={true}
               onChange={setForm}
             />
             <label htmlFor="teacher">Professor</label>
