@@ -42,6 +42,57 @@ export const Label = styled.label`
 // Custom Date Picker
 export const Date = styled(Input)``;
 
+export const InputFake = styled(Label)`
+  display: flex;
+  justify-content: space-between;
+
+  height: 54px;
+  padding: ${theme.spacing.sm};
+  margin-bottom: ${theme.spacing.md};
+
+  border-radius: ${theme.spacing.xs};
+  border: 2px solid ${theme.color.bgHigh};
+  box-shadow: ${theme.boxShadow.l0};
+
+  color: ${theme.color.txtMedium};
+  background-color: ${theme.color.bgMedium};
+
+  outline: none;
+  font-size: ${theme.fontSize.xs};
+  transition: border 0.15s ease;
+
+  &:focus {
+    border-color: ${theme.color.txtMedium};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-size: ${theme.fontSize.xs};
+  }
+`;
+
+export const ActionButtons = styled.div`
+  > button {
+    border: none;
+    background-color: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xs};
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${theme.color.bgHigh};
+    }
+
+    > * {
+      width: ${theme.spacing.md};
+      height: ${theme.spacing.md};
+    }
+  }
+`;
+
 // Custom Select
 export const Select = styled.select`
   height: 54px;
@@ -202,5 +253,19 @@ export const Textarea = styled.textarea`
   &::placeholder {
     font-family: "Poppins", sans-serif;
     font-size: ${theme.fontSize.sm};
+  }
+`;
+
+export const BadgeWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  span {
+    background: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xs};
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem;
   }
 `;

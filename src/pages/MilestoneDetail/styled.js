@@ -1,60 +1,54 @@
 import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
+import { Container } from "../../components/Grid/Index";
 
-export const Wrapper = styled.div`
-  display: flex;
+export const PageWrapper = styled(Container)`
+  height: calc(100% - 106px);
   width: 100%;
-
-  width: 900px;
-  max-width: 100%;
-
-  padding-right: 15px;
-  padding-left: 15px;
-
-  margin-left: auto;
-  margin-right: auto;
 `;
 
-export const Content = styled.div`
+export const HeaderContent = styled.div`
+  > p {
+    font-size: ${theme.fontSize.sm};
+    font-weight: ${theme.fontWeight.semiBold};
+    color: ${theme.color.txtHigh};
+
+    > span {
+      color: ${theme.color.turquoise};
+    }
+  }
+`;
+
+export const ActionBar = styled.div`
+  display: flex;
+  align-items: right;
+  /* justify-content: space-between; */
+  justify-content: flex-end;
   width: 100%;
-  font-size: 1rem;
-  padding-right: 3rem;
-  /* overflow-y: auto; */
-  overflow-y: scroll;
 
-  div {
-    display: flex;
+  > h1 {
+    color: ${theme.color.txtHigh};
+    font-size: ${theme.fontSize.sm};
+    font-weight: ${theme.fontWeight.bold};
+  }
+`;
 
-    h3 {
-      padding-top: 0.5rem;
+export const ActionButtons = styled.div`
+  > button {
+    margin-left: ${theme.spacing.xs};
+    padding: ${theme.spacing.xs};
+    border: none;
+    background-color: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xs};
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${theme.color.bgHigh};
     }
 
-    span {
-      color: #65cba0;
-    }
-
-    &:first-child {
-      width: 100%;
-      align-items: center;
-
-      justify-content: space-between;
-
-      div {
-        flex-direction: column;
-        align-items: start;
-      }
-    }
-
-    > button {
-      padding: 0.1rem;
-      background-color: #282a31;
-      color: white;
-      border: none;
-      font-size: 1rem;
-
-      &:hover {
-        cursor: pointer;
-        background-color: gray;
-      }
+    > * {
+      width: ${theme.spacing.md};
+      height: ${theme.spacing.md};
     }
   }
 `;
@@ -79,30 +73,10 @@ export const EmbedContainer = styled.div`
   }
 `;
 
-export const Block = styled.div`
-  /* display: flex; */
-  width: 40%;
-  padding-left: 1rem;
-
-  > div:first-child {
-    display: flex;
-    align-items: right;
-    align-content: right;
-
-    button {
-      margin-left: 1rem;
-      background-color: #282a31;
-      border: none;
-      padding: 0.8rem;
-      border-radius: 0.6rem;
-      align-items: center;
-
-      &:hover {
-        cursor: pointer;
-        background-color: gray;
-      }
-    }
-  }
+export const TabControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1rem 1rem;
 `;
 
 export const WrapCollabsible = styled.div`
@@ -177,19 +151,21 @@ export const WrapCollabsible = styled.div`
   }
 `;
 
-// styles on content
 export const ButtonTab = styled.button`
-  border: none !important;
-  background: transparent !important;
-  margin-left: 1rem !important;
+  padding: ${theme.spacing.xs};
 
-  border-bottom: 2px solid ${(props) => (props.tab ? "white" : "transparent")} !important;
-  color: ${(props) => (props.tab ? "white" : "gray")} !important;
+  font-size: ${theme.fontSize.sm};
+  font-weight: ${theme.fontWeight.semiBold};
+  margin-left: 1rem !important;
+  background: transparent !important;
+
+  border: none !important;
+  border-bottom: 2px solid
+    ${(props) => (props.tab ? theme.color.txtHigh : "transparent")} !important;
+  color: ${(props) =>
+    props.tab ? theme.color.txtHigh : theme.color.txtLow} !important;
 
   &:first-child {
-    /* border-bottom: 2px solid ${(props) =>
-      props.tab ? "transparent" : "white"} !important; */
-    /* color: ${(props) => (props.tab ? "gray" : "white")} !important; */
     margin-left: 0rem !important;
   }
 
@@ -203,25 +179,27 @@ export const ButtonTab = styled.button`
 export const MainContent = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 106px - 75px);
+  overflow-y: auto;
 
-  > div:first-child {
-    padding-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-
-    > div {
-      button {
-        border-radius: 0.3rem;
-      }
-    }
+  ::-webkit-scrollbar {
+    width: ${theme.spacing.xs};
   }
-
-  > div {
-    padding-top: 1rem;
+  ::-webkit-scrollbar-track {
+    background: ${theme.color.bgMedium};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb {
+    background: ${theme.color.bgHigh};
+    border-radius: ${theme.borderRadius.xxs};
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${theme.color.txtMedium};
   }
 `;
 
 export const ContentWrapper = styled.div`
+  font-size: ${theme.fontSize.xs};
+  color: ${theme.color.txtMedium};
   display: ${(props) => (props.show === true ? "block" : "none")} !important;
-  color: #a2a2a2;
 `;
