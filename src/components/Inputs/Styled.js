@@ -266,6 +266,6 @@ export const BadgeWrapper = styled.div`
     border-radius: ${theme.borderRadius.xs};
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.3rem;
   }
 `;

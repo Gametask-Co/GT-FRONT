@@ -8,7 +8,7 @@ import { Col } from "../../components/Grid/Index";
 import { Header, Body } from "../../components/Modais/styled";
 
 import Form from "../../components/Form/Index";
-import { Text, Email, Textarea, Upload } from "../../components/Inputs/Index";
+import { Text, Badge, Textarea, Upload } from "../../components/Inputs/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import Layout from "../../components/Layout";
@@ -129,7 +129,7 @@ function Subject() {
         setDescription("");
 
         setIdSubject(res.data.id);
-        setLink("https://gametask.com.br/subject/" + res.data.id);
+        setLink("https://gametask.com.br/classroom/" + res.data.id);
         setShowStudent(!showStudent);
       })
       .catch(function (error) {
@@ -160,22 +160,28 @@ function Subject() {
 
   async function handleStudentSubject(e) {
     e.preventDefault();
+    let emailStudents = students.split(";");
 
-    await api
-      .post("/subjects/student/email", {
-        subject_id: idSubject,
-        student_email: students,
-      })
-      .then(function (res) {
-        console.log(res, "add Student on Subject ok!");
-        setLink("");
-        setStudents("");
+    await emailStudents.map((item) => {
+      api
+        .post("/subjects/student/email", {
+          subject_id: idSubject,
+          student_email: item,
+        })
+        .then(function (res) {
+          console.log(res, "add Student on Subject ok!");
+          setLink("");
+          setStudents("");
 
-        setShowStudent(!showStudent);
-      })
-      .catch(function (error) {
-        console.log(error, "Error Student on Subject error!");
-      });
+          setShowStudent(!showStudent);
+        })
+        .catch(function (error) {
+          console.log(error, "Error Student on Subject error!");
+          alert("O email inserido não é de um estudante cadastrado!");
+        });
+
+      return false;
+    });
   }
 
   return (
@@ -338,7 +344,7 @@ function Subject() {
                 Compartilhar link
               </Text>
 
-              <Email
+              {/* <Email
                 name="students"
                 value={students}
                 placeholder="Inserir alunos por email"
@@ -346,8 +352,18 @@ function Subject() {
                 required
               >
                 Inserir alunos por email
-              </Email>
+              </Email> */}
               {/* <span>{students}</span> */}
+
+              <Badge
+                name="students"
+                value={students}
+                placeholder="exemplo@hotmail.com;"
+                required
+                onChange={(e) => setStudents(e.target.value)}
+              >
+                Inserir alunos por email
+              </Badge>
 
               <ButtomBar>
                 <ButtomCTA secondary onClick={handleStudentModal}>
