@@ -50,9 +50,8 @@ Dockerfile sets up a multi-stage build. We first built our React.js application 
 
 ### Env
 
-```
-REACT_APP_FACEBOOK_APP_ID=
-REACT_APP_GOOGLE_CLIENT_ID=
+```console
+cp contrib/.env-sample .env
 ```
 
 ### User Test
