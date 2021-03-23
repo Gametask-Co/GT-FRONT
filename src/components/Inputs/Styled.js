@@ -129,7 +129,8 @@ export const RadioGroup = styled.div`
   height: 54px;
   display: flex;
   justify-content: center;
-  margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)};
+  /* margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)}; */
+  margin-bottom: ${theme.spacing.md};
 
   input[type="radio"] {
     width: 0;

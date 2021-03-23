@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams, Link } from 'react-router-dom';
-import { useAuth } from '../../contents/auth';
-import api from '../../services/api';
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
+import { useAuth } from "../../contents/auth";
+import api from "../../services/api";
 
-import * as Styled from './styled';
+import * as Styled from "./styled";
 
-import { Col, Row } from '../../components/Grid/Index';
-import { Header, Body } from '../../components/Modais/styled';
+import { Col, Row } from "../../components/Grid/Index";
+import { Header, Body } from "../../components/Modais/styled";
 
-import Form from '../../components/Form/Index';
-import { Text, Textarea, RadioGroup } from '../../components/Inputs/Index';
-import { ButtomBar, ButtomCTA } from '../../components/Buttons/Index';
-import { InternModal } from '../../components/Modais';
-import MilestoneCard from '../../components/MilestoneCard';
+import Form from "../../components/Form/Index";
+import {
+  Text,
+  Textarea,
+  RadioGroup,
+  Date,
+} from "../../components/Inputs/Index";
+import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
+import { InternModal } from "../../components/Modais";
+import MilestoneCard from "../../components/MilestoneCard";
 
-import Layout from '../../components/Layout';
+import Layout from "../../components/Layout";
 
-import { AvatarLG } from '../../components/Avatar';
-import { ReactComponent as Plus } from '../../assets/icons/plus.svg';
-import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
-import { MessageSM } from '../../components/Icons';
+import { AvatarLG } from "../../components/Avatar";
+import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
+import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
+import { MessageSM } from "../../components/Icons";
 
 function MilestoneList() {
   const { signed, loading } = useAuth();
@@ -32,30 +37,30 @@ function MilestoneList() {
 
   //student
   const [students, setStudents] = useState([]);
-  const [studentActive, setStudentActive] = useState('');
+  const [studentActive, setStudentActive] = useState("");
   //const [studentEmail, setStudentEmail] = useState('');
 
   //subject
   //const [subjectName, setSubjectName] = useState('');
 
   // subject class
-  const [block, setBlock] = useState('');
+  const [block, setBlock] = useState("");
   const [blocks, setBlocks] = useState([]);
 
   //milestone
   const [milestones, setMilestones] = useState([]);
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true);
-  const [milestoneActive, setMilestoneActive] = useState('');
+  const [milestoneActive, setMilestoneActive] = useState("");
 
   // task
   //const [tasks, setTasks] = useState([]);
-  const [nameTask, setNameTask] = useState('');
-  const [descriptionTask, setDescriptionTask] = useState('');
-  const [dueTask, setDueTask] = useState('');
-  const [selectMilestoneTask, setSelectMilestoneTask] = useState('');
-  const [selectBlockTask, setSelectBlockTask] = useState('');
+  const [nameTask, setNameTask] = useState("");
+  const [descriptionTask, setDescriptionTask] = useState("");
+  const [dueTask, setDueTask] = useState("");
+  const [selectMilestoneTask, setSelectMilestoneTask] = useState("");
+  const [selectBlockTask, setSelectBlockTask] = useState("");
 
   const history = useHistory();
   const { id } = useParams();
@@ -63,9 +68,9 @@ function MilestoneList() {
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
-        history.push('/signin');
+        history.push("/signin");
       } else {
-        api.get('/subjects').then(function (res) {
+        api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
               //setSubjectName(item.name);
@@ -83,7 +88,7 @@ function MilestoneList() {
       }
     }
 
-    return;
+    // return;
     // }, [signed, history, milestones, students, loading]);
   }, [signed, history, loading, id]);
 
@@ -128,8 +133,8 @@ function MilestoneList() {
     e.preventDefault();
 
     await api({
-      method: 'delete',
-      url: '/subjects/students/',
+      method: "delete",
+      url: "/subjects/students/",
       data: {
         subject_id: id,
         student_id: studentActive,
@@ -137,10 +142,10 @@ function MilestoneList() {
     })
       .then(function (res) {
         setShowStudent(!showStudent);
-        setStudentActive('');
+        setStudentActive("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Student on Subject error!');
+        console.log(error, "Error Student on Subject error!");
       });
   }
 
@@ -148,26 +153,27 @@ function MilestoneList() {
     e.preventDefault();
 
     await api
-      .post('/subjects/milestones', {
+      .post("/subjects/milestones", {
         name,
         description,
         subject_id: id,
         // visibility,
+        // deadline
       })
       .then(function (res) {
-        console.log(res.data, 'Create Milestone ok!');
+        console.log(res.data, "Create Milestone ok!");
 
         setShow(!show);
-        setNameTask('');
-        setDescriptionTask('');
-        setDueTask('');
-        setSelectMilestoneTask('');
+        setNameTask("");
+        setDescriptionTask("");
+        setDueTask("");
+        setSelectMilestoneTask("");
         setMilestoneActive(res.data.id);
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Milestone error!');
+        console.log(error, "Error Milestone error!");
       });
   }
 
@@ -175,21 +181,21 @@ function MilestoneList() {
     e.preventDefault();
 
     await api
-      .post('/subjects/blocks', {
+      .post("/subjects/blocks", {
         name: block,
         subject_id: id,
         milestone_id: milestoneActive,
       })
       .then(function (res) {
-        console.log(res, 'add Block ok!');
+        console.log(res, "add Block ok!");
         // setLink("");
         // setStudents("");
-        setMilestoneActive('');
+        setMilestoneActive("");
 
         setShowBlock(!showBlock);
       })
       .catch(function (error) {
-        console.log(error, 'Error Block error!');
+        console.log(error, "Error Block error!");
       });
   }
 
@@ -197,7 +203,7 @@ function MilestoneList() {
     e.preventDefault();
 
     await api
-      .post('/subjects/tasks', {
+      .post("/subjects/tasks", {
         name: nameTask,
         description: descriptionTask,
         due: dueTask,
@@ -206,14 +212,14 @@ function MilestoneList() {
         // milestone_id: selectMilestoneTask,
       })
       .then(function (res) {
-        console.log(res.data, 'Create Task ok!');
+        console.log(res.data, "Create Task ok!");
 
         setShowTask(!showTask);
-        setName('');
-        setDescription('');
+        setName("");
+        setDescription("");
       })
       .catch(function (error) {
-        console.log(error, 'Error Task error!');
+        console.log(error, "Error Task error!");
       });
   }
 
@@ -279,20 +285,30 @@ function MilestoneList() {
               <>
                 <Styled.ProgressBar>
                   <Styled.Flex>
-                    <p>Marco 3 - Algoritmos de substituição de páginas</p>
-                    <span>73% Completo</span>
+                    <p>
+                      Marco {milestones[milestones.length - 1].index} -
+                      {milestones[milestones.length - 1].name}
+                    </p>
+                    <span>
+                      {milestones[milestones.length - 1].progress}% Completo
+                    </span>
                   </Styled.Flex>
-                  <Styled.Percentage percentage="73" />
+                  <Styled.Percentage
+                    percentage={milestones[milestones.length - 1].progress}
+                  />
                 </Styled.ProgressBar>
                 <Styled.ContentWrapper>
                   {milestones?.map((item, index) => (
-                    <Link key={item.id} to={`/milestone/${item.id}`}>
+                    <Link
+                      key={item.id}
+                      to={item.isVisible ? `/milestone/${item.id}` : false}
+                    >
                       <MilestoneCard
-                        number={index}
+                        number={index + 1}
                         name={item.name}
-                        deadline="11/06/20" //TODO: Convert Date type
-                        percentage="55" //TODO: ADD Funcionality
-                        visibility //TODO: ADD Funcionality
+                        deadline={item.deadline} // TODO: Add on API and Convert Date type
+                        percentage={item.progress}
+                        visibility={item.isVisible}
                       />
                     </Link>
                   ))}
@@ -342,6 +358,16 @@ function MilestoneList() {
             >
               Título
             </Text>
+
+            {/* pass deadline on api */}
+            <Date
+              // name="birthday"
+              // defaultValue={birthday}
+              // onChange={setForm}
+              required
+            >
+              Prazo de conclusão
+            </Date>
 
             <Textarea
               type="text"

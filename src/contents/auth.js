@@ -34,8 +34,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   async function signIn(email, password) {
-    // joaozinho - teacher
-    // joaozinho01 - student
     await api
       .post("/sessions", {
         email,

@@ -1,21 +1,21 @@
-import React from 'react';
-import * as Styled from './styled';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
+import React from "react";
+import * as Styled from "./styled";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
 
-import { ReactComponent as Checkmark } from '../../assets/icons/checkmark.svg';
-import { ReactComponent as Prize } from '../../assets/icons/award.svg';
-import { ReactComponent as Lock } from '../../assets/icons/lock.svg';
+import { ReactComponent as Checkmark } from "../../assets/icons/checkmark.svg";
+import { ReactComponent as Prize } from "../../assets/icons/award.svg";
+import { ReactComponent as Lock } from "../../assets/icons/lock.svg";
 
 const MilestoneCard = ({ number, name, deadline, percentage, visibility }) => {
   const isOpen = visibility;
-  const isComplete = percentage === '100';
+  const isComplete = percentage === "100";
 
   return isOpen ? (
     <Styled.Wrapper visibility>
       <Styled.Text>
         <Styled.Subtitle>Marco {number}</Styled.Subtitle>
         <Styled.DueDate>
-          {isComplete ? 'Concluído em ' : 'Termina em '}
+          {isComplete ? "Concluído em " : "Termina em "}
           {deadline}
         </Styled.DueDate>
         <Styled.Title>{name}</Styled.Title>
