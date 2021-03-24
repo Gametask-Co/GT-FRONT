@@ -2,6 +2,8 @@ import React from "react";
 import * as Styled from "./styled";
 import { DEFAULT_THEME as theme } from "../../styles/constants";
 
+import moment from "moment";
+
 import { ReactComponent as Checkmark } from "../../assets/icons/checkmark.svg";
 import { ReactComponent as Prize } from "../../assets/icons/award.svg";
 import { ReactComponent as Lock } from "../../assets/icons/lock.svg";
@@ -16,7 +18,7 @@ const MilestoneCard = ({ number, name, deadline, percentage, visibility }) => {
         <Styled.Subtitle>Marco {number}</Styled.Subtitle>
         <Styled.DueDate>
           {isComplete ? "Concluído em " : "Termina em "}
-          {deadline}
+          {moment(deadline).format("DD/MM/YYYY")}
         </Styled.DueDate>
         <Styled.Title>{name}</Styled.Title>
       </Styled.Text>
@@ -30,7 +32,7 @@ const MilestoneCard = ({ number, name, deadline, percentage, visibility }) => {
         </Styled.PrizeBar>
       ) : (
         <Styled.ProgressBar>
-          <span>{percentage}% Completo</span>
+          <span>{parseInt(percentage)}% Completo</span>
           <Styled.Percentage percentage={percentage} />
         </Styled.ProgressBar>
       )}

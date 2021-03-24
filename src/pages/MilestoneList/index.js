@@ -50,6 +50,7 @@ function MilestoneList() {
   //milestone
   const [milestones, setMilestones] = useState([]);
   const [name, setName] = useState("");
+  const [deadline, setDeadline] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(true);
   const [milestoneActive, setMilestoneActive] = useState("");
@@ -154,11 +155,11 @@ function MilestoneList() {
 
     await api
       .post("/subjects/milestones", {
+        subject_id: id,
         name,
         description,
-        subject_id: id,
-        // visibility,
-        // deadline
+        deadline,
+        isVisible: visibility,
       })
       .then(function (res) {
         console.log(res.data, "Create Milestone ok!");
@@ -303,6 +304,7 @@ function MilestoneList() {
                       key={item.id}
                       to={item.isVisible ? `/milestone/${item.id}` : false}
                     >
+                      {console.log("item.isVisible", item.isVisible)}
                       <MilestoneCard
                         number={index + 1}
                         name={item.name}
@@ -359,11 +361,10 @@ function MilestoneList() {
               Título
             </Text>
 
-            {/* pass deadline on api */}
             <Date
-              // name="birthday"
-              // defaultValue={birthday}
-              // onChange={setForm}
+              name="deadline"
+              defaultValue={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
               required
             >
               Prazo de conclusão
