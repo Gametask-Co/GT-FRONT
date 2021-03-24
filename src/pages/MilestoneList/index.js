@@ -14,6 +14,7 @@ import {
   Textarea,
   RadioGroup,
   Date,
+  Badge,
 } from "../../components/Inputs/Index";
 import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 import { InternModal } from "../../components/Modais";
@@ -414,21 +415,20 @@ function MilestoneList() {
 
       <InternModal onClose={handleBlockModal} show={showBlock}>
         <Header>
-          <h2>Adicionar Blocos</h2>
+          <h1>Adicionar Blocos</h1>
         </Header>
         <Body>
           <Form onSubmit={handleMilestoneBlock}>
-            <Text
-              type="text"
+            <Badge
               id="blocks"
-              placeholder="Nome da Disciplina"
+              name="blocks"
+              placeholder="Nome da Bloco;"
               value={block}
               onChange={(e) => setBlock(e.target.value)}
               required
             >
               Insira o nome do bloco
-            </Text>
-            <span>{block}</span>
+            </Badge>
 
             <ButtomBar>
               <ButtomCTA onClick={handleBlockModal}>Pular</ButtomCTA>
