@@ -246,7 +246,7 @@ function Subject() {
           </Styled.ActionBar>
 
           <Styled.ContentWrapper data-testid="card-subject">
-            {subjects ? (
+            {subjects?.lenght !== 0 ? (
               subjects?.map((item) => (
                 <Link key={item.id} to={`/subject/${item.id}`}>
                   <CardSubjectList

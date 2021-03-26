@@ -38,7 +38,7 @@ export const Date = ({ children, name, ...props }) => {
       <Styled.Label htmlFor={name}>{children}</Styled.Label>
       <Styled.Date
         type="date"
-        placeholder="dd-mm-yyyy"
+        placeholder="dd/mm/yyyy"
         name={name}
         id={name}
         {...props}
