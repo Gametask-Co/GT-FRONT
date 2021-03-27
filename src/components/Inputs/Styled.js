@@ -48,7 +48,7 @@ export const InputFake = styled(Label)`
 
   height: 54px;
   padding: ${theme.spacing.sm};
-  margin-bottom: ${theme.spacing.md};
+  /* margin-bottom: ${theme.spacing.md}; */
 
   border-radius: ${theme.spacing.xs};
   border: 2px solid ${theme.color.bgHigh};
