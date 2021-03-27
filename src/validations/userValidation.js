@@ -2,7 +2,6 @@ import * as yup from "yup";
 
 export const userSchema = yup.object().shape({
   name: yup.string().required("Obrigatório"),
-  avatar: yup.string().required("Obrigatório"),
   email: yup
     .string()
     .email("E-mail inserido neste formulário está incorreto")
