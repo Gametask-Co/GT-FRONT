@@ -1,11 +1,18 @@
-import React from 'react';
-import * as Styled from './styled';
-import { AvatarMD } from '../Avatar';
+import React from "react";
+import * as Styled from "./styled";
+import { AvatarMD } from "../Avatar";
 
-const CardSubjectList = ({ name, teacher, percentage, tab, description }) => {
+const CardSubjectList = ({
+  name,
+  teacher,
+  background_url,
+  percentage,
+  tab,
+  description,
+}) => {
   return (
     <Styled.Wrapper tab={tab}>
-      <Styled.Thumbnail />
+      <Styled.Thumbnail src={background_url} />
       <Styled.RightSide>
         <Styled.Text>
           <Styled.Title>{name}</Styled.Title>

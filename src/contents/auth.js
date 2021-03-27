@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
     await api
       .post("/users", {
         name,
-        avatar,
+        avatar_url: avatar,
         email,
         birthday,
         gender,

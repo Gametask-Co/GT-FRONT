@@ -124,7 +124,7 @@ function Subject() {
           .post("/subjects", {
             name,
             description,
-            avatar: data.location,
+            background_url: data.location,
           })
           .then(function (res) {
             console.log(res.data, "Create Subject ok!");
@@ -134,7 +134,7 @@ function Subject() {
             setDescription("");
 
             setIdSubject(res.data.id);
-            setLink("https://gametask.com.br/classroom/" + res.data.id);
+            setLink("http://gametask.com.br/classroom/" + res.data.id);
             setShowStudent(!showStudent);
           })
           .catch(function (error) {
@@ -259,6 +259,7 @@ function Subject() {
                   <CardSubjectList
                     key={item.id}
                     name={item.name}
+                    background_url={item.background_url}
                     teacher="Fulano de Tal"
                     percentage="55"
                     tab
