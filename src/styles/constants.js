@@ -10,6 +10,8 @@ export const DEFAULT_THEME = {
     txtMedium: '#A2A2A2',
     txtHigh: '#F0F0F0',
     turquoise: '#65CBA0',
+    yellow: 'CCAF4E',
+    orange: 'E2673E',
     txtDanger: '#E2673E',
   },
   spacing: {

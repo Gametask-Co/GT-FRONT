@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Header, Gametask } from "../../components/Modais/styled";
@@ -11,13 +11,14 @@ import { ButtomBar, ButtomCTA } from "../../components/Buttons/Index";
 
 import { userSchema } from "../../validations/userValidation";
 
-// import { UploadFile } from "../../services/amazonS3";
+import { UploadFile } from "../../services/amazonS3";
 
 const PersonalDetails = ({ setForm, formData, navigation }) => {
-  const { email, password, name, avatar, gender, birthday, teacher } = formData;
+  const { email, password, name, gender, birthday, teacher } = formData;
   const { previous, next } = navigation;
 
   const { signUp } = useAuth();
+  const [avatarPath, setAvatarPath] = useState("");
 
   async function sendData(e) {
     e.preventDefault();
@@ -25,38 +26,34 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
     try {
       const isValid = await userSchema.isValid(formData);
       if (isValid) {
-        signUp(
-          name,
-          avatar,
-          email,
-          birthday,
-          JSON.parse(gender),
-          JSON.parse(teacher),
-          password
-        );
-        next();
+        // signUp(
+        //   name,
+        //   "",
+        //   email,
+        //   birthday,
+        //   JSON.parse(gender),
+        //   JSON.parse(teacher),
+        //   password
+        // );
+        // next();
 
-        // // post image and get url to set on variable "avatar"
-        // const newFileName = "test-file.jpg";
-        // //image value = e.target.files[0]
-        // console.log("avatar", avatar);
+        UploadFile(avatarPath)
+          .then((data) => {
+            console.log("data location", data.location);
 
-        // UploadFile(newFileName)
-        //   .then((data) => {
-        //     console.log("data", data.location); // get url new image
+            signUp(
+              name,
+              data.location,
+              email,
+              birthday,
+              JSON.parse(gender),
+              JSON.parse(teacher),
+              password
+            );
 
-        //     signUp(
-        //       name,
-        //       avatar,
-        //       email,
-        //       birthday,
-        //       JSON.parse(gender),
-        //       JSON.parse(teacher),
-        //       password
-        //     );
-        //     next();
-        //   })
-        //   .catch((err) => console.error("err", err));
+            next();
+          })
+          .catch((err) => console.error("err", err));
       }
     } catch (err) {
       alert("Erro no cadastro, tente novamente.");
@@ -73,8 +70,7 @@ const PersonalDetails = ({ setForm, formData, navigation }) => {
         <Form onSubmit={sendData} autocomplete="off">
           <Upload
             name="avatar"
-            defaultValue={avatar}
-            onChange={setForm}
+            onChange={(e) => setAvatarPath(e.target.files[0])}
             accept="image/*"
             placeholder="Escolha uma foto sua"
             required

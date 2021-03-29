@@ -34,8 +34,6 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   async function signIn(email, password) {
-    // joaozinho - teacher
-    // joaozinho01 - student
     await api
       .post("/sessions", {
         email,
@@ -57,7 +55,6 @@ const AuthProvider = ({ children }) => {
       });
   }
 
-  // async function signUp(name, email, date, gender, teacher, password) {
   async function signUp(
     name,
     avatar,
@@ -70,7 +67,7 @@ const AuthProvider = ({ children }) => {
     await api
       .post("/users", {
         name,
-        avatar: "",
+        avatar_url: avatar,
         email,
         birthday,
         gender,

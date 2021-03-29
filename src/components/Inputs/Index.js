@@ -38,7 +38,7 @@ export const Date = ({ children, name, ...props }) => {
       <Styled.Label htmlFor={name}>{children}</Styled.Label>
       <Styled.Date
         type="date"
-        placeholder="dd-mm-yyyy"
+        placeholder="dd/mm/yyyy"
         name={name}
         id={name}
         {...props}
@@ -107,9 +107,10 @@ export const Upload = ({ children, name, placeholder, ...props }) => {
       <Styled.InputFake htmlFor={name}>
         {placeholder}
         <Styled.ActionButtons>
-          <button>
+          {/* <button disabled onclick={() => {}}>
             <UploadIcon />
-          </button>
+          </button> */}
+          <UploadIcon />
         </Styled.ActionButtons>
       </Styled.InputFake>
       <input
@@ -117,7 +118,8 @@ export const Upload = ({ children, name, placeholder, ...props }) => {
         name={name}
         id={name}
         {...props}
-        style={{ display: "none" }}
+        // style={{ display: "none" }}
+        style={{ marginBottom: "1.5rem" }}
       />
     </>
   );

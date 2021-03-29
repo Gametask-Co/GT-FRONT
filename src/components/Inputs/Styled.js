@@ -48,7 +48,7 @@ export const InputFake = styled(Label)`
 
   height: 54px;
   padding: ${theme.spacing.sm};
-  margin-bottom: ${theme.spacing.md};
+  /* margin-bottom: ${theme.spacing.md}; */
 
   border-radius: ${theme.spacing.xs};
   border: 2px solid ${theme.color.bgHigh};
@@ -129,7 +129,8 @@ export const RadioGroup = styled.div`
   height: 54px;
   display: flex;
   justify-content: center;
-  margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)};
+  /* margin-bottom: ${(props) => (props.margin ? theme.spacing.md : 0)}; */
+  margin-bottom: ${theme.spacing.md};
 
   input[type="radio"] {
     width: 0;

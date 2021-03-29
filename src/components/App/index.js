@@ -8,7 +8,7 @@ import SignUp from "../../pages/SignUp";
 import ForgotPassword from "../../pages/ForgotPassword";
 import NewPassword from "../../pages/NewPassword";
 import Subject from "../../pages/Subject";
-import SubjectDetail from "../../pages/SubjectDetail";
+import MilestoneList from "../../pages/MilestoneList";
 import ClassroomInvite from "../../pages/ClassroomInvite";
 import MilestoneDetail from "../../pages/MilestoneDetail";
 import AuthProvider from "../../contents/auth";
@@ -23,7 +23,7 @@ function App() {
           <Route path="/forgotpassword" component={ForgotPassword} />
           <Route path="/newpassword" component={NewPassword} />
           <Route exact path="/" component={Subject} />
-          <Route path="/subject/:id" component={SubjectDetail} />
+          <Route path="/subject/:id" component={MilestoneList} />
           <Route path="/classroom/:id" component={ClassroomInvite} />
           <Route path="/milestone/:id" component={MilestoneDetail} />
 

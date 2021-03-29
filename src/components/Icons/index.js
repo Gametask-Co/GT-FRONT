@@ -19,6 +19,9 @@ export const GametaskXL = (props) => {
 export const MessageMD = (props) => {
   return <Styled.IconMD src={Message} {...props} />;
 };
+export const MessageSM = (props) => {
+  return <Styled.IconSM src={Message} {...props} />;
+};
 
 // Icone Bell
 export const BellMD = (props) => {

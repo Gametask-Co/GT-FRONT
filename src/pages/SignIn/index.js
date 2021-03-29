@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { useAuth } from '../../contents/auth';
+import React, { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
+import { useAuth } from "../../contents/auth";
 
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import GoogleLogin from 'react-google-login';
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import GoogleLogin from "react-google-login";
 
 import {
   Header,
@@ -14,24 +14,24 @@ import {
   SocialButtons,
   Facebook,
   Google,
-} from '../../components/Modais/styled';
-import { BackgroundModal } from '../../components/Modais';
-import { Email, Password, Checkbox } from '../../components/Inputs/Index';
-import { ButtomCTA } from '../../components/Buttons/Index';
-import Form from '../../components/Form/Index';
+} from "../../components/Modais/styled";
+import { BackgroundModal } from "../../components/Modais";
+import { Email, Password, Checkbox } from "../../components/Inputs/Index";
+import { ButtomCTA } from "../../components/Buttons/Index";
+import Form from "../../components/Form/Index";
 
 function SignIn() {
   const { signed, signIn, loading } = useAuth();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const history = useHistory();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === true) {
-        history.push('/');
+        history.push("/");
       }
     }
   }, [loading, signed, history]);
@@ -47,7 +47,7 @@ function SignIn() {
   };
 
   const onGoogleFailure = (res) => {
-    console.log('Login failed: res:', res);
+    console.log("Login failed: res:", res);
   };
 
   async function handleSignIn(e) {
@@ -55,9 +55,9 @@ function SignIn() {
 
     try {
       await signIn(email, password);
-      history.push('/');
+      history.push("/");
     } catch (err) {
-      alert('Erro no login, tente novamente.');
+      alert("Erro no login, tente novamente.");
     }
   }
 
@@ -119,7 +119,7 @@ function SignIn() {
             buttonText="Login"
             onSuccess={onGoogleSuccess}
             onFailure={onGoogleFailure}
-            cookiePolicy={'single_host_origin'}
+            cookiePolicy={"single_host_origin"}
           />
 
           <FacebookLogin
