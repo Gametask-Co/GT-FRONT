@@ -12,7 +12,7 @@ const CardSubjectList = ({
 }) => {
   return (
     <Styled.Wrapper tab={tab}>
-      <Styled.Thumbnail src={background_url} />
+      <Styled.Thumbnail background_url={background_url} />
       <Styled.RightSide>
         <Styled.Text>
           <Styled.Title>{name}</Styled.Title>

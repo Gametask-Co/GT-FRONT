@@ -24,10 +24,12 @@ export const Thumbnail = styled.div`
   margin-right: ${theme.spacing.lg};
   border-radius: ${theme.borderRadius.sm};
 
-  background-image: url('https://picsum.photos/400/300');
-  /* background-image: url(${(props) =>
-    props.src ? props.src : "https://picsum.photos/400/300"}); */
-  
+  /* background-image: url('https://picsum.photos/400/300'); */
+  background-image: url(${(props) =>
+    props.background_url !== null
+      ? props.background_url
+      : "https://picsum.photos/400/300"});
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
