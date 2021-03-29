@@ -117,8 +117,8 @@ function MilestoneDetail() {
   }
 
   return (
-    // pageTitle is dynamic, resquest on api
-    <Layout header={true} pageTitle="Sistemas Operacionais">
+    // pageTitle is dynamic
+    <Layout pageTitle="Sistemas Operacionais">
       <Styled.PageWrapper>
         <Col off={1} lg={8} md={7} sm={8} xs={8}>
           <Styled.HeaderContent>

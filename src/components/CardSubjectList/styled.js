@@ -1,9 +1,9 @@
-import { rem, ellipsis } from 'polished';
-import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
+import { rem, ellipsis } from "polished";
+import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
 
 export const Wrapper = styled.div`
-  display: ${(props) => !props.tab && 'none'};
+  display: ${(props) => !props.tab && "none"};
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -24,7 +24,12 @@ export const Thumbnail = styled.div`
   margin-right: ${theme.spacing.lg};
   border-radius: ${theme.borderRadius.sm};
 
-  background-image: url('https://picsum.photos/400/300');
+  /* background-image: url('https://picsum.photos/400/300'); */
+  background-image: url(${(props) =>
+    props.background_url !== null
+      ? props.background_url
+      : "https://picsum.photos/400/300"});
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -71,7 +76,7 @@ export const ProgressBar = styled.div`
 export const Percentage = styled.div.attrs((props) => ({
   percentage: props.percentage,
 }))`
-  --progress: ${(props) => (props.percentage ? props.percentage : '0')};
+  --progress: ${(props) => (props.percentage ? props.percentage : "0")};
   height: ${theme.spacing.xs};
   width: ${rem(287)};
   display: flex;

@@ -1,7 +1,14 @@
-import React from 'react';
-import * as Styled from './styled';
+import React from "react";
+import * as Styled from "./styled";
 
-const image = 'https://picsum.photos/200/300';
+const auth_user = JSON.parse(localStorage.getItem("@RNAuth:user"));
+
+const image =
+  auth_user !== null
+    ? auth_user.avatar_url !== null
+      ? auth_user.avatar_url
+      : "https://picsum.photos/200/300"
+    : "https://picsum.photos/200/300";
 
 export const AvatarMD = (props) => {
   return <Styled.ImgMD src={image} {...props} />;

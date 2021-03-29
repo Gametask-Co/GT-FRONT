@@ -226,7 +226,7 @@ function MilestoneList() {
   }
 
   return (
-    <Layout>
+    <Layout pageTitle="Marco">
       <Styled.PageWrapper>
         <Row>
           <Col>

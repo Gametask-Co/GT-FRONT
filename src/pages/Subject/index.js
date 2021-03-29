@@ -19,6 +19,7 @@ import { AvatarXXL } from "../../components/Avatar";
 import { useAuth } from "../../contents/auth";
 
 import api from "../../services/api";
+import { UploadFile } from "../../services/amazonS3";
 
 import { ReactComponent as Plus } from "../../assets/icons/plus.svg";
 import { ReactComponent as Edit } from "../../assets/icons/edit.svg";
@@ -115,26 +116,32 @@ function Subject() {
   async function handleCreateSubject(e) {
     e.preventDefault();
 
-    await api
-      .post("/subjects", {
-        name,
-        description,
-        image,
-      })
-      .then(function (res) {
-        console.log(res.data, "Create Subject ok!");
+    await UploadFile(image)
+      .then((data) => {
+        console.log("data location", data.location);
 
-        setShow(!show);
-        setName("");
-        setDescription("");
+        api
+          .post("/subjects", {
+            name,
+            description,
+            background_url: data.location,
+          })
+          .then(function (res) {
+            console.log(res.data, "Create Subject ok!");
 
-        setIdSubject(res.data.id);
-        setLink("https://gametask.com.br/classroom/" + res.data.id);
-        setShowStudent(!showStudent);
+            setShow(!show);
+            setName("");
+            setDescription("");
+
+            setIdSubject(res.data.id);
+            setLink("http://gametask.com.br/classroom/" + res.data.id);
+            setShowStudent(!showStudent);
+          })
+          .catch(function (error) {
+            console.log(error, "Error Subject error!");
+          });
       })
-      .catch(function (error) {
-        console.log(error, "Error Subject error!");
-      });
+      .catch((err) => console.error("err", err));
   }
 
   async function handleEditSubject(e, pk) {
@@ -252,6 +259,7 @@ function Subject() {
                   <CardSubjectList
                     key={item.id}
                     name={item.name}
+                    background_url={item.background_url}
                     teacher="Fulano de Tal"
                     percentage="55"
                     tab
@@ -303,12 +311,12 @@ function Subject() {
 
               <Upload
                 name="image"
-                value={image}
                 accept="image/*"
-                onChange={(e) => setImage("null")}
-                placeholder="Arquivo"
+                onChange={(e) => setImage(e.target.files[0])}
+                placeholder="Escolha um arquivo"
+                required
+                // onChange={(e) => setImage("null")}
                 // onChange={(e) => setImage(e.target.value)}
-                // required
               >
                 Imagem
               </Upload>
