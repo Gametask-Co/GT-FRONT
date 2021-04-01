@@ -21,3 +21,7 @@ export const AvatarLG = (props) => {
 export const AvatarXXL = (props) => {
   return <Styled.ImgXXL src={image} {...props} />;
 };
+
+export const AvatarXXXL = (props) => {
+  return <Styled.ImgXXXL src={image} {...props} />;
+};
