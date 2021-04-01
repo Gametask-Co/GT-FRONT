@@ -260,8 +260,8 @@ function Subject() {
                     key={item.id}
                     name={item.name}
                     background_url={item.background_url}
-                    teacher="Fulano de Tal"
-                    percentage="55"
+                    teacher={userName}
+                    percentage={item.teacher_id ? "35" : "55"}
                     tab
                   />
                 </Link>

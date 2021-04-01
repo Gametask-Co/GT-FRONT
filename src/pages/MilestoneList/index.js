@@ -42,7 +42,7 @@ function MilestoneList() {
   //const [studentEmail, setStudentEmail] = useState('');
 
   //subject
-  //const [subjectName, setSubjectName] = useState('');
+  const [subjectName, setSubjectName] = useState("");
 
   // subject class
   const [block, setBlock] = useState("");
@@ -75,9 +75,19 @@ function MilestoneList() {
         api.get("/subjects").then(function (res) {
           res.data.teacher_user.map((item) => {
             if (item.id === id) {
-              //setSubjectName(item.name);
+              setSubjectName(item.name);
               setStudents(item.students);
               setMilestones(item.milestones);
+              localStorage.setItem(
+                "@RNAuth:milestones",
+                JSON.stringify(item.milestones)
+              );
+              localStorage.setItem(
+                "@RNAuth:subject",
+                JSON.stringify(item.name)
+              );
+              // JSON.stringify(item.milestones)
+              // .push(item.name)
 
               item.milestones.map((item) => {
                 return setBlocks(item.blocks);
@@ -182,23 +192,28 @@ function MilestoneList() {
   async function handleMilestoneBlock(e) {
     e.preventDefault();
 
-    await api
-      .post("/subjects/blocks", {
-        name: block,
-        subject_id: id,
-        milestone_id: milestoneActive,
-      })
-      .then(function (res) {
-        console.log(res, "add Block ok!");
-        // setLink("");
-        // setStudents("");
-        setMilestoneActive("");
+    let blocks = block.split(";");
+    await blocks.map((item) => {
+      api
+        .post("/subjects/blocks", {
+          name: item.trim(),
+          subject_id: id,
+          milestone_id: milestoneActive,
+        })
+        .then(function (res) {
+          console.log(res, "add Block ok!");
+          // setLink("");
+          // setStudents("");
+          setMilestoneActive("");
 
-        setShowBlock(!showBlock);
-      })
-      .catch(function (error) {
-        console.log(error, "Error Block error!");
-      });
+          setShowBlock(!showBlock);
+        })
+        .catch(function (error) {
+          console.log(error, "Error Block error!");
+        });
+
+      return null;
+    });
   }
 
   async function handleCreateTask(e) {
@@ -226,7 +241,7 @@ function MilestoneList() {
   }
 
   return (
-    <Layout pageTitle="Marco">
+    <Layout pageTitle="Marcos">
       <Styled.PageWrapper>
         <Row>
           <Col>
@@ -281,8 +296,7 @@ function MilestoneList() {
           </Col>
 
           <Col lg={8}>
-            <Styled.SubjectName>Sistemas Operacionais</Styled.SubjectName>
-
+            <Styled.SubjectName>{subjectName}</Styled.SubjectName>
             {milestones?.length !== 0 ? (
               <>
                 <Styled.ProgressBar>
@@ -292,29 +306,34 @@ function MilestoneList() {
                       {milestones[milestones.length - 1].name}
                     </p>
                     <span>
-                      {milestones[milestones.length - 1].progress}% Completo
+                      {parseInt(milestones[milestones.length - 1].progress)}%
+                      Completo
                     </span>
                   </Styled.Flex>
                   <Styled.Percentage
-                    percentage={milestones[milestones.length - 1].progress}
+                    percentage={parseInt(
+                      milestones[milestones.length - 1].progress
+                    )}
                   />
                 </Styled.ProgressBar>
                 <Styled.ContentWrapper>
-                  {milestones?.map((item, index) => (
-                    <Link
-                      key={item.id}
-                      to={item.isVisible ? `/milestone/${item.id}` : false}
-                    >
-                      {console.log("item.isVisible", item.isVisible)}
-                      <MilestoneCard
-                        number={index + 1}
-                        name={item.name}
-                        deadline={item.deadline} // TODO: Add on API and Convert Date type
-                        percentage={item.progress}
-                        visibility={item.isVisible}
-                      />
-                    </Link>
-                  ))}
+                  {milestones
+                    ?.slice(0)
+                    .reverse()
+                    .map((item, index) => (
+                      <Link
+                        key={item.id}
+                        to={item.isVisible ? `/milestone/${item.id}` : false}
+                      >
+                        <MilestoneCard
+                          number={index + 1}
+                          name={item.name}
+                          deadline={item.deadline}
+                          visibility={item.isVisible}
+                          percentage={parseInt(item.progress)}
+                        />
+                      </Link>
+                    ))}
                 </Styled.ContentWrapper>
               </>
             ) : (

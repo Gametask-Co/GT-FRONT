@@ -1,15 +1,15 @@
-import styled from 'styled-components';
-import { DEFAULT_THEME as theme } from '../../styles/constants';
+import styled from "styled-components";
+import { DEFAULT_THEME as theme } from "../../styles/constants";
 
 export const IconSM = styled.img`
   width: ${theme.spacing.sm};
   height: ${theme.spacing.sm};
   color: ${theme.color.txtHigh};
 
-  margin-right: ${({ right }) => (right ? right : '0')};
-  margin-left: ${({ left }) => (left ? left : '0')};
-  margin-top: ${({ top }) => (top ? top : '0')};
-  margin-bottom: ${({ bottom }) => (bottom ? bottom : '0')};
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
 `;
 
 export const IconMD = styled.img`
@@ -17,10 +17,10 @@ export const IconMD = styled.img`
   height: ${theme.spacing.md};
   color: ${theme.color.txtHigh};
 
-  margin-right: ${({ right }) => (right ? right : '0')};
-  margin-left: ${({ left }) => (left ? left : '0')};
-  margin-top: ${({ top }) => (top ? top : '0')};
-  margin-bottom: ${({ bottom }) => (bottom ? bottom : '0')};
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
 `;
 
 export const IconLG = styled.img`
@@ -28,10 +28,10 @@ export const IconLG = styled.img`
   height: ${theme.spacing.lg};
   color: ${theme.color.txtHigh};
 
-  margin-right: ${({ right }) => (right ? right : '0')};
-  margin-left: ${({ left }) => (left ? left : '0')};
-  margin-top: ${({ top }) => (top ? top : '0')};
-  margin-bottom: ${({ bottom }) => (bottom ? bottom : '0')};
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
 `;
 
 export const IconXL = styled.img`
@@ -39,10 +39,10 @@ export const IconXL = styled.img`
   height: ${theme.spacing.xl};
   color: ${theme.color.txtHigh};
 
-  margin-right: ${({ right }) => (right ? right : '0')};
-  margin-left: ${({ left }) => (left ? left : '0')};
-  margin-top: ${({ top }) => (top ? top : '0')};
-  margin-bottom: ${({ bottom }) => (bottom ? bottom : '0')};
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
 `;
 
 export const IconXXL = styled.img`
@@ -50,8 +50,19 @@ export const IconXXL = styled.img`
   height: ${theme.spacing.xxl};
   color: ${theme.color.txtHigh};
 
-  margin-right: ${({ right }) => (right ? right : '0')};
-  margin-left: ${({ left }) => (left ? left : '0')};
-  margin-top: ${({ top }) => (top ? top : '0')};
-  margin-bottom: ${({ bottom }) => (bottom ? bottom : '0')};
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
+`;
+
+export const IconXXXL = styled.img`
+  width: ${theme.spacing.xxxl};
+  height: ${theme.spacing.xxxl};
+  color: ${theme.color.txtHigh};
+
+  margin-right: ${({ right }) => (right ? right : "0")};
+  margin-left: ${({ left }) => (left ? left : "0")};
+  margin-top: ${({ top }) => (top ? top : "0")};
+  margin-bottom: ${({ bottom }) => (bottom ? bottom : "0")};
 `;

@@ -44,10 +44,6 @@ const MilestoneCard = ({ number, name, deadline, percentage, visibility }) => {
         <Styled.Subtitle visibility>Marco {number}</Styled.Subtitle>
         <Styled.Title>{name}</Styled.Title>
       </Styled.Text>
-      <Styled.ProgressBar>
-        <span>0% Completo</span>
-        <Styled.Percentage percentage={percentage} />
-      </Styled.ProgressBar>
     </Styled.Wrapper>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import * as Styled from "./styled";
 
@@ -33,21 +33,34 @@ function MilestoneDetail() {
   const [link, setLink] = useState("");
   // const [classActive, setClassActive] = useState("");
 
+  const [blocks, setBlocks] = useState([]);
+  const [subjectName, setSubjectName] = useState("");
+  const [milestone, setMilestone] = useState("");
+
   const history = useHistory();
+  const { id } = useParams();
 
   useEffect(() => {
     if (loading === false) {
       if (signed === false) {
         history.push("/signin");
       } else {
-        api.get("/milestones").then(function (res) {
-          // setMilestones(res.data);
-          // activate first class
-          // setClassActive(0);
+        const milestones = JSON.parse(
+          localStorage.getItem("@RNAuth:milestones")
+        );
+        const subject = JSON.parse(localStorage.getItem("@RNAuth:subject"));
+
+        milestones.map((item) => {
+          if (item.id === id) {
+            setMilestone(item);
+            setBlocks(item.blocks);
+            setSubjectName(subject);
+          }
+          return null;
         });
       }
     }
-  }, [signed, history, loading]);
+  }, [signed, history, loading, id]);
 
   function handleClassModal(e) {
     setShow(!show);
@@ -79,7 +92,6 @@ function MilestoneDetail() {
       .get("/blocks")
       .then(function (res) {
         console.log(res.data, "Create Class ok!");
-
         // setClassActive(0);
       })
       .catch(function (error) {
@@ -118,13 +130,13 @@ function MilestoneDetail() {
 
   return (
     // pageTitle is dynamic
-    <Layout pageTitle="Sistemas Operacionais">
+    <Layout pageTitle={subjectName}>
       <Styled.PageWrapper>
         <Col off={1} lg={8} md={7} sm={8} xs={8}>
           <Styled.HeaderContent>
-            <h1>Sistemas Operacionais</h1>
+            <h1>{subjectName}</h1>
             <p>
-              <span>Marco 3 </span>- Gerência de Memória
+              <span>Marco </span>- {milestone.name}
             </p>
           </Styled.HeaderContent>
 
@@ -270,35 +282,40 @@ function MilestoneDetail() {
             </Styled.ActionButtons>
           </Styled.ActionBar>
 
-          {/* .map to get blocks and class and tasks */}
-          <Styled.WrapCollabsible>
-            {/* styled with circle as number block  */}
-            <input id="collapsible" className="toggle" type="checkbox" />
-            <label htmlFor="collapsible" className="lbl-toggle">
-              Uso direto
-            </label>
-            <div className="collapsible-content">
-              <div className="content-inner">
-                <span>
-                  <input type="checkbox" name="class" id="class-id" />
-                  <label htmlFor="class-id">Aula - Método de Acesso</label>
-                </span>
-                <br />
-                <br />
-                <span>
-                  <input
-                    type="checkbox"
-                    name="class"
-                    id="class-id-1"
-                    onClick={handleClassActivate}
-                  />
-                  <label htmlFor="class-id-1">
-                    Aula - Usos de Memória Cache
-                  </label>
-                </span>
+          {blocks.map((item) => (
+            <Styled.WrapCollabsible>
+              <input
+                id={"collapsible-" + item.id}
+                className="toggle"
+                type="checkbox"
+                style={{ display: "none" }}
+              />
+              <label htmlFor={"collapsible-" + item.id} className="lbl-toggle">
+                {item.name}
+              </label>
+              <div className="collapsible-content">
+                <div className="content-inner">
+                  <span>
+                    <input type="checkbox" name="class" id="class-id" />
+                    <label htmlFor="class-id">Aula - Método de Acesso</label>
+                  </span>
+                  <br />
+                  <br />
+                  <span>
+                    <input
+                      type="checkbox"
+                      name="class"
+                      id="class-id-1"
+                      onClick={handleClassActivate}
+                    />
+                    <label htmlFor="class-id-1">
+                      Aula - Usos de Memória Cache
+                    </label>
+                  </span>
+                </div>
               </div>
-            </div>
-          </Styled.WrapCollabsible>
+            </Styled.WrapCollabsible>
+          ))}
         </Col>
 
         {/* modais */}
